@@ -1,0 +1,538 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		58D2AAD61E4ACB510084CE80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AAD51E4ACB510084CE80 /* AppDelegate.swift */; };
+		58D2AAD81E4ACB510084CE80 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AAD71E4ACB510084CE80 /* ViewController.swift */; };
+		58D2AADB1E4ACB510084CE80 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58D2AAD91E4ACB510084CE80 /* Main.storyboard */; };
+		58D2AADE1E4ACB510084CE80 /* tempus.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AADC1E4ACB510084CE80 /* tempus.xcdatamodeld */; };
+		58D2AAE01E4ACB510084CE80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D2AADF1E4ACB510084CE80 /* Assets.xcassets */; };
+		58D2AAE31E4ACB510084CE80 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58D2AAE11E4ACB510084CE80 /* LaunchScreen.storyboard */; };
+		58D2AAEE1E4ACB510084CE80 /* tempusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AAED1E4ACB510084CE80 /* tempusTests.swift */; };
+		58D2AB011E4ACE390084CE80 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AB001E4ACE390084CE80 /* MainNavigationController.swift */; };
+		58D2AB031E4ACEAB0084CE80 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AB021E4ACEAB0084CE80 /* OnboardingViewController.swift */; };
+		58D2AB051E4ACEFB0084CE80 /* OnboardingViewController_ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AB041E4ACEFB0084CE80 /* OnboardingViewController_ext.swift */; };
+		58D2AB071E4AD07D0084CE80 /* OnboardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AB061E4AD07D0084CE80 /* OnboardingPage.swift */; };
+		58D2AB091E4AD0D80084CE80 /* UIView_ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AB081E4AD0D80084CE80 /* UIView_ext.swift */; };
+		58D2AB0B1E4AD4330084CE80 /* OnboardingPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AB0A1E4AD4330084CE80 /* OnboardingPageCell.swift */; };
+		58D2AB0D1E4AD48A0084CE80 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AB0C1E4AD48A0084CE80 /* BaseCell.swift */; };
+		58D2AB0F1E4ADC7A0084CE80 /* OnboardingCoverPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AB0E1E4ADC7A0084CE80 /* OnboardingCoverPageCell.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		58D2AAEA1E4ACB510084CE80 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 58D2AACA1E4ACB510084CE80 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 58D2AAD11E4ACB510084CE80;
+			remoteInfo = tempus;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		58D2AAD21E4ACB510084CE80 /* tempus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tempus.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		58D2AAD51E4ACB510084CE80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		58D2AAD71E4ACB510084CE80 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		58D2AADA1E4ACB510084CE80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		58D2AADD1E4ACB510084CE80 /* tempus.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = tempus.xcdatamodel; sourceTree = "<group>"; };
+		58D2AADF1E4ACB510084CE80 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		58D2AAE21E4ACB510084CE80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		58D2AAE41E4ACB510084CE80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		58D2AAE91E4ACB510084CE80 /* tempusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tempusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		58D2AAED1E4ACB510084CE80 /* tempusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tempusTests.swift; sourceTree = "<group>"; };
+		58D2AAEF1E4ACB510084CE80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		58D2AB001E4ACE390084CE80 /* MainNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
+		58D2AB021E4ACEAB0084CE80 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		58D2AB041E4ACEFB0084CE80 /* OnboardingViewController_ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController_ext.swift; sourceTree = "<group>"; };
+		58D2AB061E4AD07D0084CE80 /* OnboardingPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingPage.swift; sourceTree = "<group>"; };
+		58D2AB081E4AD0D80084CE80 /* UIView_ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView_ext.swift; sourceTree = "<group>"; };
+		58D2AB0A1E4AD4330084CE80 /* OnboardingPageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingPageCell.swift; sourceTree = "<group>"; };
+		58D2AB0C1E4AD48A0084CE80 /* BaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
+		58D2AB0E1E4ADC7A0084CE80 /* OnboardingCoverPageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingCoverPageCell.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		58D2AACF1E4ACB510084CE80 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		58D2AAE61E4ACB510084CE80 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		58D2AAC91E4ACB510084CE80 = {
+			isa = PBXGroup;
+			children = (
+				58D2AAD41E4ACB510084CE80 /* tempus */,
+				58D2AAEC1E4ACB510084CE80 /* tempusTests */,
+				58D2AAD31E4ACB510084CE80 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		58D2AAD31E4ACB510084CE80 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				58D2AAD21E4ACB510084CE80 /* tempus.app */,
+				58D2AAE91E4ACB510084CE80 /* tempusTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		58D2AAD41E4ACB510084CE80 /* tempus */ = {
+			isa = PBXGroup;
+			children = (
+				58D2AAFD1E4ACB850084CE80 /* Resource */,
+				58D2AAFC1E4ACB810084CE80 /* Util */,
+				58D2AAFB1E4ACB7A0084CE80 /* Extension */,
+				58D2AAFA1E4ACB760084CE80 /* Model */,
+				58D2AAF91E4ACB700084CE80 /* Controller */,
+				58D2AAF81E4ACB590084CE80 /* View */,
+				58D2AAD51E4ACB510084CE80 /* AppDelegate.swift */,
+			);
+			path = tempus;
+			sourceTree = "<group>";
+		};
+		58D2AAEC1E4ACB510084CE80 /* tempusTests */ = {
+			isa = PBXGroup;
+			children = (
+				58D2AAED1E4ACB510084CE80 /* tempusTests.swift */,
+				58D2AAEF1E4ACB510084CE80 /* Info.plist */,
+			);
+			path = tempusTests;
+			sourceTree = "<group>";
+		};
+		58D2AAF81E4ACB590084CE80 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				58D2AB0A1E4AD4330084CE80 /* OnboardingPageCell.swift */,
+				58D2AB0E1E4ADC7A0084CE80 /* OnboardingCoverPageCell.swift */,
+				58D2AB0C1E4AD48A0084CE80 /* BaseCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		58D2AAF91E4ACB700084CE80 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				58D2AAD71E4ACB510084CE80 /* ViewController.swift */,
+				58D2AB001E4ACE390084CE80 /* MainNavigationController.swift */,
+				58D2AB021E4ACEAB0084CE80 /* OnboardingViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		58D2AAFA1E4ACB760084CE80 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				58D2AADC1E4ACB510084CE80 /* tempus.xcdatamodeld */,
+				58D2AB061E4AD07D0084CE80 /* OnboardingPage.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		58D2AAFB1E4ACB7A0084CE80 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				58D2AAFF1E4ACDC80084CE80 /* Controllers */,
+				58D2AAFE1E4ACDB30084CE80 /* UIKitComponents */,
+			);
+			name = Extension;
+			sourceTree = "<group>";
+		};
+		58D2AAFC1E4ACB810084CE80 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
+		58D2AAFD1E4ACB850084CE80 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				58D2AAD91E4ACB510084CE80 /* Main.storyboard */,
+				58D2AADF1E4ACB510084CE80 /* Assets.xcassets */,
+				58D2AAE11E4ACB510084CE80 /* LaunchScreen.storyboard */,
+				58D2AAE41E4ACB510084CE80 /* Info.plist */,
+			);
+			name = Resource;
+			sourceTree = "<group>";
+		};
+		58D2AAFE1E4ACDB30084CE80 /* UIKitComponents */ = {
+			isa = PBXGroup;
+			children = (
+				58D2AB081E4AD0D80084CE80 /* UIView_ext.swift */,
+			);
+			name = UIKitComponents;
+			sourceTree = "<group>";
+		};
+		58D2AAFF1E4ACDC80084CE80 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				58D2AB041E4ACEFB0084CE80 /* OnboardingViewController_ext.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		58D2AAD11E4ACB510084CE80 /* tempus */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 58D2AAF21E4ACB510084CE80 /* Build configuration list for PBXNativeTarget "tempus" */;
+			buildPhases = (
+				58D2AACE1E4ACB510084CE80 /* Sources */,
+				58D2AACF1E4ACB510084CE80 /* Frameworks */,
+				58D2AAD01E4ACB510084CE80 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = tempus;
+			productName = tempus;
+			productReference = 58D2AAD21E4ACB510084CE80 /* tempus.app */;
+			productType = "com.apple.product-type.application";
+		};
+		58D2AAE81E4ACB510084CE80 /* tempusTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 58D2AAF51E4ACB510084CE80 /* Build configuration list for PBXNativeTarget "tempusTests" */;
+			buildPhases = (
+				58D2AAE51E4ACB510084CE80 /* Sources */,
+				58D2AAE61E4ACB510084CE80 /* Frameworks */,
+				58D2AAE71E4ACB510084CE80 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				58D2AAEB1E4ACB510084CE80 /* PBXTargetDependency */,
+			);
+			name = tempusTests;
+			productName = tempusTests;
+			productReference = 58D2AAE91E4ACB510084CE80 /* tempusTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		58D2AACA1E4ACB510084CE80 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = boostcamp;
+				TargetAttributes = {
+					58D2AAD11E4ACB510084CE80 = {
+						CreatedOnToolsVersion = 8.3;
+						ProvisioningStyle = Automatic;
+					};
+					58D2AAE81E4ACB510084CE80 = {
+						CreatedOnToolsVersion = 8.3;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 58D2AAD11E4ACB510084CE80;
+					};
+				};
+			};
+			buildConfigurationList = 58D2AACD1E4ACB510084CE80 /* Build configuration list for PBXProject "tempus" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 58D2AAC91E4ACB510084CE80;
+			productRefGroup = 58D2AAD31E4ACB510084CE80 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				58D2AAD11E4ACB510084CE80 /* tempus */,
+				58D2AAE81E4ACB510084CE80 /* tempusTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		58D2AAD01E4ACB510084CE80 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				58D2AAE31E4ACB510084CE80 /* LaunchScreen.storyboard in Resources */,
+				58D2AAE01E4ACB510084CE80 /* Assets.xcassets in Resources */,
+				58D2AADB1E4ACB510084CE80 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		58D2AAE71E4ACB510084CE80 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		58D2AACE1E4ACB510084CE80 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				58D2AAD81E4ACB510084CE80 /* ViewController.swift in Sources */,
+				58D2AB0F1E4ADC7A0084CE80 /* OnboardingCoverPageCell.swift in Sources */,
+				58D2AADE1E4ACB510084CE80 /* tempus.xcdatamodeld in Sources */,
+				58D2AB0B1E4AD4330084CE80 /* OnboardingPageCell.swift in Sources */,
+				58D2AB031E4ACEAB0084CE80 /* OnboardingViewController.swift in Sources */,
+				58D2AB051E4ACEFB0084CE80 /* OnboardingViewController_ext.swift in Sources */,
+				58D2AB091E4AD0D80084CE80 /* UIView_ext.swift in Sources */,
+				58D2AB011E4ACE390084CE80 /* MainNavigationController.swift in Sources */,
+				58D2AB071E4AD07D0084CE80 /* OnboardingPage.swift in Sources */,
+				58D2AB0D1E4AD48A0084CE80 /* BaseCell.swift in Sources */,
+				58D2AAD61E4ACB510084CE80 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		58D2AAE51E4ACB510084CE80 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				58D2AAEE1E4ACB510084CE80 /* tempusTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		58D2AAEB1E4ACB510084CE80 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 58D2AAD11E4ACB510084CE80 /* tempus */;
+			targetProxy = 58D2AAEA1E4ACB510084CE80 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		58D2AAD91E4ACB510084CE80 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				58D2AADA1E4ACB510084CE80 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		58D2AAE11E4ACB510084CE80 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				58D2AAE21E4ACB510084CE80 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		58D2AAF01E4ACB510084CE80 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		58D2AAF11E4ACB510084CE80 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		58D2AAF31E4ACB510084CE80 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = tempus/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = boostcamp.tempus;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		58D2AAF41E4ACB510084CE80 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = tempus/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = boostcamp.tempus;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		58D2AAF61E4ACB510084CE80 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = tempusTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = boostcamp.tempusTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tempus.app/tempus";
+			};
+			name = Debug;
+		};
+		58D2AAF71E4ACB510084CE80 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = tempusTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = boostcamp.tempusTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tempus.app/tempus";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		58D2AACD1E4ACB510084CE80 /* Build configuration list for PBXProject "tempus" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				58D2AAF01E4ACB510084CE80 /* Debug */,
+				58D2AAF11E4ACB510084CE80 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		58D2AAF21E4ACB510084CE80 /* Build configuration list for PBXNativeTarget "tempus" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				58D2AAF31E4ACB510084CE80 /* Debug */,
+				58D2AAF41E4ACB510084CE80 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		58D2AAF51E4ACB510084CE80 /* Build configuration list for PBXNativeTarget "tempusTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				58D2AAF61E4ACB510084CE80 /* Debug */,
+				58D2AAF71E4ACB510084CE80 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		58D2AADC1E4ACB510084CE80 /* tempus.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				58D2AADD1E4ACB510084CE80 /* tempus.xcdatamodel */,
+			);
+			currentVersion = 58D2AADD1E4ACB510084CE80 /* tempus.xcdatamodel */;
+			path = tempus.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 58D2AACA1E4ACB510084CE80 /* Project object */;
+}
