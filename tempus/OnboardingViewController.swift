@@ -112,7 +112,9 @@ class OnboardingViewController: UIViewController {
     }
     
     func startButtonTapped() {
-        
+        let layout = UICollectionViewFlowLayout()
+        let meetingViewController = MeetingViewController(collectionViewLayout: layout)
+        self.present(meetingViewController, animated: true, completion: nil)
     }
     
     public func moveControllConstraintsOffScreen() {
