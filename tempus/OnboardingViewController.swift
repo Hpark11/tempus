@@ -147,7 +147,7 @@ class OnboardingViewController: UIViewController {
         
         nextButtonTopAnchor = nextButton.anchor(view.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, topConstant: 24, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 40).first
         
-        startButtonTopAnchor = startButton.anchor(nil, left: view.leftAnchor, bottom: pageControl.topAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 30, bottomConstant: 72, rightConstant: 30, widthConstant: 170, heightConstant: 45).first
+        startButtonTopAnchor = startButton.anchor(nil, left: view.leftAnchor, bottom: pageControl.topAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 30, bottomConstant: 72, rightConstant: 30, widthConstant: 0, heightConstant: 45).first
         
         // use autolayout instead
         collectionView.anchorToTop(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)

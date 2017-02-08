@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D13DF3F1F9689260AE36F83 /* Pods_tempus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E88DB2E7A740E9A2F92813 /* Pods_tempus.framework */; };
 		58D2AAD61E4ACB510084CE80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AAD51E4ACB510084CE80 /* AppDelegate.swift */; };
 		58D2AAD81E4ACB510084CE80 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AAD71E4ACB510084CE80 /* ViewController.swift */; };
 		58D2AADB1E4ACB510084CE80 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58D2AAD91E4ACB510084CE80 /* Main.storyboard */; };
@@ -22,6 +23,8 @@
 		58D2AB0B1E4AD4330084CE80 /* OnboardingPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AB0A1E4AD4330084CE80 /* OnboardingPageCell.swift */; };
 		58D2AB0D1E4AD48A0084CE80 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AB0C1E4AD48A0084CE80 /* BaseCell.swift */; };
 		58D2AB0F1E4ADC7A0084CE80 /* OnboardingCoverPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AB0E1E4ADC7A0084CE80 /* OnboardingCoverPageCell.swift */; };
+		58FCAAD91E4B00EA002F5B0A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58FCAAD81E4B00EA002F5B0A /* GoogleService-Info.plist */; };
+		A89D3980CC287D1CF9315CE8 /* Pods_tempusTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F65C803CE4864764B11C7F /* Pods_tempusTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +38,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08E88DB2E7A740E9A2F92813 /* Pods_tempus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tempus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B46B7A0A187E515B862B170 /* Pods-tempus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tempus.release.xcconfig"; path = "Pods/Target Support Files/Pods-tempus/Pods-tempus.release.xcconfig"; sourceTree = "<group>"; };
+		4514D91D6E2255B2CF063585 /* Pods-tempusTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tempusTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-tempusTests/Pods-tempusTests.release.xcconfig"; sourceTree = "<group>"; };
 		58D2AAD21E4ACB510084CE80 /* tempus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tempus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D2AAD51E4ACB510084CE80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D2AAD71E4ACB510084CE80 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +60,10 @@
 		58D2AB0A1E4AD4330084CE80 /* OnboardingPageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingPageCell.swift; sourceTree = "<group>"; };
 		58D2AB0C1E4AD48A0084CE80 /* BaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		58D2AB0E1E4ADC7A0084CE80 /* OnboardingCoverPageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingCoverPageCell.swift; sourceTree = "<group>"; };
+		58FCAAD81E4B00EA002F5B0A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6ACF8EEB4B7DD734752E04BE /* Pods-tempusTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tempusTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tempusTests/Pods-tempusTests.debug.xcconfig"; sourceTree = "<group>"; };
+		892E9543776C6747753C3B38 /* Pods-tempus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tempus.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tempus/Pods-tempus.debug.xcconfig"; sourceTree = "<group>"; };
+		B7F65C803CE4864764B11C7F /* Pods_tempusTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tempusTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D13DF3F1F9689260AE36F83 /* Pods_tempus.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,18 +79,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A89D3980CC287D1CF9315CE8 /* Pods_tempusTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		05B8272F29F98CDD2897DC5A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				08E88DB2E7A740E9A2F92813 /* Pods_tempus.framework */,
+				B7F65C803CE4864764B11C7F /* Pods_tempusTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		58D2AAC91E4ACB510084CE80 = {
 			isa = PBXGroup;
 			children = (
 				58D2AAD41E4ACB510084CE80 /* tempus */,
 				58D2AAEC1E4ACB510084CE80 /* tempusTests */,
 				58D2AAD31E4ACB510084CE80 /* Products */,
+				D0D43BC6B434EF43672C7907 /* Pods */,
+				05B8272F29F98CDD2897DC5A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -167,6 +190,7 @@
 				58D2AADF1E4ACB510084CE80 /* Assets.xcassets */,
 				58D2AAE11E4ACB510084CE80 /* LaunchScreen.storyboard */,
 				58D2AAE41E4ACB510084CE80 /* Info.plist */,
+				58FCAAD81E4B00EA002F5B0A /* GoogleService-Info.plist */,
 			);
 			name = Resource;
 			sourceTree = "<group>";
@@ -187,6 +211,17 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		D0D43BC6B434EF43672C7907 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				892E9543776C6747753C3B38 /* Pods-tempus.debug.xcconfig */,
+				1B46B7A0A187E515B862B170 /* Pods-tempus.release.xcconfig */,
+				6ACF8EEB4B7DD734752E04BE /* Pods-tempusTests.debug.xcconfig */,
+				4514D91D6E2255B2CF063585 /* Pods-tempusTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -194,9 +229,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 58D2AAF21E4ACB510084CE80 /* Build configuration list for PBXNativeTarget "tempus" */;
 			buildPhases = (
+				F511651B203EFCE107E8BF34 /* [CP] Check Pods Manifest.lock */,
 				58D2AACE1E4ACB510084CE80 /* Sources */,
 				58D2AACF1E4ACB510084CE80 /* Frameworks */,
 				58D2AAD01E4ACB510084CE80 /* Resources */,
+				B7A35287F9A6B5EA92E9C284 /* [CP] Embed Pods Frameworks */,
+				EC9E378708AE87F1FFAF2265 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -211,9 +249,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 58D2AAF51E4ACB510084CE80 /* Build configuration list for PBXNativeTarget "tempusTests" */;
 			buildPhases = (
+				F0553C2191567AEDB1C98707 /* [CP] Check Pods Manifest.lock */,
 				58D2AAE51E4ACB510084CE80 /* Sources */,
 				58D2AAE61E4ACB510084CE80 /* Frameworks */,
 				58D2AAE71E4ACB510084CE80 /* Resources */,
+				B1EF2118ABB7410548CC35FB /* [CP] Embed Pods Frameworks */,
+				B2F9349D10AC3FB3ABB0A623 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -271,6 +312,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				58D2AAE31E4ACB510084CE80 /* LaunchScreen.storyboard in Resources */,
+				58FCAAD91E4B00EA002F5B0A /* GoogleService-Info.plist in Resources */,
 				58D2AAE01E4ACB510084CE80 /* Assets.xcassets in Resources */,
 				58D2AADB1E4ACB510084CE80 /* Main.storyboard in Resources */,
 			);
@@ -284,6 +326,99 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B1EF2118ABB7410548CC35FB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-tempusTests/Pods-tempusTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B2F9349D10AC3FB3ABB0A623 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-tempusTests/Pods-tempusTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B7A35287F9A6B5EA92E9C284 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-tempus/Pods-tempus-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EC9E378708AE87F1FFAF2265 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-tempus/Pods-tempus-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F0553C2191567AEDB1C98707 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F511651B203EFCE107E8BF34 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		58D2AACE1E4ACB510084CE80 /* Sources */ = {
@@ -439,6 +574,7 @@
 		};
 		58D2AAF31E4ACB510084CE80 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 892E9543776C6747753C3B38 /* Pods-tempus.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = tempus/Info.plist;
@@ -451,6 +587,7 @@
 		};
 		58D2AAF41E4ACB510084CE80 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1B46B7A0A187E515B862B170 /* Pods-tempus.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = tempus/Info.plist;
@@ -463,6 +600,7 @@
 		};
 		58D2AAF61E4ACB510084CE80 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6ACF8EEB4B7DD734752E04BE /* Pods-tempusTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -477,6 +615,7 @@
 		};
 		58D2AAF71E4ACB510084CE80 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4514D91D6E2255B2CF063585 /* Pods-tempusTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
