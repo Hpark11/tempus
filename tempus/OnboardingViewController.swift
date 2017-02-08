@@ -43,7 +43,7 @@ class OnboardingViewController: UIViewController {
     lazy var pageControl: UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.pageIndicatorTintColor = .lightGray
-        pageControl.currentPageIndicatorTintColor = .blue
+        pageControl.currentPageIndicatorTintColor = .cyan
         pageControl.numberOfPages = OnboardingData.pages.count
         return pageControl
     }()
@@ -60,15 +60,18 @@ class OnboardingViewController: UIViewController {
         let button = UIButton()
         if let image = UIImage(named: "next") {
             button.setImage(image, for: .normal)
+            
         }
         button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return button
     }()
     
     lazy var startButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("시작하기", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        let button = UIButton()
+        if let image = UIImage(named: "start button") {
+            button.setImage(image, for: .normal)
+            button.imageView?.contentMode = .scaleAspectFit
+        }
         button.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -85,7 +88,8 @@ class OnboardingViewController: UIViewController {
      *  UI Actions
      */
     func skipButtonTapped() {
-        
+        pageControl.currentPage = OnboardingData.pages.count - 2
+        nextButtonTapped()
     }
     
     func nextButtonTapped() {
@@ -115,11 +119,14 @@ class OnboardingViewController: UIViewController {
         pageControlBottomAnchor?.constant = 40
         skipButtonTopAnchor?.constant = -40
         nextButtonTopAnchor?.constant = -40
+        startButton.isHidden = false
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        startButton.isHidden = true
+        
         addSubViews()
         setConstraints()
         registerCells()
@@ -140,7 +147,7 @@ class OnboardingViewController: UIViewController {
         
         nextButtonTopAnchor = nextButton.anchor(view.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, topConstant: 24, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 40).first
         
-        startButtonTopAnchor = startButton.anchor(nil, left: view.leftAnchor, bottom: pageControl.topAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 20, bottomConstant: 40, rightConstant: 20, widthConstant: 0, heightConstant: 48).first
+        startButtonTopAnchor = startButton.anchor(nil, left: view.leftAnchor, bottom: pageControl.topAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 30, bottomConstant: 72, rightConstant: 30, widthConstant: 170, heightConstant: 45).first
         
         // use autolayout instead
         collectionView.anchorToTop(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)

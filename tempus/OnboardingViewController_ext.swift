@@ -33,12 +33,13 @@ extension OnboardingViewController : UICollectionViewDelegate, UICollectionViewD
         let pageNumber = Int(targetContentOffset.pointee.x / view.frame.width)
         pageControl.currentPage = pageNumber
         
-        if pageNumber == OnboardingData.pages.count {
+        if pageNumber == OnboardingData.pages.count - 1 {
             moveControllConstraintsOffScreen()
         } else {
             pageControlBottomAnchor?.constant = -10
             skipButtonTopAnchor?.constant = 24
             nextButtonTopAnchor?.constant = 24
+            startButton.isHidden = true
         }
         
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {

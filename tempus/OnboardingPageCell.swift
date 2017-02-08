@@ -14,7 +14,7 @@ class OnboardingPageCell: BaseCell {
             guard let page = page else {
                 return
             }
-            imageView.image = UIImage(named: page.imageName)
+            // imageView.image = UIImage(named: page.imageName)
             
             let attributedText = NSMutableAttributedString(string: page.title, attributes: [
                 NSFontAttributeName: UIFont.systemFont(ofSize: 18, weight: UIFontWeightMedium),
@@ -43,7 +43,7 @@ class OnboardingPageCell: BaseCell {
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(named: "page1")
+        imageView.image = UIImage(named: "page2")
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -79,8 +79,8 @@ class OnboardingPageCell: BaseCell {
     }
     
     fileprivate func setConstraints() {
-        imageView.anchorToTop(topAnchor, left: leftAnchor, bottom: textView.topAnchor, right: rightAnchor)
-        textView.anchorWithConstantsToTop(nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 16, bottomConstant: 0, rightConstant: 16)
+        imageView.anchorToTop(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor)
+        textView.anchorWithConstantsToTop(nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0)
         textView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3).isActive = true
         lineSeparatorView.anchorToTop(nil, left: leftAnchor, bottom: textView.topAnchor, right: rightAnchor)
         lineSeparatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
