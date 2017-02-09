@@ -95,7 +95,7 @@ class MeetingViewController: UICollectionViewController {
     fileprivate func setBottomPanelCollectionViewUI() {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
-        collectionView?.backgroundColor = .lightGray
+        collectionView?.backgroundColor = .white
         collectionView?.setCollectionViewLayout(layout, animated: true)
     }
     

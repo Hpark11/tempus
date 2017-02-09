@@ -29,11 +29,20 @@ extension MeetingViewController: UICollectionViewDelegateFlowLayout {
             if indexPath.item == MeetingMainData.bottomContents.count {
                 return collectionView.dequeueReusableCell(withReuseIdentifier: MeetingMainData.categoryCellId, for: indexPath) as! CategoryMeetingViewCell
             } else {
-                return collectionView.dequeueReusableCell(withReuseIdentifier: MeetingMainData.bottomPanelCellId, for: indexPath) as!MeetingViewBottomPanelCell
+                let bottomCell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetingMainData.bottomPanelCellId, for: indexPath) as!MeetingViewBottomPanelCell
+                bottomCell.moreButton.addTarget(self, action: #selector(moreButtonTapped), for: .touchUpInside)
+                bottomCell.moreButton.tag = indexPath.item
+                return bottomCell
             }
         } else {
             return UICollectionViewCell()
         }
+    }
+    
+    func moreButtonTapped(_ button: UIButton) {
+        print("More Button tagged with tag: \(button.tag)")
+        let meetingListViewController = MeetingListViewController()
+        navigationController?.pushViewController(meetingListViewController, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -41,7 +50,7 @@ extension MeetingViewController: UICollectionViewDelegateFlowLayout {
             return CGSize(width: view.frame.width, height: collectionView.frame.size.height)
         } else if self.collectionView == collectionView {
             if indexPath.item == MeetingMainData.bottomContents.count {
-                return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height)
+                return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height * 1.4)
             } else {
                 return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height / 2.2)
             }

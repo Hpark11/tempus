@@ -34,11 +34,12 @@ class MeetingViewBottomPanelCell: BaseCell, UICollectionViewDelegate, UICollecti
         return label
     }()
     
-    let moreButton: UIButton = {
+    lazy var moreButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("더보기", for: .normal)
         button.setTitleColor(.lightGray, for: .normal)
-        button.addTarget(self, action: #selector(moreButtonTapped), for: .touchUpInside)
+        //button.addTarget(self, action: #selector(moreButtonTapped), for: .touchUpInside)
+        button.isUserInteractionEnabled = true
         return button
     }()
     
@@ -59,12 +60,15 @@ class MeetingViewBottomPanelCell: BaseCell, UICollectionViewDelegate, UICollecti
      *  UI Actions
      */
     func moreButtonTapped() {
+        //let controller = MeetingListViewController()
         
     }
     
     override func setupViews() {
         super.setupViews()
         backgroundColor = .white
+        self.contentView.isUserInteractionEnabled = false
+        
         addSubViews()
         setConstraints()
         registerCells()
