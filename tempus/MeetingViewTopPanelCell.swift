@@ -11,11 +11,38 @@ import UIKit
 class MeetingViewTopPanelCell: BaseCell {
 
     /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+     *  UI Components
+     */
+    let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: "placeholder1")
+        imageView.clipsToBounds = true
+        return imageView
+    }()
+    
+    let overlayView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        view.alpha = 0.4
+        return view
+    }()
+    
+    override func setupViews() {
+        super.setupViews()
+        
+        addSubViews()
+        setConstraints()
     }
-    */
-
+    
+    fileprivate func addSubViews() {
+        addSubview(imageView)
+        addSubview(overlayView)
+    }
+    
+    fileprivate func setConstraints() {
+        _ = imageView.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        
+        _ = overlayView.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+    }
 }

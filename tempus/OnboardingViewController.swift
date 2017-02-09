@@ -60,7 +60,6 @@ class OnboardingViewController: UIViewController {
         let button = UIButton()
         if let image = UIImage(named: "next") {
             button.setImage(image, for: .normal)
-            
         }
         button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return button

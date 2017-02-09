@@ -15,19 +15,23 @@ class MainNavigationController: UINavigationController {
         view.backgroundColor = .red
         
         if isLoggedIn() {
-            // assume user is logged in
-            let homeController = HomeController()
-            viewControllers = [homeController]
+            showMeetingViewController()
         } else {
             perform(#selector(showOnboardingViewController), with: nil, afterDelay: 0.01)
         }
     }
     
     fileprivate func isLoggedIn() -> Bool {
-        return false
+        return true
     }
     
-    func showOnboardingViewController() {
+    fileprivate func showMeetingViewController() {
+        let layout = UICollectionViewFlowLayout()
+        let meetingViewController = MeetingViewController(collectionViewLayout: layout)
+        viewControllers = [meetingViewController]
+    }
+    
+    @objc fileprivate func showOnboardingViewController() {
         let onboardingViewController = OnboardingViewController()
         self.present(onboardingViewController, animated: true, completion: {
         })

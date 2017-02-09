@@ -18,46 +18,80 @@ class MeetingViewController: UICollectionViewController {
     /*
      *  UI Components
      */
-    let topPanelCollectionView: UICollectionView = {
+    lazy var topPanelCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 0
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.isPagingEnabled = true
         return collectionView
     }()
     
+    let titleLabel: UILabel = {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 120, height: 40))
+        label.textAlignment = .center
+        label.text = "tempus"
+        label.textColor = UIColor.white
+        label.font = UIFont.systemFont(ofSize: 20)
+        return label
+    }()
+    
+    let searchButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "icon search"), for: .normal)
+        button.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
+        button.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
+        button.isEnabled = false
+        return button
+    }()
+    
+    /*
+     *  UI Actions
+     */
+    func searchButtonTapped() {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        collectionView?.backgroundColor = .lightGray
         
-        self.view.backgroundColor = .white
+        setNavigationBarUI()
+        addSubViews()
+        setConstraints()
+        registerCells()
+    }
+    
+    fileprivate func setNavigationBarUI() {
+        navigationItem.titleView = titleLabel
         
+        let searchButtonItem = UIBarButtonItem(customView: searchButton)
+        self.navigationItem.rightBarButtonItem = searchButtonItem
+    }
+    
+    fileprivate func addSubViews() {
         view.addSubview(topPanelCollectionView)
+    }
+    
+    fileprivate func setConstraints() {
+        _ = topPanelCollectionView.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: view.frame.height / 3.2).first
         
-        
-        
-        _ = topPanelCollectionView.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: view.frame.height / 5).first
-        
+        _ = self.collectionView?.anchor(topPanelCollectionView.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: -64, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0).first
+    }
+    
+    fileprivate func registerCells() {
         topPanelCollectionView.register(MeetingViewTopPanelCell.self, forCellWithReuseIdentifier: MeetingMainData.topPanelCellId)
         collectionView?.register(MeetingViewBottomPanelCell.self, forCellWithReuseIdentifier: MeetingMainData.bottomPanelCellId)
     }
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
-    }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-//        if topPanelCollectionView == collectionView {
-//            let topCell = collectionView.dequeueReusableCell(withReuseIdentifier:MeetingMainData.topPanelCellId, for: indexPath)  as! MeetingViewTopPanelCell
-//            
-//        } else if bottomPanelCollectionView == collectionView  {
-//            
-//        }
-//        
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier:MeetingMainData.topPanelCellId, for: indexPath)
-//        return cell
-    }
+    
+
    
     
 //    var appCategories: [AppCategory]?
