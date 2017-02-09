@@ -12,7 +12,7 @@ extension MeetingViewController: UICollectionViewDelegateFlowLayout {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if topPanelCollectionView == collectionView {
-            return 5
+            return 4
         } else if self.collectionView == collectionView {
             return 5
         } else {
@@ -23,7 +23,7 @@ extension MeetingViewController: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if topPanelCollectionView == collectionView {
             let topCell = collectionView.dequeueReusableCell(withReuseIdentifier:MeetingMainData.topPanelCellId, for: indexPath)  as! MeetingViewTopPanelCell
-            topCell.backgroundColor = .blue
+            topCell.content = MeetingMainData.topContents[indexPath.item]
             return topCell
         } else if self.collectionView == collectionView  {
             let bottomCell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetingMainData.bottomPanelCellId, for: indexPath) as! MeetingViewBottomPanelCell

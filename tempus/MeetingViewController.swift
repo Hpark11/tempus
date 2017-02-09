@@ -11,8 +11,27 @@ import UIKit
 class MeetingViewController: UICollectionViewController {
 
     public struct MeetingMainData {
+        static let topContents: [MeetingTopPanelContent] = {
+            return [
+                MeetingTopPanelContent(title: "당신의 가치를 높여줄 사람을 만나보세요", imageName: "placeholder1"),
+                MeetingTopPanelContent(title: "잘 찾아보면 나와요 ", imageName: "placeholder2"),
+                MeetingTopPanelContent(title: "혹시 뭐 배워보고 싶어요?", imageName: "placeholder3"),
+                MeetingTopPanelContent(title: "당신의 하루를 가치있게!!", imageName: "placeholder1")
+            ]
+        }()
+        
+        static let bottomContents: [MeetingBottomPanelContent] = {
+            return [
+                MeetingBottomPanelContent(typeName: "카운셀링"),
+                MeetingBottomPanelContent(typeName: "멘토링"),
+                MeetingBottomPanelContent(typeName: "체험"),
+                MeetingBottomPanelContent(typeName: "네트워킹")
+            ]
+        }()
+        
         static let topPanelCellId = "topPanelCellId"
         static let bottomPanelCellId = "bottomPanelCellId"
+        static let categoryCellId = "categoryCellId"
     }
     
     /*
@@ -87,41 +106,6 @@ class MeetingViewController: UICollectionViewController {
     fileprivate func registerCells() {
         topPanelCollectionView.register(MeetingViewTopPanelCell.self, forCellWithReuseIdentifier: MeetingMainData.topPanelCellId)
         collectionView?.register(MeetingViewBottomPanelCell.self, forCellWithReuseIdentifier: MeetingMainData.bottomPanelCellId)
+        collectionView?.register(CategoryMeetingViewCell.self, forCellWithReuseIdentifier: MeetingMainData.categoryCellId)
     }
-    
-    
-    
-
-   
-    
-//    var appCategories: [AppCategory]?
-//    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        
-//        appCategories = AppCategory.sampleAppCategories()
-//        
-//        collectionView?.backgroundColor = .white
-//        collectionView?.register(CategoryCell.self, forCellWithReuseIdentifier: cellId)
-//    }
-//    
-//    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        if let count = appCategories?.count {
-//            return count
-//        }
-//        return 0
-//    }
-//    
-//    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CategoryCell
-//        
-//        cell.appCategory = appCategories?[indexPath.item]
-//        
-//        return cell
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return CGSize(width: view.frame.width, height: 230)
-//    }
-
 }

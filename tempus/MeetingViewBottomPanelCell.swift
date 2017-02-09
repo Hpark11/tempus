@@ -10,7 +10,7 @@ import UIKit
 
 class MeetingViewBottomPanelCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-    public struct MeetingViewCellData {
+    struct MeetingViewCellData {
         static let cellId = "cellId"
     }
     
@@ -87,18 +87,13 @@ class MeetingViewBottomPanelCell: BaseCell, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetingViewCellData.cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetingViewCellData.cellId, for: indexPath) as! RecommendedMeetingViewCell
         return cell
     }
     
-    
-    
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: frame.width, height: meetingCollectionView.frame.height)
     }
-    */
+    
 
 }

@@ -19,6 +19,8 @@ class RecommendedMeetingViewCell: BaseCell {
     override func setupViews() {
         super.setupViews()
         
+        backgroundColor = .red
+        
         addSubViews()
         setConstraints()
     }

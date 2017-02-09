@@ -29,6 +29,10 @@
 		58FCAADF1E4B276E002F5B0A /* MeetingViewBottomPanelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FCAADE1E4B276E002F5B0A /* MeetingViewBottomPanelCell.swift */; };
 		58FCAAE11E4C2436002F5B0A /* MeetingViewController_ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FCAAE01E4C2436002F5B0A /* MeetingViewController_ext.swift */; };
 		58FCAAE31E4C2ADC002F5B0A /* RecommendedMeetingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FCAAE21E4C2ADC002F5B0A /* RecommendedMeetingViewCell.swift */; };
+		58FCAAE71E4C382E002F5B0A /* CategoryMeetingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FCAAE61E4C382E002F5B0A /* CategoryMeetingViewCell.swift */; };
+		58FCAAE91E4C3A0D002F5B0A /* MeetingCategoryContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FCAAE81E4C3A0D002F5B0A /* MeetingCategoryContent.swift */; };
+		58FCAAEB1E4C4414002F5B0A /* MeetingTopPanelContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FCAAEA1E4C4414002F5B0A /* MeetingTopPanelContent.swift */; };
+		58FCAAED1E4C44A7002F5B0A /* MeetingBottomPanelContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FCAAEC1E4C44A7002F5B0A /* MeetingBottomPanelContent.swift */; };
 		A89D3980CC287D1CF9315CE8 /* Pods_tempusTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F65C803CE4864764B11C7F /* Pods_tempusTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +75,10 @@
 		58FCAADE1E4B276E002F5B0A /* MeetingViewBottomPanelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingViewBottomPanelCell.swift; sourceTree = "<group>"; };
 		58FCAAE01E4C2436002F5B0A /* MeetingViewController_ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingViewController_ext.swift; sourceTree = "<group>"; };
 		58FCAAE21E4C2ADC002F5B0A /* RecommendedMeetingViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendedMeetingViewCell.swift; sourceTree = "<group>"; };
+		58FCAAE61E4C382E002F5B0A /* CategoryMeetingViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryMeetingViewCell.swift; sourceTree = "<group>"; };
+		58FCAAE81E4C3A0D002F5B0A /* MeetingCategoryContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingCategoryContent.swift; sourceTree = "<group>"; };
+		58FCAAEA1E4C4414002F5B0A /* MeetingTopPanelContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingTopPanelContent.swift; sourceTree = "<group>"; };
+		58FCAAEC1E4C44A7002F5B0A /* MeetingBottomPanelContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingBottomPanelContent.swift; sourceTree = "<group>"; };
 		6ACF8EEB4B7DD734752E04BE /* Pods-tempusTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tempusTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tempusTests/Pods-tempusTests.debug.xcconfig"; sourceTree = "<group>"; };
 		892E9543776C6747753C3B38 /* Pods-tempus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tempus.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tempus/Pods-tempus.debug.xcconfig"; sourceTree = "<group>"; };
 		B7F65C803CE4864764B11C7F /* Pods_tempusTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tempusTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,6 +165,7 @@
 				58FCAADC1E4B2756002F5B0A /* MeetingViewTopPanelCell.swift */,
 				58FCAADE1E4B276E002F5B0A /* MeetingViewBottomPanelCell.swift */,
 				58FCAAE21E4C2ADC002F5B0A /* RecommendedMeetingViewCell.swift */,
+				58FCAAE61E4C382E002F5B0A /* CategoryMeetingViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -177,6 +186,9 @@
 			children = (
 				58D2AADC1E4ACB510084CE80 /* tempus.xcdatamodeld */,
 				58D2AB061E4AD07D0084CE80 /* OnboardingPage.swift */,
+				58FCAAE81E4C3A0D002F5B0A /* MeetingCategoryContent.swift */,
+				58FCAAEA1E4C4414002F5B0A /* MeetingTopPanelContent.swift */,
+				58FCAAEC1E4C44A7002F5B0A /* MeetingBottomPanelContent.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -456,10 +468,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58FCAAEB1E4C4414002F5B0A /* MeetingTopPanelContent.swift in Sources */,
 				58FCAADF1E4B276E002F5B0A /* MeetingViewBottomPanelCell.swift in Sources */,
 				58D2AAD81E4ACB510084CE80 /* ViewController.swift in Sources */,
+				58FCAAED1E4C44A7002F5B0A /* MeetingBottomPanelContent.swift in Sources */,
 				58D2AB0F1E4ADC7A0084CE80 /* OnboardingCoverPageCell.swift in Sources */,
+				58FCAAE71E4C382E002F5B0A /* CategoryMeetingViewCell.swift in Sources */,
 				58FCAADD1E4B2756002F5B0A /* MeetingViewTopPanelCell.swift in Sources */,
+				58FCAAE91E4C3A0D002F5B0A /* MeetingCategoryContent.swift in Sources */,
 				58FCAAE31E4C2ADC002F5B0A /* RecommendedMeetingViewCell.swift in Sources */,
 				58D2AADE1E4ACB510084CE80 /* tempus.xcdatamodeld in Sources */,
 				58FCAAE11E4C2436002F5B0A /* MeetingViewController_ext.swift in Sources */,
