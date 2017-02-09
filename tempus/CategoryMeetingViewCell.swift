@@ -24,13 +24,15 @@ class CategoryMeetingViewCell: BaseCell {
     let categoryButtons: [UIButton] = {
         var buttons = [UIButton]()
         
-        for i in 0...CategoryData.contents.count {
+        for i in 0..<CategoryData.contents.count {
+            
             let button = UIButton(type: .system)
             button.tag = i
             button.setTitle(CategoryData.contents[i].title, for: .normal)
             button.setTitleColor(.white, for: .normal)
             button.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
             button.setBackgroundImage(UIImage(named: "placeholder1"), for: .normal)
+            button.isUserInteractionEnabled = true
             buttons.append(button)
         }
         
@@ -38,15 +40,29 @@ class CategoryMeetingViewCell: BaseCell {
     }()
     
     func categoryButtonTapped(button: UIButton) {
-        
+        print(button.tag)
     }
     
     override func setupViews() {
         super.setupViews()
-        
-        
+        //contentView.isUserInteractionEnabled = false
+        addSubViews()
+        setConstraints()
     }
     
+    fileprivate func addSubViews() {
+        for i in 0..<categoryButtons.count {
+            contentView.addSubview(categoryButtons[i])
+            //categoryButtons[i].bringSubview(toFront: self.contentView)
+        }
+    }
     
-
+    fileprivate func setConstraints() {
+        var position: CGFloat = 0
+        
+        for i in 0..<categoryButtons.count {
+            _ = categoryButtons[i].anchor(topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: position, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: frame.height / 4)
+            position += frame.height / 4
+        }
+    }
 }

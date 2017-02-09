@@ -13,7 +13,7 @@ class MeetingViewController: UICollectionViewController {
     public struct MeetingMainData {
         static let topContents: [MeetingTopPanelContent] = {
             return [
-                MeetingTopPanelContent(title: "당신의 가치를 높여줄 사람을 만나보세요", imageName: "placeholder1"),
+                MeetingTopPanelContent(title: "당신의 가치를 높여줄 사람을\n만나볼수 없을까요?", imageName: "placeholder1"),
                 MeetingTopPanelContent(title: "잘 찾아보면 나와요 ", imageName: "placeholder2"),
                 MeetingTopPanelContent(title: "혹시 뭐 배워보고 싶어요?", imageName: "placeholder3"),
                 MeetingTopPanelContent(title: "당신의 하루를 가치있게!!", imageName: "placeholder1")
@@ -78,8 +78,7 @@ class MeetingViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        collectionView?.backgroundColor = .lightGray
-        
+        setBottomPanelCollectionViewUI()
         setNavigationBarUI()
         addSubViews()
         setConstraints()
@@ -91,6 +90,13 @@ class MeetingViewController: UICollectionViewController {
         
         let searchButtonItem = UIBarButtonItem(customView: searchButton)
         self.navigationItem.rightBarButtonItem = searchButtonItem
+    }
+    
+    fileprivate func setBottomPanelCollectionViewUI() {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 0
+        collectionView?.backgroundColor = .lightGray
+        collectionView?.setCollectionViewLayout(layout, animated: true)
     }
     
     fileprivate func addSubViews() {

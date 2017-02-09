@@ -35,11 +35,6 @@ class OnboardingPageCell: BaseCell {
         }
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupViews()
-    }
-    
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -61,10 +56,6 @@ class OnboardingPageCell: BaseCell {
         view.backgroundColor = UIColor(white: 0.9, alpha: 1)
         return view
     }()
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func setupViews() {
         super.setupViews()

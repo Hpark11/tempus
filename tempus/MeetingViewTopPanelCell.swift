@@ -14,7 +14,19 @@ class MeetingViewTopPanelCell: BaseCell {
         didSet {
             if let content = content {
                 imageView.image = UIImage(named: content.imageName)
-                titleLabel.text = content.title
+                //titleLabel.text = content.title
+                
+                let attributedText = NSMutableAttributedString(string: content.title, attributes: [
+                    NSFontAttributeName: UIFont.systemFont(ofSize: 24, weight: UIFontWeightMedium),
+                    NSForegroundColorAttributeName: UIColor.white
+                    ])
+                
+                // center alignment
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.alignment = .center
+                attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSRange(location: 0, length: attributedText.string.characters.count))
+                
+                titleView.attributedText = attributedText
             }
         }
     }
@@ -30,12 +42,11 @@ class MeetingViewTopPanelCell: BaseCell {
         return imageView
     }()
     
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.textAlignment = .center
-        //label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    let titleView: UITextView = {
+        let textView = UITextView()
+        textView.backgroundColor = UIColor(white: 0.0, alpha: 0.0)
+        textView.isEditable = false
+        return textView
     }()
     
     let overlayView: UIView = {
@@ -47,7 +58,6 @@ class MeetingViewTopPanelCell: BaseCell {
     
     override func setupViews() {
         super.setupViews()
-        
         addSubViews()
         setConstraints()
     }
@@ -55,7 +65,7 @@ class MeetingViewTopPanelCell: BaseCell {
     fileprivate func addSubViews() {
         addSubview(imageView)
         addSubview(overlayView)
-        addSubview(titleLabel)
+        addSubview(titleView)
     }
     
     fileprivate func setConstraints() {
@@ -63,8 +73,8 @@ class MeetingViewTopPanelCell: BaseCell {
         
         _ = overlayView.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
-        _ = titleLabel.anchor(nil, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 0, leftConstant: 16, bottomConstant: 0, rightConstant: 16, widthConstant: 0, heightConstant: 0)
-        
-        addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
+        _ = titleView.anchor(nil, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 0, leftConstant: 16, bottomConstant: 0, rightConstant: 16, widthConstant: 0, heightConstant: 0)
+        titleView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5).isActive = true
+        addConstraint(NSLayoutConstraint(item: titleView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: frame.size.height / 3.4))
     }
 }

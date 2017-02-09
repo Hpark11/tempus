@@ -14,7 +14,7 @@ extension MeetingViewController: UICollectionViewDelegateFlowLayout {
         if topPanelCollectionView == collectionView {
             return 4
         } else if self.collectionView == collectionView {
-            return 5
+            return MeetingMainData.bottomContents.count + 1
         } else {
             return 0
         }
@@ -26,8 +26,11 @@ extension MeetingViewController: UICollectionViewDelegateFlowLayout {
             topCell.content = MeetingMainData.topContents[indexPath.item]
             return topCell
         } else if self.collectionView == collectionView  {
-            let bottomCell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetingMainData.bottomPanelCellId, for: indexPath) as! MeetingViewBottomPanelCell
-            return bottomCell
+            if indexPath.item == MeetingMainData.bottomContents.count {
+                return collectionView.dequeueReusableCell(withReuseIdentifier: MeetingMainData.categoryCellId, for: indexPath) as! CategoryMeetingViewCell
+            } else {
+                return collectionView.dequeueReusableCell(withReuseIdentifier: MeetingMainData.bottomPanelCellId, for: indexPath) as!MeetingViewBottomPanelCell
+            }
         } else {
             return UICollectionViewCell()
         }
@@ -37,7 +40,11 @@ extension MeetingViewController: UICollectionViewDelegateFlowLayout {
         if topPanelCollectionView == collectionView {
             return CGSize(width: view.frame.width, height: collectionView.frame.size.height)
         } else if self.collectionView == collectionView {
-            return CGSize(width: collectionView.frame.size.width, height: 230)
+            if indexPath.item == MeetingMainData.bottomContents.count {
+                return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height)
+            } else {
+                return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height / 2.2)
+            }
         } else {
             return CGSize(width: 50, height: 50)
         }

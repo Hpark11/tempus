@@ -10,6 +10,14 @@ import UIKit
 
 class MeetingViewBottomPanelCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
+    var content: MeetingBottomPanelContent? {
+        didSet {
+            if let content = content {
+                meetingTypeLabel.text = content.typeName
+            }
+        }
+    }
+    
     struct MeetingViewCellData {
         static let cellId = "cellId"
     }
@@ -21,7 +29,7 @@ class MeetingViewBottomPanelCell: BaseCell, UICollectionViewDelegate, UICollecti
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 120, height: 40))
         label.text = "카운셀링"
         label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -54,11 +62,9 @@ class MeetingViewBottomPanelCell: BaseCell, UICollectionViewDelegate, UICollecti
         
     }
     
-    
     override func setupViews() {
         super.setupViews()
-        backgroundColor = .red
-        
+        backgroundColor = .white
         addSubViews()
         setConstraints()
         registerCells()
@@ -71,9 +77,9 @@ class MeetingViewBottomPanelCell: BaseCell, UICollectionViewDelegate, UICollecti
     }
     
     fileprivate func setConstraints() {
-        _ = meetingTypeLabel.anchor(topAnchor, left: leftAnchor, bottom: nil, right: nil, topConstant: 8, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 120, heightConstant: 40)
+        _ = meetingTypeLabel.anchor(topAnchor, left: leftAnchor, bottom: nil, right: nil, topConstant: 8, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 120, heightConstant: 32)
         
-        _ = moreButton.anchor(topAnchor, left: nil, bottom: nil, right: rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 8, widthConstant: 60, heightConstant: 40)
+        _ = moreButton.anchor(topAnchor, left: nil, bottom: nil, right: rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 8, widthConstant: 60, heightConstant: 32)
         
         _ = meetingCollectionView.anchor(meetingTypeLabel.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
     }
@@ -94,6 +100,5 @@ class MeetingViewBottomPanelCell: BaseCell, UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: frame.width, height: meetingCollectionView.frame.height)
     }
-    
 
 }
