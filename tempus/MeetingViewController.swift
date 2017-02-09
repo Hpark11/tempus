@@ -10,7 +10,7 @@ import UIKit
 
 class MeetingViewController: UICollectionViewController {
 
-    public struct MeetingMainData {
+    internal struct MeetingMainData {
         static let topContents: [MeetingTopPanelContent] = {
             return [
                 MeetingTopPanelContent(title: "당신의 가치를 높여줄 사람을\n만나볼수 없을까요?", imageName: "placeholder1"),
@@ -85,9 +85,14 @@ class MeetingViewController: UICollectionViewController {
         registerCells()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isTranslucent = true
+        //navigationController?.navigationBar.backgroundColor = UIColor(white: 0, alpha: 0)
+    }
+    
     fileprivate func setNavigationBarUI() {
         navigationItem.titleView = titleLabel
-        
         let searchButtonItem = UIBarButtonItem(customView: searchButton)
         self.navigationItem.rightBarButtonItem = searchButtonItem
     }

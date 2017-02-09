@@ -10,7 +10,7 @@ import UIKit
 
 class OnboardingViewController: UIViewController {
 
-    public struct OnboardingData {
+    internal struct OnboardingData {
         static let pages: [OnboardingPage] = {
             return [
                 OnboardingPage(title: "당신은\n의미있는 시간을\n보내고 계신가요?", message: "오늘을 의미있는 시간으로 채워보세요!", imageName: "page1"),
