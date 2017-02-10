@@ -8,9 +8,16 @@
 
 import UIKit
 
-class MeetingListViewController: UICollectionViewController {
+class MeetingListViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     let cellId = "cellId"
+    
+    struct MeetingListData {
+        static let selfDevelopmentCellId = ""
+        static let preparingTestCellId = ""
+        static let professionalCellId = ""
+        static let hobbyCellId = ""
+    }
     
     let titleLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 120, height: 40))
@@ -56,6 +63,15 @@ class MeetingListViewController: UICollectionViewController {
         self.navigationItem.rightBarButtonItem = searchButtonItem
     }
     
+    fileprivate func cellCollectionViewUI() {
+        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.scrollDirection = .horizontal
+            flowLayout.minimumLineSpacing = 0
+        }
+        
+        
+    }
+    
     fileprivate func addSubViews() {
         
     }
@@ -65,7 +81,10 @@ class MeetingListViewController: UICollectionViewController {
     }
     
     fileprivate func registerCells() {
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: MeetingListData.selfDevelopmentCellId)
+        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: MeetingListData.preparingTestCellId)
+        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: MeetingListData.professionalCellId)
+        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: MeetingListData.hobbyCellId)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -73,9 +92,15 @@ class MeetingListViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
         cell.backgroundColor = .blue
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: view.frame.height * 9 / 16)
     }
 }
 

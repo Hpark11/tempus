@@ -10,7 +10,7 @@ import UIKit
 
 class MainNavigationController: UINavigationController {
 
-    static var isLogged: Bool = false
+    static var isLogged: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
