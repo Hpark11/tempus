@@ -52,7 +52,7 @@ class MeetingListCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let height = (frame.width - 2 * Constants.sizeStandards.spaceShort) * Constants.sizeStandards.landscapeRatio
-        return CGSize(width: frame.width, height: height + 88 + 16)
+        return CGSize(width: frame.width, height: height + 80)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

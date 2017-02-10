@@ -40,7 +40,6 @@ extension MeetingViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func moreButtonTapped(_ button: UIButton) {
-        print("More Button tagged with tag: \(button.tag)")
         let layout = UICollectionViewFlowLayout()
         let meetingListViewController = MeetingListViewController(collectionViewLayout: layout)
         navigationController?.pushViewController(meetingListViewController, animated: true)

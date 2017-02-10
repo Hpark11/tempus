@@ -87,7 +87,10 @@ class MeetingViewController: UICollectionViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.isTranslucent = true
+        
+        UIView.animate(withDuration: 0.5) { 
+            self.navigationController?.navigationBar.isTranslucent = true
+        }
         //navigationController?.navigationBar.backgroundColor = UIColor(white: 0, alpha: 0)
     }
     

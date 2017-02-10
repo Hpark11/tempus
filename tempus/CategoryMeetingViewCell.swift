@@ -46,7 +46,7 @@ class CategoryMeetingViewCell: BaseCell {
     }()
     
     func categoryButtonTapped(_ button: UIButton) {
-        print(button.tag)
+
     }
     
     override func setupViews() {
