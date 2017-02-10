@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4D13DF3F1F9689260AE36F83 /* Pods_tempus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E88DB2E7A740E9A2F92813 /* Pods_tempus.framework */; };
+		580CB5F71E4E6F85008658CA /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580CB5F61E4E6F85008658CA /* Meeting.swift */; };
 		583BB5BD1E4D486B000FDA44 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BB5BC1E4D486B000FDA44 /* Constants.swift */; };
 		583BB5BF1E4D4F9C000FDA44 /* MeetingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BB5BE1E4D4F9C000FDA44 /* MeetingCell.swift */; };
 		583BB5C31E4D551A000FDA44 /* DownloadImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BB5C21E4D551A000FDA44 /* DownloadImageView.swift */; };
@@ -55,6 +56,7 @@
 		08E88DB2E7A740E9A2F92813 /* Pods_tempus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tempus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B46B7A0A187E515B862B170 /* Pods-tempus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tempus.release.xcconfig"; path = "Pods/Target Support Files/Pods-tempus/Pods-tempus.release.xcconfig"; sourceTree = "<group>"; };
 		4514D91D6E2255B2CF063585 /* Pods-tempusTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tempusTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-tempusTests/Pods-tempusTests.release.xcconfig"; sourceTree = "<group>"; };
+		580CB5F61E4E6F85008658CA /* Meeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
 		583BB5BC1E4D486B000FDA44 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		583BB5BE1E4D4F9C000FDA44 /* MeetingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingCell.swift; sourceTree = "<group>"; };
 		583BB5C21E4D551A000FDA44 /* DownloadImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadImageView.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				58FCAAE81E4C3A0D002F5B0A /* MeetingCategoryContent.swift */,
 				58FCAAEA1E4C4414002F5B0A /* MeetingTopPanelContent.swift */,
 				58FCAAEC1E4C44A7002F5B0A /* MeetingBottomPanelContent.swift */,
+				580CB5F61E4E6F85008658CA /* Meeting.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -509,6 +512,7 @@
 				58D2AB0F1E4ADC7A0084CE80 /* OnboardingCoverPageCell.swift in Sources */,
 				58FCAAE71E4C382E002F5B0A /* CategoryMeetingViewCell.swift in Sources */,
 				58D2E2781E4CB4860084B2C9 /* MeetingListCell.swift in Sources */,
+				580CB5F71E4E6F85008658CA /* Meeting.swift in Sources */,
 				583BB5C31E4D551A000FDA44 /* DownloadImageView.swift in Sources */,
 				58FCAADD1E4B2756002F5B0A /* MeetingViewTopPanelCell.swift in Sources */,
 				58FCAAE91E4C3A0D002F5B0A /* MeetingCategoryContent.swift in Sources */,
