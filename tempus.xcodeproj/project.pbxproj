@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		4D13DF3F1F9689260AE36F83 /* Pods_tempus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E88DB2E7A740E9A2F92813 /* Pods_tempus.framework */; };
+		583BB5BD1E4D486B000FDA44 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BB5BC1E4D486B000FDA44 /* Constants.swift */; };
+		583BB5BF1E4D4F9C000FDA44 /* MeetingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BB5BE1E4D4F9C000FDA44 /* MeetingCell.swift */; };
+		583BB5C31E4D551A000FDA44 /* DownloadImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BB5C21E4D551A000FDA44 /* DownloadImageView.swift */; };
 		58D2AAD61E4ACB510084CE80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AAD51E4ACB510084CE80 /* AppDelegate.swift */; };
 		58D2AAD81E4ACB510084CE80 /* MeetingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AAD71E4ACB510084CE80 /* MeetingListViewController.swift */; };
-		58D2AADB1E4ACB510084CE80 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58D2AAD91E4ACB510084CE80 /* Main.storyboard */; };
 		58D2AADE1E4ACB510084CE80 /* tempus.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AADC1E4ACB510084CE80 /* tempus.xcdatamodeld */; };
 		58D2AAE01E4ACB510084CE80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58D2AADF1E4ACB510084CE80 /* Assets.xcassets */; };
 		58D2AAE31E4ACB510084CE80 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58D2AAE11E4ACB510084CE80 /* LaunchScreen.storyboard */; };
@@ -23,7 +25,7 @@
 		58D2AB0B1E4AD4330084CE80 /* OnboardingPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AB0A1E4AD4330084CE80 /* OnboardingPageCell.swift */; };
 		58D2AB0D1E4AD48A0084CE80 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AB0C1E4AD48A0084CE80 /* BaseCell.swift */; };
 		58D2AB0F1E4ADC7A0084CE80 /* OnboardingCoverPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AB0E1E4ADC7A0084CE80 /* OnboardingCoverPageCell.swift */; };
-		58D2E2781E4CB4860084B2C9 /* MeetingContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2E2771E4CB4860084B2C9 /* MeetingContentCell.swift */; };
+		58D2E2781E4CB4860084B2C9 /* MeetingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2E2771E4CB4860084B2C9 /* MeetingListCell.swift */; };
 		58FCAAD91E4B00EA002F5B0A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58FCAAD81E4B00EA002F5B0A /* GoogleService-Info.plist */; };
 		58FCAADB1E4B0663002F5B0A /* MeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FCAADA1E4B0663002F5B0A /* MeetingViewController.swift */; };
 		58FCAADD1E4B2756002F5B0A /* MeetingViewTopPanelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FCAADC1E4B2756002F5B0A /* MeetingViewTopPanelCell.swift */; };
@@ -51,10 +53,12 @@
 		08E88DB2E7A740E9A2F92813 /* Pods_tempus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tempus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B46B7A0A187E515B862B170 /* Pods-tempus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tempus.release.xcconfig"; path = "Pods/Target Support Files/Pods-tempus/Pods-tempus.release.xcconfig"; sourceTree = "<group>"; };
 		4514D91D6E2255B2CF063585 /* Pods-tempusTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tempusTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-tempusTests/Pods-tempusTests.release.xcconfig"; sourceTree = "<group>"; };
+		583BB5BC1E4D486B000FDA44 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		583BB5BE1E4D4F9C000FDA44 /* MeetingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingCell.swift; sourceTree = "<group>"; };
+		583BB5C21E4D551A000FDA44 /* DownloadImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadImageView.swift; sourceTree = "<group>"; };
 		58D2AAD21E4ACB510084CE80 /* tempus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tempus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D2AAD51E4ACB510084CE80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D2AAD71E4ACB510084CE80 /* MeetingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingListViewController.swift; sourceTree = "<group>"; };
-		58D2AADA1E4ACB510084CE80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		58D2AADD1E4ACB510084CE80 /* tempus.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = tempus.xcdatamodel; sourceTree = "<group>"; };
 		58D2AADF1E4ACB510084CE80 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		58D2AAE21E4ACB510084CE80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -70,7 +74,7 @@
 		58D2AB0A1E4AD4330084CE80 /* OnboardingPageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingPageCell.swift; sourceTree = "<group>"; };
 		58D2AB0C1E4AD48A0084CE80 /* BaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		58D2AB0E1E4ADC7A0084CE80 /* OnboardingCoverPageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingCoverPageCell.swift; sourceTree = "<group>"; };
-		58D2E2771E4CB4860084B2C9 /* MeetingContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingContentCell.swift; sourceTree = "<group>"; };
+		58D2E2771E4CB4860084B2C9 /* MeetingListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingListCell.swift; sourceTree = "<group>"; };
 		58FCAAD81E4B00EA002F5B0A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		58FCAADA1E4B0663002F5B0A /* MeetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingViewController.swift; sourceTree = "<group>"; };
 		58FCAADC1E4B2756002F5B0A /* MeetingViewTopPanelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingViewTopPanelCell.swift; sourceTree = "<group>"; };
@@ -113,6 +117,30 @@
 				B7F65C803CE4864764B11C7F /* Pods_tempusTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		583BB5C01E4D54BC000FDA44 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				583BB5C21E4D551A000FDA44 /* DownloadImageView.swift */,
+			);
+			name = "Custom Views";
+			sourceTree = "<group>";
+		};
+		583BB5C11E4D54D3000FDA44 /* Custom Cells */ = {
+			isa = PBXGroup;
+			children = (
+				58D2AB0A1E4AD4330084CE80 /* OnboardingPageCell.swift */,
+				58D2AB0E1E4ADC7A0084CE80 /* OnboardingCoverPageCell.swift */,
+				58D2AB0C1E4AD48A0084CE80 /* BaseCell.swift */,
+				58FCAADC1E4B2756002F5B0A /* MeetingViewTopPanelCell.swift */,
+				58FCAADE1E4B276E002F5B0A /* MeetingViewBottomPanelCell.swift */,
+				58FCAAE21E4C2ADC002F5B0A /* RecommendedMeetingViewCell.swift */,
+				58FCAAE61E4C382E002F5B0A /* CategoryMeetingViewCell.swift */,
+				58D2E2771E4CB4860084B2C9 /* MeetingListCell.swift */,
+				583BB5BE1E4D4F9C000FDA44 /* MeetingCell.swift */,
+			);
+			name = "Custom Cells";
 			sourceTree = "<group>";
 		};
 		58D2AAC91E4ACB510084CE80 = {
@@ -161,14 +189,8 @@
 		58D2AAF81E4ACB590084CE80 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				58D2AB0A1E4AD4330084CE80 /* OnboardingPageCell.swift */,
-				58D2AB0E1E4ADC7A0084CE80 /* OnboardingCoverPageCell.swift */,
-				58D2AB0C1E4AD48A0084CE80 /* BaseCell.swift */,
-				58FCAADC1E4B2756002F5B0A /* MeetingViewTopPanelCell.swift */,
-				58FCAADE1E4B276E002F5B0A /* MeetingViewBottomPanelCell.swift */,
-				58FCAAE21E4C2ADC002F5B0A /* RecommendedMeetingViewCell.swift */,
-				58FCAAE61E4C382E002F5B0A /* CategoryMeetingViewCell.swift */,
-				58D2E2771E4CB4860084B2C9 /* MeetingContentCell.swift */,
+				583BB5C11E4D54D3000FDA44 /* Custom Cells */,
+				583BB5C01E4D54BC000FDA44 /* Custom Views */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -209,6 +231,7 @@
 		58D2AAFC1E4ACB810084CE80 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				583BB5BC1E4D486B000FDA44 /* Constants.swift */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -216,7 +239,6 @@
 		58D2AAFD1E4ACB850084CE80 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				58D2AAD91E4ACB510084CE80 /* Main.storyboard */,
 				58D2AADF1E4ACB510084CE80 /* Assets.xcassets */,
 				58D2AAE11E4ACB510084CE80 /* LaunchScreen.storyboard */,
 				58D2AAE41E4ACB510084CE80 /* Info.plist */,
@@ -360,7 +382,6 @@
 				58D2AAE31E4ACB510084CE80 /* LaunchScreen.storyboard in Resources */,
 				58FCAAD91E4B00EA002F5B0A /* GoogleService-Info.plist in Resources */,
 				58D2AAE01E4ACB510084CE80 /* Assets.xcassets in Resources */,
-				58D2AADB1E4ACB510084CE80 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,12 +493,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				58FCAAEB1E4C4414002F5B0A /* MeetingTopPanelContent.swift in Sources */,
+				583BB5BD1E4D486B000FDA44 /* Constants.swift in Sources */,
 				58FCAADF1E4B276E002F5B0A /* MeetingViewBottomPanelCell.swift in Sources */,
 				58D2AAD81E4ACB510084CE80 /* MeetingListViewController.swift in Sources */,
 				58FCAAED1E4C44A7002F5B0A /* MeetingBottomPanelContent.swift in Sources */,
 				58D2AB0F1E4ADC7A0084CE80 /* OnboardingCoverPageCell.swift in Sources */,
 				58FCAAE71E4C382E002F5B0A /* CategoryMeetingViewCell.swift in Sources */,
-				58D2E2781E4CB4860084B2C9 /* MeetingContentCell.swift in Sources */,
+				58D2E2781E4CB4860084B2C9 /* MeetingListCell.swift in Sources */,
+				583BB5C31E4D551A000FDA44 /* DownloadImageView.swift in Sources */,
 				58FCAADD1E4B2756002F5B0A /* MeetingViewTopPanelCell.swift in Sources */,
 				58FCAAE91E4C3A0D002F5B0A /* MeetingCategoryContent.swift in Sources */,
 				58FCAAE31E4C2ADC002F5B0A /* RecommendedMeetingViewCell.swift in Sources */,
@@ -492,6 +515,7 @@
 				58D2AB071E4AD07D0084CE80 /* OnboardingPage.swift in Sources */,
 				58D2AB0D1E4AD48A0084CE80 /* BaseCell.swift in Sources */,
 				58D2AAD61E4ACB510084CE80 /* AppDelegate.swift in Sources */,
+				583BB5BF1E4D4F9C000FDA44 /* MeetingCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,14 +538,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		58D2AAD91E4ACB510084CE80 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				58D2AADA1E4ACB510084CE80 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		58D2AAE11E4ACB510084CE80 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

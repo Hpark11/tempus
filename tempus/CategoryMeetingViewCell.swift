@@ -22,7 +22,7 @@ class CategoryMeetingViewCell: BaseCell {
     }
     
     let meetingTypeLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 120, height: 32))
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 120, height: 40))
         label.text = "카테고리"
         label.textAlignment = .left
         label.font = UIFont.boldSystemFont(ofSize: 18)
@@ -67,7 +67,7 @@ class CategoryMeetingViewCell: BaseCell {
     fileprivate func setConstraints() {
         var position: CGFloat = 0
         
-        _ = meetingTypeLabel.anchor(topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 8, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 120, heightConstant: 32)
+        _ = meetingTypeLabel.anchor(topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 8, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         for i in 0..<categoryButtons.count {
             _ = categoryButtons[i].anchor(meetingTypeLabel.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: position + 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: frame.height / 4)
             position += (frame.height - meetingTypeLabel.frame.height - 8) / 4
