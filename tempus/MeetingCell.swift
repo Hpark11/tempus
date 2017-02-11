@@ -10,6 +10,8 @@ import UIKit
 
 class MeetingCell: BaseCell {
     
+    var attachedViewController: MeetingListViewController?
+    
     /*
      *  UI Components
      */
@@ -118,7 +120,12 @@ class MeetingCell: BaseCell {
     }
     
     func mainPanelTapped() {
-        print("Main Image Tapped")
+        if let attachedViewController = self.attachedViewController {
+            let layout = UICollectionViewFlowLayout()
+            layout.scrollDirection = .horizontal
+            let slideViewController = SlideViewController(collectionViewLayout: layout)
+            attachedViewController.present(slideViewController, animated: false, completion: nil)
+        }
     }
     
     override func setupViews() {

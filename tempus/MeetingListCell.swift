@@ -10,6 +10,8 @@ import UIKit
 
 class MeetingListCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
+    var attachedViewController: MeetingListViewController?
+    
     let cellId = "cellId"
     
     lazy var collectionView: UICollectionView = {
@@ -46,7 +48,10 @@ class MeetingListCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MeetingCell
+        if let attachedViewController = self.attachedViewController {
+            cell.attachedViewController = attachedViewController
+        }
         return cell
     }
     
