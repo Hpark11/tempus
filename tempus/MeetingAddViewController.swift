@@ -75,6 +75,10 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
             return coverCell
         } else {
             let detailCell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetingAddViewData.detailId, for: indexPath) as! MeetingAddDetailCell
+            if let detailImage = self.detailImage {
+                detailCell.detailImageView.image = detailImage
+            }
+            detailCell.attachedViewController = self
             return detailCell
         }
         

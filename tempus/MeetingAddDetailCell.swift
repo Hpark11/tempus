@@ -10,7 +10,7 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 
-class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, GMSMapViewDelegate {
+class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate {
 
     var attachedViewController: MeetingAddViewController?
     
@@ -119,6 +119,25 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
         return label
     }()
     
+    let preferredLocationLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = .black
+        label.text = "선호하는 위치"
+        return label
+    }()
+    
+    lazy var locationSearchButton: UIButton = {
+        let button = UIButton()
+        button.tintColor = .white
+        button.backgroundColor = .cyan
+        button.setTitleColor(.white, for: .normal)
+        button.setTitle("위치 검색", for: .normal)
+        button.addTarget(self, action: #selector(locationSearchButtonTapped), for: .touchUpInside)
+        button.isUserInteractionEnabled = true
+        return button
+    }()
+    
     func detailImageTapped() {
         if let attachedViewController = self.attachedViewController {
             attachedViewController.presentImagePickerController(.savedPhotosAlbum, imgTag: 0)
@@ -144,7 +163,7 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
         setConstraints()
         initGoogleMap()
         
-        
+        self.contentView.isUserInteractionEnabled = false
     }
     
     fileprivate func addSubviews() {
@@ -157,6 +176,8 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
         addSubview(preferredPersonField)
         addSubview(personalRecordLabel)
         addSubview(personalRecordTextView)
+        addSubview(preferredLocationLabel)
+        addSubview(locationSearchButton)
         addSubview(textLengthLabel)
         addSubview(googlemapView)
     }
@@ -166,19 +187,27 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
         
         _ = panelLabel.anchor(topAnchor, left: leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 36)
         
-        _ = detailImageView.anchor(panelLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: nil, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: frame.width / 4, heightConstant: frame.width / 2)
+        _ = detailImageView.anchor(panelLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: nil, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: frame.width / 4, heightConstant: frame.width / 4)
         
         _ = priceLabel.anchor(panelLabel.bottomAnchor, left: detailImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 16)
         
-        _ = priceField.anchor(priceLabel.bottomAnchor, left: detailImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 2, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 30)
+        _ = priceField.anchor(priceLabel.bottomAnchor, left: detailImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 2, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 28)
         
-        _ = personalRecordLabel.anchor(priceField.bottomAnchor, left: detailImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 2, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 16)
+        _ = preferredPersonLabel.anchor(priceField.bottomAnchor, left: detailImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 2, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 16)
         
-        _ = personalRecordTextView.anchor(personalRecordLabel.bottomAnchor, left: detailImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 2, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 42)
+        _ = preferredPersonField.anchor(preferredPersonLabel.bottomAnchor, left: detailImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 6, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 28)
+        
+        _ = personalRecordLabel.anchor(preferredPersonField.bottomAnchor, left: detailImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 6, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 16)
+        
+        _ = personalRecordTextView.anchor(personalRecordLabel.bottomAnchor, left: detailImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 2, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 50)
+        
+        _ = preferredLocationLabel.anchor(personalRecordTextView.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 2, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 16)
+        
+        _ = locationSearchButton.anchor(preferredLocationLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 6, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 28)
         
         _ = textLengthLabel.anchor(panelView.topAnchor, left: nil, bottom: nil, right: panelView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 220, heightConstant: 20)
         
-        _ = googlemapView.anchor(personalRecordTextView.bottomAnchor, left: panelView.leftAnchor, bottom: panelView.bottomAnchor, right: panelView.rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        _ = googlemapView.anchor(locationSearchButton.bottomAnchor, left: panelView.leftAnchor, bottom: panelView.bottomAnchor, right: panelView.rightAnchor, topConstant: 6, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -241,5 +270,34 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
         }
     }
     
+    // MARK : Google Map Auto Complete
+    
+    func locationSearchButtonTapped() {
+        print("Auto Search Button Tapped")
+        if let attachedViewController = self.attachedViewController {
+            let autoCompleteController = GMSAutocompleteViewController()
+            autoCompleteController.delegate = self
+            self.locationManager.startUpdatingLocation()
+            attachedViewController.present(autoCompleteController, animated: true, completion: nil)
+        }
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        if let attachedViewController = self.attachedViewController {
+            let camera = GMSCameraPosition.camera(withLatitude: place.coordinate.latitude, longitude: place.coordinate.longitude, zoom: 15.0)
+            self.googlemapView.camera = camera
+            attachedViewController.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        if let attachedViewController = self.attachedViewController {
+            attachedViewController.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        print("ERROR AUTO COMPLETE \(error)")
+    }
     
 }
