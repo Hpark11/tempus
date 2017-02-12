@@ -11,7 +11,9 @@ target 'tempus' do
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
-  
+  pod 'GoogleMaps' 
+  pod 'GooglePlaces'
+   
   target 'tempusTests' do
     inherit! :search_paths
     # Pods for testing

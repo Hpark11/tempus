@@ -8,8 +8,10 @@
 
 import UIKit
 
-class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
+class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    var attachedViewController: MeetingAddViewController?
+
     var titleCharNumber: Int = 0
     var subtitleCharNumber: Int = 0
     
@@ -27,7 +29,7 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
         return label
     }()
     
-    let mainImageView: DownloadImageView = {
+    lazy var mainImageView: DownloadImageView = {
         let imageView = DownloadImageView()
         imageView.image = UIImage(named: "placeholder3")
         imageView.contentMode = .scaleToFill
@@ -35,6 +37,8 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
         imageView.layer.borderColor = UIColor.darkGray.cgColor
         imageView.layer.cornerRadius = 8
         imageView.layer.masksToBounds = true
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(mainImageTapped)))
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
     
@@ -63,6 +67,12 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
         label.textAlignment = .right
         return label
     }()
+    
+    func mainImageTapped() {
+        if let attachedViewController = self.attachedViewController {
+            attachedViewController.presentImagePickerController(.savedPhotosAlbum, imgTag: 0)
+        }
+    }
     
     override func setupViews() {
         super.setupViews()
@@ -129,5 +139,4 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
         self.textLengthLabel.text = "제목: \(titleCharNumber) / 20, 부제목: \(subtitleCharNumber) / 40"
         return true
     }
-    
 }

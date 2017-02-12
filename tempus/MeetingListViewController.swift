@@ -65,7 +65,7 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
     func addMeetingButtonTapped() {
         let layout = UICollectionViewFlowLayout()
         let meetingAddViewController = MeetingAddViewController(collectionViewLayout: layout)
-        navigationController?.pushViewController(meetingAddViewController, animated: true)
+        present(meetingAddViewController, animated: true, completion: nil)
     }
     
     func scrollToCategoryIndex(_ index: Int) {

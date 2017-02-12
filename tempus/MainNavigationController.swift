@@ -33,6 +33,7 @@ class MainNavigationController: UINavigationController {
         let layout = UICollectionViewFlowLayout()
         let meetingViewController = MeetingViewController(collectionViewLayout: layout)
         viewControllers = [meetingViewController]
+        print(viewControllers.count)
     }
     
     @objc fileprivate func showOnboardingViewController() {

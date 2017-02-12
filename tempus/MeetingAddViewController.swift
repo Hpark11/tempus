@@ -9,7 +9,12 @@
 import UIKit
 
 class MeetingAddViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-
+    
+    var mainImage: UIImage?
+    var subImages: [UIImage] = []
+    var detailImage: UIImage?
+    var imgTag: Int = 0
+    
     struct MeetingAddViewData {
         static let coverCellId = "coverCellId"
         static let cellId = "cellId"
@@ -35,6 +40,9 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
         setNavigationBarUI()
         registerCells()
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
     
     fileprivate func addSubViews() {
     
@@ -50,6 +58,7 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
     
     fileprivate func registerCells() {
         collectionView?.register(MeetingAddCoverCell.self, forCellWithReuseIdentifier: MeetingAddViewData.coverCellId)
+        collectionView?.register(MeetingAddDetailCell.self, forCellWithReuseIdentifier: MeetingAddViewData.detailId)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -57,7 +66,19 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: MeetingAddViewData.coverCellId, for: indexPath) as! MeetingAddCoverCell
+        if indexPath.item == 0 {
+            let coverCell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetingAddViewData.coverCellId, for: indexPath) as! MeetingAddCoverCell
+            if let mainImage = self.mainImage {
+                coverCell.mainImageView.image = mainImage
+            }
+            coverCell.attachedViewController = self
+            return coverCell
+        } else {
+            let detailCell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetingAddViewData.detailId, for: indexPath) as! MeetingAddDetailCell
+            return detailCell
+        }
+        
+        
 //        if indexPath.item == 0 {
 //            return collectionView.dequeueReusableCell(withReuseIdentifier: SlideViewData.coverCellId, for: indexPath) as! SlideCoverCell
 //        } else if indexPath.item == 4 {
@@ -72,6 +93,10 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.width * Constants.sizeStandards.landscapeRatio)
+        if indexPath.item == 0 {
+            return CGSize(width: view.frame.width, height: view.frame.width * Constants.sizeStandards.landscapeRatio)
+        } else {
+            return CGSize(width: view.frame.width, height: view.frame.width * Constants.sizeStandards.landscapeRatio * 2)
+        }
     }
 }

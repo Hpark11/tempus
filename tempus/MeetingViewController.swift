@@ -91,7 +91,6 @@ class MeetingViewController: UICollectionViewController {
         UIView.animate(withDuration: 0.5) { 
             self.navigationController?.navigationBar.isTranslucent = true
         }
-        //navigationController?.navigationBar.backgroundColor = UIColor(white: 0, alpha: 0)
     }
     
     fileprivate func setNavigationBarUI() {
