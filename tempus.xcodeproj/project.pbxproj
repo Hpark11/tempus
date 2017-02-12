@@ -14,11 +14,17 @@
 		5811210A1E4F0227004D1C85 /* SlideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581121091E4F0227004D1C85 /* SlideCell.swift */; };
 		5811210C1E4F0274004D1C85 /* SlideCoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5811210B1E4F0274004D1C85 /* SlideCoverCell.swift */; };
 		5811210E1E4F0280004D1C85 /* SlideDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5811210D1E4F0280004D1C85 /* SlideDetailCell.swift */; };
+		581121111E501DC0004D1C85 /* FirebaseDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581121101E501DC0004D1C85 /* FirebaseDataService.swift */; };
+		581121131E501DCF004D1C85 /* RestApiDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581121121E501DCF004D1C85 /* RestApiDataService.swift */; };
+		581121151E50415E004D1C85 /* MeetingAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581121141E50415E004D1C85 /* MeetingAddViewController.swift */; };
 		583BB5BD1E4D486B000FDA44 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BB5BC1E4D486B000FDA44 /* Constants.swift */; };
 		583BB5BF1E4D4F9C000FDA44 /* MeetingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BB5BE1E4D4F9C000FDA44 /* MeetingCell.swift */; };
 		583BB5C31E4D551A000FDA44 /* DownloadImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BB5C21E4D551A000FDA44 /* DownloadImageView.swift */; };
 		583BB5C51E4D9258000FDA44 /* CategoryBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BB5C41E4D9258000FDA44 /* CategoryBarView.swift */; };
 		583BB5C71E4D9A73000FDA44 /* CategoryViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BB5C61E4D9A73000FDA44 /* CategoryViewCell.swift */; };
+		5841BD641E5049DA001E6186 /* MeetingAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841BD631E5049DA001E6186 /* MeetingAddCell.swift */; };
+		5841BD661E5049ED001E6186 /* MeetingAddCoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841BD651E5049ED001E6186 /* MeetingAddCoverCell.swift */; };
+		5841BD681E5049FA001E6186 /* MeetingAddDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841BD671E5049FA001E6186 /* MeetingAddDetailCell.swift */; };
 		58D2AAD61E4ACB510084CE80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AAD51E4ACB510084CE80 /* AppDelegate.swift */; };
 		58D2AAD81E4ACB510084CE80 /* MeetingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AAD71E4ACB510084CE80 /* MeetingListViewController.swift */; };
 		58D2AADE1E4ACB510084CE80 /* tempus.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AADC1E4ACB510084CE80 /* tempus.xcdatamodeld */; };
@@ -67,11 +73,17 @@
 		581121091E4F0227004D1C85 /* SlideCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideCell.swift; sourceTree = "<group>"; };
 		5811210B1E4F0274004D1C85 /* SlideCoverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideCoverCell.swift; sourceTree = "<group>"; };
 		5811210D1E4F0280004D1C85 /* SlideDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideDetailCell.swift; sourceTree = "<group>"; };
+		581121101E501DC0004D1C85 /* FirebaseDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDataService.swift; sourceTree = "<group>"; };
+		581121121E501DCF004D1C85 /* RestApiDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiDataService.swift; sourceTree = "<group>"; };
+		581121141E50415E004D1C85 /* MeetingAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingAddViewController.swift; sourceTree = "<group>"; };
 		583BB5BC1E4D486B000FDA44 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		583BB5BE1E4D4F9C000FDA44 /* MeetingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingCell.swift; sourceTree = "<group>"; };
 		583BB5C21E4D551A000FDA44 /* DownloadImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadImageView.swift; sourceTree = "<group>"; };
 		583BB5C41E4D9258000FDA44 /* CategoryBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryBarView.swift; sourceTree = "<group>"; };
 		583BB5C61E4D9A73000FDA44 /* CategoryViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryViewCell.swift; sourceTree = "<group>"; };
+		5841BD631E5049DA001E6186 /* MeetingAddCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingAddCell.swift; sourceTree = "<group>"; };
+		5841BD651E5049ED001E6186 /* MeetingAddCoverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingAddCoverCell.swift; sourceTree = "<group>"; };
+		5841BD671E5049FA001E6186 /* MeetingAddDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingAddDetailCell.swift; sourceTree = "<group>"; };
 		58D2AAD21E4ACB510084CE80 /* tempus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tempus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D2AAD51E4ACB510084CE80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D2AAD71E4ACB510084CE80 /* MeetingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingListViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +147,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5811210F1E501CA1004D1C85 /* Singleton */ = {
+			isa = PBXGroup;
+			children = (
+				581121101E501DC0004D1C85 /* FirebaseDataService.swift */,
+				581121121E501DCF004D1C85 /* RestApiDataService.swift */,
+			);
+			name = Singleton;
+			sourceTree = "<group>";
+		};
 		583BB5C01E4D54BC000FDA44 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +181,9 @@
 				581121091E4F0227004D1C85 /* SlideCell.swift */,
 				5811210B1E4F0274004D1C85 /* SlideCoverCell.swift */,
 				5811210D1E4F0280004D1C85 /* SlideDetailCell.swift */,
+				5841BD631E5049DA001E6186 /* MeetingAddCell.swift */,
+				5841BD651E5049ED001E6186 /* MeetingAddCoverCell.swift */,
+				5841BD671E5049FA001E6186 /* MeetingAddDetailCell.swift */,
 			);
 			name = "Custom Cells";
 			sourceTree = "<group>";
@@ -187,6 +211,7 @@
 		58D2AAD41E4ACB510084CE80 /* tempus */ = {
 			isa = PBXGroup;
 			children = (
+				5811210F1E501CA1004D1C85 /* Singleton */,
 				58D2AAFD1E4ACB850084CE80 /* Resource */,
 				58D2AAFC1E4ACB810084CE80 /* Util */,
 				58D2AAFB1E4ACB7A0084CE80 /* Extension */,
@@ -219,10 +244,11 @@
 		58D2AAF91E4ACB700084CE80 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				58D2AAD71E4ACB510084CE80 /* MeetingListViewController.swift */,
 				58D2AB001E4ACE390084CE80 /* MainNavigationController.swift */,
-				58D2AB021E4ACEAB0084CE80 /* OnboardingViewController.swift */,
 				58FCAADA1E4B0663002F5B0A /* MeetingViewController.swift */,
+				58D2AAD71E4ACB510084CE80 /* MeetingListViewController.swift */,
+				581121141E50415E004D1C85 /* MeetingAddViewController.swift */,
+				58D2AB021E4ACEAB0084CE80 /* OnboardingViewController.swift */,
 				5807755C1E4ECB3A0092ED8F /* SlideViewController.swift */,
 				5807755E1E4ECB6A0092ED8F /* DiaryViewController.swift */,
 			);
@@ -525,12 +551,16 @@
 				58FCAAED1E4C44A7002F5B0A /* MeetingBottomPanelContent.swift in Sources */,
 				583BB5C71E4D9A73000FDA44 /* CategoryViewCell.swift in Sources */,
 				5811210C1E4F0274004D1C85 /* SlideCoverCell.swift in Sources */,
+				581121111E501DC0004D1C85 /* FirebaseDataService.swift in Sources */,
+				5841BD641E5049DA001E6186 /* MeetingAddCell.swift in Sources */,
 				5811210A1E4F0227004D1C85 /* SlideCell.swift in Sources */,
 				58D2AB0F1E4ADC7A0084CE80 /* OnboardingCoverPageCell.swift in Sources */,
 				58FCAAE71E4C382E002F5B0A /* CategoryMeetingViewCell.swift in Sources */,
 				58D2E2781E4CB4860084B2C9 /* MeetingListCell.swift in Sources */,
 				580CB5F71E4E6F85008658CA /* Meeting.swift in Sources */,
+				581121131E501DCF004D1C85 /* RestApiDataService.swift in Sources */,
 				583BB5C31E4D551A000FDA44 /* DownloadImageView.swift in Sources */,
+				5841BD661E5049ED001E6186 /* MeetingAddCoverCell.swift in Sources */,
 				5807755D1E4ECB3A0092ED8F /* SlideViewController.swift in Sources */,
 				58FCAADD1E4B2756002F5B0A /* MeetingViewTopPanelCell.swift in Sources */,
 				58FCAAE91E4C3A0D002F5B0A /* MeetingCategoryContent.swift in Sources */,
@@ -545,9 +575,11 @@
 				58FCAADB1E4B0663002F5B0A /* MeetingViewController.swift in Sources */,
 				58D2AB091E4AD0D80084CE80 /* UIView_ext.swift in Sources */,
 				58D2AB011E4ACE390084CE80 /* MainNavigationController.swift in Sources */,
+				5841BD681E5049FA001E6186 /* MeetingAddDetailCell.swift in Sources */,
 				58D2AB071E4AD07D0084CE80 /* OnboardingPage.swift in Sources */,
 				58D2AB0D1E4AD48A0084CE80 /* BaseCell.swift in Sources */,
 				58D2AAD61E4ACB510084CE80 /* AppDelegate.swift in Sources */,
+				581121151E50415E004D1C85 /* MeetingAddViewController.swift in Sources */,
 				583BB5BF1E4D4F9C000FDA44 /* MeetingCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

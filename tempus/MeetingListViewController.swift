@@ -34,11 +34,20 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
         return label
     }()
     
-    let searchButton: UIButton = {
+    lazy var searchButton: UIButton = {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(named: "icon search"), for: .normal)
-        button.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
+        button.frame = CGRect(x: 0, y: 0, width: 28, height: 28)
         button.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
+        button.isEnabled = false
+        return button
+    }()
+    
+    lazy var addMeetingButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "icon add meeting"), for: .normal)
+        button.frame = CGRect(x: 0, y: 0, width: 28, height: 28)
+        button.addTarget(self, action: #selector(addMeetingButtonTapped), for: .touchUpInside)
         button.isEnabled = false
         return button
     }()
@@ -51,6 +60,12 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
     
     func searchButtonTapped() {
         
+    }
+    
+    func addMeetingButtonTapped() {
+        let layout = UICollectionViewFlowLayout()
+        let meetingAddViewController = MeetingAddViewController(collectionViewLayout: layout)
+        navigationController?.pushViewController(meetingAddViewController, animated: true)
     }
     
     func scrollToCategoryIndex(_ index: Int) {
@@ -77,7 +92,8 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
         
         navigationItem.titleView = titleLabel
         let searchButtonItem = UIBarButtonItem(customView: searchButton)
-        self.navigationItem.rightBarButtonItem = searchButtonItem
+        let addMeetingButtonItem = UIBarButtonItem(customView: addMeetingButton)
+        self.navigationItem.rightBarButtonItems = [addMeetingButtonItem, searchButtonItem]
     }
     
     fileprivate func setCollectionViewUI() {

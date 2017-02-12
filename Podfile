@@ -6,8 +6,12 @@ target 'tempus' do
   use_frameworks!
 
   # Pods for tempus
-  pod 'Firebase/Core' 
-
+  pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Database'
+  pod 'Firebase/Storage'
+  
   target 'tempusTests' do
     inherit! :search_paths
     # Pods for testing

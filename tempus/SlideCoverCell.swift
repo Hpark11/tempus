@@ -20,11 +20,20 @@ class SlideCoverCell: BaseCell {
         return imageView
     }()
     
+    let overlayView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        view.alpha = 0.3
+        return view
+    }()
+    
     let userProfileImageView: DownloadImageView = {
         let imageView = DownloadImageView()
         imageView.image = UIImage(named: "placeholder1")
         imageView.layer.cornerRadius = Constants.userProfileImageSize.mini / 2
         imageView.layer.masksToBounds = true
+        imageView.layer.borderWidth = 2
+        imageView.layer.borderColor = (UIColor.white as! CGColor)
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
@@ -69,14 +78,11 @@ class SlideCoverCell: BaseCell {
         return textView
     }()
     
-    let pageLabel: UILabel = {
-        let label = UILabel()
-        label.text = "0 / 10"
-        label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 18)
-        label.textAlignment = .center
-        return label
-    }()
+    
+    
+    func beforeButtonTapped() {
+        
+    }
     
     override func setupViews() {
         super.setupViews()
@@ -87,7 +93,7 @@ class SlideCoverCell: BaseCell {
     
     fileprivate func addSubViews() {
         addSubview(mainImageView)
-        addSubview(pageLabel)
+        addSubview(overlayView)
         addSubview(dividerView)
         addSubview(userProfileImageView)
         addSubview(giverLabel)
@@ -98,9 +104,7 @@ class SlideCoverCell: BaseCell {
     fileprivate func setContstraints() {
         _ = mainImageView.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
-        _ = pageLabel.anchor(nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 16, bottomConstant: 20, rightConstant: 16, widthConstant: 0, heightConstant: 24)
-        
-        _ = dividerView.anchor(nil, left: leftAnchor, bottom: pageLabel.topAnchor, right: rightAnchor, topConstant: 0, leftConstant: 8, bottomConstant: 14, rightConstant: 8, widthConstant: 0, heightConstant: 1)
+        _ = overlayView.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
         _ = userProfileImageView.anchor(nil, left: leftAnchor, bottom: dividerView.topAnchor, right: nil, topConstant: 0, leftConstant: 12, bottomConstant: 36, rightConstant: 0, widthConstant: Constants.userProfileImageSize.mini, heightConstant: Constants.userProfileImageSize.mini)
         
