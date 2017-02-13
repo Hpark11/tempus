@@ -107,7 +107,7 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
                 Constants.Meetings.Position.address: self.submitData.position.address,
                 Constants.Meetings.Position.latitude: NSNumber(value: self.submitData.position.latitude),
                 Constants.Meetings.Position.longitude: NSNumber(value: self.submitData.position.longitude)
-                ])
+            ])
             
             self.imageToFirebaseStorage(image: self.mainImage, cellType: .cover, dataReference: firebaseAutoRef)
             self.imageToFirebaseStorage(image: self.detailImage, cellType: .detail, dataReference: firebaseAutoRef)
@@ -131,7 +131,7 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
     }()
 
     func beforeButtonTapped() {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: false, completion: nil)
     }
     
     func submitButtonTapped() {
