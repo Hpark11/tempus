@@ -25,7 +25,7 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UI
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textColor = .black
         label.textAlignment = .left
-        label.text = "메인 작성"
+        label.text = "메인"
         return label
     }()
     

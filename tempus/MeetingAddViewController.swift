@@ -11,9 +11,10 @@ import UIKit
 class MeetingAddViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var mainImage: UIImage?
-    var subImages: [UIImage] = []
+    var subImages: [UIImage] = [UIImage(named: "placeholder1")!]
     var detailImage: UIImage?
     var imgTag: Int = 0
+    var numStories: Int = 1
     var submitData: SubmitData = SubmitData()
     
     struct MeetingAddViewData {
@@ -26,8 +27,7 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
     
     struct SubmitData {
         var position: Position = Position()
-        
-        
+    
         struct Position {
             // Coordinate of Seoul, South Korea
             var address: String = "대한민국 서울"
@@ -82,10 +82,11 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
     fileprivate func registerCells() {
         collectionView?.register(MeetingAddCoverCell.self, forCellWithReuseIdentifier: MeetingAddViewData.coverCellId)
         collectionView?.register(MeetingAddDetailCell.self, forCellWithReuseIdentifier: MeetingAddViewData.detailId)
+        collectionView?.register(MeetingAddCell.self, forCellWithReuseIdentifier: MeetingAddViewData.cellId)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return MeetingAddViewData.cellIds.count
+        return numStories + 2 // 2 is for Cover and Detail Cell
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -96,7 +97,7 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
             }
             coverCell.attachedViewController = self
             return coverCell
-        } else {
+        } else if indexPath.item == 1 {
             let detailCell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetingAddViewData.detailId, for: indexPath) as! MeetingAddDetailCell
             if let detailImage = self.detailImage {
                 detailCell.detailImageView.image = detailImage
@@ -104,27 +105,41 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
             detailCell.traceSavedLocation(latitude: submitData.position.latitude, longitude: submitData.position.longitude, address: submitData.position.address)
             detailCell.attachedViewController = self
             return detailCell
+        } else {
+            let storyCell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetingAddViewData.cellId, for: indexPath) as! MeetingAddCell
+            if indexPath.item >= 2 {
+                storyCell.cellImageView.image = subImages[indexPath.item - 2]
+                storyCell.imgTag = indexPath.item
+                
+                var isFirst: Bool = false
+                var isLast: Bool = false
+                if indexPath.item == 2 {
+                    isFirst = true
+                }
+                if (indexPath.item - 1) == subImages.count {
+                    isLast = true
+                }
+                
+                storyCell.resetMeetingCell(isFirst: isFirst, isLast: isLast)
+                storyCell.attachedViewController = self
+            }
+            return storyCell
         }
-        
-        
-//        if indexPath.item == 0 {
-//            return collectionView.dequeueReusableCell(withReuseIdentifier: SlideViewData.coverCellId, for: indexPath) as! SlideCoverCell
-//        } else if indexPath.item == 4 {
-//            return collectionView.dequeueReusableCell(withReuseIdentifier: SlideViewData.detailId, for: indexPath) as! SlideDetailCell
-//        } else {
-//            return collectionView.dequeueReusableCell(withReuseIdentifier: SlideViewData.cellId, for: indexPath) as! SlideCell
-//        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 1
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.item == 0 {
             return CGSize(width: view.frame.width, height: view.frame.width * Constants.sizeStandards.landscapeRatio)
-        } else {
+        } else if indexPath.item == 1 {
             return CGSize(width: view.frame.width, height: view.frame.width * Constants.sizeStandards.landscapeRatio * 2.4)
+        } else if (indexPath.item - 1) == subImages.count {
+            return CGSize(width: view.frame.width, height: view.frame.width * Constants.sizeStandards.landscapeRatio + 50)
+        } else {
+            return CGSize(width: view.frame.width, height: view.frame.width * Constants.sizeStandards.landscapeRatio)
         }
     }
 }

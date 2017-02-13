@@ -47,7 +47,7 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textColor = .black
         label.textAlignment = .left
-        label.text = "프로필 작성"
+        label.text = "프로필"
         return label
     }()
     
@@ -68,7 +68,7 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = .black
-        label.text = "가격"
+        label.text = "가격 (원)"
         return label
     }()
     
