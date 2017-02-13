@@ -63,4 +63,13 @@ struct Constants {
             static let longitude: String = "longitude"
         }
     }
+    
+    struct Users {
+        static let username: String = "username"
+        static let comments: String = "comments"
+        static let followers: String = "followers"
+        static let following: String = "following"
+        static let numFollowers: String = "numFollowers"
+        static let numComments: String = "numComments"
+    }
 }

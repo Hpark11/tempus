@@ -41,8 +41,8 @@ struct Meeting {
     private var _imageUrl: String!
     private var _type: String!
     private var _category: String!
-    private var _userId: String!
-    private var _likes: Int!
+    private var _username: String!
+    private var _followers: Int!
     private var _comments: Int!
     
     var title: String {
@@ -65,25 +65,33 @@ struct Meeting {
         return _category
     }
     
-    var userId: String {
-        return _userId
+    var username: String {
+        return _username
     }
     
-    var likes: Int {
-        return _likes
+    var followers: Int {
+        return _followers
     }
     
     var comments: Int {
         return _comments
     }
     
-    init(data: Dictionary<String, AnyObject>, userInfo: Dictionary<String, AnyObject>) {
+    init(data: Dictionary<String, AnyObject>, username:String, numFollowers:Int, numComments:Int) {
         if let title = data[Constants.Meetings.Cover.title] as? String,
             let subTitle = data[Constants.Meetings.Cover.subTitle] as? String,
             let imageUrl = data[Constants.Meetings.Cover.imageUrl] as? String,
             let type = data[Constants.Meetings.Cover.category] as? String,
             let category = data[Constants.Meetings.Cover.category] as? String {
             
+            self._title = title
+            self._subTitle = subTitle
+            self._imageUrl = imageUrl
+            self._type = type
+            self._category = category
+            self._username = username
+            self._followers = numFollowers
+            self._comments = numComments
         }
     }
 }
@@ -185,4 +193,4 @@ struct Meeting {
 //        
 //        _postRef.child("likes").setValue(_likes)
 //    }
-}
+//}

@@ -18,7 +18,7 @@ class FirebaseDataService {
     // Database References
     private var _baseRef = DB_BASE
     private var _meetingRef = DB_BASE.child("meeting")
-    private var _userRef = DB_BASE.child("user")
+    private var _userRef = DB_BASE.child("users")
     
     // Storage References
     private var _imageRef = STORAGE_BASE.child("images")

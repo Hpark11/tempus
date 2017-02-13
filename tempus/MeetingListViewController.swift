@@ -98,37 +98,18 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
         FirebaseDataService.instance.meetingRef.observe(.value, with: { (snapshot) in
             if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
                 self.selfImprovementMeetings.removeAll()
-                self.prepareExaminationMeetings.removeAll()
-                self.professionalSkillsMeetings.removeAll()
-                self.lookingForHobbyMeetings.removeAll()
+//                self.prepareExaminationMeetings.removeAll()
+//                self.professionalSkillsMeetings.removeAll()
+//                self.lookingForHobbyMeetings.removeAll()
                 
                 for one in snapshot {
                     if let postMeeting = one.value as? Dictionary<String, AnyObject> {
-                        let key = one.key
-                        
-                        FirebaseDataService.instance.meetingRef.child(Constants.Meetings.cover).observeSingleEvent(of: .value, with: { (coverSnap) in
-                            if let postMeetingCover = coverSnap.value as? Dictionary<String, AnyObject> {
+                        FirebaseDataService.instance.userRef.child(postMeeting[Constants.Meetings.userId] as! String).observeSingleEvent(of: .value, with: { (userSnap) in
+                            if let userInfo = userSnap.value as? Dictionary<String, AnyObject> {
+                                let meeting = Meeting(data: postMeeting, username: userInfo[Constants.Users.username] as! String, numFollowers: userInfo[Constants.Users.numFollowers] as! Int, numComments: userInfo[Constants.Users.numComments] as! Int)
+                                self.selfImprovementMeetings.append(meeting)
                                 
-                                FirebaseDataService.instance.meetingRef.child(Constants.Meetings.detail).observeSingleEvent(of: .value, with: { (detailSnap) in
-                                    if let postMeetingDetail = detailSnap.value as? Dictionary<String, AnyObject> {
-                                        
-                                        FirebaseDataService.instance.meetingRef.child(Constants.Meetings.normal).observe(.value, with: { (normalSnap) in
-                                            
-                                            if let normalSnap = normalSnap.children.allObjects as? [FIRDataSnapshot] {
-                                                var normals = Array<Dictionary<String, AnyObject>>()
-                                                for norm in normalSnap {
-                                                    if let postNormal = norm.value as? Dictionary<String, AnyObject> {
-                                                        normals.append(postNormal)
-                                                    }
-                                                }
-                                                
-                                                let meeting = Meeting(meetingId: key, data: postMeeting, cover: postMeetingCover, detail: postMeetingDetail, normals: normals)
-                                                self.selfImprovementMeetings.append(meeting)
-                                                print(":::", meeting)
-                                            }
-                                        })
-                                    }
-                                })
+                                print(meeting)
                             }
                         })
                     }
