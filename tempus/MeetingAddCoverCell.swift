@@ -103,6 +103,8 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UI
         let pickerView = UIPickerView()
         pickerView.delegate = self
         pickerView.dataSource = self
+        pickerView.layer.borderColor = UIColor.darkGray.cgColor
+        pickerView.layer.borderWidth = 1
         return pickerView
     }()
     
@@ -118,6 +120,8 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UI
         let pickerView = UIPickerView()
         pickerView.delegate = self
         pickerView.dataSource = self
+        pickerView.layer.borderColor = UIColor.darkGray.cgColor
+        pickerView.layer.borderWidth = 1
         return pickerView
     }()
     
@@ -144,6 +148,8 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UI
         addSubview(typePickerView)
         addSubview(titleLabel)
         addSubview(subtitleLabel)
+        addSubview(categoryLabel)
+        addSubview(typeLabel)
     }
     
     fileprivate func setConstraints() {
@@ -163,9 +169,13 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UI
         
         _ = textLengthLabel.anchor(panelView.topAnchor, left: nil, bottom: nil, right: panelView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 220, heightConstant: 20)
         
-        _ = categoryPickerView.anchor(subtitleTextView.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 90)
+        _ = categoryLabel.anchor(subtitleTextView.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 6, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 16)
         
-        _ = typePickerView.anchor(categoryPickerView.bottomAnchor, left: panelView.leftAnchor, bottom: panelView.bottomAnchor, right: panelView.rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        _ = categoryPickerView.anchor(categoryLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 2, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 90)
+        
+        _ = typeLabel.anchor(categoryPickerView.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 6, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 16)
+        
+        _ = typePickerView.anchor(typeLabel.bottomAnchor, left: panelView.leftAnchor, bottom: panelView.bottomAnchor, right: panelView.rightAnchor, topConstant: 2, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
     }
     

@@ -156,7 +156,7 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
             firebaseRef?.child(Constants.Meetings.title).setValue(self.submitData.title as AnyObject)
             firebaseRef?.child(Constants.Meetings.subTitle).setValue(self.submitData.subTitle as AnyObject)
             firebaseRef?.child(Constants.Meetings.frontImageUrl).setValue(imageUrl as AnyObject)
-            firebaseRef?.child(Constants.Meetings.category).setValue(self.submitData.title as AnyObject)
+            firebaseRef?.child(Constants.Meetings.category).setValue(self.submitData.category as AnyObject)
             firebaseRef?.child(Constants.Meetings.type).setValue(self.submitData.type as AnyObject)
             firebaseRef?.child(Constants.Meetings.isPassed).setValue(self.submitData.isPassed as AnyObject)
         } else if cellType == .detail {
