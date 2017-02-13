@@ -129,6 +129,9 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
     fileprivate func setNavigationBarUI() {
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = .black
+        navigationController?.hidesBarsOnSwipe = true
+        navigationController?.hidesBarsOnTap = true
+        tabBarController?.hidesBottomBarWhenPushed = true
         
         navigationItem.titleView = titleLabel
         let searchButtonItem = UIBarButtonItem(customView: searchButton)

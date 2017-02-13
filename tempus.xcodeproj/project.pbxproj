@@ -16,6 +16,7 @@
 		580FB4801E5225E20057DA21 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580FB47F1E5225E20057DA21 /* CommunityViewController.swift */; };
 		580FB4821E5225ED0057DA21 /* UserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580FB4811E5225ED0057DA21 /* UserPageViewController.swift */; };
 		580FB4841E52260D0057DA21 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580FB4831E52260D0057DA21 /* SettingsViewController.swift */; };
+		580FB4861E5232B70057DA21 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580FB4851E5232B70057DA21 /* SignInViewController.swift */; };
 		5811210A1E4F0227004D1C85 /* SlideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581121091E4F0227004D1C85 /* SlideCell.swift */; };
 		5811210C1E4F0274004D1C85 /* SlideCoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5811210B1E4F0274004D1C85 /* SlideCoverCell.swift */; };
 		5811210E1E4F0280004D1C85 /* SlideDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5811210D1E4F0280004D1C85 /* SlideDetailCell.swift */; };
@@ -81,6 +82,7 @@
 		580FB47F1E5225E20057DA21 /* CommunityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
 		580FB4811E5225ED0057DA21 /* UserPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPageViewController.swift; sourceTree = "<group>"; };
 		580FB4831E52260D0057DA21 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		580FB4851E5232B70057DA21 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		581121091E4F0227004D1C85 /* SlideCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideCell.swift; sourceTree = "<group>"; };
 		5811210B1E4F0274004D1C85 /* SlideCoverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideCoverCell.swift; sourceTree = "<group>"; };
 		5811210D1E4F0280004D1C85 /* SlideDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideDetailCell.swift; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 				580FB47F1E5225E20057DA21 /* CommunityViewController.swift */,
 				580FB4811E5225ED0057DA21 /* UserPageViewController.swift */,
 				580FB4831E52260D0057DA21 /* SettingsViewController.swift */,
+				580FB4851E5232B70057DA21 /* SignInViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -584,6 +587,7 @@
 				580FB4801E5225E20057DA21 /* CommunityViewController.swift in Sources */,
 				5807755D1E4ECB3A0092ED8F /* SlideViewController.swift in Sources */,
 				58FCAADD1E4B2756002F5B0A /* MeetingViewTopPanelCell.swift in Sources */,
+				580FB4861E5232B70057DA21 /* SignInViewController.swift in Sources */,
 				58FCAAE91E4C3A0D002F5B0A /* MeetingCategoryContent.swift in Sources */,
 				58FCAAE31E4C2ADC002F5B0A /* RecommendedMeetingViewCell.swift in Sources */,
 				58D2AADE1E4ACB510084CE80 /* tempus.xcdatamodeld in Sources */,
