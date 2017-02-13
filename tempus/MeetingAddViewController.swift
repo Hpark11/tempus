@@ -138,6 +138,8 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
         
         var dict: Dictionary<String, AnyObject>?
         var firebaseRef: FIRDatabaseReference?
+        firebaseRef = dataReference.child(cellType.rawValue)
+        
         
         if cellType == .cover {
             if let title = self.submitData.cover.title, let subTitle = self.submitData.cover.subTitle {
@@ -166,10 +168,10 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
                     Constants.Meetings.Normal.imageUrl : imageUrl as AnyObject
                 ]
                 self.submitData.normal.removeFirst()
+                firebaseRef?.childByAutoId()
             }
         }
         
-        firebaseRef = dataReference.child(cellType.rawValue)
         firebaseRef?.setValue(dict)
     }
     
