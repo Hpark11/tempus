@@ -22,8 +22,10 @@ struct Detail {
 }
 
 struct Normal {
-    var storyTitle: String?
-    var storySubtitle: String?
+    var storyTitle: String = ""
+    var storySubtitle: String = ""
+    var storyTitleCharNumber: Int = 0
+    var storySubtitleCharNumber: Int = 0
 }
 
 struct Position {
@@ -41,6 +43,8 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
     
     var imgTag: Int = 0
     var numStories: Int = 1
+    var dataIterator: Int = 0
+    
     var submitData: SubmitData = SubmitData()
     
     enum CellType : String {
@@ -161,15 +165,13 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
                 ]
             }
         } else {
-            if let storyTitle = self.submitData.normal[0].storyTitle, let storySubtitle = self.submitData.normal[0].storySubtitle {
-                dict = [
-                    Constants.Meetings.Normal.storyTitle : storyTitle as AnyObject,
-                    Constants.Meetings.Normal.storySubtitle : storySubtitle as AnyObject,
-                    Constants.Meetings.Normal.imageUrl : imageUrl as AnyObject
-                ]
-                self.submitData.normal.removeFirst()
-                firebaseRef?.childByAutoId()
-            }
+            dict = [
+                Constants.Meetings.Normal.storyTitle : self.submitData.normal[0].storyTitle as AnyObject,
+                Constants.Meetings.Normal.storySubtitle : self.submitData.normal[0].storySubtitle as AnyObject,
+                Constants.Meetings.Normal.imageUrl : imageUrl as AnyObject
+            ]
+            self.submitData.normal.removeLast()
+            firebaseRef = firebaseRef?.childByAutoId()
         }
         
         firebaseRef?.setValue(dict)
@@ -238,8 +240,11 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
             if indexPath.item >= 2 {
                 storyCell.cellImageView.image = subImages[indexPath.item - 2]
                 storyCell.imgTag = indexPath.item
+                
                 storyCell.storySubtitle = submitData.normal[indexPath.item - 2].storySubtitle
                 storyCell.storyTitle = submitData.normal[indexPath.item - 2].storyTitle
+                storyCell.storyTitleCharNumber = submitData.normal[indexPath.item - 2].storyTitleCharNumber
+                storyCell.storySubtitleCharNumber = submitData.normal[indexPath.item - 2].storySubtitleCharNumber
                 
                 var isFirst: Bool = false
                 var isLast: Bool = false

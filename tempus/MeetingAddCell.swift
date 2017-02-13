@@ -10,8 +10,21 @@ import UIKit
 
 class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
 
-    var storyTitleCharNumber: Int = 0
-    var storySubtitleCharNumber: Int = 0
+    var storyTitleCharNumber: Int = 0 {
+        didSet {
+            self.textLengthLabel.text = "스토리제목: \(storyTitleCharNumber) / 20, 스토리라인: \(storySubtitleCharNumber) / 120"
+            if let attachedViewController = self.attachedViewController, let tag = self.imgTag {
+                attachedViewController.submitData.normal[tag - 2].storyTitleCharNumber
+            }
+        }
+    }
+    
+    var storySubtitleCharNumber: Int = 0 {
+        didSet {
+            self.textLengthLabel.text = "스토리제목: \(storyTitleCharNumber) / 20, 스토리라인: \(storySubtitleCharNumber) / 120"
+        }
+    }
+    
     var attachedViewController: MeetingAddViewController?
     
     var imgTag: Int? {
@@ -223,6 +236,12 @@ class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
         _ = textLengthLabel.anchor(panelView.topAnchor, left: nil, bottom: nil, right: panelView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 260, heightConstant: 20)
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let attachedViewController = self.attachedViewController, let imgTag = self.imgTag, let text = textField.text {
+            attachedViewController.submitData.normal[imgTag - 2].storyTitle = text
+        }
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         var newText: NSString = textField.text! as NSString
         newText = newText.replacingCharacters(in: range, with: string) as NSString
@@ -234,16 +253,18 @@ class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
             self.textLengthLabel.textColor = UIColor.darkGray
         }
         storyTitleCharNumber = newText.length
-        self.textLengthLabel.text = "스토리제목: \(storyTitleCharNumber) / 20, 스토리라인: \(storySubtitleCharNumber) / 120"
-        if let attachedViewController = self.attachedViewController, let imgTag = self.imgTag {
-            attachedViewController.submitData.normal[imgTag - 2].storyTitle = newText as String
-        }
         return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if let attachedViewController = self.attachedViewController, let imgTag = self.imgTag, let text = textView.text   {
+            attachedViewController.submitData.normal[imgTag - 2].storySubtitle = text
+        }
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -258,10 +279,6 @@ class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
         }
         
         storySubtitleCharNumber = newText.length
-        self.textLengthLabel.text = "선호대상: \(storyTitleCharNumber) / 20, 개인이력: \(storySubtitleCharNumber) / 120"
-        if let attachedViewController = self.attachedViewController, let imgTag = self.imgTag  {
-            attachedViewController.submitData.normal[imgTag - 2].storyTitle = newText as String
-        }
         return true
     }
 }
