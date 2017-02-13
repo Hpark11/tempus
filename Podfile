@@ -13,7 +13,9 @@ target 'tempus' do
   pod 'Firebase/Storage'
   pod 'GoogleMaps' 
   pod 'GooglePlaces'
-   
+  pod 'FBSDKLoginKit'
+  pod 'FBSDKCoreKit'
+  pod 'FBSDKShareKit' 
   target 'tempusTests' do
     inherit! :search_paths
     # Pods for testing
