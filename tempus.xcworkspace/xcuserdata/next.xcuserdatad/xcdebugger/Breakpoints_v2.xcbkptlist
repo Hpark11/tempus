@@ -2,4 +2,326 @@
 <Bucket
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tempus/MeetingListViewController.swift"
+            timestampString = "508687123.393318"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tempus/MeetingListViewController.swift"
+            timestampString = "508687166.82476"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "observeFirebaseValue()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tempus/MeetingListViewController.swift"
+            timestampString = "508687168.106559"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "observeFirebaseValue()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tempus.MeetingListViewController.(observeFirebaseValue () -&gt; ()).(closure #1)"
+                  moduleName = "tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/MeetingListViewController.swift"
+                  timestampString = "508687241.874299"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "109"
+                  endingLineNumber = "109"
+                  offsetFromSymbolStart = "1596">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tempus.MeetingListViewController.(observeFirebaseValue () -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/MeetingListViewController.swift"
+                  timestampString = "508687241.876559"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "110"
+                  endingLineNumber = "110"
+                  offsetFromSymbolStart = "48">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tempus/MeetingListViewController.swift"
+            timestampString = "508687177.225055"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "observeFirebaseValue()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tempus.MeetingListViewController.(observeFirebaseValue () -&gt; ()).(closure #1).(closure #1).(closure #1)"
+                  moduleName = "tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/MeetingListViewController.swift"
+                  timestampString = "508687241.880491"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "115"
+                  endingLineNumber = "115"
+                  offsetFromSymbolStart = "532">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tempus.MeetingListViewController.(observeFirebaseValue () -&gt; ()).(closure #1).(closure #1).(closure #1).(closure #1)"
+                  moduleName = "tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/MeetingListViewController.swift"
+                  timestampString = "508687241.88238"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "117"
+                  endingLineNumber = "117"
+                  offsetFromSymbolStart = "72">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tempus/MeetingListViewController.swift"
+            timestampString = "508687178.630575"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
+            landmarkName = "observeFirebaseValue()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tempus.MeetingListViewController.(observeFirebaseValue () -&gt; ()).(closure #1).(closure #1).(closure #1).(closure #1)"
+                  moduleName = "tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/MeetingListViewController.swift"
+                  timestampString = "508687241.885743"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "120"
+                  endingLineNumber = "120"
+                  offsetFromSymbolStart = "432">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tempus.MeetingListViewController.(observeFirebaseValue () -&gt; ()).(closure #1).(closure #1).(closure #1).(closure #1)"
+                  moduleName = "tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/MeetingListViewController.swift"
+                  timestampString = "508687241.887612"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "120"
+                  endingLineNumber = "120"
+                  offsetFromSymbolStart = "876">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tempus/MeetingListViewController.swift"
+            timestampString = "508687194.626517"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
+            landmarkName = "observeFirebaseValue()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tempus.MeetingListViewController.(observeFirebaseValue () -&gt; ()).(closure #1).(closure #1).(closure #1)"
+                  moduleName = "tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/MeetingListViewController.swift"
+                  timestampString = "508687241.89081"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "113"
+                  endingLineNumber = "113"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tempus.MeetingListViewController.(observeFirebaseValue () -&gt; ()).(closure #1).(closure #1).(closure #1)"
+                  moduleName = "tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/MeetingListViewController.swift"
+                  timestampString = "508687241.892669"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "113"
+                  endingLineNumber = "113"
+                  offsetFromSymbolStart = "516">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tempus/MeetingListViewController.swift"
+            timestampString = "508687234.061951"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "observeFirebaseValue()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tempus.MeetingListViewController.(observeFirebaseValue () -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/MeetingListViewController.swift"
+                  timestampString = "508687241.89789"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "112"
+                  endingLineNumber = "112"
+                  offsetFromSymbolStart = "524">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tempus.MeetingListViewController.(observeFirebaseValue () -&gt; ()).(closure #1).(closure #1).(closure #1)"
+                  moduleName = "tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/MeetingListViewController.swift"
+                  timestampString = "508687241.900923"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "113"
+                  endingLineNumber = "113"
+                  offsetFromSymbolStart = "52">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tempus/MeetingListViewController.swift"
+            timestampString = "508687264.239681"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "observeFirebaseValue()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tempus.MeetingListViewController.(observeFirebaseValue () -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/MeetingListViewController.swift"
+                  timestampString = "508687264.246256"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "110"
+                  endingLineNumber = "110"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tempus.MeetingListViewController.(observeFirebaseValue () -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/MeetingListViewController.swift"
+                  timestampString = "508687264.248627"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "110"
+                  endingLineNumber = "110"
+                  offsetFromSymbolStart = "508">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

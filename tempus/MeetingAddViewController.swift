@@ -12,6 +12,8 @@ import Firebase
 struct Cover {
     var title: String?
     var subTitle: String?
+    var category: String?
+    var type: String?
 }
 
 struct Detail {

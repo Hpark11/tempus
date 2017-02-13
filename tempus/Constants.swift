@@ -34,11 +34,14 @@ struct Constants {
         static let detail: String = "detail"
         static let normal: String = "normal"
         static let position: String = "position"
+        static let userId: String = "userId"
         
         struct Cover {
             static let title: String = "title"
             static let subTitle: String = "subTitle"
             static let imageUrl: String = "imageUrl"
+            static let category: String = "category"
+            static let type: String = "type"
         }
         
         struct Detail {

@@ -7,18 +7,22 @@
 //
 
 import UIKit
+import Firebase
+
 
 class MeetingListViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    
-    let cellId = "cellId"
+    var selfImprovementMeetings = [Meeting]()
+    var prepareExaminationMeetings = [Meeting]()
+    var professionalSkillsMeetings = [Meeting]()
+    var lookingForHobbyMeetings = [Meeting]()
     
     struct MeetingListData {
         static let selfImprovementCellId = "selfImprovementCellId"
         static let prepareExaminationCellId = "prepareExaminationCellId"
-        static let professionalSkillesCellId = "professionalSkillesCellId"
+        static let professionalSkillsCellId = "professionalSkillsCellId"
         static let lookingForHobbyCellId = "lookingForHobbyCellId"
-        static let cells = [selfImprovementCellId, prepareExaminationCellId, professionalSkillesCellId, lookingForHobbyCellId]
+        static let cells = [selfImprovementCellId, prepareExaminationCellId, professionalSkillsCellId, lookingForHobbyCellId]
         
         static let categoryBarSize: CGFloat = 50.0
     }
@@ -86,8 +90,60 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
         registerCells()
         
         collectionView?.backgroundColor = UIColor.white
+        observeFirebaseValue()
     }
-
+    
+    func observeFirebaseValue() {
+        // get list of memePosts from Firebase
+        FirebaseDataService.instance.meetingRef.observe(.value, with: { (snapshot) in
+            if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                self.selfImprovementMeetings.removeAll()
+                self.prepareExaminationMeetings.removeAll()
+                self.professionalSkillsMeetings.removeAll()
+                self.lookingForHobbyMeetings.removeAll()
+                
+                for one in snapshot {
+                    if let postMeeting = one.value as? Dictionary<String, AnyObject> {
+                        let key = one.key
+                        
+                        FirebaseDataService.instance.meetingRef.child(Constants.Meetings.cover).observeSingleEvent(of: .value, with: { (coverSnap) in
+                            if let postMeetingCover = coverSnap.value as? Dictionary<String, AnyObject> {
+                                
+                                FirebaseDataService.instance.meetingRef.child(Constants.Meetings.detail).observeSingleEvent(of: .value, with: { (detailSnap) in
+                                    if let postMeetingDetail = detailSnap.value as? Dictionary<String, AnyObject> {
+                                        
+                                        FirebaseDataService.instance.meetingRef.child(Constants.Meetings.normal).observe(.value, with: { (normalSnap) in
+                                            
+                                            if let normalSnap = normalSnap.children.allObjects as? [FIRDataSnapshot] {
+                                                var normals = Array<Dictionary<String, AnyObject>>()
+                                                for norm in normalSnap {
+                                                    if let postNormal = norm.value as? Dictionary<String, AnyObject> {
+                                                        normals.append(postNormal)
+                                                    }
+                                                }
+                                                
+                                                let meeting = Meeting(meetingId: key, data: postMeeting, cover: postMeetingCover, detail: postMeetingDetail, normals: normals)
+                                                self.selfImprovementMeetings.append(meeting)
+                                                print(":::", meeting)
+                                            }
+                                        })
+                                    }
+                                })
+                            }
+                        })
+                    }
+                }
+            }
+            
+//            self.selfImprovementMeetings.reverse()
+//            self.prepareExaminationMeetings.reverse()
+//            self.professionalSkillsMeetings.reverse()
+//            self.lookingForHobbyMeetings.reverse()
+//            
+//            self.collectionView?.reloadData()
+        })
+    }
+    
     
     fileprivate func setNavigationBarUI() {
         navigationController?.navigationBar.isTranslucent = false
