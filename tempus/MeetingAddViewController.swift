@@ -14,6 +14,7 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
     var subImages: [UIImage] = []
     var detailImage: UIImage?
     var imgTag: Int = 0
+    var submitData: SubmitData = SubmitData()
     
     struct MeetingAddViewData {
         static let coverCellId = "coverCellId"
@@ -21,6 +22,17 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
         static let detailId = "detailId"
         
         static let cellIds = [coverCellId, cellId, detailId]
+    }
+    
+    struct SubmitData {
+        var position: Position = Position()
+        
+        
+        struct Position {
+            // Coordinate of Seoul, South Korea
+            var latitude: Double = 37.6183087
+            var longitude: Double = 126.9390451
+        }
     }
     
     let titleLabel: UILabel = {
@@ -32,28 +44,38 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
         return label
     }()
     
+    let headerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.collectionView?.backgroundColor = .white
         addSubViews()
-        setNavigationBarUI()
+        setConstraints()
         registerCells()
+        setCollectionViewUI()
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }
     
-    fileprivate func addSubViews() {
-    
+    fileprivate func setCollectionViewUI() {
+        collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(64, 0, 0, 0)
+        collectionView?.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
     }
     
-    fileprivate func setNavigationBarUI() {
-        navigationItem.titleView = titleLabel
+    fileprivate func addSubViews() {
+        view.addSubview(headerView)
     }
     
     fileprivate func setConstraints() {
-        _ = collectionView?.anchor(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        _ = headerView.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 64)
+        
+        _ = collectionView?.anchor(headerView.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
     }
     
     fileprivate func registerCells() {
@@ -100,7 +122,7 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
         if indexPath.item == 0 {
             return CGSize(width: view.frame.width, height: view.frame.width * Constants.sizeStandards.landscapeRatio)
         } else {
-            return CGSize(width: view.frame.width, height: view.frame.width * Constants.sizeStandards.landscapeRatio * 2)
+            return CGSize(width: view.frame.width, height: view.frame.width * Constants.sizeStandards.landscapeRatio * 2.4)
         }
     }
 }

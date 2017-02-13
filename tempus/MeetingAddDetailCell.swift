@@ -14,8 +14,11 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
 
     var attachedViewController: MeetingAddViewController?
     
-    var titleCharNumber: Int = 0
-    var subtitleCharNumber: Int = 0
+    var preferredPersonCharNumber: Int = 0
+    var personalRecordCharNumber: Int = 0
+    
+    var marker: GMSMarker?
+    var alertController: UIAlertController?
     
     lazy var locationManager: CLLocationManager = {
         let locationManager = CLLocationManager()
@@ -114,7 +117,7 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .darkGray
-        label.text = "제목: 0 / 20, 부제목: 0 / 40"
+        label.text = "선호대상: 0 / 20, 개인이력: 0 / 120"
         label.textAlignment = .right
         return label
     }()
@@ -140,21 +143,15 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
     
     func detailImageTapped() {
         if let attachedViewController = self.attachedViewController {
-            attachedViewController.presentImagePickerController(.savedPhotosAlbum, imgTag: 0)
+            attachedViewController.presentImagePickerController(.savedPhotosAlbum, imgTag: 1)
         }
     }
-    
-    func initGoogleMap() {
-        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6)
-        let mapView = GMSMapView.map(withFrame: CGRect(), camera: camera)
-        mapView.isMyLocationEnabled = true
-        googlemapView.camera = camera
-        
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2DMake(-33.86, 151.20)
-        marker.title = "Sydney"
-        marker.snippet = "Australia"
-        marker.map = mapView
+
+    func presentAlert(message:String) {
+        if let attachedViewController = self.attachedViewController, let alertController = self.alertController {
+            alertController.message = message
+            attachedViewController.present(alertController, animated: true)
+        }
     }
     
     override func setupViews() {
@@ -162,8 +159,27 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
         addSubviews()
         setConstraints()
         initGoogleMap()
-        
+        setAlertViewUI()
+
         self.contentView.isUserInteractionEnabled = false
+    }
+    
+    fileprivate func initGoogleMap() {
+        let camera = GMSCameraPosition.camera(withLatitude: 37.6183087, longitude: 126.9390451, zoom: 10)
+        let mapView = GMSMapView.map(withFrame: CGRect(), camera: camera)
+        mapView.isMyLocationEnabled = true
+        googlemapView.camera = camera
+            
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2DMake(37.6183087, 126.9390451)
+        marker.title = "Seoul"
+        marker.snippet = "Republic of Korea"
+        marker.map = mapView
+    }
+    
+    fileprivate func setAlertViewUI() {
+        alertController = UIAlertController(title: "입력 경고", message: "", preferredStyle: .alert)
+        alertController?.addAction(UIAlertAction(title: "확인", style: .default) { action in })
     }
     
     fileprivate func addSubviews() {
@@ -193,17 +209,17 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
         
         _ = priceField.anchor(priceLabel.bottomAnchor, left: detailImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 2, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 28)
         
-        _ = preferredPersonLabel.anchor(priceField.bottomAnchor, left: detailImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 2, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 16)
+        _ = preferredPersonLabel.anchor(priceField.bottomAnchor, left: detailImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 6, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 16)
         
-        _ = preferredPersonField.anchor(preferredPersonLabel.bottomAnchor, left: detailImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 6, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 28)
+        _ = preferredPersonField.anchor(preferredPersonLabel.bottomAnchor, left: detailImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 2, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 28)
         
-        _ = personalRecordLabel.anchor(preferredPersonField.bottomAnchor, left: detailImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 6, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 16)
+        _ = personalRecordLabel.anchor(detailImageView.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 6, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 16)
         
-        _ = personalRecordTextView.anchor(personalRecordLabel.bottomAnchor, left: detailImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 2, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 50)
+        _ = personalRecordTextView.anchor(personalRecordLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 2, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 50)
         
-        _ = preferredLocationLabel.anchor(personalRecordTextView.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 2, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 16)
+        _ = preferredLocationLabel.anchor(personalRecordTextView.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 6, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 16)
         
-        _ = locationSearchButton.anchor(preferredLocationLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 6, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 28)
+        _ = locationSearchButton.anchor(preferredLocationLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 2, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 36)
         
         _ = textLengthLabel.anchor(panelView.topAnchor, left: nil, bottom: nil, right: panelView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 220, heightConstant: 20)
         
@@ -214,20 +230,30 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
         var newText: NSString = textField.text! as NSString
         newText = newText.replacingCharacters(in: range, with: string) as NSString
         
-        if newText.length > 20 {
-            self.textLengthLabel.textColor = UIColor.red
-            //self.titleField.text = newText.substring(to: 19)
-        } else {
-            self.textLengthLabel.textColor = UIColor.darkGray
+        if textField == self.priceField {
+            guard Int(newText as String) != nil else {
+                presentAlert(message: "숫자만 가능합니다.")
+                return true
+            }
+            if newText.length > 14 {
+                self.priceField.text = newText.substring(to: 13)
+            }
+            
+        } else if textField == self.preferredPersonField {
+            if newText.length > 20 {
+                self.textLengthLabel.textColor = UIColor.red
+                self.preferredPersonField.text = newText.substring(to: 19)
+            } else {
+                self.textLengthLabel.textColor = UIColor.darkGray
+            }
+            preferredPersonCharNumber = newText.length
+            self.textLengthLabel.text = "선호대상: \(preferredPersonCharNumber) / 20, 개인이력: \(personalRecordCharNumber) / 120"
         }
-        
-        titleCharNumber = newText.length
-        self.textLengthLabel.text = "제목: \(titleCharNumber) / 20, 부제목: \(subtitleCharNumber) / 40"
         return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        //self.titleField.resignFirstResponder()
+        self.preferredPersonField.resignFirstResponder()
         return true
     }
     
@@ -235,15 +261,15 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
         var newText: NSString = textView.text! as NSString
         newText = newText.replacingCharacters(in: range, with: text) as NSString
         
-        if newText.length > 40 {
+        if newText.length > 120 {
             self.textLengthLabel.textColor = UIColor.red
-            //self.subtitleTextView.text = newText.substring(to: 39)
+            self.personalRecordTextView.text = newText.substring(to: 119)
         } else {
             self.textLengthLabel.textColor = UIColor.darkGray
         }
         
-        subtitleCharNumber = newText.length
-        self.textLengthLabel.text = "제목: \(titleCharNumber) / 20, 부제목: \(subtitleCharNumber) / 40"
+        personalRecordCharNumber = newText.length
+        self.textLengthLabel.text = "선호대상: \(preferredPersonCharNumber) / 20, 개인이력: \(personalRecordCharNumber) / 120"
         return true
     }
     
@@ -253,9 +279,9 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location = locations.last
-        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 17.0)
-        self.googlemapView.animate(to: camera)
+        //let location = locations.last
+        //let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 17.0)
+        //self.googlemapView.animate(to: camera)
     }
     
     // MARK : GMSMapView Delegate
@@ -286,6 +312,20 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
         if let attachedViewController = self.attachedViewController {
             let camera = GMSCameraPosition.camera(withLatitude: place.coordinate.latitude, longitude: place.coordinate.longitude, zoom: 15.0)
             self.googlemapView.camera = camera
+            
+            googlemapView.clear()
+            
+            let position = CLLocationCoordinate2DMake(place.coordinate.latitude, place.coordinate.longitude)
+            self.marker = GMSMarker(position: position)
+            marker?.title = place.formattedAddress
+            marker?.map = googlemapView
+            
+//            if let title = place.formattedAddress {
+//                preferredLocationLabel.text = "선호하는 위치 : \(title)"
+//            }
+            
+            attachedViewController.submitData.position.latitude = place.coordinate.latitude
+            attachedViewController.submitData.position.longitude = place.coordinate.longitude
             attachedViewController.dismiss(animated: true, completion: nil)
         }
     }
