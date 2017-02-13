@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        window?.rootViewController = MainNavigationController()
+        window?.rootViewController = MainTabBarController()
         
         // get rid of black line underneath navbar
         UINavigationBar.appearance().shadowImage = UIImage()
