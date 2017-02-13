@@ -14,7 +14,7 @@ class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
         didSet {
             self.textLengthLabel.text = "스토리제목: \(storyTitleCharNumber) / 20, 스토리라인: \(storySubtitleCharNumber) / 120"
             if let attachedViewController = self.attachedViewController, let tag = self.imgTag {
-                attachedViewController.submitData.normal[tag - 2].storyTitleCharNumber
+                attachedViewController.submitData.normal[tag - 2].storyTitleCharNumber = storyTitleCharNumber
             }
         }
     }
@@ -22,6 +22,9 @@ class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
     var storySubtitleCharNumber: Int = 0 {
         didSet {
             self.textLengthLabel.text = "스토리제목: \(storyTitleCharNumber) / 20, 스토리라인: \(storySubtitleCharNumber) / 120"
+            if let attachedViewController = self.attachedViewController, let tag = self.imgTag {
+                attachedViewController.submitData.normal[tag - 2].storySubtitleCharNumber = storySubtitleCharNumber
+            }
         }
     }
     

@@ -9,7 +9,6 @@
 import UIKit
 import Firebase
 
-
 struct Cover {
     var title: String?
     var subTitle: String?
@@ -94,13 +93,49 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
         return button
     }()
     
-    func submitButtonTapped() {
+    
+    
+    lazy var alertController: UIAlertController = {
         let alert = UIAlertController(title: "스토리 게시", message: "정말 게시하겠습니까?", preferredStyle: .alert)
+        
         alert.addAction(UIAlertAction(title: "확인", style: .default) { action in
-            self.postDataToFirebase()
+            let firebaseAutoRef = FirebaseDataService.instance.meetingRef.childByAutoId()
+            let firebaseRefPosition = firebaseAutoRef.child(Constants.Meetings.position)
+            
+            firebaseAutoRef.setValue([Constants.Meetings.dateTime: NSNumber(value: Int(Date().timeIntervalSince1970))])
+            firebaseRefPosition.setValue([
+                Constants.Meetings.Position.address: self.submitData.position.address,
+                Constants.Meetings.Position.latitude: NSNumber(value: self.submitData.position.latitude),
+                Constants.Meetings.Position.longitude: NSNumber(value: self.submitData.position.longitude)
+                ])
+            
+            self.imageToFirebaseStorage(image: self.mainImage, cellType: .cover, dataReference: firebaseAutoRef)
+            self.imageToFirebaseStorage(image: self.detailImage, cellType: .detail, dataReference: firebaseAutoRef)
+            for image in self.subImages {
+                self.imageToFirebaseStorage(image: image, cellType: .normal, dataReference: firebaseAutoRef)
+            }
+            self.dismiss(animated: true, completion: nil)
         })
+        
         alert.addAction(UIAlertAction(title: "취소", style: .default) { action in })
-        present(alert, animated: true, completion: nil)
+        return alert
+    }()
+    
+    lazy var beforeButton: UIButton = {
+        let button = UIButton()
+        if let image = UIImage(named: "before") {
+            button.setImage(image, for: .normal)
+        }
+        button.addTarget(self, action: #selector(beforeButtonTapped), for: .touchUpInside)
+        return button
+    }()
+
+    func beforeButtonTapped() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func submitButtonTapped() {
+        present(alertController, animated: true, completion: nil)
     }
     
     func postDataToFirebase() {
@@ -144,7 +179,6 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
         var firebaseRef: FIRDatabaseReference?
         firebaseRef = dataReference.child(cellType.rawValue)
         
-        
         if cellType == .cover {
             if let title = self.submitData.cover.title, let subTitle = self.submitData.cover.subTitle {
                 dict = [
@@ -166,11 +200,15 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
             }
         } else {
             dict = [
-                Constants.Meetings.Normal.storyTitle : self.submitData.normal[0].storyTitle as AnyObject,
-                Constants.Meetings.Normal.storySubtitle : self.submitData.normal[0].storySubtitle as AnyObject,
+                Constants.Meetings.Normal.storyTitle : self.submitData.normal[dataIterator].storyTitle as AnyObject,
+                Constants.Meetings.Normal.storySubtitle : self.submitData.normal[dataIterator].storySubtitle as AnyObject,
                 Constants.Meetings.Normal.imageUrl : imageUrl as AnyObject
             ]
-            self.submitData.normal.removeLast()
+            dataIterator += 1
+            if dataIterator >= self.submitData.normal.count {
+                dataIterator = 0
+            }
+            //self.submitData.normal.removeLast()
             firebaseRef = firebaseRef?.childByAutoId()
         }
         
@@ -199,6 +237,7 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
     fileprivate func addSubViews() {
         view.addSubview(headerView)
         view.addSubview(submitButton)
+        view.addSubview(beforeButton)
     }
     
     fileprivate func setConstraints() {
@@ -207,6 +246,8 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
         _ = collectionView?.anchor(headerView.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 64, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
         _ = submitButton.anchor(collectionView?.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 8, leftConstant: 8, bottomConstant: 8, rightConstant: 8, widthConstant: 0, heightConstant: 0)
+        
+        _ = beforeButton.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: nil, topConstant: 24, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 40).first
     }
     
     fileprivate func registerCells() {

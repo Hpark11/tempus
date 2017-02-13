@@ -101,9 +101,6 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
             flowLayout.scrollDirection = .horizontal
             flowLayout.minimumLineSpacing = 0
         }
-        
-        collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(MeetingListData.categoryBarSize, 0, 0, 0)
-        collectionView?.contentInset = UIEdgeInsetsMake(MeetingListData.categoryBarSize, 0, 0, 0)
         collectionView?.isPagingEnabled = true
     }
     
@@ -114,7 +111,7 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
     fileprivate func setConstraints() {
         _ = categoryBarView.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: MeetingListData.categoryBarSize)
         
-        _ = collectionView?.anchor(categoryBarView.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        _ = collectionView?.anchor(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: MeetingListData.categoryBarSize, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
     }
     
     fileprivate func registerCells() {
@@ -142,7 +139,7 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.height)
+        return CGSize(width: view.frame.width, height: view.frame.height - MeetingListData.categoryBarSize)
     }
 }
 
