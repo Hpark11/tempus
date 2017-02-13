@@ -90,7 +90,7 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
         registerCells()
         
         collectionView?.backgroundColor = UIColor.white
-        observeFirebaseValue()
+        //observeFirebaseValue()
     }
     
     func observeFirebaseValue() {

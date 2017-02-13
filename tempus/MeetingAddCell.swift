@@ -14,7 +14,7 @@ class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
         didSet {
             self.textLengthLabel.text = "스토리제목: \(storyTitleCharNumber) / 20, 스토리라인: \(storySubtitleCharNumber) / 120"
             if let attachedViewController = self.attachedViewController, let tag = self.imgTag {
-                attachedViewController.submitData.normal[tag - 2].storyTitleCharNumber = storyTitleCharNumber
+                attachedViewController.submitData.slides[tag - 2].storyTitleCharNumber = storyTitleCharNumber
             }
         }
     }
@@ -23,7 +23,7 @@ class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
         didSet {
             self.textLengthLabel.text = "스토리제목: \(storyTitleCharNumber) / 20, 스토리라인: \(storySubtitleCharNumber) / 120"
             if let attachedViewController = self.attachedViewController, let tag = self.imgTag {
-                attachedViewController.submitData.normal[tag - 2].storySubtitleCharNumber = storySubtitleCharNumber
+                attachedViewController.submitData.slides[tag - 2].storySubtitleCharNumber = storySubtitleCharNumber
             }
         }
     }
@@ -165,7 +165,7 @@ class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
         if let attachedViewController = self.attachedViewController {
             attachedViewController.numStories += 1
             attachedViewController.subImages.append(UIImage())
-            attachedViewController.submitData.normal.append(Normal())
+            attachedViewController.submitData.slides.append(Slides())
             attachedViewController.collectionView?.reloadData()
         }
     }
@@ -174,7 +174,7 @@ class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
         if let attachedViewController = self.attachedViewController {
             attachedViewController.numStories -= 1
             attachedViewController.subImages.removeLast()
-            attachedViewController.submitData.normal.removeLast()
+            attachedViewController.submitData.slides.removeLast()
             attachedViewController.collectionView?.reloadData()
         }
     }
@@ -241,7 +241,7 @@ class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let attachedViewController = self.attachedViewController, let imgTag = self.imgTag, let text = textField.text {
-            attachedViewController.submitData.normal[imgTag - 2].storyTitle = text
+            attachedViewController.submitData.slides[imgTag - 2].storyTitle = text
         }
     }
     
@@ -266,7 +266,7 @@ class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if let attachedViewController = self.attachedViewController, let imgTag = self.imgTag, let text = textView.text   {
-            attachedViewController.submitData.normal[imgTag - 2].storySubtitle = text
+            attachedViewController.submitData.slides[imgTag - 2].storySubtitle = text
         }
     }
     

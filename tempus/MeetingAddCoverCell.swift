@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     var attachedViewController: MeetingAddViewController?
 
@@ -68,6 +68,20 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UI
         return label
     }()
     
+    lazy var categoryPickerView: UIPickerView = {
+        let pickerView = UIPickerView()
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        return pickerView
+    }()
+    
+    lazy var typePickerView: UIPickerView = {
+        let pickerView = UIPickerView()
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        return pickerView
+    }()
+    
     func mainImageTapped() {
         if let attachedViewController = self.attachedViewController {
             attachedViewController.presentImagePickerController(.savedPhotosAlbum, imgTag: 0)
@@ -87,6 +101,8 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UI
         addSubview(titleField)
         addSubview(subtitleTextView)
         addSubview(textLengthLabel)
+        addSubview(categoryPickerView)
+        addSubview(typePickerView)
     }
     
     fileprivate func setConstraints() {
@@ -105,7 +121,9 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UI
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
         if let attachedViewController = self.attachedViewController {
-            attachedViewController.submitData.cover.title = textField.text
+            if let text = textField.text {
+                attachedViewController.submitData.title = text
+            }
         }
     }
     
@@ -133,7 +151,7 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UI
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if let attachedViewController = self.attachedViewController {
-            attachedViewController.submitData.cover.subTitle = textView.text
+            attachedViewController.submitData.subTitle = textView.text
         }
     }
     
@@ -153,4 +171,17 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UI
         
         return true
     }
+    
+    // MARK : PickerView Delegate
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        if pickerView == categoryPickerView {
+            return 4
+        } else if pickerView == typePickerView {
+            return 4
+        } else {
+            return 4
+        }
+    }
+    
 }

@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "tempus/MeetingListViewController.swift"
-            timestampString = "508691450.979505"
+            filePath = "tempus/Meeting.swift"
+            timestampString = "508692339.244249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
-            landmarkName = "observeFirebaseValue()"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "init(data:username:numFollowers:numComments:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

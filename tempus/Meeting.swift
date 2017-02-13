@@ -78,11 +78,11 @@ struct Meeting {
     }
     
     init(data: Dictionary<String, AnyObject>, username:String, numFollowers:Int, numComments:Int) {
-        if let title = data[Constants.Meetings.Cover.title] as? String,
-            let subTitle = data[Constants.Meetings.Cover.subTitle] as? String,
-            let imageUrl = data[Constants.Meetings.Cover.imageUrl] as? String,
-            let type = data[Constants.Meetings.Cover.category] as? String,
-            let category = data[Constants.Meetings.Cover.category] as? String {
+        if let title = data[Constants.Meetings.title] as? String,
+            let subTitle = data[Constants.Meetings.subTitle] as? String,
+            let imageUrl = data[Constants.Meetings.frontImageUrl] as? String,
+            let type = data[Constants.Meetings.type] as? String,
+            let category = data[Constants.Meetings.category] as? String {
             
             self._title = title
             self._subTitle = subTitle

@@ -9,31 +9,11 @@
 import UIKit
 import Firebase
 
-struct Cover {
-    var title: String?
-    var subTitle: String?
-    var category: String?
-    var type: String?
-}
-
-struct Detail {
-    var price: String?
-    var preferred: String?
-    var profile: String?
-}
-
-struct Normal {
+struct Slides {
     var storyTitle: String = ""
     var storySubtitle: String = ""
     var storyTitleCharNumber: Int = 0
     var storySubtitleCharNumber: Int = 0
-}
-
-struct Position {
-    // Coordinate of Seoul, South Korea
-    var address: String = "대한민국 서울"
-    var latitude: Double = 37.6183087
-    var longitude: Double = 126.9390451
 }
 
 class MeetingAddViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
@@ -51,7 +31,7 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
     enum CellType : String {
         case cover = "cover"
         case detail = "detail"
-        case normal = "normal"
+        case slides = "slides"
     }
     
     struct MeetingAddViewData {
@@ -62,11 +42,22 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
     }
     
     struct SubmitData {
+        var title: String = ""
+        var subTitle: String = ""
+        var category: String = Constants.Category.selfImprovement
+        var type: String = Constants.MeetingType.experience
+        var userId: String = ""
+        
+        var price: String = "0"
+        var preferred: String = ""
+        var profile: String = ""
+        
+        var address: String = "대한민국 서울"
+        var latitude: Double = 37.6183087
+        var longitude: Double = 126.9390451
+        
         var isPassed: Bool = false
-        var cover: Cover = Cover()
-        var detail: Detail = Detail()
-        var normal: [Normal] = [Normal()]
-        var position: Position = Position()
+        var slides: [Slides] = [Slides()]
     }
     
     let titleLabel: UILabel = {
@@ -96,25 +87,23 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
     }()
     
     
-    
     lazy var alertController: UIAlertController = {
         let alert = UIAlertController(title: "스토리 게시", message: "정말 게시하겠습니까?", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "확인", style: .default) { action in
             let firebaseAutoRef = FirebaseDataService.instance.meetingRef.childByAutoId()
-            let firebaseRefPosition = firebaseAutoRef.child(Constants.Meetings.position)
             
-            firebaseAutoRef.setValue([Constants.Meetings.dateTime: NSNumber(value: Int(Date().timeIntervalSince1970))])
-            firebaseRefPosition.setValue([
-                Constants.Meetings.Position.address: self.submitData.position.address,
-                Constants.Meetings.Position.latitude: NSNumber(value: self.submitData.position.latitude),
-                Constants.Meetings.Position.longitude: NSNumber(value: self.submitData.position.longitude)
+            firebaseAutoRef.setValue([
+                Constants.Meetings.dateTime: NSNumber(value: Int(Date().timeIntervalSince1970)),
+                Constants.Meetings.address: self.submitData.address,
+                Constants.Meetings.latitude: self.submitData.latitude,
+                Constants.Meetings.longitude: self.submitData.longitude
             ])
             
             self.imageToFirebaseStorage(image: self.mainImage, cellType: .cover, dataReference: firebaseAutoRef)
             self.imageToFirebaseStorage(image: self.detailImage, cellType: .detail, dataReference: firebaseAutoRef)
             for image in self.subImages {
-                self.imageToFirebaseStorage(image: image, cellType: .normal, dataReference: firebaseAutoRef)
+                self.imageToFirebaseStorage(image: image, cellType: .slides, dataReference: firebaseAutoRef)
             }
             self.dismiss(animated: true, completion: nil)
         })
@@ -140,24 +129,6 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
         present(alertController, animated: true, completion: nil)
     }
     
-    func postDataToFirebase() {
-        let firebaseAutoRef = FirebaseDataService.instance.meetingRef.childByAutoId()
-        let firebaseRefPosition = firebaseAutoRef.child(Constants.Meetings.position)
-        
-        firebaseAutoRef.setValue([Constants.Meetings.dateTime: NSNumber(value: Int(Date().timeIntervalSince1970))])
-        firebaseRefPosition.setValue([
-            Constants.Meetings.Position.address: self.submitData.position.address,
-            Constants.Meetings.Position.latitude: NSNumber(value: self.submitData.position.latitude),
-            Constants.Meetings.Position.longitude: NSNumber(value: self.submitData.position.longitude)
-        ])
-        
-        self.imageToFirebaseStorage(image: self.mainImage, cellType: .cover, dataReference: firebaseAutoRef)
-        self.imageToFirebaseStorage(image: self.detailImage, cellType: .detail, dataReference: firebaseAutoRef)
-        for image in self.subImages {
-            self.imageToFirebaseStorage(image: image, cellType: .normal, dataReference: firebaseAutoRef)
-        }
-    }
-    
     func imageToFirebaseStorage(image: UIImage?, cellType: CellType, dataReference: FIRDatabaseReference) {
         if let image = image, let imageData = UIImageJPEGRepresentation(image, 1.0) {
             let imageUid = NSUUID().uuidString
@@ -179,42 +150,36 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
         
         var dict: Dictionary<String, AnyObject>?
         var firebaseRef: FIRDatabaseReference?
-        firebaseRef = dataReference.child(cellType.rawValue)
+        firebaseRef = dataReference
         
         if cellType == .cover {
-            if let title = self.submitData.cover.title, let subTitle = self.submitData.cover.subTitle {
-                dict = [
-                    Constants.Meetings.Cover.title : title as AnyObject,
-                    Constants.Meetings.Cover.subTitle : subTitle as AnyObject,
-                    Constants.Meetings.Cover.imageUrl : imageUrl as AnyObject
-                ]
-            }
+            firebaseRef?.child(Constants.Meetings.title).setValue(self.submitData.title as AnyObject)
+            firebaseRef?.child(Constants.Meetings.subTitle).setValue(self.submitData.subTitle as AnyObject)
+            firebaseRef?.child(Constants.Meetings.frontImageUrl).setValue(imageUrl as AnyObject)
+            firebaseRef?.child(Constants.Meetings.category).setValue(self.submitData.title as AnyObject)
+            firebaseRef?.child(Constants.Meetings.type).setValue(self.submitData.type as AnyObject)
+            firebaseRef?.child(Constants.Meetings.isPassed).setValue(self.submitData.isPassed as AnyObject)
         } else if cellType == .detail {
-            if let price = self.submitData.detail.price,
-                let profile = self.submitData.detail.profile,
-                let preferred = self.submitData.detail.preferred {
-                dict = [
-                    Constants.Meetings.Detail.price : price as AnyObject,
-                    Constants.Meetings.Detail.profile : profile as AnyObject,
-                    Constants.Meetings.Detail.preferred : preferred as AnyObject,
-                    Constants.Meetings.Detail.imageUrl : imageUrl as AnyObject,
-                ]
-            }
+            firebaseRef?.child(Constants.Meetings.price).setValue(self.submitData.price as AnyObject)
+            firebaseRef?.child(Constants.Meetings.profile).setValue(self.submitData.profile as AnyObject)
+            firebaseRef?.child(Constants.Meetings.preferred).setValue(self.submitData.preferred as AnyObject)
+            firebaseRef?.child(Constants.Meetings.backImageUrl).setValue(imageUrl as AnyObject)
         } else {
             dict = [
-                Constants.Meetings.Normal.storyTitle : self.submitData.normal[dataIterator].storyTitle as AnyObject,
-                Constants.Meetings.Normal.storySubtitle : self.submitData.normal[dataIterator].storySubtitle as AnyObject,
-                Constants.Meetings.Normal.imageUrl : imageUrl as AnyObject
+                Constants.Meetings.Slides.storyTitle : self.submitData.slides[dataIterator].storyTitle as AnyObject,
+                Constants.Meetings.Slides.storySubtitle : self.submitData.slides[dataIterator].storySubtitle as AnyObject,
+                Constants.Meetings.Slides.imageUrl : imageUrl as AnyObject
             ]
             dataIterator += 1
-            if dataIterator >= self.submitData.normal.count {
+            if dataIterator >= self.submitData.slides.count {
                 dataIterator = 0
             }
             //self.submitData.normal.removeLast()
-            firebaseRef = firebaseRef?.childByAutoId()
+            firebaseRef = firebaseRef?.child(cellType.rawValue).childByAutoId()
+            if let dict = dict {
+                firebaseRef?.setValue(dict)
+            }
         }
-        
-        firebaseRef?.setValue(dict)
     }
     
     override func viewDidLoad() {
@@ -275,7 +240,7 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
             if let detailImage = self.detailImage {
                 detailCell.detailImageView.image = detailImage
             }
-            detailCell.traceSavedLocation(latitude: submitData.position.latitude, longitude: submitData.position.longitude, address: submitData.position.address)
+            detailCell.traceSavedLocation(latitude: submitData.latitude, longitude: submitData.longitude, address: submitData.address)
             detailCell.attachedViewController = self
             return detailCell
         } else {
@@ -284,10 +249,10 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
                 storyCell.cellImageView.image = subImages[indexPath.item - 2]
                 storyCell.imgTag = indexPath.item
                 
-                storyCell.storySubtitle = submitData.normal[indexPath.item - 2].storySubtitle
-                storyCell.storyTitle = submitData.normal[indexPath.item - 2].storyTitle
-                storyCell.storyTitleCharNumber = submitData.normal[indexPath.item - 2].storyTitleCharNumber
-                storyCell.storySubtitleCharNumber = submitData.normal[indexPath.item - 2].storySubtitleCharNumber
+                storyCell.storySubtitle = submitData.slides[indexPath.item - 2].storySubtitle
+                storyCell.storyTitle = submitData.slides[indexPath.item - 2].storyTitle
+                storyCell.storyTitleCharNumber = submitData.slides[indexPath.item - 2].storyTitleCharNumber
+                storyCell.storySubtitleCharNumber = submitData.slides[indexPath.item - 2].storySubtitleCharNumber
                 
                 var isFirst: Bool = false
                 var isLast: Bool = false

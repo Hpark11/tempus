@@ -29,38 +29,27 @@ struct Constants {
     }
     
     struct Meetings {
+        static let isPassed: String = "isPassed"
+        static let title: String = "title"
+        static let subTitle: String = "subTitle"
+        static let category: String = "category"
+        static let type: String = "type"
         static let dateTime: String = "dateTime"
-        static let cover: String = "cover"
-        static let detail: String = "detail"
-        static let normal: String = "normal"
-        static let position: String = "position"
+        static let address: String = "address"
+        static let latitude: String = "latitude"
+        static let longitude: String = "longitude"
         static let userId: String = "userId"
+        static let price: String = "price"
+        static let preferred: String = "preferred"
+        static let profile: String = "profile"
+        static let frontImageUrl: String = "frontImageUrl"
+        static let backImageUrl: String = "backimageUrl"
+        static let slides: String = "slides"
         
-        struct Cover {
-            static let title: String = "title"
-            static let subTitle: String = "subTitle"
-            static let imageUrl: String = "imageUrl"
-            static let category: String = "category"
-            static let type: String = "type"
-        }
-        
-        struct Detail {
-            static let price: String = "price"
-            static let preferred: String = "preferred"
-            static let profile: String = "profile"
-            static let imageUrl: String = "imageUrl"
-        }
-        
-        struct Normal {
+        struct Slides {
             static let storyTitle: String = "storyTitle"
             static let storySubtitle: String = "storySubtitle"
             static let imageUrl: String = "imageUrl"
-        }
-        
-        struct Position {
-            static let address: String = "address"
-            static let latitude: String = "latitude"
-            static let longitude: String = "longitude"
         }
     }
     
@@ -71,5 +60,19 @@ struct Constants {
         static let following: String = "following"
         static let numFollowers: String = "numFollowers"
         static let numComments: String = "numComments"
+    }
+    
+    struct Category {
+        static let selfImprovement = "selfImprovement"
+        static let prepareExamination = "prepareExamination"
+        static let professionalSkills = "professionalSkills"
+        static let lookingForHobby = "lookingForHobby"
+    }
+    
+    struct MeetingType {
+        static let mentoring = "mentoring"
+        static let counseling = "counseling"
+        static let networking = "networking"
+        static let experience = "experience"
     }
 }
