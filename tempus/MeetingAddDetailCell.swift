@@ -333,10 +333,10 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
         if let attachedViewController = self.attachedViewController {
             if let address = place.formattedAddress {
                 traceSavedLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude, address: address)
+                attachedViewController.submitData.position.address = address
+                attachedViewController.submitData.position.latitude = place.coordinate.latitude
+                attachedViewController.submitData.position.longitude = place.coordinate.longitude
             }
-            
-            attachedViewController.submitData.position.latitude = place.coordinate.latitude
-            attachedViewController.submitData.position.longitude = place.coordinate.longitude
             attachedViewController.dismiss(animated: true, completion: nil)
         }
     }

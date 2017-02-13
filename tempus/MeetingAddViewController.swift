@@ -94,7 +94,6 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
         let alert = UIAlertController(title: "스토리 게시", message: "정말 게시하겠습니까?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default) { action in
             self.postDataToFirebase()
-            self.dismiss(animated: true, completion: nil)
         })
         alert.addAction(UIAlertAction(title: "취소", style: .default) { action in })
         present(alert, animated: true, completion: nil)
@@ -104,7 +103,7 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
         let firebaseAutoRef = FirebaseDataService.instance.meetingRef.childByAutoId()
         let firebaseRefPosition = firebaseAutoRef.child(Constants.Meetings.position)
         
-        firebaseAutoRef.setValue(["dateTime": NSNumber(value: Int(Date().timeIntervalSince1970))])
+        firebaseAutoRef.setValue([Constants.Meetings.dateTime: NSNumber(value: Int(Date().timeIntervalSince1970))])
         firebaseRefPosition.setValue([
             Constants.Meetings.Position.address: self.submitData.position.address,
             Constants.Meetings.Position.latitude: NSNumber(value: self.submitData.position.latitude),
