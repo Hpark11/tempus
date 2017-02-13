@@ -10,6 +10,8 @@ import UIKit
 
 class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
 
+    var storyTitleCharNumber: Int = 0
+    var storySubtitleCharNumber: Int = 0
     var attachedViewController: MeetingAddViewController?
     var imgTag: Int? {
         didSet {
@@ -191,7 +193,7 @@ class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
         
         _ = storySubtitleLabel.anchor(storyTitleField.bottomAnchor, left: cellImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 6, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 16)
         
-        _ = storySubtitleTextView.anchor(storySubtitleLabel.bottomAnchor, left: cellImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 2, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 50)
+        _ = storySubtitleTextView.anchor(storySubtitleLabel.bottomAnchor, left: cellImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 2, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 64)
         
         _ = addStoryLabel.anchor(storySubtitleTextView.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 6, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 16)
         
@@ -202,4 +204,40 @@ class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
         _ = textLengthLabel.anchor(panelView.topAnchor, left: nil, bottom: nil, right: panelView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 260, heightConstant: 20)
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        var newText: NSString = textField.text! as NSString
+        newText = newText.replacingCharacters(in: range, with: string) as NSString
+
+        if newText.length > 20 {
+            self.textLengthLabel.textColor = UIColor.red
+            self.storyTitleField.text = newText.substring(to: 19)
+        } else {
+            self.textLengthLabel.textColor = UIColor.darkGray
+        }
+        storyTitleCharNumber = newText.length
+        self.textLengthLabel.text = "스토리제목: \(storyTitleCharNumber) / 20, 스토리라인: \(storySubtitleCharNumber) / 120"
+        
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        var newText: NSString = textView.text! as NSString
+        newText = newText.replacingCharacters(in: range, with: text) as NSString
+        
+        if newText.length > 120 {
+            self.textLengthLabel.textColor = UIColor.red
+            self.storySubtitleTextView.text = newText.substring(to: 119)
+        } else {
+            self.textLengthLabel.textColor = UIColor.darkGray
+        }
+        
+        storySubtitleCharNumber = newText.length
+        self.textLengthLabel.text = "선호대상: \(storyTitleCharNumber) / 20, 개인이력: \(storySubtitleCharNumber) / 120"
+        return true
+    }
 }

@@ -12,8 +12,8 @@ import Firebase
 let DB_BASE = FIRDatabase.database().reference()
 let STORAGE_BASE = FIRStorage.storage().reference()
 
-class DataService {
-    static let instance = DataService()
+class FirebaseDataService {
+    static let instance = FirebaseDataService()
     
     // Database References
     private var _baseRef = DB_BASE
