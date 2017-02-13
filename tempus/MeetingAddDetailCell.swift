@@ -154,6 +154,20 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
         }
     }
     
+    func traceSavedLocation(latitude: Double, longitude: Double, address: String) {
+        let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: 16)
+        self.googlemapView.camera = camera
+        
+        googlemapView.clear()
+        
+        let position = CLLocationCoordinate2DMake(latitude, longitude)
+        self.marker = GMSMarker(position: position)
+        marker?.title = address
+        marker?.map = googlemapView
+        
+        preferredLocationLabel.text = "선호하는 위치 : \(address)"
+    }
+    
     override func setupViews() {
         super.setupViews()
         addSubviews()
@@ -165,7 +179,7 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
     }
     
     fileprivate func initGoogleMap() {
-        let camera = GMSCameraPosition.camera(withLatitude: 37.6183087, longitude: 126.9390451, zoom: 10)
+        let camera = GMSCameraPosition.camera(withLatitude: 37.6183087, longitude: 126.9390451, zoom: 16)
         let mapView = GMSMapView.map(withFrame: CGRect(), camera: camera)
         mapView.isMyLocationEnabled = true
         googlemapView.camera = camera
@@ -253,7 +267,7 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.preferredPersonField.resignFirstResponder()
+        textField.resignFirstResponder()
         return true
     }
     
@@ -310,19 +324,9 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
     
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         if let attachedViewController = self.attachedViewController {
-            let camera = GMSCameraPosition.camera(withLatitude: place.coordinate.latitude, longitude: place.coordinate.longitude, zoom: 15.0)
-            self.googlemapView.camera = camera
-            
-            googlemapView.clear()
-            
-            let position = CLLocationCoordinate2DMake(place.coordinate.latitude, place.coordinate.longitude)
-            self.marker = GMSMarker(position: position)
-            marker?.title = place.formattedAddress
-            marker?.map = googlemapView
-            
-//            if let title = place.formattedAddress {
-//                preferredLocationLabel.text = "선호하는 위치 : \(title)"
-//            }
+            if let address = place.formattedAddress {
+                traceSavedLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude, address: address)
+            }
             
             attachedViewController.submitData.position.latitude = place.coordinate.latitude
             attachedViewController.submitData.position.longitude = place.coordinate.longitude

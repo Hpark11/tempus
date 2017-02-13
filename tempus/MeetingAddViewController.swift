@@ -30,6 +30,7 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
         
         struct Position {
             // Coordinate of Seoul, South Korea
+            var address: String = "대한민국 서울"
             var latitude: Double = 37.6183087
             var longitude: Double = 126.9390451
         }
@@ -100,6 +101,7 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
             if let detailImage = self.detailImage {
                 detailCell.detailImageView.image = detailImage
             }
+            detailCell.traceSavedLocation(latitude: submitData.position.latitude, longitude: submitData.position.longitude, address: submitData.position.address)
             detailCell.attachedViewController = self
             return detailCell
         }
