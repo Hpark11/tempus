@@ -13,10 +13,27 @@ class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
     var storyTitleCharNumber: Int = 0
     var storySubtitleCharNumber: Int = 0
     var attachedViewController: MeetingAddViewController?
+    
     var imgTag: Int? {
         didSet {
             if let tag = imgTag {
                 panelLabel.text = "스토리 \(tag - 1)"
+            }
+        }
+    }
+    
+    var storyTitle: String? {
+        didSet {
+            if let storyTitle = storyTitle {
+                storyTitleField.text = storyTitle
+            }
+        }
+    }
+    
+    var storySubtitle: String? {
+        didSet {
+            if let storySubtitle = storySubtitle {
+                storySubtitleTextView.text = storySubtitle
             }
         }
     }

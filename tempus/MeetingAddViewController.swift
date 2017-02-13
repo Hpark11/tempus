@@ -236,6 +236,8 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
             if indexPath.item >= 2 {
                 storyCell.cellImageView.image = subImages[indexPath.item - 2]
                 storyCell.imgTag = indexPath.item
+                storyCell.storySubtitle = submitData.normal[indexPath.item - 2].storySubtitle
+                storyCell.storyTitle = submitData.normal[indexPath.item - 2].storyTitle
                 
                 var isFirst: Bool = false
                 var isLast: Bool = false

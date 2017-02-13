@@ -31,7 +31,7 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UI
     
     lazy var mainImageView: DownloadImageView = {
         let imageView = DownloadImageView()
-        imageView.image = UIImage(named: "placeholder3")
+        imageView.image = UIImage()
         imageView.contentMode = .scaleToFill
         imageView.layer.borderWidth = 1
         imageView.layer.borderColor = UIColor.darkGray.cgColor
@@ -103,6 +103,12 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UI
         _ = textLengthLabel.anchor(panelView.topAnchor, left: nil, bottom: nil, right: panelView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 220, heightConstant: 20)
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+        if let attachedViewController = self.attachedViewController {
+            attachedViewController.submitData.cover.title = textField.text
+        }
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         var newText: NSString = textField.text! as NSString
         newText = newText.replacingCharacters(in: range, with: string) as NSString
@@ -117,15 +123,18 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UI
         titleCharNumber = newText.length
         self.textLengthLabel.text = "제목: \(titleCharNumber) / 20, 부제목: \(subtitleCharNumber) / 40"
         
-        if let attachedViewController = self.attachedViewController {
-            attachedViewController.submitData.cover.title = newText as String
-        }
         return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.titleField.resignFirstResponder()
         return true
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if let attachedViewController = self.attachedViewController {
+            attachedViewController.submitData.cover.subTitle = textView.text
+        }
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -141,9 +150,7 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UI
         
         subtitleCharNumber = newText.length
         self.textLengthLabel.text = "제목: \(titleCharNumber) / 20, 부제목: \(subtitleCharNumber) / 40"
-        if let attachedViewController = self.attachedViewController {
-            attachedViewController.submitData.cover.subTitle = newText as String
-        }
+        
         return true
     }
 }

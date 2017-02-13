@@ -53,7 +53,7 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
     
     lazy var detailImageView: DownloadImageView = {
         let imageView = DownloadImageView()
-        imageView.image = UIImage(named: "placeholder3")
+        imageView.image = UIImage()
         imageView.contentMode = .scaleToFill
         imageView.layer.borderWidth = 1
         imageView.layer.borderColor = UIColor.darkGray.cgColor
@@ -240,31 +240,37 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
         _ = googlemapView.anchor(locationSearchButton.bottomAnchor, left: panelView.leftAnchor, bottom: panelView.bottomAnchor, right: panelView.rightAnchor, topConstant: 6, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+        if let attachedViewController = self.attachedViewController {
+            if textField == self.priceField {
+                attachedViewController.submitData.detail.price = textField.text
+            } else if textField == self.preferredPersonField {
+                attachedViewController.submitData.detail.preferred = textField.text
+            }
+        }
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         var newText: NSString = textField.text! as NSString
         newText = newText.replacingCharacters(in: range, with: string) as NSString
         
-        if let attachedViewController = self.attachedViewController {
-            if textField == self.priceField {
-                guard Int(newText as String) != nil else {
-                    presentAlert(message: "숫자만 가능합니다.")
-                    return true
-                }
-                if newText.length > 14 {
-                    self.priceField.text = newText.substring(to: 13)
-                }
-                attachedViewController.submitData.detail.price = newText as String
-            } else if textField == self.preferredPersonField {
-                if newText.length > 20 {
-                    self.textLengthLabel.textColor = UIColor.red
-                    self.preferredPersonField.text = newText.substring(to: 19)
-                } else {
-                    self.textLengthLabel.textColor = UIColor.darkGray
-                }
-                preferredPersonCharNumber = newText.length
-                self.textLengthLabel.text = "선호대상: \(preferredPersonCharNumber) / 20, 개인이력: \(personalRecordCharNumber) / 120"
-                attachedViewController.submitData.detail.preferred = newText as String
+        if textField == self.priceField {
+            guard Int(newText as String) != nil else {
+                presentAlert(message: "숫자만 가능합니다.")
+                return true
             }
+            if newText.length > 14 {
+                self.priceField.text = newText.substring(to: 13)
+            }
+        } else if textField == self.preferredPersonField {
+            if newText.length > 20 {
+                self.textLengthLabel.textColor = UIColor.red
+                self.preferredPersonField.text = newText.substring(to: 19)
+            } else {
+                self.textLengthLabel.textColor = UIColor.darkGray
+            }
+            preferredPersonCharNumber = newText.length
+            self.textLengthLabel.text = "선호대상: \(preferredPersonCharNumber) / 20, 개인이력: \(personalRecordCharNumber) / 120"
         }
         return true
     }
@@ -272,6 +278,12 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if let attachedViewController = self.attachedViewController {
+            attachedViewController.submitData.detail.profile = textView.text
+        }
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -287,10 +299,6 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
         
         personalRecordCharNumber = newText.length
         self.textLengthLabel.text = "선호대상: \(preferredPersonCharNumber) / 20, 개인이력: \(personalRecordCharNumber) / 120"
-        if let attachedViewController = self.attachedViewController {
-            attachedViewController.submitData.detail.profile = newText as String
-        }
-        
         return true
     }
     
