@@ -116,6 +116,10 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UI
         
         titleCharNumber = newText.length
         self.textLengthLabel.text = "제목: \(titleCharNumber) / 20, 부제목: \(subtitleCharNumber) / 40"
+        
+        if let attachedViewController = self.attachedViewController {
+            attachedViewController.submitData.cover.title = newText as String
+        }
         return true
     }
     
@@ -137,6 +141,9 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UI
         
         subtitleCharNumber = newText.length
         self.textLengthLabel.text = "제목: \(titleCharNumber) / 20, 부제목: \(subtitleCharNumber) / 40"
+        if let attachedViewController = self.attachedViewController {
+            attachedViewController.submitData.cover.subTitle = newText as String
+        }
         return true
     }
 }

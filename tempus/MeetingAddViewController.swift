@@ -9,6 +9,30 @@
 import UIKit
 import Firebase
 
+
+struct Cover {
+    var title: String?
+    var subTitle: String?
+}
+
+struct Detail {
+    var price: String?
+    var preferred: String?
+    var profile: String?
+}
+
+struct Normal {
+    var storyTitle: String?
+    var storySubtitle: String?
+}
+
+struct Position {
+    // Coordinate of Seoul, South Korea
+    var address: String = "대한민국 서울"
+    var latitude: Double = 37.6183087
+    var longitude: Double = 126.9390451
+}
+
 class MeetingAddViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var mainImage: UIImage?
@@ -29,7 +53,6 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
         static let coverCellId = "coverCellId"
         static let cellId = "cellId"
         static let detailId = "detailId"
-        
         static let cellIds = [coverCellId, cellId, detailId]
     }
     
@@ -37,31 +60,8 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
         var isPassed: Bool = false
         var cover: Cover = Cover()
         var detail: Detail = Detail()
-        var normal: Normal = Normal()
+        var normal: [Normal] = [Normal()]
         var position: Position = Position()
-    
-        struct Cover {
-            var title: String?
-            var subTitle: String?
-        }
-        
-        struct Detail {
-            var price: String?
-            var preferred: String?
-            var profile: String?
-        }
-        
-        struct Normal {
-            var storyTitle: String?
-            var storySubtitle: String?
-        }
-        
-        struct Position {
-            // Coordinate of Seoul, South Korea
-            var address: String = "대한민국 서울"
-            var latitude: Double = 37.6183087
-            var longitude: Double = 126.9390451
-        }
     }
     
     let titleLabel: UILabel = {
@@ -93,19 +93,32 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
     func submitButtonTapped() {
         let alert = UIAlertController(title: "스토리 게시", message: "정말 게시하겠습니까?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default) { action in
-            self.imageToFirebaseStorage(image: self.mainImage, cellType: .cover)
-            self.imageToFirebaseStorage(image: self.detailImage, cellType: .detail)
-            for image in self.subImages {
-                self.imageToFirebaseStorage(image: image, cellType: .normal)
-            }
-            
-            data
+            self.postDataToFirebase()
+            self.dismiss(animated: true, completion: nil)
         })
         alert.addAction(UIAlertAction(title: "취소", style: .default) { action in })
         present(alert, animated: true, completion: nil)
     }
     
-    func imageToFirebaseStorage(image: UIImage?, cellType: CellType) {
+    func postDataToFirebase() {
+        let firebaseAutoRef = FirebaseDataService.instance.meetingRef.childByAutoId()
+        let firebaseRefPosition = firebaseAutoRef.child(Constants.Meetings.position)
+        
+        firebaseAutoRef.setValue(["dateTime": NSNumber(value: Int(Date().timeIntervalSince1970))])
+        firebaseRefPosition.setValue([
+            Constants.Meetings.Position.address: self.submitData.position.address,
+            Constants.Meetings.Position.latitude: NSNumber(value: self.submitData.position.latitude),
+            Constants.Meetings.Position.longitude: NSNumber(value: self.submitData.position.longitude)
+        ])
+        
+        self.imageToFirebaseStorage(image: self.mainImage, cellType: .cover, dataReference: firebaseAutoRef)
+        self.imageToFirebaseStorage(image: self.detailImage, cellType: .detail, dataReference: firebaseAutoRef)
+        for image in self.subImages {
+            self.imageToFirebaseStorage(image: image, cellType: .normal, dataReference: firebaseAutoRef)
+        }
+    }
+    
+    func imageToFirebaseStorage(image: UIImage?, cellType: CellType, dataReference: FIRDatabaseReference) {
         if let image = image, let imageData = UIImageJPEGRepresentation(image, 1.0) {
             let imageUid = NSUUID().uuidString
             let metadata = FIRStorageMetadata()
@@ -115,37 +128,54 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
                     print(":::[HPARK] Unable to upload image to storage \(error as Any):::\n ")
                 } else {
                     if let downloadURL = metadata?.downloadURL()?.absoluteString {
-                        self.dataToFirebaseDatabase(imageUrl: downloadURL, cellType: cellType)
+                        self.dataToFirebaseDatabase(imageUrl: downloadURL, cellType: cellType, dataReference: dataReference)
                     }
                 }
             }
         }
     }
     
-    func dataToFirebaseDatabase(imageUrl: String) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM월 dd일 - HH:mm"
-        let postedDate = formatter.string(from: Date())
+    func dataToFirebaseDatabase(imageUrl: String, cellType: CellType, dataReference: FIRDatabaseReference) {
         
-//        let memePost: Dictionary<String, AnyObject> = [
-//            IdForMemePost.caption: memeIntroTextField.text! as AnyObject,
-//            IdForMemePost.imageUrl: imageUrl as AnyObject,
-//            IdForMemePost.likes: 0 as AnyObject,
-//            IdForMemePost.user: uid as AnyObject,
-//            IdForMemePost.dateTime: postedDate as AnyObject,
-//            ]
+        var dict: Dictionary<String, AnyObject>?
+        var firebaseRef: FIRDatabaseReference?
         
-        let firebaseMeetingRef = {
-            let
-        }()
+        if cellType == .cover {
+            if let title = self.submitData.cover.title, let subTitle = self.submitData.cover.subTitle {
+                dict = [
+                    Constants.Meetings.Cover.title : title as AnyObject,
+                    Constants.Meetings.Cover.subTitle : subTitle as AnyObject,
+                    Constants.Meetings.Cover.imageUrl : imageUrl as AnyObject
+                ]
+            }
+        } else if cellType == .detail {
+            if let price = self.submitData.detail.price,
+                let profile = self.submitData.detail.profile,
+                let preferred = self.submitData.detail.preferred {
+                dict = [
+                    Constants.Meetings.Detail.price : price as AnyObject,
+                    Constants.Meetings.Detail.profile : profile as AnyObject,
+                    Constants.Meetings.Detail.preferred : preferred as AnyObject,
+                    Constants.Meetings.Detail.imageUrl : imageUrl as AnyObject,
+                ]
+            }
+        } else {
+            if let storyTitle = self.submitData.normal[0].storyTitle, let storySubtitle = self.submitData.normal[0].storySubtitle {
+                dict = [
+                    Constants.Meetings.Normal.storyTitle : storyTitle as AnyObject,
+                    Constants.Meetings.Normal.storySubtitle : storySubtitle as AnyObject,
+                    Constants.Meetings.Normal.imageUrl : imageUrl as AnyObject
+                ]
+                self.submitData.normal.removeFirst()
+            }
+        }
         
-        let firebaseRef = FirebaseDataService.instance.meetingRef.childByAutoId().child(cellType.cover.rawValue)
-        firebasePost.setValue(memePost)
+        firebaseRef = dataReference.child(cellType.rawValue)
+        firebaseRef?.setValue(dict)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.view.backgroundColor = .white
         self.collectionView?.backgroundColor = .white
         addSubViews()

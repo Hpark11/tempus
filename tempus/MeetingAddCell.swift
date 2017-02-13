@@ -132,6 +132,7 @@ class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
         if let attachedViewController = self.attachedViewController {
             attachedViewController.numStories += 1
             attachedViewController.subImages.append(UIImage())
+            attachedViewController.submitData.normal.append(Normal())
             attachedViewController.collectionView?.reloadData()
         }
     }
@@ -140,6 +141,7 @@ class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
         if let attachedViewController = self.attachedViewController {
             attachedViewController.numStories -= 1
             attachedViewController.subImages.removeLast()
+            attachedViewController.submitData.normal.removeLast()
             attachedViewController.collectionView?.reloadData()
         }
     }
@@ -216,7 +218,9 @@ class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
         }
         storyTitleCharNumber = newText.length
         self.textLengthLabel.text = "스토리제목: \(storyTitleCharNumber) / 20, 스토리라인: \(storySubtitleCharNumber) / 120"
-        
+        if let attachedViewController = self.attachedViewController, let imgTag = self.imgTag {
+            attachedViewController.submitData.normal[imgTag - 2].storyTitle = newText as String
+        }
         return true
     }
     
@@ -238,6 +242,9 @@ class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
         
         storySubtitleCharNumber = newText.length
         self.textLengthLabel.text = "선호대상: \(storyTitleCharNumber) / 20, 개인이력: \(storySubtitleCharNumber) / 120"
+        if let attachedViewController = self.attachedViewController, let imgTag = self.imgTag  {
+            attachedViewController.submitData.normal[imgTag - 2].storyTitle = newText as String
+        }
         return true
     }
 }

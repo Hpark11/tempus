@@ -244,24 +244,27 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
         var newText: NSString = textField.text! as NSString
         newText = newText.replacingCharacters(in: range, with: string) as NSString
         
-        if textField == self.priceField {
-            guard Int(newText as String) != nil else {
-                presentAlert(message: "숫자만 가능합니다.")
-                return true
+        if let attachedViewController = self.attachedViewController {
+            if textField == self.priceField {
+                guard Int(newText as String) != nil else {
+                    presentAlert(message: "숫자만 가능합니다.")
+                    return true
+                }
+                if newText.length > 14 {
+                    self.priceField.text = newText.substring(to: 13)
+                }
+                attachedViewController.submitData.detail.price = newText as String
+            } else if textField == self.preferredPersonField {
+                if newText.length > 20 {
+                    self.textLengthLabel.textColor = UIColor.red
+                    self.preferredPersonField.text = newText.substring(to: 19)
+                } else {
+                    self.textLengthLabel.textColor = UIColor.darkGray
+                }
+                preferredPersonCharNumber = newText.length
+                self.textLengthLabel.text = "선호대상: \(preferredPersonCharNumber) / 20, 개인이력: \(personalRecordCharNumber) / 120"
+                attachedViewController.submitData.detail.preferred = newText as String
             }
-            if newText.length > 14 {
-                self.priceField.text = newText.substring(to: 13)
-            }
-            
-        } else if textField == self.preferredPersonField {
-            if newText.length > 20 {
-                self.textLengthLabel.textColor = UIColor.red
-                self.preferredPersonField.text = newText.substring(to: 19)
-            } else {
-                self.textLengthLabel.textColor = UIColor.darkGray
-            }
-            preferredPersonCharNumber = newText.length
-            self.textLengthLabel.text = "선호대상: \(preferredPersonCharNumber) / 20, 개인이력: \(personalRecordCharNumber) / 120"
         }
         return true
     }
@@ -284,6 +287,10 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
         
         personalRecordCharNumber = newText.length
         self.textLengthLabel.text = "선호대상: \(preferredPersonCharNumber) / 20, 개인이력: \(personalRecordCharNumber) / 120"
+        if let attachedViewController = self.attachedViewController {
+            attachedViewController.submitData.detail.profile = newText as String
+        }
+        
         return true
     }
     
