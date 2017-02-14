@@ -14,8 +14,8 @@ class UserPageViewController: UICollectionViewController, UICollectionViewDelega
 
     struct UserPageData {
         static let myInfoCellId = "myInfoCellId"
-        static let followerCellId = "followerCellId"
-        static let cellIds = [myInfoCellId, followerCellId]
+        static let followingCellId = "followingCellId"
+        static let cellIds = [myInfoCellId, followingCellId]
         static let categoryBarSize: CGFloat = 50.0
     }
     
@@ -69,6 +69,7 @@ class UserPageViewController: UICollectionViewController, UICollectionViewDelega
         super.viewDidLoad()
         view.backgroundColor = .white
         collectionView?.backgroundColor = .white
+        collectionView?.isPagingEnabled = true
         
         setNavigationBarUI()
         addSubViews()
@@ -96,7 +97,8 @@ class UserPageViewController: UICollectionViewController, UICollectionViewDelega
     }
     
     fileprivate func registerCells() {
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: UserPageData.myInfoCellId)
+        collectionView?.register(MyProfileInfoCell.self, forCellWithReuseIdentifier: UserPageData.myInfoCellId)
+        collectionView?.register(UserFollowingCell.self, forCellWithReuseIdentifier: UserPageData.followingCellId)
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -104,11 +106,20 @@ class UserPageViewController: UICollectionViewController, UICollectionViewDelega
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UserPageData.myInfoCellId, for: indexPath)
-        return cell
+        if indexPath.item == 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UserPageData.myInfoCellId, for: indexPath) as! MyProfileInfoCell
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UserPageData.followingCellId, for: indexPath) as! UserFollowingCell
+            return cell
+        }
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         userProfileBarView.profileHighlightedBarConstraint?.constant = scrollView.contentOffset.x / CGFloat(UserPageData.cellIds.count)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: collectionView.frame.height)
     }
 }
