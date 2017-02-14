@@ -27,8 +27,8 @@ class MainTabBarController: UITabBarController {
         secondNavigationController.title = "모임"
         secondNavigationController.tabBarItem.image = UIImage(named: "icon community")
         
-        let userPageViewController = UserPageViewController()
-        let thirdNavigationController = UINavigationController(rootViewController: userPageViewController)
+        let signInRequiredViewController = SignInRequiredViewController()
+        let thirdNavigationController = UINavigationController(rootViewController: signInRequiredViewController)
         thirdNavigationController.title = "마이페이지"
         thirdNavigationController.tabBarItem.image = UIImage(named: "icon myPage")
         

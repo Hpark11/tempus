@@ -160,9 +160,9 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                 if let user = user, let email = user.email {
                     let dataUser = ["provider": credential.provider, "email": email]
                     FirebaseDataService.instance.createFirebaseDatabaseUser(uid: user.uid, dataUser: dataUser)
-                    //KeychainWrapper.standard.set(user.uid, forKey: IdForKeyChain.uid)
+                    KeychainWrapper.standard.set(user.uid, forKey: Constants.keychainUid)
                 }
-                //self.performSegue(withIdentifier: IdForSegue.displayMemes, sender: nil)
+                self.dismiss(animated: true, completion: nil)
             }
         })
     }
@@ -180,6 +180,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         userNameField.isHidden = isHide
         dividerView3.isHidden = isHide
         dividerView4.isHidden = isHide
+        signInWithFacebookButton.isHidden = !isHide
     }
     
     override func viewDidLoad() {

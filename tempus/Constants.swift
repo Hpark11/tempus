@@ -9,6 +9,8 @@
 import UIKit
 
 struct Constants {
+    static let keychainUid = "uid"
+    
     struct sizeStandards {
         static let landscapeRatio: CGFloat = 9 / 16
         static let spaceShort: CGFloat = 8

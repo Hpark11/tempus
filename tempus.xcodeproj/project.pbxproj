@@ -10,11 +10,12 @@
 		4D13DF3F1F9689260AE36F83 /* Pods_tempus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E88DB2E7A740E9A2F92813 /* Pods_tempus.framework */; };
 		5807755D1E4ECB3A0092ED8F /* SlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5807755C1E4ECB3A0092ED8F /* SlideViewController.swift */; };
 		5807755F1E4ECB6A0092ED8F /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5807755E1E4ECB6A0092ED8F /* DiaryViewController.swift */; };
+		5808951B1E52A47500F8D96B /* UserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5808951A1E52A47500F8D96B /* UserPageViewController.swift */; };
 		580CB5F71E4E6F85008658CA /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580CB5F61E4E6F85008658CA /* Meeting.swift */; };
 		580FB47C1E52217A0057DA21 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580FB47B1E52217A0057DA21 /* MainTabBarController.swift */; };
 		580FB47E1E5225CD0057DA21 /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580FB47D1E5225CD0057DA21 /* ChattingViewController.swift */; };
 		580FB4801E5225E20057DA21 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580FB47F1E5225E20057DA21 /* CommunityViewController.swift */; };
-		580FB4821E5225ED0057DA21 /* UserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580FB4811E5225ED0057DA21 /* UserPageViewController.swift */; };
+		580FB4821E5225ED0057DA21 /* SignInRequiredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580FB4811E5225ED0057DA21 /* SignInRequiredViewController.swift */; };
 		580FB4841E52260D0057DA21 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580FB4831E52260D0057DA21 /* SettingsViewController.swift */; };
 		580FB4861E5232B70057DA21 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580FB4851E5232B70057DA21 /* SignInViewController.swift */; };
 		5811210A1E4F0227004D1C85 /* SlideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581121091E4F0227004D1C85 /* SlideCell.swift */; };
@@ -76,11 +77,12 @@
 		4514D91D6E2255B2CF063585 /* Pods-tempusTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tempusTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-tempusTests/Pods-tempusTests.release.xcconfig"; sourceTree = "<group>"; };
 		5807755C1E4ECB3A0092ED8F /* SlideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideViewController.swift; sourceTree = "<group>"; };
 		5807755E1E4ECB6A0092ED8F /* DiaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
+		5808951A1E52A47500F8D96B /* UserPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPageViewController.swift; sourceTree = "<group>"; };
 		580CB5F61E4E6F85008658CA /* Meeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
 		580FB47B1E52217A0057DA21 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		580FB47D1E5225CD0057DA21 /* ChattingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
 		580FB47F1E5225E20057DA21 /* CommunityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
-		580FB4811E5225ED0057DA21 /* UserPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPageViewController.swift; sourceTree = "<group>"; };
+		580FB4811E5225ED0057DA21 /* SignInRequiredViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInRequiredViewController.swift; sourceTree = "<group>"; };
 		580FB4831E52260D0057DA21 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		580FB4851E5232B70057DA21 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		581121091E4F0227004D1C85 /* SlideCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideCell.swift; sourceTree = "<group>"; };
@@ -268,9 +270,10 @@
 				5807755E1E4ECB6A0092ED8F /* DiaryViewController.swift */,
 				580FB47D1E5225CD0057DA21 /* ChattingViewController.swift */,
 				580FB47F1E5225E20057DA21 /* CommunityViewController.swift */,
-				580FB4811E5225ED0057DA21 /* UserPageViewController.swift */,
+				580FB4811E5225ED0057DA21 /* SignInRequiredViewController.swift */,
 				580FB4831E52260D0057DA21 /* SettingsViewController.swift */,
 				580FB4851E5232B70057DA21 /* SignInViewController.swift */,
+				5808951A1E52A47500F8D96B /* UserPageViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -570,6 +573,7 @@
 				583BB5BD1E4D486B000FDA44 /* Constants.swift in Sources */,
 				58FCAADF1E4B276E002F5B0A /* MeetingViewBottomPanelCell.swift in Sources */,
 				58D2AAD81E4ACB510084CE80 /* MeetingListViewController.swift in Sources */,
+				5808951B1E52A47500F8D96B /* UserPageViewController.swift in Sources */,
 				58FCAAED1E4C44A7002F5B0A /* MeetingBottomPanelContent.swift in Sources */,
 				583BB5C71E4D9A73000FDA44 /* CategoryViewCell.swift in Sources */,
 				5811210C1E4F0274004D1C85 /* SlideCoverCell.swift in Sources */,
@@ -608,7 +612,7 @@
 				58D2AAD61E4ACB510084CE80 /* AppDelegate.swift in Sources */,
 				581121151E50415E004D1C85 /* MeetingAddViewController.swift in Sources */,
 				583BB5BF1E4D4F9C000FDA44 /* MeetingCell.swift in Sources */,
-				580FB4821E5225ED0057DA21 /* UserPageViewController.swift in Sources */,
+				580FB4821E5225ED0057DA21 /* SignInRequiredViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
