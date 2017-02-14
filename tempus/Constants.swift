@@ -61,7 +61,9 @@ struct Constants {
         static let followers: String = "followers"
         static let following: String = "following"
         static let numFollowers: String = "numFollowers"
+        static let numFollowings: String = "numFollowings"
         static let numComments: String = "numComments"
+        static let uid: String = "uid"
     }
     
     struct Category {
