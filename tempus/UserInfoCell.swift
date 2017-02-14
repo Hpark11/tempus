@@ -62,6 +62,81 @@ class UserInfoCell: BaseCell {
         return label
     }()
     
+    let commentsNumTextView: UITextView = {
+        let textView = UITextView()
+        //textView.backgroundColor = UIColor(white: 0.0, alpha: 0.0)
+        textView.isEditable = false
+        
+        let attributedText = NSMutableAttributedString(string: "000", attributes: [
+            NSFontAttributeName: UIFont.systemFont(ofSize: 24, weight: UIFontWeightMedium),
+            NSForegroundColorAttributeName: UIColor.black
+            ])
+        
+        attributedText.append(NSAttributedString(string: "\n댓글", attributes: [
+            NSFontAttributeName: UIFont.systemFont(ofSize: 14),
+            NSForegroundColorAttributeName: UIColor.darkGray
+            ]))
+        
+        // center alignment
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSRange(location: 0, length: attributedText.string.characters.count))
+        
+        textView.attributedText = attributedText
+        
+        return textView
+    }()
+    
+    let followersNumTextView: UITextView = {
+        let textView = UITextView()
+        textView.backgroundColor = UIColor(white: 0.0, alpha: 0.0)
+        textView.isEditable = false
+        
+        let attributedText = NSMutableAttributedString(string: "000", attributes: [
+            NSFontAttributeName: UIFont.systemFont(ofSize: 24, weight: UIFontWeightMedium),
+            NSForegroundColorAttributeName: UIColor.black
+            ])
+        
+        attributedText.append(NSAttributedString(string: "\n팔로워", attributes: [
+            NSFontAttributeName: UIFont.systemFont(ofSize: 14),
+            NSForegroundColorAttributeName: UIColor.darkGray
+            ]))
+        
+        // center alignment
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSRange(location: 0, length: attributedText.string.characters.count))
+        
+        textView.attributedText = attributedText
+        
+        return textView
+    }()
+    
+    let followingNumTextView: UITextView = {
+        let textView = UITextView()
+        textView.backgroundColor = UIColor(white: 0.0, alpha: 0.0)
+        textView.isEditable = false
+        
+        let attributedText = NSMutableAttributedString(string: "000", attributes: [
+            NSFontAttributeName: UIFont.systemFont(ofSize: 24, weight: UIFontWeightMedium),
+            NSForegroundColorAttributeName: UIColor.black
+            ])
+        
+        attributedText.append(NSAttributedString(string: "\n팔로잉", attributes: [
+            NSFontAttributeName: UIFont.systemFont(ofSize: 14),
+            NSForegroundColorAttributeName: UIColor.darkGray
+            ]))
+        
+        // center alignment
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSRange(location: 0, length: attributedText.string.characters.count))
+        
+        textView.attributedText = attributedText
+        
+        return textView
+    }()
+    
     func followButtonTapped() {
         
     }
@@ -84,6 +159,9 @@ class UserInfoCell: BaseCell {
         addSubview(dividerView1)
         addSubview(dividerView2)
         addSubview(titleLabel)
+        addSubview(commentsNumTextView)
+        addSubview(followersNumTextView)
+        addSubview(followingNumTextView)
     }
 
     fileprivate func setConstraints() {
@@ -101,5 +179,12 @@ class UserInfoCell: BaseCell {
         _ = dividerView2.anchor(nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 1)
         
         _ = dividerView1.anchor(nil, left: leftAnchor, bottom: dividerView2.topAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 92, rightConstant: 0, widthConstant: 0, heightConstant: 1)
+        
+        _ = commentsNumTextView.anchor(dividerView1.bottomAnchor, left: leftAnchor, bottom: dividerView2.topAnchor, right: nil, topConstant: 18, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: frame.width / 3, heightConstant: 0)
+        
+        _ = followersNumTextView.anchor(dividerView1.bottomAnchor, left: commentsNumTextView.rightAnchor, bottom: dividerView2.topAnchor, right: nil, topConstant: 18, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: frame.width / 3, heightConstant: 0)
+        
+        _ = followingNumTextView.anchor(dividerView1.bottomAnchor, left: followersNumTextView.rightAnchor, bottom: dividerView2.topAnchor, right: nil, topConstant: 18, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: frame.width / 3, heightConstant: 0)
+        
     }
 }

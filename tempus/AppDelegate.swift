@@ -13,11 +13,14 @@ import GoogleMaps
 import GooglePlaces
 import FBSDKLoginKit
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
+    static let imageCache: NSCache<NSString, UIImage> = NSCache()
+    
+    
     var window: UIWindow?
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

@@ -106,7 +106,7 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
                     if let postMeeting = one.value as? Dictionary<String, AnyObject> {
                         FirebaseDataService.instance.userRef.child(postMeeting[Constants.Meetings.userId] as! String).observeSingleEvent(of: .value, with: { (userSnap) in
                             if let userInfo = userSnap.value as? Dictionary<String, AnyObject> {
-                                let meeting = Meeting(data: postMeeting, username: userInfo[Constants.Users.username] as! String, numFollowers: userInfo[Constants.Users.numFollowers] as! Int, numComments: userInfo[Constants.Users.numComments] as! Int)
+                                let meeting = Meeting(id:one.key, data: postMeeting, username: userInfo[Constants.Users.username] as! String, numFollowers: userInfo[Constants.Users.numFollowers] as! Int, numComments: userInfo[Constants.Users.numComments] as! Int)
                                 self.selfImprovementMeetings.append(meeting)
                                 
                                 print(meeting)

@@ -20,6 +20,7 @@ class MyProfileInfoCell: BaseCell, UICollectionViewDelegate, UICollectionViewDat
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .white
         collectionView.delegate = self
         collectionView.dataSource = self
         return collectionView
