@@ -90,7 +90,9 @@ class SignInRequiredViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let _ = KeychainWrapper.standard.string(forKey: Constants.keychainUid) {
-            let userPageViewController = UserPageViewController()
+            let layout = UICollectionViewFlowLayout()
+            layout.scrollDirection = .horizontal
+            let userPageViewController = UserPageViewController(collectionViewLayout: layout)
             navigationController?.pushViewController(userPageViewController, animated: true)
         }
     }

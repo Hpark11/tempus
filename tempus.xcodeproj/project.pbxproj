@@ -13,6 +13,8 @@
 		5808951B1E52A47500F8D96B /* UserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5808951A1E52A47500F8D96B /* UserPageViewController.swift */; };
 		5808951E1E52C55700F8D96B /* UserProfileBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5808951D1E52C55700F8D96B /* UserProfileBarView.swift */; };
 		580895201E52C70E00F8D96B /* UserProfileViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5808951F1E52C70E00F8D96B /* UserProfileViewCell.swift */; };
+		580895241E52E86200F8D96B /* UserInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580895231E52E86200F8D96B /* UserInfoCell.swift */; };
+		580895261E52E87400F8D96B /* UserMeetingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580895251E52E87400F8D96B /* UserMeetingCell.swift */; };
 		580CB5F71E4E6F85008658CA /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580CB5F61E4E6F85008658CA /* Meeting.swift */; };
 		580FB47C1E52217A0057DA21 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580FB47B1E52217A0057DA21 /* MainTabBarController.swift */; };
 		580FB47E1E5225CD0057DA21 /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580FB47D1E5225CD0057DA21 /* ChattingViewController.swift */; };
@@ -83,6 +85,8 @@
 		5808951C1E52A95A00F8D96B /* tempus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = tempus.entitlements; sourceTree = "<group>"; };
 		5808951D1E52C55700F8D96B /* UserProfileBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileBarView.swift; sourceTree = "<group>"; };
 		5808951F1E52C70E00F8D96B /* UserProfileViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewCell.swift; sourceTree = "<group>"; };
+		580895231E52E86200F8D96B /* UserInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoCell.swift; sourceTree = "<group>"; };
+		580895251E52E87400F8D96B /* UserMeetingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMeetingCell.swift; sourceTree = "<group>"; };
 		580CB5F61E4E6F85008658CA /* Meeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
 		580FB47B1E52217A0057DA21 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		580FB47D1E5225CD0057DA21 /* ChattingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
@@ -200,13 +204,15 @@
 				58D2E2771E4CB4860084B2C9 /* MeetingListCell.swift */,
 				583BB5BE1E4D4F9C000FDA44 /* MeetingCell.swift */,
 				583BB5C61E4D9A73000FDA44 /* CategoryViewCell.swift */,
+				5808951F1E52C70E00F8D96B /* UserProfileViewCell.swift */,
 				581121091E4F0227004D1C85 /* SlideCell.swift */,
 				5811210B1E4F0274004D1C85 /* SlideCoverCell.swift */,
 				5811210D1E4F0280004D1C85 /* SlideDetailCell.swift */,
 				5841BD631E5049DA001E6186 /* MeetingAddCell.swift */,
 				5841BD651E5049ED001E6186 /* MeetingAddCoverCell.swift */,
 				5841BD671E5049FA001E6186 /* MeetingAddDetailCell.swift */,
-				5808951F1E52C70E00F8D96B /* UserProfileViewCell.swift */,
+				580895231E52E86200F8D96B /* UserInfoCell.swift */,
+				580895251E52E87400F8D96B /* UserMeetingCell.swift */,
 			);
 			name = "Custom Cells";
 			sourceTree = "<group>";
@@ -595,6 +601,7 @@
 				5811210A1E4F0227004D1C85 /* SlideCell.swift in Sources */,
 				58D2AB0F1E4ADC7A0084CE80 /* OnboardingCoverPageCell.swift in Sources */,
 				58FCAAE71E4C382E002F5B0A /* CategoryMeetingViewCell.swift in Sources */,
+				580895241E52E86200F8D96B /* UserInfoCell.swift in Sources */,
 				58D2E2781E4CB4860084B2C9 /* MeetingListCell.swift in Sources */,
 				5841BD6A1E50776E001E6186 /* MeetingAddViewController_ext.swift in Sources */,
 				580CB5F71E4E6F85008658CA /* Meeting.swift in Sources */,
@@ -625,6 +632,7 @@
 				58D2AB0D1E4AD48A0084CE80 /* BaseCell.swift in Sources */,
 				58D2AAD61E4ACB510084CE80 /* AppDelegate.swift in Sources */,
 				581121151E50415E004D1C85 /* MeetingAddViewController.swift in Sources */,
+				580895261E52E87400F8D96B /* UserMeetingCell.swift in Sources */,
 				5808951E1E52C55700F8D96B /* UserProfileBarView.swift in Sources */,
 				583BB5BF1E4D4F9C000FDA44 /* MeetingCell.swift in Sources */,
 				580FB4821E5225ED0057DA21 /* SignInRequiredViewController.swift in Sources */,

@@ -21,6 +21,7 @@ class UserProfileBarView : UIView, UICollectionViewDelegate, UICollectionViewDat
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 0
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
         collectionView.dataSource = self
@@ -36,7 +37,7 @@ class UserProfileBarView : UIView, UICollectionViewDelegate, UICollectionViewDat
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .black
+        backgroundColor = .white
         
         addSubViews()
         setConstraints()
@@ -58,12 +59,12 @@ class UserProfileBarView : UIView, UICollectionViewDelegate, UICollectionViewDat
         categoryHighlightedBar.translatesAutoresizingMaskIntoConstraints = false
         addSubview(categoryHighlightedBar)
         
-        categoryHighlightedBarConstraint = categoryHighlightedBar.leftAnchor.constraint(equalTo: self.leftAnchor)
-        categoryHighlightedBarConstraint?.isActive = true
+        profileHighlightedBarConstraint = categoryHighlightedBar.leftAnchor.constraint(equalTo: self.leftAnchor)
+        profileHighlightedBarConstraint?.isActive = true
         
         categoryHighlightedBar.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         categoryHighlightedBar.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1 / CGFloat(UserProfileBarData.categories.count)).isActive = true
-        categoryHighlightedBar.heightAnchor.constraint(equalToConstant: 4).isActive = true
+        categoryHighlightedBar.heightAnchor.constraint(equalToConstant: 2).isActive = true
     }
     
     fileprivate func addSubViews() {
@@ -75,7 +76,7 @@ class UserProfileBarView : UIView, UICollectionViewDelegate, UICollectionViewDat
     }
     
     fileprivate func registerCells() {
-        collectionView.register(CategoryViewCell.self, forCellWithReuseIdentifier: CategoryBarData.cellId)
+        collectionView.register(UserProfileViewCell.self, forCellWithReuseIdentifier: UserProfileBarData.cellId)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -83,21 +84,17 @@ class UserProfileBarView : UIView, UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return CategoryBarData.categories.count
+        return UserProfileBarData.categories.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryBarData.cellId, for: indexPath) as! CategoryViewCell
-        cell.backgroundColor = .black
-        cell.categoryLabel.text = CategoryBarData.categories[indexPath.item]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UserProfileBarData.cellId, for: indexPath) as! UserProfileViewCell
+        cell.userProfileTypeLabel.text = UserProfileBarData.categories[indexPath.item]
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: frame.width / CGFloat(CategoryBarData.categories.count), height: frame.height)
+        return CGSize(width: frame.width / CGFloat(UserProfileBarData.categories.count), height: frame.height)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
 }

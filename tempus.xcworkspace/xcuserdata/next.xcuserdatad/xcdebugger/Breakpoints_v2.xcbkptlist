@@ -58,7 +58,7 @@
                   moduleName = "tempus"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/SignInViewController.swift"
-                  timestampString = "508736877.936883"
+                  timestampString = "508749152.776414"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "206"
@@ -73,7 +73,7 @@
                   moduleName = "tempus"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/SignInViewController.swift"
-                  timestampString = "508736877.939606"
+                  timestampString = "508749152.778837"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "206"
@@ -81,6 +81,38 @@
                   offsetFromSymbolStart = "336">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tempus/SignInViewController.swift"
+            timestampString = "508745175.038979"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "324"
+            endingLineNumber = "324"
+            landmarkName = "viewWillAppear(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tempus/SignInViewController.swift"
+            timestampString = "508745177.223233"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "316"
+            endingLineNumber = "316"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

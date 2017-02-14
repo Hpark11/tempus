@@ -10,18 +10,19 @@ import UIKit
 import Firebase
 import SwiftKeychainWrapper
 
-class UserPageViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class UserPageViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    let cellId = "cellId"
+    struct UserPageData {
+        static let myInfoCellId = "myInfoCellId"
+        static let followerCellId = "followerCellId"
+        static let cellIds = [myInfoCellId, followerCellId]
+        static let categoryBarSize: CGFloat = 50.0
+    }
     
-    lazy var userProfileCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 0
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .white
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        return collectionView
+    lazy var userProfileBarView: UserProfileBarView = {
+        let view = UserProfileBarView()
+        view.attachedViewController = self
+        return view
     }()
     
     let titleLabel: UILabel = {
@@ -42,6 +43,12 @@ class UserPageViewController: UIViewController, UICollectionViewDelegate, UIColl
         return button
     }()
     
+    let dividerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.makeViaRgb(red: 230, green: 230, blue: 230)
+        return view
+    }()
+    
     func signOutButtonTapped() {
         do {
             try FIRAuth.auth()?.signOut()
@@ -53,13 +60,20 @@ class UserPageViewController: UIViewController, UICollectionViewDelegate, UIColl
         }
     }
     
+    func scrollToCategoryIndex(_ index: Int) {
+        let indexPath = IndexPath(item: index, section: 0)
+        collectionView?.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition(), animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        collectionView?.backgroundColor = .white
         
         setNavigationBarUI()
         addSubViews()
         setConstraints()
+        registerCells()
     }
 
     fileprivate func setNavigationBarUI() {
@@ -69,19 +83,32 @@ class UserPageViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     fileprivate func addSubViews() {
-        view.addSubview(userProfileCollectionView)
+        view.addSubview(userProfileBarView)
+        view.addSubview(dividerView)
     }
     
     fileprivate func setConstraints() {
+        _ = userProfileBarView.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: UserPageData.categoryBarSize)
         
-    }
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        _ = dividerView.anchor(userProfileBarView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 1)
+        
+        _ = collectionView?.anchor(dividerView.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+    fileprivate func registerCells() {
+        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: UserPageData.myInfoCellId)
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return UserPageData.cellIds.count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UserPageData.myInfoCellId, for: indexPath)
         return cell
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        userProfileBarView.profileHighlightedBarConstraint?.constant = scrollView.contentOffset.x / CGFloat(UserPageData.cellIds.count)
     }
 }
