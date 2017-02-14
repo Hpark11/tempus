@@ -7,8 +7,10 @@
 //
 
 import UIKit
-
-
+import Firebase
+import FBSDKCoreKit
+import FBSDKLoginKit
+import SwiftKeychainWrapper
 
 class SignInViewController: UIViewController, UITextFieldDelegate {
 
@@ -38,7 +40,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         button.backgroundColor = UIColor.makeViaRgb(red: 74, green: 144, blue: 226)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
         button.titleLabel?.textColor = .white
-        button.addTarget(self, action: #selector(signInButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(signInWithFacebookButtonTapped), for: .touchUpInside)
         button.isUserInteractionEnabled = true
         button.layer.cornerRadius = 8
         button.setTitle("페이스북으로 로그인", for: .normal)
@@ -126,6 +128,43 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     func handleLoginRegisterChange() {
         let title = loginRegisterSegmentedControl.titleForSegment(at: loginRegisterSegmentedControl.selectedSegmentIndex)
         signInButton.setTitle(title, for: .normal)
+        
+        if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
+            setBottomInputVisibility(isHide: true)
+        } else {
+            setBottomInputVisibility(isHide: false)
+        }
+    }
+    
+    func signInWithFacebookButtonTapped() {
+        let facebookLoginManager = FBSDKLoginManager()
+        facebookLoginManager.logIn(withReadPermissions: ["email", "public_profile"], from: self) { (result, error) in
+            if error != nil {
+                print(":::[HPARK] Unable to authenticate with Facebook \(String(describing: error)):::\n")
+            } else if result?.isCancelled == true {
+                print(":::[HPARK] App User cancelled Facebook Authentication :::\n")
+            } else {
+                print(":::[HPARK] Authentication with Facebook Successful :::\n")
+                let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                self.firebaseAuth(credential)
+            }
+        }
+    }
+    
+    func firebaseAuth(_ credential: FIRAuthCredential) {
+        FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
+            if error != nil {
+                print(":::[HPARK] Unable to authenticate with Firebase - \(String(describing: error)) :::\n")
+            } else {
+                print(":::[HPARK] Successfully authenticated with Firebase :::\n")
+                if let user = user, let email = user.email {
+                    let dataUser = ["provider": credential.provider, "email": email]
+                    FirebaseDataService.instance.createFirebaseDatabaseUser(uid: user.uid, dataUser: dataUser)
+                    //KeychainWrapper.standard.set(user.uid, forKey: IdForKeyChain.uid)
+                }
+                //self.performSegue(withIdentifier: IdForSegue.displayMemes, sender: nil)
+            }
+        })
     }
     
     func signInButtonTapped() {
@@ -136,11 +175,18 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         dismiss(animated: true, completion: nil)
     }
     
+    func setBottomInputVisibility(isHide: Bool) {
+        passwordConfirmField.isHidden = isHide
+        userNameField.isHidden = isHide
+        dividerView3.isHidden = isHide
+        dividerView4.isHidden = isHide
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        
+        setBottomInputVisibility(isHide: true)
         addSubViews()
         setConstraints()
     }
@@ -160,6 +206,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(dividerView4)
         view.addSubview(cancelButton)
     }
+    
+    //let inputContainerViewHeightAnchor = NSLayoutConstraint?
     
     fileprivate func setConstraints() {
         _ = imageView.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: view.frame.height * 6 / 16)

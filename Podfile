@@ -15,7 +15,9 @@ target 'tempus' do
   pod 'GooglePlaces'
   pod 'FBSDKLoginKit'
   pod 'FBSDKCoreKit'
-  pod 'FBSDKShareKit' 
+  pod 'FBSDKShareKit'
+  pod 'SwiftKeychainWrapper'
+ 
   target 'tempusTests' do
     inherit! :search_paths
     # Pods for testing
