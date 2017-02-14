@@ -76,6 +76,7 @@ PODS:
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMSessionFetcher/Core (1.1.8)
   - SwiftKeychainWrapper (3.0.1)
+  - SwiftValidators (5.1.1)
 
 DEPENDENCIES:
   - FBSDKCoreKit
@@ -89,6 +90,7 @@ DEPENDENCIES:
   - GoogleMaps
   - GooglePlaces
   - SwiftKeychainWrapper
+  - SwiftValidators
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
@@ -110,7 +112,8 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 6f8d8b28b7e345549ac471071608170b31cb4977
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
+  SwiftValidators: 3be5c8f80287fe4960d1b053519b22f304804a00
 
-PODFILE CHECKSUM: 8396f5ed8fa5919d37575b1645763985627c2b99
+PODFILE CHECKSUM: 06c9cb3af6906f9bd954f6e4d24a6ea39625b81d
 
 COCOAPODS: 1.2.0

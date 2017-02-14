@@ -17,6 +17,7 @@ target 'tempus' do
   pod 'FBSDKCoreKit'
   pod 'FBSDKShareKit'
   pod 'SwiftKeychainWrapper'
+  pod 'SwiftValidators'
  
   target 'tempusTests' do
     inherit! :search_paths
