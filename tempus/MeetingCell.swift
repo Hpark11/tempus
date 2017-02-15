@@ -10,7 +10,41 @@ import UIKit
 
 class MeetingCell: BaseCell {
     
+    var meetingId: String?
     var attachedViewController: MeetingListViewController?
+    var meeting: Meeting? {
+        didSet {
+            if let meeting = meeting {
+                self.meetingId = meeting.meetingId
+                mainImageView.imageUrlString = meeting.imageUrl
+                userProfileImageView.imageUrlString = meeting.userImageUrl
+                
+                if let title = meeting.title {
+                    titleTextView.text = title
+                }
+                
+                if let subTitle = meeting.subTitle {
+                    subtitleTextView.text = subTitle
+                }
+                
+                if let type = meeting.type {
+                    
+                }
+                
+                if let username = meeting.username {
+                    
+                }
+                
+                if let followers = meeting.followers {
+                    
+                }
+                
+                if let comments = meeting.comments {
+                    
+                }
+            }
+        }
+    }
     
     /*
      *  UI Components
@@ -128,6 +162,30 @@ class MeetingCell: BaseCell {
         }
     }
     
+    fileprivate func setMeetingTypeLabel(type: String) {
+        var type: String = ""
+        if type == Constants.MeetingType.counseling {
+            type = "카운셀링"
+        } else if type == Constants.MeetingType.experience {
+            type = "체험"
+        } else if type == Constants.MeetingType.mentoring {
+            type = "멘토링"
+        } else if type == Constants.MeetingType.networking {
+            type = "네트워킹"
+        } else {
+            type = "카운셀링"
+        }
+        
+        let attributedText = NSMutableAttributedString(string: "")
+        
+        let attachmentMeetingType = NSTextAttachment()
+        attachmentMeetingType.image = UIImage(named: "placeholder3")
+        attachmentMeetingType.bounds = CGRect(x: 0, y: -2, width: 14, height: 14)
+        attributedText.append(NSAttributedString(attachment: attachmentMeetingType))
+        attributedText.append(NSAttributedString(string:(" " + type), attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 16), NSForegroundColorAttributeName: UIColor.lightGray]))
+        meetingTypeLabel.attributedText = attributedText
+    }
+    
     override func setupViews() {
         super.setupViews()
         addSubViews()
@@ -162,6 +220,5 @@ class MeetingCell: BaseCell {
         
         _ = titleTextView.anchor(nil, left: mainImageView.leftAnchor, bottom: subtitleTextView.topAnchor, right: mainImageView.rightAnchor, topConstant: 0, leftConstant: 8, bottomConstant: 4, rightConstant: 8, widthConstant: 0, heightConstant: 64)
     }
-
     
 }

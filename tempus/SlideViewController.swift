@@ -36,9 +36,7 @@ class SlideViewController: UICollectionViewController, UICollectionViewDelegateF
         //button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return button
     }()
-    
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 

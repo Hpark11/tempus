@@ -19,6 +19,7 @@
 		5808952A1E52F78A00F8D96B /* MyProfileInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580895291E52F78A00F8D96B /* MyProfileInfoCell.swift */; };
 		5808952C1E530F8C00F8D96B /* MinimizedMeetingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5808952B1E530F8C00F8D96B /* MinimizedMeetingCell.swift */; };
 		5808952E1E531B8700F8D96B /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5808952D1E531B8700F8D96B /* Cache.swift */; };
+		580895301E5428F900F8D96B /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5808952F1E5428F900F8D96B /* Users.swift */; };
 		580CB5F71E4E6F85008658CA /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580CB5F61E4E6F85008658CA /* Meeting.swift */; };
 		580FB47C1E52217A0057DA21 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580FB47B1E52217A0057DA21 /* MainTabBarController.swift */; };
 		580FB47E1E5225CD0057DA21 /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580FB47D1E5225CD0057DA21 /* ChattingViewController.swift */; };
@@ -95,6 +96,7 @@
 		580895291E52F78A00F8D96B /* MyProfileInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileInfoCell.swift; sourceTree = "<group>"; };
 		5808952B1E530F8C00F8D96B /* MinimizedMeetingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimizedMeetingCell.swift; sourceTree = "<group>"; };
 		5808952D1E531B8700F8D96B /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		5808952F1E5428F900F8D96B /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		580CB5F61E4E6F85008658CA /* Meeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
 		580FB47B1E52217A0057DA21 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		580FB47D1E5225CD0057DA21 /* ChattingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 				58FCAAEA1E4C4414002F5B0A /* MeetingTopPanelContent.swift */,
 				58FCAAEC1E4C44A7002F5B0A /* MeetingBottomPanelContent.swift */,
 				580CB5F61E4E6F85008658CA /* Meeting.swift */,
+				5808952F1E5428F900F8D96B /* Users.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -630,6 +633,7 @@
 				580FB4861E5232B70057DA21 /* SignInViewController.swift in Sources */,
 				58FCAAE91E4C3A0D002F5B0A /* MeetingCategoryContent.swift in Sources */,
 				58FCAAE31E4C2ADC002F5B0A /* RecommendedMeetingViewCell.swift in Sources */,
+				580895301E5428F900F8D96B /* Users.swift in Sources */,
 				58D2AADE1E4ACB510084CE80 /* tempus.xcdatamodeld in Sources */,
 				58FCAAE11E4C2436002F5B0A /* MeetingViewController_ext.swift in Sources */,
 				5811210E1E4F0280004D1C85 /* SlideDetailCell.swift in Sources */,

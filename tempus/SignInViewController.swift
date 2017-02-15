@@ -189,8 +189,10 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                 print(":::[HPARK] Unable to authenticate with Firebase - \(String(describing: error)) :::\n")
             } else {
                 print(":::[HPARK] Successfully authenticated with Firebase :::\n")
-                if let user = user, let email = user.email {
-                    let dataUser = ["provider": credential.provider, "email": email]
+                if let user = user, let email = user.email, let username = user.displayName {
+                    let dataUser = [Constants.Users.provider: credential.provider,
+                                    Constants.Users.email: email,
+                                    Constants.Users.username: username]
                     FirebaseDataService.instance.createFirebaseDatabaseUser(uid: user.uid, dataUser: dataUser)
                     KeychainWrapper.standard.set(user.uid, forKey: Constants.keychainUid)
                 }

@@ -8,7 +8,7 @@
 
 import UIKit
 import Firebase
-
+import SwiftKeychainWrapper
 
 class MeetingListViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
@@ -67,12 +67,13 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
     }
     
     func addMeetingButtonTapped() {
-        let layout = UICollectionViewFlowLayout()
-        let meetingAddViewController = MeetingAddViewController(collectionViewLayout: layout)
-        //navigationController?.pushViewController(meetingAddViewController, animated: true)
-        
-        present(meetingAddViewController, animated: true, completion: nil)
-        
+        if let _ = KeychainWrapper.standard.string(forKey: Constants.keychainUid) {
+            let layout = UICollectionViewFlowLayout()
+            let meetingAddViewController = MeetingAddViewController(collectionViewLayout: layout)
+            navigationController?.pushViewController(meetingAddViewController, animated: true)
+        } else {
+            
+        }
     }
     
     func scrollToCategoryIndex(_ index: Int) {
@@ -95,6 +96,7 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
     
     func observeFirebaseValue() {
         // get list of memePosts from Firebase
+        
         FirebaseDataService.instance.meetingRef.observe(.value, with: { (snapshot) in
             if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
                 self.selfImprovementMeetings.removeAll()
@@ -106,7 +108,7 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
                     if let postMeeting = one.value as? Dictionary<String, AnyObject> {
                         FirebaseDataService.instance.userRef.child(postMeeting[Constants.Meetings.userId] as! String).observeSingleEvent(of: .value, with: { (userSnap) in
                             if let userInfo = userSnap.value as? Dictionary<String, AnyObject> {
-                                let meeting = Meeting(id:one.key, data: postMeeting, username: userInfo[Constants.Users.username] as! String, numFollowers: userInfo[Constants.Users.numFollowers] as! Int, numComments: userInfo[Constants.Users.numComments] as! Int)
+                                let meeting = Meeting(id:one.key, data: postMeeting, username: userInfo[Constants.Users.username] as! String, numFollowers: userInfo[Constants.Users.numFollowers] as! Int, numComments: userInfo[Constants.Users.numComments] as! Int, userImageUrl: userInfo[Constants.Users.imageUrl] as! String)
                                 self.selfImprovementMeetings.append(meeting)
                                 
                                 print(meeting)
@@ -159,6 +161,9 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
     
     fileprivate func registerCells() {
         collectionView?.register(MeetingListCell.self, forCellWithReuseIdentifier: MeetingListData.selfImprovementCellId)
+        collectionView?.register(MeetingListCell.self, forCellWithReuseIdentifier: MeetingListData.prepareExaminationCellId)
+        collectionView?.register(MeetingListCell.self, forCellWithReuseIdentifier: MeetingListData.professionalSkillsCellId)
+        collectionView?.register(MeetingListCell.self, forCellWithReuseIdentifier: MeetingListData.lookingForHobbyCellId)
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {

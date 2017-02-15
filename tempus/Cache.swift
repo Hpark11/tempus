@@ -8,3 +8,4 @@
 
 import UIKit
 
+let imageCache: NSCache<NSString, UIImage> = NSCache()

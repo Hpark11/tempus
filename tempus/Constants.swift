@@ -31,6 +31,7 @@ struct Constants {
     }
     
     struct Meetings {
+        static let userId: String = "userId"
         static let isPassed: String = "isPassed"
         static let title: String = "title"
         static let subTitle: String = "subTitle"
@@ -40,7 +41,6 @@ struct Constants {
         static let address: String = "address"
         static let latitude: String = "latitude"
         static let longitude: String = "longitude"
-        static let userId: String = "userId"
         static let price: String = "price"
         static let preferred: String = "preferred"
         static let profile: String = "profile"
@@ -56,6 +56,7 @@ struct Constants {
     }
     
     struct Users {
+        static let imageUrl: String = "imageUrl"
         static let username: String = "username"
         static let comments: String = "comments"
         static let followers: String = "followers"
@@ -63,6 +64,8 @@ struct Constants {
         static let numFollowers: String = "numFollowers"
         static let numFollowings: String = "numFollowings"
         static let numComments: String = "numComments"
+        static let provider: String = "provider"
+        static let email: String = "email"
         static let uid: String = "uid"
     }
     

@@ -10,13 +10,17 @@ import Foundation
 
 import UIKit
 
-let imageCache: NSCache<NSString, UIImage> = NSCache()
-
 class DownloadImageView : UIImageView {
     
-    var imageUrlString: String?
+    var imageUrlString: String? {
+        didSet {
+            if let imageUrlString = imageUrlString {
+                loadImageUsingUrlString(urlString: imageUrlString)
+            }
+        }
+    }
+    
     func loadImageUsingUrlString(urlString: String) {
-        
         imageUrlString = urlString
         let url = URL(string: urlString)
         image = nil
@@ -34,11 +38,7 @@ class DownloadImageView : UIImageView {
             
             DispatchQueue.main.async(execute: {
                 let imageToCache = UIImage(data: data!)
-                
-                if self.imageUrlString == urlString {
-                    self.image = imageToCache
-                }
-                
+                self.image = imageToCache
                 imageCache.setObject(imageToCache!, forKey: urlString as NSString)
             })
         }).resume()

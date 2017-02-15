@@ -14,11 +14,9 @@ import GooglePlaces
 import FBSDKLoginKit
 
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    static let imageCache: NSCache<NSString, UIImage> = NSCache()
-    
     
     var window: UIWindow?
 

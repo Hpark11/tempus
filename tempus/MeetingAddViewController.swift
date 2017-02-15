@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SwiftKeychainWrapper
 
 struct Slides {
     var storyTitle: String = ""
@@ -42,10 +43,11 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
     }
     
     struct SubmitData {
+        var uid: String = KeychainWrapper.standard.string(forKey: Constants.keychainUid)!
         var title: String = ""
         var subTitle: String = ""
         var category: String = Constants.Category.selfImprovement
-        var type: String = Constants.MeetingType.experience
+        var type: String = Constants.MeetingType.counseling
         var userId: String = ""
         
         var price: String = "0"
@@ -69,12 +71,6 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
         return label
     }()
     
-    let headerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .black
-        return view
-    }()
-    
     lazy var submitButton: UIButton = {
         let button = UIButton()
         button.tintColor = .white
@@ -92,12 +88,15 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
         
         alert.addAction(UIAlertAction(title: "확인", style: .default) { action in
             let firebaseAutoRef = FirebaseDataService.instance.meetingRef.childByAutoId()
-            
             firebaseAutoRef.setValue([
                 Constants.Meetings.dateTime: NSNumber(value: Int(Date().timeIntervalSince1970)),
                 Constants.Meetings.address: self.submitData.address,
                 Constants.Meetings.latitude: self.submitData.latitude,
-                Constants.Meetings.longitude: self.submitData.longitude
+                Constants.Meetings.longitude: self.submitData.longitude,
+                Constants.Meetings.userId: self.submitData.uid,
+                Constants.Meetings.isPassed: self.submitData.isPassed,
+                Constants.Meetings.category: self.submitData.category,
+                Constants.Meetings.type: self.submitData.type
             ])
             
             self.imageToFirebaseStorage(image: self.mainImage, cellType: .cover, dataReference: firebaseAutoRef)
@@ -156,9 +155,6 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
             firebaseRef?.child(Constants.Meetings.title).setValue(self.submitData.title as AnyObject)
             firebaseRef?.child(Constants.Meetings.subTitle).setValue(self.submitData.subTitle as AnyObject)
             firebaseRef?.child(Constants.Meetings.frontImageUrl).setValue(imageUrl as AnyObject)
-            firebaseRef?.child(Constants.Meetings.category).setValue(self.submitData.category as AnyObject)
-            firebaseRef?.child(Constants.Meetings.type).setValue(self.submitData.type as AnyObject)
-            firebaseRef?.child(Constants.Meetings.isPassed).setValue(self.submitData.isPassed as AnyObject)
         } else if cellType == .detail {
             firebaseRef?.child(Constants.Meetings.price).setValue(self.submitData.price as AnyObject)
             firebaseRef?.child(Constants.Meetings.profile).setValue(self.submitData.profile as AnyObject)
@@ -174,7 +170,6 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
             if dataIterator >= self.submitData.slides.count {
                 dataIterator = 0
             }
-            //self.submitData.normal.removeLast()
             firebaseRef = firebaseRef?.child(cellType.rawValue).childByAutoId()
             if let dict = dict {
                 firebaseRef?.setValue(dict)
@@ -202,15 +197,13 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
     }
     
     fileprivate func addSubViews() {
-        view.addSubview(headerView)
         view.addSubview(submitButton)
         view.addSubview(beforeButton)
     }
     
     fileprivate func setConstraints() {
-        _ = headerView.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 64)
-        
-        _ = collectionView?.anchor(headerView.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 64, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+
+        _ = collectionView?.anchor(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 64, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
         _ = submitButton.anchor(collectionView?.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 8, leftConstant: 8, bottomConstant: 8, rightConstant: 8, widthConstant: 0, heightConstant: 0)
         
