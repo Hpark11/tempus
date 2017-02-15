@@ -34,17 +34,10 @@ class SlideCell: BaseCell {
                 NSFontAttributeName: UIFont.systemFont(ofSize: 32, weight: UIFontWeightMedium),
                 NSForegroundColorAttributeName: UIColor.black
             ])
-            
             attributedText.append(NSAttributedString(string: "\n\n\(subTitleText)", attributes: [
                 NSFontAttributeName: UIFont.systemFont(ofSize: 18),
                 NSForegroundColorAttributeName: UIColor.black
             ]))
-            
-            // center alignment
-//            let paragraphStyle = NSMutableParagraphStyle()
-//            paragraphStyle.alignment = .center
-//            attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSRange(location: 0, length: attributedText.string.characters.count))
-            
             mainTextView.attributedText = attributedText
         }
     }
@@ -54,13 +47,13 @@ class SlideCell: BaseCell {
      */
     let overlayView: UIView = {
         let view = UIView()
-//        view.backgroundColor = .black
-//        view.alpha = 0.3
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = view.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.addSubview(blurEffectView)
+        view.backgroundColor = .black
+        view.alpha = 0.4
+//        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+//        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//        blurEffectView.frame = view.bounds
+//        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        view.addSubview(blurEffectView)
         return view
     }()
     
@@ -69,9 +62,13 @@ class SlideCell: BaseCell {
         imageView.image = UIImage()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.layer.borderWidth = 2
-        imageView.layer.borderColor = UIColor.white.cgColor
+        imageView.layer.borderWidth = 2.6
+        imageView.layer.borderColor = UIColor.darkGray.cgColor
         imageView.layer.cornerRadius = 14
+        imageView.layer.shadowColor = UIColor.black.cgColor
+        imageView.layer.shadowOpacity = 1.0
+        imageView.layer.shadowRadius = 10.0
+        imageView.layer.shadowOffset = CGSize(width: 0.2, height: 4.0)
         return imageView
     }()
     
@@ -79,20 +76,18 @@ class SlideCell: BaseCell {
     lazy var mainTextView: UITextView = {
         let textView = UITextView()
         textView.font = UIFont.boldSystemFont(ofSize: 28)
-        textView.textContainerInset = UIEdgeInsetsMake(8, 8, 8, 8)
+        textView.textContainerInset = UIEdgeInsetsMake(26, 8, 8, 8)
         textView.backgroundColor = .white
         textView.textColor = .black
         textView.text = "이것은 테스트용 입니다"
         textView.isUserInteractionEnabled = false
         textView.isScrollEnabled = false
-        textView.layer.borderWidth = 1
+        textView.layer.borderWidth = 2
         textView.layer.cornerRadius = 14
         textView.layer.borderColor = UIColor.lightGray.cgColor
         return textView
     }()
-    
 
-    
     override func setupViews() {
         super.setupViews()
         addSubViews()
@@ -110,7 +105,7 @@ class SlideCell: BaseCell {
         
         _ = mainImageView.anchor(topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 80, leftConstant: 26, bottomConstant: 0, rightConstant: 26, widthConstant: 0, heightConstant: frame.height / 2 - 80)
         
-        _ = mainTextView.anchor(mainImageView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: -10, leftConstant: 16, bottomConstant: 24, rightConstant: 16, widthConstant: 0, heightConstant: 0)
+        _ = mainTextView.anchor(mainImageView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: -18, leftConstant: 16, bottomConstant: 24, rightConstant: 16, widthConstant: 0, heightConstant: 0)
     }
     
     

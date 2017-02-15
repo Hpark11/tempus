@@ -86,6 +86,7 @@ class SlideViewController: UICollectionViewController, UICollectionViewDelegateF
                     self.slides.append(one.key)
                 }
             }
+            self.collectionView?.reloadData()
         })
     }
     
@@ -111,7 +112,7 @@ class SlideViewController: UICollectionViewController, UICollectionViewDelegateF
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return slides.count
+        return (slides.count + 2)
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -120,7 +121,7 @@ class SlideViewController: UICollectionViewController, UICollectionViewDelegateF
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SlideViewData.coverCellId, for: indexPath) as! SlideCoverCell
             cell.meetingId = self.meetingId
             return cell
-        } else if indexPath.item == slides.count {
+        } else if indexPath.item == (slides.count + 1) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SlideViewData.detailId, for: indexPath) as! SlideDetailCell
             return cell
         } else {
