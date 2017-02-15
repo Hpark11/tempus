@@ -20,6 +20,7 @@ struct Constants {
     
     struct userProfileImageSize {
         static let mini: CGFloat = 28
+        static let lessSmall: CGFloat = 36
         static let small: CGFloat = 44
         static let middle: CGFloat = 96
         static let big: CGFloat = 128

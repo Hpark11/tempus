@@ -7,19 +7,42 @@
 //
 
 import UIKit
+import Firebase
 
 class SlideViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout{
 
     var beforeButtonTopAnchor: NSLayoutConstraint?
     var nextButtonTopAnchor: NSLayoutConstraint?
     
-    var meetingId: String?
-
+    var meetingId: String? {
+        didSet {
+            if let id = meetingId {
+                getSlides(id: id)
+            }
+        }
+    }
+    var slides = [String]()
+    var meetingMainImageUrl: String? {
+        didSet {
+            if let imageUrl = meetingMainImageUrl {
+                mainImageView.imageUrlString = imageUrl
+            }
+        }
+    }
+    
     struct SlideViewData {
         static let coverCellId = "coverCellId"
         static let cellId = "cellId"
         static let detailId = "detailId"
     }
+    
+    let mainImageView: DownloadImageView = {
+        let imageView = DownloadImageView()
+        imageView.image = UIImage()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        return imageView
+    }()
     
     lazy var beforeButton: UIButton = {
         let button = UIButton()
@@ -38,10 +61,6 @@ class SlideViewController: UICollectionViewController, UICollectionViewDelegateF
         //button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return button
     }()
-
-    func observeFirebaseValue() {
-        //FirebaseDataService.instance.meetingRef.child(Constants.)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,18 +68,30 @@ class SlideViewController: UICollectionViewController, UICollectionViewDelegateF
         if let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
             layout.minimumLineSpacing = 0
-            //layout.minimumInteritemSpacing = 0
         }
         
         collectionView?.isPagingEnabled = true
-        
+        collectionView?.backgroundColor = UIColor.clear
+    
         addSubViews()
         setConstraints()
         registerCells()
     }
     
+    fileprivate func getSlides(id: String) {
+        self.slides.removeAll()
+        FirebaseDataService.instance.meetingRef.child(id).child(Constants.Meetings.slides).observe(.value, with: { (snapshot) in
+            if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                for one in snapshot {
+                    self.slides.append(one.key)
+                }
+            }
+        })
+    }
+    
     fileprivate func addSubViews() {
         navigationController?.navigationBar.isHidden = true
+        collectionView?.backgroundView = mainImageView
         view.addSubview(beforeButton)
         view.addSubview(nextButton)
     }
@@ -80,7 +111,7 @@ class SlideViewController: UICollectionViewController, UICollectionViewDelegateF
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return slides.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -89,10 +120,14 @@ class SlideViewController: UICollectionViewController, UICollectionViewDelegateF
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SlideViewData.coverCellId, for: indexPath) as! SlideCoverCell
             cell.meetingId = self.meetingId
             return cell
-        } else if indexPath.item == 4 {
-            return collectionView.dequeueReusableCell(withReuseIdentifier: SlideViewData.detailId, for: indexPath) as! SlideDetailCell
+        } else if indexPath.item == slides.count {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SlideViewData.detailId, for: indexPath) as! SlideDetailCell
+            return cell
         } else {
-            return collectionView.dequeueReusableCell(withReuseIdentifier: SlideViewData.cellId, for: indexPath) as! SlideCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SlideViewData.cellId, for: indexPath) as! SlideCell
+            cell.meetingId = self.meetingId
+            cell.slideId = slides[indexPath.item - 1]
+            return cell
         }
     }
     

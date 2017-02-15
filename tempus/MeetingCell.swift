@@ -11,6 +11,8 @@ import UIKit
 class MeetingCell: BaseCell {
     
     var meetingId: String?
+    var meetingMainImageUrl: String?
+    
     var attachedViewController: MeetingListViewController?
     var titleLabelHeightConstraint: NSLayoutConstraint?
     var meeting: Meeting? {
@@ -18,7 +20,10 @@ class MeetingCell: BaseCell {
             if let meeting = meeting {
                 self.meetingId = meeting.meetingId
                 mainImageView.imageUrlString = meeting.imageUrl
+                self.meetingMainImageUrl = meeting.imageUrl
+                
                 userProfileImageView.imageUrlString = meeting.userImageUrl
+                
                 
                 if let title = meeting.title {
                     let size = CGSize(width: frame.width - 20, height: 1000)
@@ -146,6 +151,7 @@ class MeetingCell: BaseCell {
             layout.scrollDirection = .horizontal
             let slideViewController = SlideViewController(collectionViewLayout: layout)
             slideViewController.meetingId = meetingId
+            slideViewController.meetingMainImageUrl = self.meetingMainImageUrl
             attachedViewController.present(slideViewController, animated: false, completion: nil)
         }
     }
