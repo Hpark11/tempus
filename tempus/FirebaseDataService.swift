@@ -19,6 +19,7 @@ class FirebaseDataService {
     private var _baseRef = DB_BASE
     private var _meetingRef = DB_BASE.child("meeting")
     private var _userRef = DB_BASE.child("users")
+    private var _messeageRef = DB_BASE.child("messages")
     
     // Storage References
     private var _imageRef = STORAGE_BASE.child("images")
@@ -37,10 +38,14 @@ class FirebaseDataService {
         return _userRef
     }
     
+    var messageRef: FIRDatabaseReference {
+        return _messeageRef
+    }
+    
     var imageRef: FIRStorageReference {
         return _imageRef
     }
-    
+
     func createFirebaseDatabaseUser(uid: String, dataUser: Dictionary<String, String>) {
         userRef.child(uid).updateChildValues(dataUser)
     }

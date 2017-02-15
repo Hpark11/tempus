@@ -21,7 +21,7 @@ class ChattingViewController: UITableViewController {
         return button
     }()
     
-    let titleLabel: UILabel = {
+    lazy var titleLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 120, height: 40))
         label.textAlignment = .center
         label.text = "tempus"
@@ -33,7 +33,9 @@ class ChattingViewController: UITableViewController {
     }()
     
     func titleLabelTapped() {
-        
+        let layout = UICollectionViewFlowLayout()
+        let chattingHistoryViewController = ChattingHistoryViewController(collectionViewLayout: layout)
+        navigationController?.pushViewController(chattingHistoryViewController, animated: true)
     }
     
     func signOutButtonTapped() {
