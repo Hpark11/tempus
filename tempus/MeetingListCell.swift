@@ -11,7 +11,11 @@ import UIKit
 class MeetingListCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     var attachedViewController: MeetingListViewController?
-    var meetingList: [Meeting]?
+    var meetingList: [Meeting]? {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     
     let cellId = "cellId"
     
@@ -45,13 +49,14 @@ class MeetingListCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return meetingList?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MeetingCell
         if let attachedViewController = self.attachedViewController {
             cell.attachedViewController = attachedViewController
+            cell.meeting = meetingList?[indexPath.item]
         }
         return cell
     }
@@ -65,61 +70,3 @@ class MeetingListCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
         return 0
     }
 }
-
-//import UIKit
-//
-//class FeedCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-//    
-//    lazy var collectionView: UICollectionView = {
-//        let layout = UICollectionViewFlowLayout()
-//        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-//        collectionView.backgroundColor = UIColor.white
-//        collectionView.dataSource = self
-//        collectionView.delegate = self
-//        return collectionView
-//    }()
-//    
-//    var videos: [Video]?
-//    let cellId = "cellId"
-//    
-//    func fetchVideos() {
-//        ApiService.sharedInstance.fetchVideos { (videos: [Video]) in
-//            self.videos = videos
-//            self.collectionView.reloadData()
-//        }
-//    }
-//    
-//    override func setupViews() {
-//        super.setupViews()
-//        
-//        fetchVideos()
-//        
-//        addSubview(collectionView)
-//        addConstraintsWithFormat(format: "H:|[v0]|", views: collectionView)
-//        addConstraintsWithFormat(format: "V:|[v0]|", views: collectionView)
-//        
-//        collectionView.register(VideoCell.self, forCellWithReuseIdentifier: cellId)
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return videos?.count ?? 0
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! VideoCell
-//        cell.video = videos?[indexPath.item]
-//        return cell
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let height = (frame.width - 16 - 16) * 9 / 16
-//        return CGSize(width: frame.width, height: height + 16 + 88)
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 0
-//    }
-//    
-//    
-//}
-

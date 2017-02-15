@@ -104,7 +104,7 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
             for image in self.subImages {
                 self.imageToFirebaseStorage(image: image, cellType: .slides, dataReference: firebaseAutoRef)
             }
-            self.dismiss(animated: true, completion: nil)
+            _ = self.navigationController?.popViewController(animated: true)
         })
         
         alert.addAction(UIAlertAction(title: "취소", style: .default) { action in })

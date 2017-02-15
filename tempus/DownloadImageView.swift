@@ -21,7 +21,6 @@ class DownloadImageView : UIImageView {
     }
     
     func loadImageUsingUrlString(urlString: String) {
-        imageUrlString = urlString
         let url = URL(string: urlString)
         image = nil
         

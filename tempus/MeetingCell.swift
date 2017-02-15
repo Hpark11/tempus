@@ -95,9 +95,7 @@ class MeetingCell: BaseCell {
     
     let giverLabel: UILabel = {
         let label = UILabel()
-        
         label.numberOfLines = 2
-        
         return label
     }()
     
@@ -128,30 +126,30 @@ class MeetingCell: BaseCell {
     }
     
     fileprivate func setMeetingTypeLabel(type: String) {
-        var type: String = ""
+        var meetingType: String = ""
         let attributedText = NSMutableAttributedString(string: "")
         let attachmentMeetingType = NSTextAttachment()
         
         if type == Constants.MeetingType.counseling {
-            type = "카운셀링"
+            meetingType = "카운셀링"
             attachmentMeetingType.image = UIImage(named: "icon chat")
         } else if type == Constants.MeetingType.experience {
-            type = "체험"
+            meetingType = "체험"
             attachmentMeetingType.image = UIImage(named: "icon meet")
         } else if type == Constants.MeetingType.mentoring {
-            type = "멘토링"
+            meetingType = "멘토링"
             attachmentMeetingType.image = UIImage(named: "icon myPage")
         } else if type == Constants.MeetingType.networking {
-            type = "네트워킹"
+            meetingType = "네트워킹"
             attachmentMeetingType.image = UIImage(named: "icon setting")
         } else {
-            type = "카운셀링"
+            meetingType = "카운셀링"
             attachmentMeetingType.image = UIImage(named: "icon chat")
         }
         
         attachmentMeetingType.bounds = CGRect(x: 0, y: -2, width: 14, height: 14)
         attributedText.append(NSAttributedString(attachment: attachmentMeetingType))
-        attributedText.append(NSAttributedString(string:(" " + type), attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 16), NSForegroundColorAttributeName: UIColor.lightGray]))
+        attributedText.append(NSAttributedString(string:(" " + meetingType), attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 16), NSForegroundColorAttributeName: UIColor.lightGray]))
         meetingTypeLabel.attributedText = attributedText
     }
     
@@ -173,7 +171,6 @@ class MeetingCell: BaseCell {
             attachmentHeart.bounds = CGRect(x: 0, y: -2, width: 16, height: 16)
             attachmentComment.image = UIImage(named: "icon comment gray")
             attachmentComment.bounds = CGRect(x: 0, y: -2, width: 16, height: 16)
-            
             attributedText.append(NSAttributedString(attachment: attachmentHeart))
             
             if let numFollowers = followers {

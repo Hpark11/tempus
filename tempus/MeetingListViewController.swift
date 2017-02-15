@@ -129,10 +129,12 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
                                 }
                                 print(meeting)
                             }
+                            self.collectionView?.reloadData()
                         })
                     }
                 }
             }
+            
             self.selfImprovementMeetings.reverse()
             self.prepareExaminationMeetings.reverse()
             self.professionalSkillsMeetings.reverse()
