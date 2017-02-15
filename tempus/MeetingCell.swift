@@ -72,10 +72,12 @@ class MeetingCell: BaseCell {
         return imageView
     }()
     
-    let overlayView: UIView = {
+    lazy var overlayView: UIView = {
         let view = UIView()
         view.backgroundColor = .blue
         view.alpha = 0.3
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(mainPanelTapped)))
+        view.isUserInteractionEnabled = true
         return view
     }()
     
@@ -95,7 +97,7 @@ class MeetingCell: BaseCell {
         textView.isEditable = false
         textView.isSelectable = false
         textView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(mainPanelTapped)))
-        textView.isUserInteractionEnabled = false
+        textView.isUserInteractionEnabled = true
         return textView
     }()
     
@@ -109,7 +111,7 @@ class MeetingCell: BaseCell {
         textView.isEditable = false
         textView.isSelectable = false
         textView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(mainPanelTapped)))
-        textView.isUserInteractionEnabled = false
+        textView.isUserInteractionEnabled = true
         return textView
     }()
     
@@ -139,10 +141,11 @@ class MeetingCell: BaseCell {
     }
     
     func mainPanelTapped() {
-        if let attachedViewController = self.attachedViewController {
+        if let attachedViewController = self.attachedViewController, let meetingId = self.meetingId {
             let layout = UICollectionViewFlowLayout()
             layout.scrollDirection = .horizontal
             let slideViewController = SlideViewController(collectionViewLayout: layout)
+            slideViewController.meetingId = meetingId
             attachedViewController.present(slideViewController, animated: false, completion: nil)
         }
     }

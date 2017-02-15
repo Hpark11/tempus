@@ -10,6 +10,31 @@ import UIKit
 
 class SlideCoverCell: BaseCell {
 
+    var meetingId: String? {
+        didSet{
+            observeFirebaseValue()
+        }
+    }
+    
+    func observeFirebaseValue() {
+        if let id = self.meetingId {
+            FirebaseDataService.instance.meetingRef.child(id).observeSingleEvent(of: .value, with: { (snapshot) in
+                if let value = snapshot.value as? Dictionary<String, AnyObject> {
+                    self.mainImageView.imageUrlString = value[Constants.Meetings.frontImageUrl] as? String
+                    self.titleTextView.text = value[Constants.Meetings.title] as? String
+                    self.subtitleTextView.text = value[Constants.Meetings.subTitle] as? String
+                    
+                    FirebaseDataService.instance.userRef.child((value[Constants.Meetings.userId] as? String)!).observeSingleEvent(of: .value, with: { (userSnap) in
+                        if let userVal = userSnap.value as? Dictionary<String, AnyObject> {
+                            self.userProfileImageView.imageUrlString = userVal[Constants.Users.imageUrl] as? String
+                            self.giverLabel.text = userVal[Constants.Users.username] as? String
+                        }
+                    })
+                }
+            })
+        }
+    }
+    
     /*
      * UI Components
      */
@@ -17,6 +42,7 @@ class SlideCoverCell: BaseCell {
         let imageView = DownloadImageView()
         imageView.image = UIImage(named: "placeholder3")
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -33,7 +59,7 @@ class SlideCoverCell: BaseCell {
         imageView.layer.cornerRadius = Constants.userProfileImageSize.mini / 2
         imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 2
-        imageView.layer.borderColor = (UIColor.white as! CGColor)
+        imageView.layer.borderColor = UIColor.white.cgColor
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
@@ -78,11 +104,11 @@ class SlideCoverCell: BaseCell {
         return textView
     }()
     
-    
-    
     func beforeButtonTapped() {
         
     }
+    
+    
     
     override func setupViews() {
         super.setupViews()
@@ -102,6 +128,7 @@ class SlideCoverCell: BaseCell {
     }
     
     fileprivate func setContstraints() {
+        
         _ = mainImageView.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
         _ = overlayView.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)

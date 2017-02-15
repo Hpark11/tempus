@@ -17,6 +17,7 @@ class SlideCell: BaseCell {
         let imageView = DownloadImageView()
         imageView.image = UIImage(named: "placeholder3")
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -25,7 +26,7 @@ class SlideCell: BaseCell {
         imageView.image = UIImage(named: "placeholder1")
         imageView.layer.cornerRadius = Constants.userProfileImageSize.mini / 2
         imageView.layer.masksToBounds = true
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleToFill
         return imageView
     }()
     
@@ -86,6 +87,7 @@ class SlideCell: BaseCell {
     }
     
     fileprivate func addSubViews() {
+        
         addSubview(mainImageView)
         addSubview(pageLabel)
         addSubview(dividerView)

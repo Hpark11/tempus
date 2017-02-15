@@ -13,6 +13,8 @@ class SlideViewController: UICollectionViewController, UICollectionViewDelegateF
     var beforeButtonTopAnchor: NSLayoutConstraint?
     var nextButtonTopAnchor: NSLayoutConstraint?
     
+    var meetingId: String?
+
     struct SlideViewData {
         static let coverCellId = "coverCellId"
         static let cellId = "cellId"
@@ -37,13 +39,17 @@ class SlideViewController: UICollectionViewController, UICollectionViewDelegateF
         return button
     }()
 
+    func observeFirebaseValue() {
+        //FirebaseDataService.instance.meetingRef.child(Constants.)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         if let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
             layout.minimumLineSpacing = 0
-            layout.minimumInteritemSpacing = 0
+            //layout.minimumInteritemSpacing = 0
         }
         
         collectionView?.isPagingEnabled = true
@@ -55,6 +61,8 @@ class SlideViewController: UICollectionViewController, UICollectionViewDelegateF
     
     fileprivate func addSubViews() {
         navigationController?.navigationBar.isHidden = true
+        view.addSubview(beforeButton)
+        view.addSubview(nextButton)
     }
     
     fileprivate func setConstraints() {
@@ -76,8 +84,11 @@ class SlideViewController: UICollectionViewController, UICollectionViewDelegateF
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         if indexPath.item == 0 {
-            return collectionView.dequeueReusableCell(withReuseIdentifier: SlideViewData.coverCellId, for: indexPath) as! SlideCoverCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SlideViewData.coverCellId, for: indexPath) as! SlideCoverCell
+            cell.meetingId = self.meetingId
+            return cell
         } else if indexPath.item == 4 {
             return collectionView.dequeueReusableCell(withReuseIdentifier: SlideViewData.detailId, for: indexPath) as! SlideDetailCell
         } else {
@@ -86,7 +97,6 @@ class SlideViewController: UICollectionViewController, UICollectionViewDelegateF
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        print(collectionView.frame.height)
-        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+        return CGSize(width:  view.frame.width, height: view.frame.height)
     }
 }
