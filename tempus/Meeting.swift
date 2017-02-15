@@ -68,24 +68,17 @@ struct Meeting {
         return _comments
     }
     
-    init(id: String, data: Dictionary<String, AnyObject>, username:String, numFollowers:Int, numComments:Int, userImageUrl: String) {
-        if let title = data[Constants.Meetings.title] as? String,
-            let subTitle = data[Constants.Meetings.subTitle] as? String,
-            let imageUrl = data[Constants.Meetings.frontImageUrl] as? String,
-            let type = data[Constants.Meetings.type] as? String,
-            let category = data[Constants.Meetings.category] as? String {
-            
-            self._meetingId = id
-            self._title = title
-            self._subTitle = subTitle
-            self._imageUrl = imageUrl
-            self._type = type
-            self._category = category
-            self._username = username
-            self._userImageUrl = userImageUrl
-            self._followers = numFollowers
-            self._comments = numComments
-        }
+    init(id: String, data: Dictionary<String, AnyObject>, userInfo: Dictionary<String, AnyObject>) {
+        self._meetingId = id
+        self._title = data[Constants.Meetings.title] as? String
+        self._subTitle = data[Constants.Meetings.subTitle] as? String
+        self._imageUrl = data[Constants.Meetings.frontImageUrl] as? String
+        self._type = data[Constants.Meetings.type] as? String
+        self._category = data[Constants.Meetings.category] as? String
+        self._username = userInfo[Constants.Users.username] as? String
+        self._userImageUrl = userInfo[Constants.Users.imageUrl] as? String
+        self._followers = userInfo[Constants.Users.numFollowers] as? Int
+        self._comments = userInfo[Constants.Users.comments] as? Int
     }
 }
 

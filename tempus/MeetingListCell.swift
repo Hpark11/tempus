@@ -11,6 +11,7 @@ import UIKit
 class MeetingListCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     var attachedViewController: MeetingListViewController?
+    var meetingList: [Meeting]?
     
     let cellId = "cellId"
     

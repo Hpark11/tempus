@@ -32,17 +32,7 @@ class MeetingCell: BaseCell {
                     setMeetingTypeLabel(type: type)
                 }
                 
-                if let username = meeting.username {
-                    
-                }
-                
-                if let followers = meeting.followers {
-                    
-                }
-                
-                if let comments = meeting.comments {
-                    
-                }
+                setGiverLabel(username: meeting.username, followers: meeting.followers, comments: meeting.comments)
             }
         }
     }
@@ -179,9 +169,9 @@ class MeetingCell: BaseCell {
             
             let attachmentHeart = NSTextAttachment()
             let attachmentComment = NSTextAttachment()
-            attachmentHeart.image = UIImage(named: "placeholder1")
+            attachmentHeart.image = UIImage(named: "icon heart")
             attachmentHeart.bounds = CGRect(x: 0, y: -2, width: 16, height: 16)
-            attachmentComment.image = UIImage(named: "placeholder2")
+            attachmentComment.image = UIImage(named: "icon comment gray")
             attachmentComment.bounds = CGRect(x: 0, y: -2, width: 16, height: 16)
             
             attributedText.append(NSAttributedString(attachment: attachmentHeart))
