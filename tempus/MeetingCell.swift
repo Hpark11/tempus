@@ -12,7 +12,7 @@ class MeetingCell: BaseCell {
     
     var meetingId: String?
     var attachedViewController: MeetingListViewController?
-    
+    var titleLabelHeightConstraint: NSLayoutConstraint?
     var meeting: Meeting? {
         didSet {
             if let meeting = meeting {
@@ -21,6 +21,17 @@ class MeetingCell: BaseCell {
                 userProfileImageView.imageUrlString = meeting.userImageUrl
                 
                 if let title = meeting.title {
+                    let size = CGSize(width: frame.width - 20, height: 1000)
+                    let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+                    let estimatedRect = NSString(string: title).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 28)], context: nil)
+                    
+                    if estimatedRect.size.height > 36 {
+                        titleLabelHeightConstraint?.constant = 64
+                    } else {
+                        titleLabelHeightConstraint?.constant = 32
+                    }
+                    
+                    
                     titleTextView.text = title
                 }
                 
@@ -56,6 +67,8 @@ class MeetingCell: BaseCell {
         imageView.layer.cornerRadius = Constants.userProfileImageSize.small / 2
         imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFill
+        imageView.layer.borderColor = UIColor.cyan.cgColor
+        imageView.layer.borderWidth = 1.2
         return imageView
     }()
     
@@ -167,7 +180,7 @@ class MeetingCell: BaseCell {
         var numC: Int = 0
         
         if let name = username {
-            let attributedText = NSMutableAttributedString(string: name, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18)])
+            let attributedText = NSMutableAttributedString(string: "\(name) 기버", attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18)])
             attributedText.append(NSAttributedString(string: "\n", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14)]))
             let style = NSMutableParagraphStyle()
             style.lineSpacing = 6
@@ -233,7 +246,7 @@ class MeetingCell: BaseCell {
         
         _ = subtitleTextView.anchor(nil, left: mainImageView.leftAnchor, bottom: mainImageView.bottomAnchor, right: mainImageView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 12, rightConstant: 0, widthConstant: 0, heightConstant: 40)
         
-        _ = titleTextView.anchor(nil, left: mainImageView.leftAnchor, bottom: subtitleTextView.topAnchor, right: mainImageView.rightAnchor, topConstant: 0, leftConstant: 8, bottomConstant: 4, rightConstant: 8, widthConstant: 0, heightConstant: 64)
+        titleLabelHeightConstraint = titleTextView.anchor(nil, left: mainImageView.leftAnchor, bottom: subtitleTextView.topAnchor, right: mainImageView.rightAnchor, topConstant: 0, leftConstant: 8, bottomConstant: 4, rightConstant: 8, widthConstant: 0, heightConstant: 64).last
     }
     
 }
