@@ -59,6 +59,13 @@ class MeetingCell: BaseCell {
         return imageView
     }()
     
+    let overlayView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .blue
+        view.alpha = 0.3
+        return view
+    }()
+    
     let dividerView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.makeViaRgb(red: 230, green: 230, blue: 230)
@@ -107,7 +114,9 @@ class MeetingCell: BaseCell {
     
     lazy var moreButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: "placeholder1"), for: .normal)
+        button.setImage(UIImage(named: "icon more"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.contentMode = .scaleAspectFit
         button.addTarget(self, action: #selector(moreButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -196,6 +205,7 @@ class MeetingCell: BaseCell {
     
     fileprivate func addSubViews() {
         addSubview(mainImageView)
+        addSubview(overlayView)
         addSubview(userProfileImageView)
         addSubview(giverLabel)
         addSubview(meetingTypeLabel)
@@ -203,10 +213,13 @@ class MeetingCell: BaseCell {
         addSubview(dividerView)
         addSubview(subtitleTextView)
         addSubview(titleTextView)
+        
     }
     
     fileprivate func setConstraints() {
         _ = mainImageView.anchor(topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: Constants.sizeStandards.spaceShort, leftConstant: Constants.sizeStandards.spaceShort, bottomConstant: 0, rightConstant: Constants.sizeStandards.spaceShort, widthConstant: 0, heightConstant: frame.width * Constants.sizeStandards.landscapeRatio)
+        
+        _ = overlayView.anchor(mainImageView.topAnchor, left: mainImageView.leftAnchor, bottom: mainImageView.bottomAnchor, right: mainImageView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
         _ = userProfileImageView.anchor(mainImageView.bottomAnchor, left: leftAnchor, bottom: nil, right: nil, topConstant: 8, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: Constants.userProfileImageSize.small, heightConstant: Constants.userProfileImageSize.small)
         

@@ -48,6 +48,16 @@ class MeetingListCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
         collectionView.register(MeetingCell.self, forCellWithReuseIdentifier: cellId)
     }
     
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if let attachedViewController = self.attachedViewController {
+            if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
+                attachedViewController.setTabBarVisibility(isHidden: true, animated: true)
+            } else {
+                attachedViewController.setTabBarVisibility(isHidden: false, animated: true)
+            }
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return meetingList?.count ?? 0
     }

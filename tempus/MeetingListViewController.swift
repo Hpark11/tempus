@@ -81,6 +81,27 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
         collectionView?.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition(), animated: true)
     }
     
+    func setTabBarVisibility(isHidden: Bool, animated: Bool) {
+        let tabBar = self.tabBarController?.tabBar
+        if tabBar?.isHidden == isHidden {
+            return
+        }
+        let frame = tabBar?.frame
+        let offset = (isHidden ? (frame?.size.height)! : -(frame?.size.height)!)
+        let duration: TimeInterval = (animated ? 0.5 : 0.0)
+        tabBar?.isHidden = false
+        if frame != nil
+        {
+            UIView.animate(withDuration: duration, animations: { 
+                tabBar?.frame = (frame?.offsetBy(dx: 0, dy: offset))!
+            }, completion: {
+                if $0 {
+                    tabBar?.isHidden = isHidden
+                }
+            })
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -127,7 +148,6 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
                                         break
                                     }
                                 }
-                                print(meeting)
                             }
                             self.collectionView?.reloadData()
                         })
@@ -146,9 +166,6 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
     fileprivate func setNavigationBarUI() {
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = .black
-        navigationController?.hidesBarsOnSwipe = true
-        navigationController?.hidesBarsOnTap = true
-        tabBarController?.hidesBottomBarWhenPushed = true
         
         navigationItem.titleView = titleLabel
         let searchButtonItem = UIBarButtonItem(customView: searchButton)
@@ -161,7 +178,10 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
             flowLayout.scrollDirection = .horizontal
             flowLayout.minimumLineSpacing = 0
         }
+        collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
+        collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
         collectionView?.isPagingEnabled = true
+        collectionView?.showsHorizontalScrollIndicator = false
     }
     
     fileprivate func addSubViews() {
