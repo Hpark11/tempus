@@ -12,6 +12,7 @@ class MeetingCell: BaseCell {
     
     var meetingId: String?
     var attachedViewController: MeetingListViewController?
+    
     var meeting: Meeting? {
         didSet {
             if let meeting = meeting {
@@ -28,7 +29,7 @@ class MeetingCell: BaseCell {
                 }
                 
                 if let type = meeting.type {
-                    
+                    setMeetingTypeLabel(type: type)
                 }
                 
                 if let username = meeting.username {
@@ -106,38 +107,12 @@ class MeetingCell: BaseCell {
         let label = UILabel()
         
         label.numberOfLines = 2
-        let attributedText = NSMutableAttributedString(string: "강교혁 기버", attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18)])
-        attributedText.append(NSAttributedString(string: "\n", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14)]))
-        let style = NSMutableParagraphStyle()
-        style.lineSpacing = 6
         
-        attributedText.addAttribute(NSParagraphStyleAttributeName, value: style, range: NSMakeRange(0, attributedText.string.characters.count))
-        
-        let attachmentHeart = NSTextAttachment()
-        let attachmentComment = NSTextAttachment()
-        attachmentHeart.image = UIImage(named: "placeholder1")
-        attachmentHeart.bounds = CGRect(x: 0, y: -2, width: 16, height: 16)
-        attachmentComment.image = UIImage(named: "placeholder2")
-        attachmentComment.bounds = CGRect(x: 0, y: -2, width: 16, height: 16)
-        
-        attributedText.append(NSAttributedString(attachment: attachmentHeart))
-        attributedText.append(NSAttributedString(string: " 233  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 16), NSForegroundColorAttributeName: UIColor.lightGray]))
-        attributedText.append(NSAttributedString(attachment: attachmentComment))
-        attributedText.append(NSAttributedString(string: " 48 ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 16), NSForegroundColorAttributeName: UIColor.lightGray]))
-        label.attributedText = attributedText
         return label
     }()
     
     let meetingTypeLabel: UILabel = {
-       let label = UILabel()
-        let attributedText = NSMutableAttributedString(string: "")
-        
-        let attachmentMeetingType = NSTextAttachment()
-        attachmentMeetingType.image = UIImage(named: "placeholder3")
-        attachmentMeetingType.bounds = CGRect(x: 0, y: -2, width: 14, height: 14)
-        attributedText.append(NSAttributedString(attachment: attachmentMeetingType))
-        attributedText.append(NSAttributedString(string: " 카운셀링", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 16), NSForegroundColorAttributeName: UIColor.lightGray]))
-        label.attributedText = attributedText
+        let label = UILabel()
         label.textAlignment = .right
         return label
     }()
@@ -164,26 +139,66 @@ class MeetingCell: BaseCell {
     
     fileprivate func setMeetingTypeLabel(type: String) {
         var type: String = ""
+        let attributedText = NSMutableAttributedString(string: "")
+        let attachmentMeetingType = NSTextAttachment()
+        
         if type == Constants.MeetingType.counseling {
             type = "카운셀링"
+            attachmentMeetingType.image = UIImage(named: "icon chat")
         } else if type == Constants.MeetingType.experience {
             type = "체험"
+            attachmentMeetingType.image = UIImage(named: "icon meet")
         } else if type == Constants.MeetingType.mentoring {
             type = "멘토링"
+            attachmentMeetingType.image = UIImage(named: "icon myPage")
         } else if type == Constants.MeetingType.networking {
             type = "네트워킹"
+            attachmentMeetingType.image = UIImage(named: "icon setting")
         } else {
             type = "카운셀링"
+            attachmentMeetingType.image = UIImage(named: "icon chat")
         }
         
-        let attributedText = NSMutableAttributedString(string: "")
-        
-        let attachmentMeetingType = NSTextAttachment()
-        attachmentMeetingType.image = UIImage(named: "placeholder3")
         attachmentMeetingType.bounds = CGRect(x: 0, y: -2, width: 14, height: 14)
         attributedText.append(NSAttributedString(attachment: attachmentMeetingType))
         attributedText.append(NSAttributedString(string:(" " + type), attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 16), NSForegroundColorAttributeName: UIColor.lightGray]))
         meetingTypeLabel.attributedText = attributedText
+    }
+    
+    fileprivate func setGiverLabel(username: String?, followers: Int?, comments: Int?) {
+        var numF: Int = 0
+        var numC: Int = 0
+        
+        if let name = username {
+            let attributedText = NSMutableAttributedString(string: name, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18)])
+            attributedText.append(NSAttributedString(string: "\n", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14)]))
+            let style = NSMutableParagraphStyle()
+            style.lineSpacing = 6
+            
+            attributedText.addAttribute(NSParagraphStyleAttributeName, value: style, range: NSMakeRange(0, attributedText.string.characters.count))
+            
+            let attachmentHeart = NSTextAttachment()
+            let attachmentComment = NSTextAttachment()
+            attachmentHeart.image = UIImage(named: "placeholder1")
+            attachmentHeart.bounds = CGRect(x: 0, y: -2, width: 16, height: 16)
+            attachmentComment.image = UIImage(named: "placeholder2")
+            attachmentComment.bounds = CGRect(x: 0, y: -2, width: 16, height: 16)
+            
+            attributedText.append(NSAttributedString(attachment: attachmentHeart))
+            
+            if let numFollowers = followers {
+                numF = numFollowers
+            }
+            
+            if let numComments = comments {
+                numC = numComments
+            }
+            
+            attributedText.append(NSAttributedString(string: " \(numF)  ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 16), NSForegroundColorAttributeName: UIColor.lightGray]))
+            attributedText.append(NSAttributedString(attachment: attachmentComment))
+            attributedText.append(NSAttributedString(string: " \(numC) ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 16), NSForegroundColorAttributeName: UIColor.lightGray]))
+            giverLabel.attributedText = attributedText
+        }
     }
     
     override func setupViews() {
