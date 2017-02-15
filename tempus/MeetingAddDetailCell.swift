@@ -243,9 +243,13 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
         if let attachedViewController = self.attachedViewController {
             if textField == self.priceField {
-                attachedViewController.submitData.detail.price = textField.text
+                if let text = textField.text {
+                    attachedViewController.submitData.price = text
+                }
             } else if textField == self.preferredPersonField {
-                attachedViewController.submitData.detail.preferred = textField.text
+                if let text = textField.text {
+                    attachedViewController.submitData.preferred = text
+                }
             }
         }
     }
@@ -282,7 +286,7 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if let attachedViewController = self.attachedViewController {
-            attachedViewController.submitData.detail.profile = textView.text
+            attachedViewController.submitData.profile = textView.text
         }
     }
     
@@ -341,9 +345,9 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
         if let attachedViewController = self.attachedViewController {
             if let address = place.formattedAddress {
                 traceSavedLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude, address: address)
-                attachedViewController.submitData.position.address = address
-                attachedViewController.submitData.position.latitude = place.coordinate.latitude
-                attachedViewController.submitData.position.longitude = place.coordinate.longitude
+                attachedViewController.submitData.address = address
+                attachedViewController.submitData.latitude = place.coordinate.latitude
+                attachedViewController.submitData.longitude = place.coordinate.longitude
             }
             attachedViewController.dismiss(animated: true, completion: nil)
         }

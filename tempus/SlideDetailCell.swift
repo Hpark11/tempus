@@ -17,6 +17,7 @@ class SlideDetailCell: BaseCell {
         let imageView = DownloadImageView()
         imageView.image = UIImage(named: "placeholder3")
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     

@@ -10,105 +10,102 @@ import UIKit
 
 class SlideCell: BaseCell {
 
+    var meetingId: String?
+    var slideId: String? {
+        didSet {
+            observeFirebaseValue()
+        }
+    }
+    
+    func observeFirebaseValue() {
+        if let id = slideId, let meetingId = self.meetingId {
+            FirebaseDataService.instance.meetingRef.child(meetingId).child(Constants.Meetings.slides).child(id).observeSingleEvent(of: .value, with: { (snapshot) in
+                if let value = snapshot.value as? Dictionary<String, AnyObject> {
+                    self.mainImageView.imageUrlString = value[Constants.Meetings.Slides.imageUrl] as? String
+                    self.configureContentText(title: (value[Constants.Meetings.Slides.storyTitle] as? String), subTitle: (value[Constants.Meetings.Slides.storySubtitle] as? String))
+                }
+            })
+        }
+    }
+    
+    func configureContentText(title: String?, subTitle: String?) {
+        if let titleText = title, let subTitleText = subTitle {
+            let attributedText = NSMutableAttributedString(string: titleText, attributes: [
+                NSFontAttributeName: UIFont.systemFont(ofSize: 32, weight: UIFontWeightMedium),
+                NSForegroundColorAttributeName: UIColor.black
+            ])
+            attributedText.append(NSAttributedString(string: "\n\n\(subTitleText)", attributes: [
+                NSFontAttributeName: UIFont.systemFont(ofSize: 18),
+                NSForegroundColorAttributeName: UIColor.black
+            ]))
+            mainTextView.attributedText = attributedText
+        }
+    }
+    
     /*
      * UI Components
      */
-    let mainImageView: DownloadImageView = {
-        let imageView = DownloadImageView()
-        imageView.image = UIImage(named: "placeholder3")
-        imageView.contentMode = .scaleAspectFill
-        return imageView
-    }()
-    
-    let userProfileImageView: DownloadImageView = {
-        let imageView = DownloadImageView()
-        imageView.image = UIImage(named: "placeholder1")
-        imageView.layer.cornerRadius = Constants.userProfileImageSize.mini / 2
-        imageView.layer.masksToBounds = true
-        imageView.contentMode = .scaleAspectFill
-        return imageView
-    }()
-    
-    let giverLabel: UILabel = {
-        let label = UILabel()
-        label.text = "강교혁 기버"
-        label.textColor = .cyan
-        label.font = UIFont.systemFont(ofSize: 16)
-        return label
-    }()
-    
-    let dividerView: UIView = {
+    let overlayView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.makeViaRgb(red: 230, green: 230, blue: 230)
+        view.backgroundColor = .black
+        view.alpha = 0.4
+//        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+//        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//        blurEffectView.frame = view.bounds
+//        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        view.addSubview(blurEffectView)
         return view
     }()
     
-    lazy var titleTextView: UITextView = {
+    let mainImageView: DownloadImageView = {
+        let imageView = DownloadImageView()
+        imageView.image = UIImage()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.layer.borderWidth = 2.6
+        imageView.layer.borderColor = UIColor.darkGray.cgColor
+        imageView.layer.cornerRadius = 14
+        imageView.layer.shadowColor = UIColor.black.cgColor
+        imageView.layer.shadowOpacity = 1.0
+        imageView.layer.shadowRadius = 10.0
+        imageView.layer.shadowOffset = CGSize(width: 0.2, height: 4.0)
+        return imageView
+    }()
+    
+    
+    lazy var mainTextView: UITextView = {
         let textView = UITextView()
         textView.font = UIFont.boldSystemFont(ofSize: 28)
-        textView.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0)
-        textView.backgroundColor = .clear
-        textView.textColor = .white
-        textView.text = "강교혁 기버와 함께하는 \n창업이야기"
-        textView.isEditable = false
-        textView.isSelectable = false
+        textView.textContainerInset = UIEdgeInsetsMake(26, 8, 8, 8)
+        textView.backgroundColor = .white
+        textView.textColor = .black
+        textView.text = "이것은 테스트용 입니다"
         textView.isUserInteractionEnabled = false
+        textView.isScrollEnabled = false
+        textView.layer.borderWidth = 2
+        textView.layer.cornerRadius = 14
+        textView.layer.borderColor = UIColor.lightGray.cgColor
         return textView
     }()
-    
-    lazy var subtitleTextView: UITextView = {
-        let textView = UITextView()
-        textView.font = UIFont.systemFont(ofSize: 18)
-        //textView.textContainerInset = UIEdgeInsetsMake(0, 10, 0, 0)
-        textView.textColor = .lightGray
-        textView.backgroundColor = .clear
-        textView.text = "강교혁 기버만이 가진 창업노하우를 같이 공유합니다"
-        textView.isEditable = false
-        textView.isSelectable = false
-        textView.isUserInteractionEnabled = false
-        return textView
-    }()
-    
-    let pageLabel: UILabel = {
-        let label = UILabel()
-        label.text = "0 / 10"
-        label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 18)
-        label.textAlignment = .center
-        return label
-    }()
-    
+
     override func setupViews() {
         super.setupViews()
-        
         addSubViews()
         setContstraints()
     }
     
     fileprivate func addSubViews() {
+        addSubview(overlayView)
+        addSubview(mainTextView)
         addSubview(mainImageView)
-        addSubview(pageLabel)
-        addSubview(dividerView)
-        addSubview(userProfileImageView)
-        addSubview(giverLabel)
-        addSubview(subtitleTextView)
-        addSubview(titleTextView)
     }
     
     fileprivate func setContstraints() {
-        _ = mainImageView.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        _ = overlayView.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
-        _ = pageLabel.anchor(nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 16, bottomConstant: 20, rightConstant: 16, widthConstant: 0, heightConstant: 24)
+        _ = mainImageView.anchor(topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 80, leftConstant: 26, bottomConstant: 0, rightConstant: 26, widthConstant: 0, heightConstant: frame.height / 2 - 80)
         
-        _ = dividerView.anchor(nil, left: leftAnchor, bottom: pageLabel.topAnchor, right: rightAnchor, topConstant: 0, leftConstant: 8, bottomConstant: 14, rightConstant: 8, widthConstant: 0, heightConstant: 1)
-        
-        _ = userProfileImageView.anchor(nil, left: leftAnchor, bottom: dividerView.topAnchor, right: nil, topConstant: 0, leftConstant: 12, bottomConstant: 36, rightConstant: 0, widthConstant: Constants.userProfileImageSize.mini, heightConstant: Constants.userProfileImageSize.mini)
-        
-        _ = giverLabel.anchor(nil, left: userProfileImageView.rightAnchor, bottom: dividerView.topAnchor, right: nil, topConstant: 0, leftConstant: 8, bottomConstant: 30, rightConstant: 0, widthConstant: 80, heightConstant: 40)
-        
-        _ = subtitleTextView.anchor(nil, left: leftAnchor, bottom: userProfileImageView.topAnchor, right: rightAnchor, topConstant: 0, leftConstant: 8, bottomConstant: 8, rightConstant: 0, widthConstant: 0, heightConstant: 48)
-        
-        _ = titleTextView.anchor(nil, left: leftAnchor, bottom: subtitleTextView.topAnchor, right: rightAnchor, topConstant: 0, leftConstant: 8, bottomConstant: 4, rightConstant: 8, widthConstant: 0, heightConstant: 64)
+        _ = mainTextView.anchor(mainImageView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: -18, leftConstant: 16, bottomConstant: 24, rightConstant: 16, widthConstant: 0, heightConstant: 0)
     }
     
     

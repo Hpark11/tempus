@@ -7,29 +7,81 @@
 //
 
 import UIKit
+import Firebase
 
-//class Meeting : NSObject {
-//    var cover_image_name: String?
-//    var title: String?
-//    var sub_title: String?
-//    var meeting_type: String?
-//    var category: String?
-//    var upload_date: Date?
-//    var userId: String?
-//
-//    var slides: [MeetingSlide]?
-//    var detail: MeetingDetail
-//    init(title:String) {
-//        
-//    }
-//}
-//
-//class MeetingSlide : NSObject {
-//    var image: String?
-//    var header: String?
-//    var content: String?
-//}
-//
-//class MeetingDetail : NSObject {
-//    
-//}
+struct MinimizedMeeting {
+    var id: String?
+    var title: String?
+    var category: String?
+    var imageUrl: String?
+}
+
+struct Meeting {
+    private var _meetingId: String?
+    private var _title: String?
+    private var _subTitle: String?
+    private var _imageUrl: String?
+    private var _type: String?
+    private var _category: String?
+    private var _username: String?
+    private var _userImageUrl: String?
+    private var _followers: Int?
+    private var _comments: Int?
+    
+    var meetingId: String? {
+        return _meetingId
+    }
+    
+    var title: String? {
+        return _title
+    }
+    
+    var subTitle: String? {
+        return _subTitle
+    }
+    
+    var imageUrl: String? {
+        return _imageUrl
+    }
+    
+    var type: String? {
+        return _type
+    }
+    
+    var category: String? {
+        return _category
+    }
+    
+    var username: String? {
+        return _username
+    }
+    
+    var userImageUrl: String? {
+        return _userImageUrl
+    }
+    
+    var followers: Int? {
+        return _followers
+    }
+    
+    var comments: Int? {
+        return _comments
+    }
+    
+    init(id: String, data: Dictionary<String, AnyObject>, userInfo: Dictionary<String, AnyObject>) {
+        self._meetingId = id
+        self._title = data[Constants.Meetings.title] as? String
+        self._subTitle = data[Constants.Meetings.subTitle] as? String
+        self._imageUrl = data[Constants.Meetings.frontImageUrl] as? String
+        self._type = data[Constants.Meetings.type] as? String
+        self._category = data[Constants.Meetings.category] as? String
+        self._username = userInfo[Constants.Users.username] as? String
+        self._userImageUrl = userInfo[Constants.Users.imageUrl] as? String
+        self._followers = userInfo[Constants.Users.numFollowers] as? Int
+        self._comments = userInfo[Constants.Users.comments] as? Int
+    }
+}
+
+
+
+

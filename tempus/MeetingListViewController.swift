@@ -7,18 +7,22 @@
 //
 
 import UIKit
+import Firebase
+import SwiftKeychainWrapper
 
 class MeetingListViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    
-    let cellId = "cellId"
+    var selfImprovementMeetings = [Meeting]()
+    var prepareExaminationMeetings = [Meeting]()
+    var professionalSkillsMeetings = [Meeting]()
+    var lookingForHobbyMeetings = [Meeting]()
     
     struct MeetingListData {
         static let selfImprovementCellId = "selfImprovementCellId"
         static let prepareExaminationCellId = "prepareExaminationCellId"
-        static let professionalSkillesCellId = "professionalSkillesCellId"
+        static let professionalSkillsCellId = "professionalSkillsCellId"
         static let lookingForHobbyCellId = "lookingForHobbyCellId"
-        static let cells = [selfImprovementCellId, prepareExaminationCellId, professionalSkillesCellId, lookingForHobbyCellId]
+        static let cells = [selfImprovementCellId, prepareExaminationCellId, professionalSkillsCellId, lookingForHobbyCellId]
         
         static let categoryBarSize: CGFloat = 50.0
     }
@@ -63,17 +67,39 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
     }
     
     func addMeetingButtonTapped() {
-        let layout = UICollectionViewFlowLayout()
-        let meetingAddViewController = MeetingAddViewController(collectionViewLayout: layout)
-        //navigationController?.pushViewController(meetingAddViewController, animated: true)
-        
-        present(meetingAddViewController, animated: true, completion: nil)
-        
+        if let _ = KeychainWrapper.standard.string(forKey: Constants.keychainUid) {
+            let layout = UICollectionViewFlowLayout()
+            let meetingAddViewController = MeetingAddViewController(collectionViewLayout: layout)
+            navigationController?.pushViewController(meetingAddViewController, animated: true)
+        } else {
+            
+        }
     }
     
     func scrollToCategoryIndex(_ index: Int) {
         let indexPath = IndexPath(item: index, section: 0)
         collectionView?.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition(), animated: true)
+    }
+    
+    func setTabBarVisibility(isHidden: Bool, animated: Bool) {
+        let tabBar = self.tabBarController?.tabBar
+        if tabBar?.isHidden == isHidden {
+            return
+        }
+        let frame = tabBar?.frame
+        let offset = (isHidden ? (frame?.size.height)! : -(frame?.size.height)!)
+        let duration: TimeInterval = (animated ? 0.5 : 0.0)
+        tabBar?.isHidden = false
+        if frame != nil
+        {
+            UIView.animate(withDuration: duration, animations: { 
+                tabBar?.frame = (frame?.offsetBy(dx: 0, dy: offset))!
+            }, completion: {
+                if $0 {
+                    tabBar?.isHidden = isHidden
+                }
+            })
+        }
     }
     
     override func viewDidLoad() {
@@ -86,8 +112,56 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
         registerCells()
         
         collectionView?.backgroundColor = UIColor.white
+        observeFirebaseValue()
     }
-
+    
+    func observeFirebaseValue() {
+        // get list of memePosts from Firebase
+        
+        FirebaseDataService.instance.meetingRef.observe(.value, with: { (snapshot) in
+            if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                self.selfImprovementMeetings.removeAll()
+                self.prepareExaminationMeetings.removeAll()
+                self.professionalSkillsMeetings.removeAll()
+                self.lookingForHobbyMeetings.removeAll()
+                
+                for one in snapshot {
+                    if let postMeeting = one.value as? Dictionary<String, AnyObject> {
+                        FirebaseDataService.instance.userRef.child(postMeeting[Constants.Meetings.userId] as! String).observeSingleEvent(of: .value, with: { (userSnap) in
+                            if let userInfo = userSnap.value as? Dictionary<String, AnyObject> {
+                                let meeting = Meeting(id:one.key, data: postMeeting, userInfo: userInfo)
+                                if let category = meeting.category {
+                                    switch(category) {
+                                    case Constants.Category.selfImprovement:
+                                        self.selfImprovementMeetings.append(meeting)
+                                        break
+                                    case Constants.Category.prepareExamination:
+                                        self.prepareExaminationMeetings.append(meeting)
+                                        break
+                                    case Constants.Category.professionalSkills:
+                                        self.professionalSkillsMeetings.append(meeting)
+                                        break
+                                    case Constants.Category.lookingForHobby:
+                                        self.lookingForHobbyMeetings.append(meeting)
+                                        break
+                                    default:
+                                        break
+                                    }
+                                }
+                            }
+                            self.collectionView?.reloadData()
+                        })
+                    }
+                }
+            }
+            
+            self.selfImprovementMeetings.reverse()
+            self.prepareExaminationMeetings.reverse()
+            self.professionalSkillsMeetings.reverse()
+            self.lookingForHobbyMeetings.reverse()
+        })
+    }
+    
     
     fileprivate func setNavigationBarUI() {
         navigationController?.navigationBar.isTranslucent = false
@@ -104,7 +178,10 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
             flowLayout.scrollDirection = .horizontal
             flowLayout.minimumLineSpacing = 0
         }
+        collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
+        collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
         collectionView?.isPagingEnabled = true
+        collectionView?.showsHorizontalScrollIndicator = false
     }
     
     fileprivate func addSubViews() {
@@ -119,6 +196,9 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
     
     fileprivate func registerCells() {
         collectionView?.register(MeetingListCell.self, forCellWithReuseIdentifier: MeetingListData.selfImprovementCellId)
+        collectionView?.register(MeetingListCell.self, forCellWithReuseIdentifier: MeetingListData.prepareExaminationCellId)
+        collectionView?.register(MeetingListCell.self, forCellWithReuseIdentifier: MeetingListData.professionalSkillsCellId)
+        collectionView?.register(MeetingListCell.self, forCellWithReuseIdentifier: MeetingListData.lookingForHobbyCellId)
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -136,7 +216,25 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetingListData.selfImprovementCellId, for: indexPath) as! MeetingListCell
+        let cell: MeetingListCell
+
+        if indexPath.item == 0 {
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetingListData.selfImprovementCellId, for: indexPath) as! MeetingListCell
+            cell.meetingList = selfImprovementMeetings
+        } else if indexPath.item == 1 {
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetingListData.prepareExaminationCellId, for: indexPath) as! MeetingListCell
+            cell.meetingList = prepareExaminationMeetings
+        } else if indexPath.item == 2 {
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetingListData.professionalSkillsCellId, for: indexPath) as! MeetingListCell
+            cell.meetingList = professionalSkillsMeetings
+        } else if indexPath.item == 3 {
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetingListData.lookingForHobbyCellId, for: indexPath) as! MeetingListCell
+            cell.meetingList = lookingForHobbyMeetings
+        } else {
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetingListData.selfImprovementCellId, for: indexPath) as! MeetingListCell
+            cell.meetingList = selfImprovementMeetings
+        }
+        
         cell.attachedViewController = self
         return cell
     }
