@@ -27,13 +27,15 @@ class MainTabBarController: UITabBarController {
         secondNavigationController.title = "모임"
         secondNavigationController.tabBarItem.image = UIImage(named: "icon community")
         
-        let signInRequiredViewController = SignInRequiredViewController()
-        let thirdNavigationController = UINavigationController(rootViewController: signInRequiredViewController)
+        let signInRequiredViewControllerForMyPage = SignInRequiredViewController()
+        signInRequiredViewControllerForMyPage.controllerId = Constants.ControllerId.userPage
+        let thirdNavigationController = UINavigationController(rootViewController: signInRequiredViewControllerForMyPage)
         thirdNavigationController.title = "마이페이지"
         thirdNavigationController.tabBarItem.image = UIImage(named: "icon myPage")
         
-        let chattingViewController = ChattingViewController()
-        let fourthNavigationController = UINavigationController(rootViewController: chattingViewController)
+        let signInRequiredViewControllerForChatting = SignInRequiredViewController()
+        signInRequiredViewControllerForChatting.controllerId = Constants.ControllerId.chatting
+        let fourthNavigationController = UINavigationController(rootViewController: signInRequiredViewControllerForChatting)
         fourthNavigationController.title = "채팅하기"
         fourthNavigationController.tabBarItem.image = UIImage(named: "icon chat")
         

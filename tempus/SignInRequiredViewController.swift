@@ -12,7 +12,7 @@ import SwiftKeychainWrapper
 class SignInRequiredViewController: UIViewController{
 
     let cellId = "cellId"
-    
+    var controllerId: String?
     
     lazy var signInButton: UIButton = {
         let button = UIButton()
@@ -66,8 +66,6 @@ class SignInRequiredViewController: UIViewController{
         return subTextView
     }()
     
-    
-    
     let signInStartView: UIView = {
         let view = UIView()
         return view
@@ -90,17 +88,26 @@ class SignInRequiredViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let _ = KeychainWrapper.standard.string(forKey: Constants.keychainUid) {
-            let layout = UICollectionViewFlowLayout()
-            layout.scrollDirection = .horizontal
-            let userPageViewController = UserPageViewController(collectionViewLayout: layout)
-            navigationController?.pushViewController(userPageViewController, animated: true)
+            
+            if let controllerId = self.controllerId {
+                if controllerId == Constants.ControllerId.userPage {
+                    let layout = UICollectionViewFlowLayout()
+                    layout.scrollDirection = .horizontal
+                    let userPageViewController = UserPageViewController(collectionViewLayout: layout)
+                    navigationController?.pushViewController(userPageViewController, animated: true)
+                } else if controllerId == Constants.ControllerId.chatting {
+                    let layout = UICollectionViewFlowLayout()
+                    layout.scrollDirection = .horizontal
+                    let chattingViewController = ChattingViewController()
+                    navigationController?.pushViewController(chattingViewController, animated: true)
+                }
+            }
         }
     }
     
     fileprivate func setNavigationBarUI() {
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = .black
-        
         navigationItem.titleView = titleLabel
     }
     

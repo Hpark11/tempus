@@ -20,6 +20,8 @@
 		5808952C1E530F8C00F8D96B /* MinimizedMeetingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5808952B1E530F8C00F8D96B /* MinimizedMeetingCell.swift */; };
 		5808952E1E531B8700F8D96B /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5808952D1E531B8700F8D96B /* Cache.swift */; };
 		580895301E5428F900F8D96B /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5808952F1E5428F900F8D96B /* Users.swift */; };
+		580BCBCB1E54DA6F007AFFE3 /* ChattingHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580BCBCA1E54DA6F007AFFE3 /* ChattingHistoryViewController.swift */; };
+		580BCBCD1E54DFDE007AFFE3 /* ChattingWithNewOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580BCBCC1E54DFDE007AFFE3 /* ChattingWithNewOneViewController.swift */; };
 		580CB5F71E4E6F85008658CA /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580CB5F61E4E6F85008658CA /* Meeting.swift */; };
 		580FB47C1E52217A0057DA21 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580FB47B1E52217A0057DA21 /* MainTabBarController.swift */; };
 		580FB47E1E5225CD0057DA21 /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580FB47D1E5225CD0057DA21 /* ChattingViewController.swift */; };
@@ -97,6 +99,8 @@
 		5808952B1E530F8C00F8D96B /* MinimizedMeetingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimizedMeetingCell.swift; sourceTree = "<group>"; };
 		5808952D1E531B8700F8D96B /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		5808952F1E5428F900F8D96B /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
+		580BCBCA1E54DA6F007AFFE3 /* ChattingHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingHistoryViewController.swift; sourceTree = "<group>"; };
+		580BCBCC1E54DFDE007AFFE3 /* ChattingWithNewOneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingWithNewOneViewController.swift; sourceTree = "<group>"; };
 		580CB5F61E4E6F85008658CA /* Meeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
 		580FB47B1E52217A0057DA21 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		580FB47D1E5225CD0057DA21 /* ChattingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
@@ -295,12 +299,14 @@
 				58D2AB021E4ACEAB0084CE80 /* OnboardingViewController.swift */,
 				5807755C1E4ECB3A0092ED8F /* SlideViewController.swift */,
 				5807755E1E4ECB6A0092ED8F /* DiaryViewController.swift */,
-				580FB47D1E5225CD0057DA21 /* ChattingViewController.swift */,
 				580FB47F1E5225E20057DA21 /* CommunityViewController.swift */,
 				580FB4811E5225ED0057DA21 /* SignInRequiredViewController.swift */,
 				580FB4831E52260D0057DA21 /* SettingsViewController.swift */,
 				580FB4851E5232B70057DA21 /* SignInViewController.swift */,
 				5808951A1E52A47500F8D96B /* UserPageViewController.swift */,
+				580FB47D1E5225CD0057DA21 /* ChattingViewController.swift */,
+				580BCBCA1E54DA6F007AFFE3 /* ChattingHistoryViewController.swift */,
+				580BCBCC1E54DFDE007AFFE3 /* ChattingWithNewOneViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -624,6 +630,7 @@
 				5841BD6A1E50776E001E6186 /* MeetingAddViewController_ext.swift in Sources */,
 				580CB5F71E4E6F85008658CA /* Meeting.swift in Sources */,
 				581121131E501DCF004D1C85 /* RestApiDataService.swift in Sources */,
+				580BCBCD1E54DFDE007AFFE3 /* ChattingWithNewOneViewController.swift in Sources */,
 				583BB5C31E4D551A000FDA44 /* DownloadImageView.swift in Sources */,
 				5841BD661E5049ED001E6186 /* MeetingAddCoverCell.swift in Sources */,
 				580FB4801E5225E20057DA21 /* CommunityViewController.swift in Sources */,
@@ -650,6 +657,7 @@
 				5841BD681E5049FA001E6186 /* MeetingAddDetailCell.swift in Sources */,
 				58D2AB071E4AD07D0084CE80 /* OnboardingPage.swift in Sources */,
 				58D2AB0D1E4AD48A0084CE80 /* BaseCell.swift in Sources */,
+				580BCBCB1E54DA6F007AFFE3 /* ChattingHistoryViewController.swift in Sources */,
 				58D2AAD61E4ACB510084CE80 /* AppDelegate.swift in Sources */,
 				581121151E50415E004D1C85 /* MeetingAddViewController.swift in Sources */,
 				580895261E52E87400F8D96B /* UserMeetingCell.swift in Sources */,

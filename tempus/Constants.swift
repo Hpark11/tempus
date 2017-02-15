@@ -83,4 +83,9 @@ struct Constants {
         static let networking = "networking"
         static let experience = "experience"
     }
+    
+    struct ControllerId {
+        static let userPage = "userPage"
+        static let chatting = "chatting"
+    }
 }
