@@ -13,6 +13,8 @@ class ChattingWithNewOneViewController: UITableViewController {
     let cellId = "cellId"
     var users = [Users]()
     
+    var attachedViewController: ChattingViewController?
+    
     func handleCancel() {
         dismiss(animated: true, completion: nil)
     }
@@ -33,7 +35,7 @@ class ChattingWithNewOneViewController: UITableViewController {
     func fetchAllFriends() {
         FirebaseDataService.instance.userRef.observe(.childAdded, with: { (snapshot) in
             if let value = snapshot.value as? Dictionary<String, AnyObject> {
-                let user = Users(data: value)
+                let user = Users(uid: snapshot.key, data: value)
                 self.users.append(user)
                 
                 DispatchQueue.main.async(execute: { 
@@ -58,6 +60,13 @@ class ChattingWithNewOneViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 72
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        dismiss(animated: true) {
+            let user = self.users[indexPath.row]
+            self.attachedViewController?.presentChattingHistory(user: user)
+        }
     }
 }
 

@@ -110,8 +110,8 @@ struct Users {
         }
     }
     
-    init(data: Dictionary<String, AnyObject>) {
-        _uid = data[Constants.Users.uid] as? String
+    init(uid: String, data: Dictionary<String, AnyObject>) {
+        _uid = uid
         _email = data[Constants.Users.email] as? String
         _username = data[Constants.Users.username] as? String
         _comments = data[Constants.Users.comments] as? Array<String>

@@ -11,9 +11,23 @@ import Firebase
 
 class ChattingHistoryViewController: UICollectionViewController, UITextFieldDelegate {
     
+    var user: Users? {
+        didSet {
+            titleLabel.text = user?.username
+        }
+    }
+    
     struct ChattingHistoryData {
         static let inputYSize: CGFloat = 50
     }
+    
+    let titleLabel: UILabel = {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 120, height: 40))
+        label.textAlignment = .center
+        label.textColor = UIColor.white
+        label.font = UIFont.systemFont(ofSize: 20)
+        return label
+    }()
     
     let chatInputView: UIView = {
         let view = UIView()
@@ -43,14 +57,19 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
     
     func sendButtonTapped() {
         let ref = FirebaseDataService.instance.messageRef.childByAutoId()
-        let values = ["text": inputTextField.text!]
+        let values: Dictionary<String, AnyObject> = [
+            "text": inputTextField.text! as AnyObject,
+            "toUserId": user?.uid as AnyObject,
+            "fromUserId": FIRAuth.auth()?.currentUser?.uid as AnyObject,
+            "timestamp": NSNumber(value: Int(Date().timeIntervalSince1970))
+        ]
         ref.updateChildValues(values)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.backgroundColor = .white
-        
+        navigationItem.titleView = titleLabel
         addSubViews()
         setConstraints()
     }

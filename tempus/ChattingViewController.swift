@@ -27,14 +27,14 @@ class ChattingViewController: UITableViewController {
         label.text = "tempus"
         label.textColor = UIColor.white
         label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(titleLabelTapped)))
         label.isUserInteractionEnabled = true
         return label
     }()
     
-    func titleLabelTapped() {
+    func presentChattingHistory(user: Users) {
         let layout = UICollectionViewFlowLayout()
         let chattingHistoryViewController = ChattingHistoryViewController(collectionViewLayout: layout)
+        chattingHistoryViewController.user = user
         navigationController?.pushViewController(chattingHistoryViewController, animated: true)
     }
     
@@ -49,8 +49,9 @@ class ChattingViewController: UITableViewController {
         }
     }
     
-    func handleNewMessage() {
+    func openChattingWithNewOne() {
         let chattingWithNewOneViewController = ChattingWithNewOneViewController()
+        chattingWithNewOneViewController.attachedViewController = self
         let navController = UINavigationController(rootViewController: chattingWithNewOneViewController)
         present(navController, animated: true, completion: nil)
     }
@@ -73,7 +74,7 @@ class ChattingViewController: UITableViewController {
         navigationController?.navigationBar.tintColor = .white
         let signOutButtonItem = UIBarButtonItem(customView: signOutButton)
         self.navigationItem.leftBarButtonItem = signOutButtonItem
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon add meeting"), style: .plain, target: self, action: #selector(handleNewMessage))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon add meeting"), style: .plain, target: self, action: #selector(openChattingWithNewOne))
     }
     
     fileprivate func addSubViews() {
