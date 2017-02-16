@@ -14,6 +14,7 @@ struct Users {
     private var _email: String?
     private var _provider: String?
     private var _username: String?
+    private var _imageUrl: String?
     private var _followers: Array<String>?
     private var _following: Array<String>?
     private var _comments: Array<String>?
@@ -48,6 +49,14 @@ struct Users {
     var username: String {
         if let username = _username {
             return username
+        } else {
+            return ""
+        }
+    }
+    
+    var imageUrl: String {
+        if let imageUrl = _imageUrl {
+            return imageUrl
         } else {
             return ""
         }
@@ -112,5 +121,6 @@ struct Users {
         _numFollowers = data[Constants.Users.numFollowers] as? Int
         _numFollowings = data[Constants.Users.numFollowings] as? Int
         _provider = data[Constants.Users.provider] as? String
+        _imageUrl = data[Constants.Users.imageUrl] as? String
     }
 }

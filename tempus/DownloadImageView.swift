@@ -21,25 +21,27 @@ class DownloadImageView : UIImageView {
     }
     
     func loadImageUsingUrlString(urlString: String) {
-        let url = URL(string: urlString)
+        let url: URL? = URL(string: urlString)
         image = nil
         
-        if let imageFromCache = imageCache.object(forKey: urlString as NSString) {
-            self.image = imageFromCache
-            return
-        }
-        
-        URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
-            guard error == nil else {
-                print(error as Any)
+        if let url = url {
+            if let imageFromCache = imageCache.object(forKey: urlString as NSString) {
+                self.image = imageFromCache
                 return
             }
             
-            DispatchQueue.main.async(execute: {
-                let imageToCache = UIImage(data: data!)
-                self.image = imageToCache
-                imageCache.setObject(imageToCache!, forKey: urlString as NSString)
-            })
-        }).resume()
+            URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+                guard error == nil else {
+                    print(error as Any)
+                    return
+                }
+                
+                DispatchQueue.main.async(execute: {
+                    let imageToCache = UIImage(data: data!)
+                    self.image = imageToCache
+                    imageCache.setObject(imageToCache!, forKey: urlString as NSString)
+                })
+            }).resume()
+        }
     }
 }
