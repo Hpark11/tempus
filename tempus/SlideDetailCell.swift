@@ -8,11 +8,22 @@
 
 import UIKit
 
-class SlideDetailCell: BaseCell {
+class SlideDetailCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     struct SlideDetailData {
-        static let defaultButtonHeight: CGFloat = 54
+        static let defaultButtonHeight: CGFloat = 44
+        static let cellId: String = "cellId"
     }
+    
+    lazy var giverInfollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 0
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .white
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        return collectionView
+    }()
     
     /*
      * UI Components
@@ -27,8 +38,8 @@ class SlideDetailCell: BaseCell {
     
     let userProfileImageView: DownloadImageView = {
         let imageView = DownloadImageView()
-        imageView.image = UIImage(named: "placeholder human")
-        imageView.layer.cornerRadius = Constants.userProfileImageSize.big / 2
+        imageView.image = UIImage(named: "placeholder1")
+        imageView.layer.cornerRadius = Constants.userProfileImageSize.middle / 2
         imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 2
         imageView.layer.borderColor = UIColor.white.cgColor
@@ -65,24 +76,24 @@ class SlideDetailCell: BaseCell {
     lazy var followButton: UIButton = {
         let button = UIButton()
         button.layer.borderColor = UIColor.lightGray.cgColor
-        button.layer.borderWidth = 1.4
-        button.backgroundColor = UIColor.makeViaRgb(red: 74, green: 144, blue: 226)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
-        button.titleLabel?.textColor = .white
+        button.layer.borderWidth = 1.0
+        button.backgroundColor = UIColor.white
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 24)
+        button.titleLabel?.textColor = .darkGray
         button.layer.cornerRadius = SlideDetailData.defaultButtonHeight / 2
-        button.setTitle("팔로우 하기", for: .normal)
         button.addTarget(self, action: #selector(followButtonTapped), for: .touchUpInside)
         button.isUserInteractionEnabled = true
+        button.titleLabel?.text = "follow"
         return button
     }()
     
     lazy var commentButton: UIButton = {
-        let button = UIButton()
-        button.layer.borderColor = UIColor.makeViaRgb(red: 230, green: 230, blue: 230).cgColor
-        button.layer.borderWidth = 1.4
-        button.layer.cornerRadius = SlideDetailData.defaultButtonHeight / 2
-        button.backgroundColor = .white
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "icon comment"), for: .normal)
         button.addTarget(self, action: #selector(commentButtonTapped), for: .touchUpInside)
+        button.layer.borderColor = UIColor.lightGray.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = SlideDetailData.defaultButtonHeight / 2
         return button
     }()
     
@@ -101,6 +112,7 @@ class SlideDetailCell: BaseCell {
         
         addSubViews()
         setContstraints()
+        registerCells()
     }
     
     fileprivate func addSubViews() {
@@ -111,13 +123,13 @@ class SlideDetailCell: BaseCell {
         addSubview(followButton)
         addSubview(commentButton)
         addSubview(dividerView)
-        
+        addSubview(giverInfollectionView)
     }
     
     fileprivate func setContstraints() {
         _ = mainImageView.anchor(topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: frame.height / 4)
         
-        _ = userProfileImageView.anchor(mainImageView.bottomAnchor, left: leftAnchor, bottom: nil, right: nil, topConstant: -32, leftConstant: 12, bottomConstant: 0, rightConstant: 0, widthConstant: Constants.userProfileImageSize.big, heightConstant: Constants.userProfileImageSize.big)
+        _ = userProfileImageView.anchor(mainImageView.bottomAnchor, left: leftAnchor, bottom: nil, right: nil, topConstant: -24, leftConstant: 12, bottomConstant: 0, rightConstant: 0, widthConstant: Constants.userProfileImageSize.middle, heightConstant: Constants.userProfileImageSize.middle)
         
         _ = introTextView.anchor(nil, left: userProfileImageView.rightAnchor, bottom: userProfileImageView.bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 12, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 22)
 
@@ -128,6 +140,24 @@ class SlideDetailCell: BaseCell {
         _ = followButton.anchor(introTextView.bottomAnchor, left: userProfileImageView.leftAnchor, bottom: nil, right: commentButton.leftAnchor, topConstant: 12, leftConstant: 0, bottomConstant: 0, rightConstant: 10, widthConstant: 0, heightConstant: SlideDetailData.defaultButtonHeight)
         
         _ = dividerView.anchor(followButton.bottomAnchor, left: userProfileImageView.leftAnchor, bottom: nil, right: commentButton.rightAnchor, topConstant: 12, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 1.4)
+        
+        _ = giverInfollectionView.anchor(dividerView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 4, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
     }
-
+    
+    fileprivate func registerCells() {
+        giverInfollectionView.register(MeetingGiverDetailCell.self, forCellWithReuseIdentifier: SlideDetailData.cellId)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SlideDetailData.cellId, for: indexPath) as! MeetingGiverDetailCell
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: frame.width, height: frame.height * 1.2)
+    }
 }

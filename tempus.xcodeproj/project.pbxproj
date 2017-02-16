@@ -20,6 +20,7 @@
 		5808952C1E530F8C00F8D96B /* MinimizedMeetingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5808952B1E530F8C00F8D96B /* MinimizedMeetingCell.swift */; };
 		5808952E1E531B8700F8D96B /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5808952D1E531B8700F8D96B /* Cache.swift */; };
 		580895301E5428F900F8D96B /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5808952F1E5428F900F8D96B /* Users.swift */; };
+		580A22BF1E557CD200CF6E83 /* MeetingGiverDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580A22BE1E557CD200CF6E83 /* MeetingGiverDetailCell.swift */; };
 		580BCBCB1E54DA6F007AFFE3 /* ChattingHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580BCBCA1E54DA6F007AFFE3 /* ChattingHistoryViewController.swift */; };
 		580BCBCD1E54DFDE007AFFE3 /* ChattingWithNewOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580BCBCC1E54DFDE007AFFE3 /* ChattingWithNewOneViewController.swift */; };
 		580BCBCF1E5545D3007AFFE3 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580BCBCE1E5545D3007AFFE3 /* UserCell.swift */; };
@@ -101,6 +102,7 @@
 		5808952B1E530F8C00F8D96B /* MinimizedMeetingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimizedMeetingCell.swift; sourceTree = "<group>"; };
 		5808952D1E531B8700F8D96B /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		5808952F1E5428F900F8D96B /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
+		580A22BE1E557CD200CF6E83 /* MeetingGiverDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingGiverDetailCell.swift; sourceTree = "<group>"; };
 		580BCBCA1E54DA6F007AFFE3 /* ChattingHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingHistoryViewController.swift; sourceTree = "<group>"; };
 		580BCBCC1E54DFDE007AFFE3 /* ChattingWithNewOneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingWithNewOneViewController.swift; sourceTree = "<group>"; };
 		580BCBCE1E5545D3007AFFE3 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				581121091E4F0227004D1C85 /* SlideCell.swift */,
 				5811210B1E4F0274004D1C85 /* SlideCoverCell.swift */,
 				5811210D1E4F0280004D1C85 /* SlideDetailCell.swift */,
+				580A22BE1E557CD200CF6E83 /* MeetingGiverDetailCell.swift */,
 				5841BD631E5049DA001E6186 /* MeetingAddCell.swift */,
 				5841BD651E5049ED001E6186 /* MeetingAddCoverCell.swift */,
 				5841BD671E5049FA001E6186 /* MeetingAddDetailCell.swift */,
@@ -621,6 +624,7 @@
 				58D2AAD81E4ACB510084CE80 /* MeetingListViewController.swift in Sources */,
 				5808951B1E52A47500F8D96B /* UserPageViewController.swift in Sources */,
 				58FCAAED1E4C44A7002F5B0A /* MeetingBottomPanelContent.swift in Sources */,
+				580A22BF1E557CD200CF6E83 /* MeetingGiverDetailCell.swift in Sources */,
 				583BB5C71E4D9A73000FDA44 /* CategoryViewCell.swift in Sources */,
 				5811210C1E4F0274004D1C85 /* SlideCoverCell.swift in Sources */,
 				5808952E1E531B8700F8D96B /* Cache.swift in Sources */,

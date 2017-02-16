@@ -36,7 +36,6 @@ class MeetingCell: BaseCell {
                         titleLabelHeightConstraint?.constant = 32
                     }
                     
-                    
                     titleTextView.text = title
                 }
                 

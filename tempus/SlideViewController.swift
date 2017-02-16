@@ -49,7 +49,8 @@ class SlideViewController: UICollectionViewController, UICollectionViewDelegateF
         if let image = UIImage(named: "before") {
             button.setImage(image, for: .normal)
         }
-        //button.addTarget(self, action: #selector(beforeButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(beforeButtonTapped), for: .touchUpInside)
+        button.isUserInteractionEnabled = true
         return button
     }()
     
@@ -61,6 +62,10 @@ class SlideViewController: UICollectionViewController, UICollectionViewDelegateF
         //button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return button
     }()
+    
+    func beforeButtonTapped() {
+        dismiss(animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

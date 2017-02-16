@@ -74,6 +74,16 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
         setConstraints()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        subscribeToKeyboardNotifications()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        unsubscribeFromKeyboardNotifications()
+    }
+    
     fileprivate func addSubViews() {
         view.addSubview(chatInputView)
         chatInputView.addSubview(sendButton)
@@ -99,6 +109,34 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
         return true
     }
     
+    // get keyboard height and shift the view from bottom to higher
+    func keyboardWillShow(_ notification: Notification) {
+        if inputTextField.isFirstResponder {
+            view.frame.origin.y = 0 - getKeyboardHeight(notification)
+        }
+    }
+    
+    func keyboardWillHide(_ notification: Notification) {
+        if inputTextField.isFirstResponder {
+            view.frame.origin.y = 0
+        }
+    }
+    
+    func getKeyboardHeight(_ notification: Notification) -> CGFloat {
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        return keyboardSize.cgRectValue.height
+    }
+    
+    func subscribeToKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    func unsubscribeFromKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+    }
     
 }
 
