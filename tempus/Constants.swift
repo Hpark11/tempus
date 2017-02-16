@@ -58,6 +58,7 @@ struct Constants {
     
     struct Users {
         static let imageUrl: String = "imageUrl"
+        static let backgroundImageUrl: String = "backgroundImageUrl"
         static let username: String = "username"
         static let comments: String = "comments"
         static let followers: String = "followers"
@@ -68,6 +69,7 @@ struct Constants {
         static let provider: String = "provider"
         static let email: String = "email"
         static let uid: String = "uid"
+        static let intro: String = "intro"
     }
     
     struct Category {

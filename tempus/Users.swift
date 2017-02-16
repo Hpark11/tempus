@@ -15,12 +15,14 @@ struct Users {
     private var _provider: String?
     private var _username: String?
     private var _imageUrl: String?
+    private var _backgroundImageUrl: String?
     private var _followers: Array<String>?
     private var _following: Array<String>?
     private var _comments: Array<String>?
     private var _numComments: Int?
     private var _numFollowers: Int?
     private var _numFollowings: Int?
+    private var _intro: String?
     
     var uid: String {
         if let uid = _uid {
@@ -57,6 +59,14 @@ struct Users {
     var imageUrl: String {
         if let imageUrl = _imageUrl {
             return imageUrl
+        } else {
+            return ""
+        }
+    }
+    
+    var backgroundImageUrl: String {
+        if let backgroundImageUrl = _backgroundImageUrl {
+            return backgroundImageUrl
         } else {
             return ""
         }
@@ -110,6 +120,14 @@ struct Users {
         }
     }
     
+    var intro: String {
+        if let intro = _intro {
+            return intro
+        } else {
+            return ""
+        }
+    }
+    
     init(uid: String, data: Dictionary<String, AnyObject>) {
         _uid = uid
         _email = data[Constants.Users.email] as? String
@@ -122,5 +140,7 @@ struct Users {
         _numFollowings = data[Constants.Users.numFollowings] as? Int
         _provider = data[Constants.Users.provider] as? String
         _imageUrl = data[Constants.Users.imageUrl] as? String
+        _backgroundImageUrl = data[Constants.Users.backgroundImageUrl] as? String
+        _intro = data[Constants.Users.intro] as? String
     }
 }

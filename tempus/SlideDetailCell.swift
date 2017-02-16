@@ -10,6 +10,10 @@ import UIKit
 
 class SlideDetailCell: BaseCell {
 
+    struct SlideDetailData {
+        static let defaultButtonHeight: CGFloat = 54
+    }
+    
     /*
      * UI Components
      */
@@ -23,19 +27,33 @@ class SlideDetailCell: BaseCell {
     
     let userProfileImageView: DownloadImageView = {
         let imageView = DownloadImageView()
-        imageView.image = UIImage(named: "placeholder1")
-        imageView.layer.cornerRadius = Constants.userProfileImageSize.mini / 2
+        imageView.image = UIImage(named: "placeholder human")
+        imageView.layer.cornerRadius = Constants.userProfileImageSize.big / 2
         imageView.layer.masksToBounds = true
+        imageView.layer.borderWidth = 2
+        imageView.layer.borderColor = UIColor.white.cgColor
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
     let giverLabel: UILabel = {
         let label = UILabel()
-        label.text = "강교혁 기버"
-        label.textColor = .cyan
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.text = "기버"
+        label.textColor = .black
+        label.font = UIFont.boldSystemFont(ofSize: 28)
         return label
+    }()
+    
+    lazy var introTextView: UITextView = {
+        let textView = UITextView()
+        textView.font = UIFont.systemFont(ofSize: 16)
+        textView.textContainerInset = UIEdgeInsetsMake(0, 8, 0, 0)
+        textView.textColor = .lightGray
+        textView.backgroundColor = .clear
+        textView.isEditable = false
+        textView.isSelectable = false
+        textView.isUserInteractionEnabled = false
+        return textView
     }()
     
     let dividerView: UIView = {
@@ -44,43 +62,42 @@ class SlideDetailCell: BaseCell {
         return view
     }()
     
-    lazy var titleTextView: UITextView = {
-        let textView = UITextView()
-        textView.font = UIFont.boldSystemFont(ofSize: 28)
-        textView.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0)
-        textView.backgroundColor = .clear
-        textView.textColor = .white
-        textView.text = "강교혁 기버와 함께하는 \n창업이야기"
-        textView.isEditable = false
-        textView.isSelectable = false
-        textView.isUserInteractionEnabled = false
-        return textView
+    lazy var followButton: UIButton = {
+        let button = UIButton()
+        button.layer.borderColor = UIColor.lightGray.cgColor
+        button.layer.borderWidth = 1.4
+        button.backgroundColor = UIColor.makeViaRgb(red: 74, green: 144, blue: 226)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+        button.titleLabel?.textColor = .white
+        button.layer.cornerRadius = SlideDetailData.defaultButtonHeight / 2
+        button.setTitle("팔로우 하기", for: .normal)
+        button.addTarget(self, action: #selector(followButtonTapped), for: .touchUpInside)
+        button.isUserInteractionEnabled = true
+        return button
     }()
     
-    lazy var subtitleTextView: UITextView = {
-        let textView = UITextView()
-        textView.font = UIFont.systemFont(ofSize: 18)
-        //textView.textContainerInset = UIEdgeInsetsMake(0, 10, 0, 0)
-        textView.textColor = .lightGray
-        textView.backgroundColor = .clear
-        textView.text = "강교혁 기버만이 가진 창업노하우를 같이 공유합니다"
-        textView.isEditable = false
-        textView.isSelectable = false
-        textView.isUserInteractionEnabled = false
-        return textView
+    lazy var commentButton: UIButton = {
+        let button = UIButton()
+        button.layer.borderColor = UIColor.makeViaRgb(red: 230, green: 230, blue: 230).cgColor
+        button.layer.borderWidth = 1.4
+        button.layer.cornerRadius = SlideDetailData.defaultButtonHeight / 2
+        button.backgroundColor = .white
+        button.addTarget(self, action: #selector(commentButtonTapped), for: .touchUpInside)
+        return button
     }()
     
-    let pageLabel: UILabel = {
-        let label = UILabel()
-        label.text = "0 / 10"
-        label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 18)
-        label.textAlignment = .center
-        return label
-    }()
+    func followButtonTapped() {
+        
+    }
+    
+    func commentButtonTapped() {
+        
+    }
     
     override func setupViews() {
         super.setupViews()
+        
+        backgroundColor = .white
         
         addSubViews()
         setContstraints()
@@ -88,28 +105,29 @@ class SlideDetailCell: BaseCell {
     
     fileprivate func addSubViews() {
         addSubview(mainImageView)
-        addSubview(pageLabel)
-        addSubview(dividerView)
         addSubview(userProfileImageView)
+        addSubview(introTextView)
         addSubview(giverLabel)
-        addSubview(subtitleTextView)
-        addSubview(titleTextView)
+        addSubview(followButton)
+        addSubview(commentButton)
+        addSubview(dividerView)
+        
     }
     
     fileprivate func setContstraints() {
-        _ = mainImageView.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        _ = mainImageView.anchor(topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: frame.height / 4)
         
-        _ = pageLabel.anchor(nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 16, bottomConstant: 20, rightConstant: 16, widthConstant: 0, heightConstant: 24)
+        _ = userProfileImageView.anchor(mainImageView.bottomAnchor, left: leftAnchor, bottom: nil, right: nil, topConstant: -32, leftConstant: 12, bottomConstant: 0, rightConstant: 0, widthConstant: Constants.userProfileImageSize.big, heightConstant: Constants.userProfileImageSize.big)
         
-        _ = dividerView.anchor(nil, left: leftAnchor, bottom: pageLabel.topAnchor, right: rightAnchor, topConstant: 0, leftConstant: 8, bottomConstant: 14, rightConstant: 8, widthConstant: 0, heightConstant: 1)
+        _ = introTextView.anchor(nil, left: userProfileImageView.rightAnchor, bottom: userProfileImageView.bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 12, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 22)
+
+        _ = giverLabel.anchor(nil, left: userProfileImageView.rightAnchor, bottom: introTextView.topAnchor, right: rightAnchor, topConstant: 0, leftConstant: 12, bottomConstant: 10, rightConstant: 0, widthConstant: 0, heightConstant: 32)
         
-        _ = userProfileImageView.anchor(nil, left: leftAnchor, bottom: dividerView.topAnchor, right: nil, topConstant: 0, leftConstant: 12, bottomConstant: 36, rightConstant: 0, widthConstant: Constants.userProfileImageSize.mini, heightConstant: Constants.userProfileImageSize.mini)
+        _ = commentButton.anchor(introTextView.bottomAnchor, left: nil, bottom: nil, right: rightAnchor, topConstant: 12, leftConstant: 0, bottomConstant: 0, rightConstant: 12, widthConstant: SlideDetailData.defaultButtonHeight, heightConstant: SlideDetailData.defaultButtonHeight)
         
-        _ = giverLabel.anchor(nil, left: userProfileImageView.rightAnchor, bottom: dividerView.topAnchor, right: nil, topConstant: 0, leftConstant: 8, bottomConstant: 30, rightConstant: 0, widthConstant: 80, heightConstant: 40)
+        _ = followButton.anchor(introTextView.bottomAnchor, left: userProfileImageView.leftAnchor, bottom: nil, right: commentButton.leftAnchor, topConstant: 12, leftConstant: 0, bottomConstant: 0, rightConstant: 10, widthConstant: 0, heightConstant: SlideDetailData.defaultButtonHeight)
         
-        _ = subtitleTextView.anchor(nil, left: leftAnchor, bottom: userProfileImageView.topAnchor, right: rightAnchor, topConstant: 0, leftConstant: 8, bottomConstant: 8, rightConstant: 0, widthConstant: 0, heightConstant: 48)
-        
-        _ = titleTextView.anchor(nil, left: leftAnchor, bottom: subtitleTextView.topAnchor, right: rightAnchor, topConstant: 0, leftConstant: 8, bottomConstant: 4, rightConstant: 8, widthConstant: 0, heightConstant: 64)
+        _ = dividerView.anchor(followButton.bottomAnchor, left: userProfileImageView.leftAnchor, bottom: nil, right: commentButton.rightAnchor, topConstant: 12, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 1.4)
     }
 
 }

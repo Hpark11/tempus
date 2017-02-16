@@ -13,7 +13,7 @@ import SwiftKeychainWrapper
 class ChattingViewController: UITableViewController {
 
     let cellId = "cellId"
-    var messages: [Message]()
+    var messages = [Message]()
     
     lazy var signOutButton: UIButton = {
         let button = UIButton(type: .custom)

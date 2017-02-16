@@ -69,7 +69,7 @@ class SlideCoverCell: BaseCell {
     
     let userProfileImageView: DownloadImageView = {
         let imageView = DownloadImageView()
-        imageView.image = UIImage(named: "placeholder1")
+        imageView.image = UIImage(named: "placeholder human")
         imageView.layer.cornerRadius = Constants.userProfileImageSize.lessSmall / 2
         imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 2
