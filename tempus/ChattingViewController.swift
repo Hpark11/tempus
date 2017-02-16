@@ -12,6 +12,9 @@ import SwiftKeychainWrapper
 
 class ChattingViewController: UITableViewController {
 
+    let cellId = "cellId"
+    var messages: [Message]()
+    
     lazy var signOutButton: UIButton = {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(named: "icon signout"), for: .normal)
@@ -67,6 +70,21 @@ class ChattingViewController: UITableViewController {
         view.backgroundColor = .white
         checkIsUserSignedIn()
         setNavigationBarUI()
+        observeMessages()
+    }
+    
+    fileprivate func observeMessages() {
+        FirebaseDataService.instance.messageRef.observe(.childAdded, with: { (snapshot) in
+            if let dict = snapshot.value as? Dictionary<String, AnyObject> {
+                let message = Message()
+                message.setValuesForKeys(dict)
+                self.messages.append(message)
+                
+                DispatchQueue.main.async(execute: { 
+                    self.tableView.reloadData()
+                })
+            }
+        })
     }
 
     fileprivate func setNavigationBarUI() {
@@ -83,6 +101,14 @@ class ChattingViewController: UITableViewController {
     
     fileprivate func setConstraints() {
 
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
     }
 }
 

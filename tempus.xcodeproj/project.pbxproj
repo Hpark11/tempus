@@ -23,6 +23,7 @@
 		580BCBCB1E54DA6F007AFFE3 /* ChattingHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580BCBCA1E54DA6F007AFFE3 /* ChattingHistoryViewController.swift */; };
 		580BCBCD1E54DFDE007AFFE3 /* ChattingWithNewOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580BCBCC1E54DFDE007AFFE3 /* ChattingWithNewOneViewController.swift */; };
 		580BCBCF1E5545D3007AFFE3 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580BCBCE1E5545D3007AFFE3 /* UserCell.swift */; };
+		580BCBD11E555BB8007AFFE3 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580BCBD01E555BB8007AFFE3 /* Message.swift */; };
 		580CB5F71E4E6F85008658CA /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580CB5F61E4E6F85008658CA /* Meeting.swift */; };
 		580FB47C1E52217A0057DA21 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580FB47B1E52217A0057DA21 /* MainTabBarController.swift */; };
 		580FB47E1E5225CD0057DA21 /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580FB47D1E5225CD0057DA21 /* ChattingViewController.swift */; };
@@ -103,6 +104,7 @@
 		580BCBCA1E54DA6F007AFFE3 /* ChattingHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingHistoryViewController.swift; sourceTree = "<group>"; };
 		580BCBCC1E54DFDE007AFFE3 /* ChattingWithNewOneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingWithNewOneViewController.swift; sourceTree = "<group>"; };
 		580BCBCE1E5545D3007AFFE3 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		580BCBD01E555BB8007AFFE3 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		580CB5F61E4E6F85008658CA /* Meeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
 		580FB47B1E52217A0057DA21 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		580FB47D1E5225CD0057DA21 /* ChattingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 				58FCAAEC1E4C44A7002F5B0A /* MeetingBottomPanelContent.swift */,
 				580CB5F61E4E6F85008658CA /* Meeting.swift */,
 				5808952F1E5428F900F8D96B /* Users.swift */,
+				580BCBD01E555BB8007AFFE3 /* Message.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -649,6 +652,7 @@
 				58FCAAE11E4C2436002F5B0A /* MeetingViewController_ext.swift in Sources */,
 				5811210E1E4F0280004D1C85 /* SlideDetailCell.swift in Sources */,
 				5807755F1E4ECB6A0092ED8F /* DiaryViewController.swift in Sources */,
+				580BCBD11E555BB8007AFFE3 /* Message.swift in Sources */,
 				580895201E52C70E00F8D96B /* UserProfileViewCell.swift in Sources */,
 				58D2AB0B1E4AD4330084CE80 /* OnboardingPageCell.swift in Sources */,
 				58D2AB031E4ACEAB0084CE80 /* OnboardingViewController.swift in Sources */,
