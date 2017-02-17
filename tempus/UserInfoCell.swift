@@ -9,9 +9,11 @@
 import UIKit
 import Firebase
 
-class UserInfoCell: BaseCell {
+class UserInfoCell: BaseCell, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    var isUserImage: Bool = false
     var myUid: String?
+    var attachedViewController: UserPageViewController?
     var userInfo: Users? {
         didSet {
             if let user = self.userInfo {
@@ -58,14 +60,14 @@ class UserInfoCell: BaseCell {
     let overlayBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = .black
-        view.alpha = 0.6
+        view.alpha = 0.4
         return view
     }()
     
     let overlayUserView: UIView = {
         let view = UIView()
         view.backgroundColor = .black
-        view.alpha = 0.6
+        view.alpha = 0.4
         return view
     }()
     
@@ -106,31 +108,32 @@ class UserInfoCell: BaseCell {
     lazy var photoPickBackgroundButton: UIButton = {
         let button = UIButton(type: .system)
         let image = UIImage(named: "icon camera")
-        image?.resizableImage(withCapInsets: UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
         button.setImage(image, for: .normal)
-        button.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
+        button.tintColor = .yellow
         button.backgroundColor = .clear
         button.addTarget(self, action: #selector(photoPickBackgroundButtonTapped), for: .touchUpInside)
         return button
     }()
     
     func photoPickBackgroundButtonTapped() {
-    
+        isUserImage = false
+        self.presentImagePickerController(.photoLibrary)
     }
     
     lazy var photoPickUserImageButton: UIButton = {
         let button = UIButton(type: .system)
         let image = UIImage(named: "icon camera")
-        image?.resizableImage(withCapInsets: UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
         button.setImage(image, for: .normal)
-        button.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
+        button.tintColor = .yellow
         button.backgroundColor = .clear
         button.addTarget(self, action: #selector(photoPickUserImageButtonTapped), for: .touchUpInside)
+        button.isUserInteractionEnabled = true
         return button
     }()
     
     func photoPickUserImageButtonTapped() {
-        
+        isUserImage = true
+        self.presentImagePickerController(.photoLibrary)
     }
     
     lazy var commentButton: UIButton = {
@@ -286,8 +289,8 @@ class UserInfoCell: BaseCell {
         
         userBackgroundImageView.addSubview(overlayBackgroundView)
         userProfileImageView.addSubview(overlayUserView)
-        overlayBackgroundView.addSubview(photoPickBackgroundButton)
-        overlayUserView.addSubview(photoPickUserImageButton)
+        addSubview(photoPickBackgroundButton)
+        addSubview(photoPickUserImageButton)
     }
 
     fileprivate func setConstraints() {
@@ -319,9 +322,67 @@ class UserInfoCell: BaseCell {
         
         _ = overlayUserView.anchor(userProfileImageView.topAnchor, left: userProfileImageView.leftAnchor, bottom: userProfileImageView.bottomAnchor, right: userProfileImageView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
-        _ = photoPickBackgroundButton.anchor(nil, left: nil, bottom: overlayBackgroundView.bottomAnchor, right: overlayBackgroundView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 3, rightConstant: 3, widthConstant: 44, heightConstant: 44)
+        _ = photoPickBackgroundButton.anchor(nil, left: nil, bottom: overlayBackgroundView.bottomAnchor, right: overlayBackgroundView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 3, rightConstant: 3, widthConstant: 36, heightConstant: 32)
         
-        _ = photoPickUserImageButton.anchor(overlayUserView.topAnchor, left: overlayUserView.leftAnchor, bottom: overlayUserView.bottomAnchor, right: nil, topConstant: 0, leftConstant: 2, bottomConstant: 0, rightConstant: 0, widthConstant: 44, heightConstant: 44)
+        _ = photoPickUserImageButton.anchor(overlayUserView.topAnchor, left: overlayUserView.leftAnchor, bottom: overlayUserView.bottomAnchor, right: overlayUserView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
+    }
+    
+    // present image picker
+    func presentImagePickerController(_ source: UIImagePickerControllerSourceType) {
+        if let attachedViewController = self.attachedViewController {
+            let imagePickerController = UIImagePickerController()
+            imagePickerController.delegate = self
+            imagePickerController.sourceType = source
+            imagePickerController.allowsEditing = true
+            attachedViewController.present(imagePickerController, animated: true, completion: nil)
+        }
+    }
+    
+    // after finished picking image
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+            if isUserImage == true {
+                userProfileImageView.image = image
+            } else {
+                userBackgroundImageView.image = image
+            }
+            
+            pickedImageToFirebaseStorage(image: image)
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func pickedImageToFirebaseStorage(image: UIImage) {
+        if let imageData = UIImageJPEGRepresentation(image, 0.8) {
+            let imageUid = NSUUID().uuidString
+            let metadata = FIRStorageMetadata()
+            metadata.contentType = "image/jpeg"
+            FirebaseDataService.instance.imageRef.child(imageUid).put(imageData, metadata: metadata) { (metadata, error) in
+                if error != nil {
+                    print(":::[HPARK] Unable to upload image to storage \(String(describing: error)):::\n ")
+                } else {
+                    if let downloadURL = metadata?.downloadURL()?.absoluteString {
+                        imageCache.setObject(UIImage(data:imageData)!, forKey: downloadURL as NSString)
+                        self.saveNewImageUrl(imageUrl: downloadURL)
+                    }
+                }
+            }
+        }
+    }
+    
+    func saveNewImageUrl(imageUrl: String) {
+        if let myUid = self.myUid {
+            if self.isUserImage == true {
+                FirebaseDataService.instance.userRef.child(myUid).child(Constants.Users.imageUrl).setValue(imageUrl)
+            } else {
+                FirebaseDataService.instance.userRef.child(myUid).child(Constants.Users.backgroundImageUrl).setValue(imageUrl)
+            }
+        }
+    }
+    
+    // cancel button tapped
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
     }
 }

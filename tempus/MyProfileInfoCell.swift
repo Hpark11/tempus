@@ -77,11 +77,15 @@ class MyProfileInfoCell: BaseCell, UICollectionViewDelegate, UICollectionViewDat
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyProfileInfoData.userInfoCellId, for: indexPath) as! UserInfoCell
             cell.myUid = userInfo?.uid
             cell.userInfo = userInfo
+            if let attachedViewController = self.attachedViewController {
+                cell.attachedViewController = attachedViewController
+            }
             return cell
         } else {
             if isModifyMode == true {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyProfileInfoData.userProfileModifyCellId, for: indexPath) as! UserProfileModifyCell
                 cell.userInfo = userInfo
+                cell.attachedCell = self
                 if let attachedViewController = self.attachedViewController {
                     cell.attachedViewController = attachedViewController
                 }

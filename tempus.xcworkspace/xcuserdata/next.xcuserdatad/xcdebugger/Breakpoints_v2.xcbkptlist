@@ -2,4 +2,70 @@
 <Bucket
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tempus/UserProfileModifyCell.swift"
+            timestampString = "509056516.137326"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
+            landmarkName = "saveSuccessAlert"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tempus/UserProfileModifyCell.swift"
+            timestampString = "509056589.325893"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
+            landmarkName = "saveSuccessAlert"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tempus.UserProfileModifyCell.(saveSuccessAlert.getter : __ObjC.UIAlertController).(closure #1).(closure #1)"
+                  moduleName = "tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/UserProfileModifyCell.swift"
+                  timestampString = "509056589.54507"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "166"
+                  endingLineNumber = "166"
+                  offsetFromSymbolStart = "28">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tempus.UserProfileModifyCell.(saveSuccessAlert.getter : __ObjC.UIAlertController).(closure #1).(closure #1)"
+                  moduleName = "tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/UserProfileModifyCell.swift"
+                  timestampString = "509056589.547593"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "166"
+                  endingLineNumber = "166"
+                  offsetFromSymbolStart = "80">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

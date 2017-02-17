@@ -13,6 +13,7 @@ import SwiftKeychainWrapper
 class UserProfileModifyCell: BaseCell, UITextFieldDelegate {
     
     var attachedViewController: UserPageViewController?
+    var attachedCell: MyProfileInfoCell?
     var userInfo: Users? {
         didSet {
             if let user = self.userInfo {
@@ -159,6 +160,61 @@ class UserProfileModifyCell: BaseCell, UITextFieldDelegate {
         return alert
     }()
     
+    lazy var saveSuccessAlert: UIAlertController = {
+        let alert = UIAlertController(title: "저장완료", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default) { action in
+            if let attachedCell = self.attachedCell {
+                attachedCell.isModifyMode = false
+                attachedCell.meetingCollectionView.reloadData()
+            }
+        })
+        
+        return alert
+    }()
+    
+    lazy var saveVerifyAlert: UIAlertController = {
+        let alert = UIAlertController(title: "저장확인", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default) { action in
+            
+            if self.userInfo?.provider == "Firebase" {
+                let user = FIRAuth.auth()?.currentUser
+                user?.updateEmail(self.emailField.text!) { error in
+                    if let error = error {
+                        print(error)
+                    } else {
+                        if let pwd1 = self.passwordField.text, let pwd2 = self.passwordConfirmField.text {
+                            if pwd1 == pwd2 {
+                                user?.updatePassword(pwd1) { error in
+                                    if let error = error {
+                                        print(error)
+                                    } else {
+                                        self.setBasicUserInfo()
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                self.setBasicUserInfo()
+            }
+        })
+        alert.addAction(UIAlertAction(title: "취소", style: .default) { action in })
+        return alert
+    }()
+    
+    func setBasicUserInfo() {
+        let intro = self.introField.text!
+        let username = self.usernameField.text!
+        let email = self.emailField.text!
+        FirebaseDataService.instance.userRef.child((userInfo?.uid)!).child(Constants.Users.intro).setValue(intro)
+        FirebaseDataService.instance.userRef.child((userInfo?.uid)!).child(Constants.Users.username).setValue(username)
+        FirebaseDataService.instance.userRef.child((userInfo?.uid)!).child(Constants.Users.email).setValue(email)
+        if let attachedViewController = self.attachedViewController {
+            attachedViewController.present(saveSuccessAlert, animated: true)
+        }
+    }
+    
     lazy var deleteSuccessAlert: UIAlertController = {
         let alert = UIAlertController(title: "사용자 삭제확인", message: "정말로 삭제하시겠습니까?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default) { action in
@@ -201,7 +257,7 @@ class UserProfileModifyCell: BaseCell, UITextFieldDelegate {
     }()
     
     func saveProfileButtonTapped() {
-        
+        self.presentAlert(controller: self.saveVerifyAlert, message: "저장하시겠습니까?")
     }
     
     lazy var deleteProfileButton: UIButton = {
@@ -290,7 +346,7 @@ class UserProfileModifyCell: BaseCell, UITextFieldDelegate {
         
         _ = saveProfileButton.anchor(nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 16, bottomConstant: 32, rightConstant: 16, widthConstant: 0, heightConstant: 44)
         
-        _ = deleteProfileButton.anchor(nil, left: leftAnchor, bottom: deleteProfileButton.topAnchor, right: rightAnchor, topConstant: 0, leftConstant: 16, bottomConstant: 10, rightConstant: 16, widthConstant: 0, heightConstant: 44)
+        _ = deleteProfileButton.anchor(nil, left: leftAnchor, bottom: saveProfileButton.topAnchor, right: rightAnchor, topConstant: 0, leftConstant: 16, bottomConstant: 10, rightConstant: 16, widthConstant: 0, heightConstant: 44)
         
         _ = infoLabel.anchor(infoSectionView.topAnchor, left: infoSectionView.leftAnchor, bottom: infoSectionView.bottomAnchor, right: infoSectionView.rightAnchor, topConstant: 0, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
