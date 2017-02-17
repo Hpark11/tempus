@@ -14,6 +14,19 @@ struct MinimizedMeeting {
     var title: String?
     var category: String?
     var imageUrl: String?
+    
+    init(id: String, data: Dictionary<String, AnyObject>) {
+        self.id = id
+        self.title = data[Constants.Meetings.title] as? String
+        self.imageUrl = data[Constants.Meetings.frontImageUrl] as? String
+        if let category = data[Constants.Meetings.category] as? String {
+            for i in 0..<Constants.categoryDataSourceEn.count {
+                if Constants.categoryDataSourceEn[i] == category {
+                    self.category = Constants.categoryDataSource[i]
+                }
+            }
+        }
+    }
 }
 
 struct Meeting {

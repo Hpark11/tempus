@@ -11,33 +11,24 @@ import Firebase
 
 class UserInfoCell: BaseCell {
 
-    var userInfo: Users?
-    var myUid: String = ""
-    var userId: String? {
+    var myUid: String?
+    var userInfo: Users? {
         didSet {
-            if let userId = userId {
-                if userId == myUid {
-                    followButton.isHidden = true
+            if let user = self.userInfo {
+                self.userBackgroundImageView.imageUrlString = user.backgroundImageUrl
+                self.userProfileImageView.imageUrlString = user.imageUrl
+                self.titleLabel.text = user.username
+                self.introTextView.text = user.intro
+                self.setPersonalStatistics(numComments: user.numComments, numFollowers: user.numFollowers, numFollowings: user.numFollowings)
+                
+                if let myUid = self.myUid {
+                    if user.uid == myUid {
+                        followButton.isHidden = true
+                    }
                 }
-                observeFirebaseValue(userId: userId)
                 checkFollowButtonState()
             }
         }
-    }
-    
-    func observeFirebaseValue(userId: String) {
-        FirebaseDataService.instance.userRef.child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
-            if let value = snapshot.value as? Dictionary<String, AnyObject> {
-                self.userInfo = Users(uid: snapshot.key, data: value)
-                if let user = self.userInfo {
-                    self.userBackgroundImageView.imageUrlString = user.backgroundImageUrl
-                    self.userProfileImageView.imageUrlString = user.imageUrl
-                    self.titleLabel.text = user.username
-                    self.introTextView.text = user.intro
-                    self.setPersonalStatistics(numComments: user.numComments, numFollowers: user.numFollowers, numFollowings: user.numFollowings)
-                }
-            }
-        })
     }
     
     func setPersonalStatistics(numComments: Int, numFollowers: Int, numFollowings: Int) {
@@ -68,6 +59,7 @@ class UserInfoCell: BaseCell {
         let imageView = DownloadImageView()
         imageView.image = UIImage(named: "placeholder1")
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -113,8 +105,8 @@ class UserInfoCell: BaseCell {
     }
     
     func checkFollowButtonState() {
-        if let shownUid = self.userId {
-            let followerRef = FirebaseDataService.instance.userRef.child(shownUid).child(Constants.Users.followers).child(self.myUid)
+        if let shownUid = self.userInfo?.uid, let myUid = self.myUid {
+            let followerRef = FirebaseDataService.instance.userRef.child(shownUid).child(Constants.Users.followers).child(myUid)
             followerRef.observeSingleEvent(of: .value, with: { (snapshot) in
                 if let _ = snapshot.value as? NSNull {
                     self.turnOnAndOffFollowButton(isOn: false)
@@ -126,17 +118,17 @@ class UserInfoCell: BaseCell {
     }
     
     func changeFollowButtonState() {
-        if let shownUid = self.userId {
-            let followingRef = FirebaseDataService.instance.userRef.child(self.myUid).child(Constants.Users.following).child(shownUid)
-            let followerRef = FirebaseDataService.instance.userRef.child(shownUid).child(Constants.Users.followers).child(self.myUid)
+        if let shownUid = self.userInfo?.uid, let myUid = self.myUid {
+            let followingRef = FirebaseDataService.instance.userRef.child(myUid).child(Constants.Users.following).child(shownUid)
+            let followerRef = FirebaseDataService.instance.userRef.child(shownUid).child(Constants.Users.followers).child(myUid)
             followerRef.observeSingleEvent(of: .value, with: { (snapshot) in
                 if let _ = snapshot.value as? NSNull {
-                    self.observeChangeFollowing(follows: true, followee: shownUid, follower: self.myUid)
+                    self.observeChangeFollowing(follows: true, followee: shownUid, follower: myUid)
                     self.turnOnAndOffFollowButton(isOn: true)
                     followerRef.setValue(NSNumber(value: 1))
                     followingRef.setValue(NSNumber(value: 1))
                 } else {
-                    self.observeChangeFollowing(follows: false, followee: shownUid, follower: self.myUid)
+                    self.observeChangeFollowing(follows: false, followee: shownUid, follower: myUid)
                     self.turnOnAndOffFollowButton(isOn: false)
                     followerRef.removeValue()
                     followingRef.removeValue()
@@ -149,7 +141,9 @@ class UserInfoCell: BaseCell {
         FirebaseDataService.instance.userRef.child(follower).child(Constants.Users.numFollowings).observeSingleEvent(of: .value, with: { (snapshot) in
             if let value = snapshot.value as? Int {
                 self.userInfo?.changeNumFollowers(follows: follows, followee: followee, follower: follower, numFollowing: value)
-                followersNumTextView.attributedText = putDashBoardAttributedText(number: self.userInfo?.numFollowers, type: "팔로워")
+                if let user = self.userInfo {
+                    self.followersNumTextView.attributedText = self.putDashBoardAttributedText(number: user.numFollowers, type: "팔로워")
+                }
             }
         })
     }

@@ -19,6 +19,8 @@ class Users {
     private var _followers: Array<String>?
     private var _following: Array<String>?
     private var _comments: Array<String>?
+    private var _appliedMeetings: Array<String>?
+    private var _openedMeetings: Array<String>?
     private var _numComments: Int?
     private var _numFollowers: Int?
     private var _numFollowings: Int?
@@ -128,6 +130,22 @@ class Users {
         }
     }
     
+    var appliedMeetings: Array<String> {
+        if let appliedMeetings = _appliedMeetings {
+            return appliedMeetings
+        } else {
+            return []
+        }
+    }
+    
+    var openedMeetings: Array<String> {
+        if let openedMeetings = _openedMeetings {
+            return openedMeetings
+        } else {
+            return []
+        }
+    }
+
     init(uid: String, data: Dictionary<String, AnyObject>) {
         _uid = uid
         _email = data[Constants.Users.email] as? String
@@ -142,6 +160,8 @@ class Users {
         _imageUrl = data[Constants.Users.imageUrl] as? String
         _backgroundImageUrl = data[Constants.Users.backgroundImageUrl] as? String
         _intro = data[Constants.Users.intro] as? String
+        _appliedMeetings = data[Constants.Users.appliedMeetings] as? Array<String>
+        _openedMeetings = data[Constants.Users.openedMeetings] as? Array<String>
     }
     
     func changeNumFollowers(follows: Bool, followee: String, follower: String, numFollowing: Int) {

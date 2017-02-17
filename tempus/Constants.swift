@@ -71,6 +71,8 @@ struct Constants {
         static let email: String = "email"
         static let uid: String = "uid"
         static let intro: String = "intro"
+        static let openedMeetings: String = "openedMeetings"
+        static let appliedMeetings: String = "appliedMeetings"
     }
     
     struct Category {
@@ -91,4 +93,11 @@ struct Constants {
         static let userPage = "userPage"
         static let chatting = "chatting"
     }
+    
+    static let categoryDataSource = ["자기계발", "입시", "전문기술", "취미"]
+    static let typeDataSource = ["카운셀링", "멘토링", "체험", "네트워킹"]
+    
+    static let categoryDataSourceEn = [Constants.Category.selfImprovement, Constants.Category.prepareExamination, Constants.Category.professionalSkills, Constants.Category.lookingForHobby]
+    static let typeDataSourceEn = [Constants.MeetingType.counseling, Constants.MeetingType.mentoring, Constants.MeetingType.experience, Constants.MeetingType.networking]
+    
 }

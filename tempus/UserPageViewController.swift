@@ -112,6 +112,7 @@ class UserPageViewController: UICollectionViewController, UICollectionViewDelega
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.item == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UserPageData.myInfoCellId, for: indexPath) as! MyProfileInfoCell
+            cell.attachedViewController = self
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UserPageData.followingCellId, for: indexPath) as! UserFollowingCell

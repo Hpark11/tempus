@@ -11,10 +11,24 @@ import Firebase
 
 class MyProfileInfoCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
+    var attachedViewController: UserPageViewController?
+    
     struct MyProfileInfoData {
         static let userInfoCellId = "userInfoCellId"
         static let userMeetingCellId = "userMeetingCellId"
         
+    }
+    var userInfo: Users?
+    
+    func observeFirebaseValue(userId: String) {
+        if let userId = FIRAuth.auth()?.currentUser?.uid {
+            FirebaseDataService.instance.userRef.child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
+                if let value = snapshot.value as? Dictionary<String, AnyObject> {
+                    self.userInfo = Users(uid: snapshot.key, data: value)
+                    self.meetingCollectionView.reloadData()
+                }
+            })
+        }
     }
     
     lazy var meetingCollectionView: UICollectionView = {
@@ -30,6 +44,10 @@ class MyProfileInfoCell: BaseCell, UICollectionViewDelegate, UICollectionViewDat
     
     override func setupViews() {
         super.setupViews()
+        if let userId = FIRAuth.auth()?.currentUser?.uid {
+            observeFirebaseValue(userId: userId)
+        }
+        
         addSubViews()
         setConstraints()
         registerCells()
@@ -55,13 +73,15 @@ class MyProfileInfoCell: BaseCell, UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.item == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyProfileInfoData.userInfoCellId, for: indexPath) as! UserInfoCell
-            if let userId = FIRAuth.auth()?.currentUser?.uid {
-                cell.myUid = userId
-                cell.userId = userId
-            }
+            cell.myUid = userInfo?.uid
+            cell.userInfo = userInfo
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyProfileInfoData.userMeetingCellId, for: indexPath) as! UserMeetingCell
+            cell.userInfo = userInfo
+            if let attachedViewController = self.attachedViewController {
+                cell.attachedViewController = attachedViewController
+            }
             return cell
         }
     }
