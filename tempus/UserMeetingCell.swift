@@ -11,6 +11,8 @@ import UIKit
 class UserMeetingCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     var attachedViewController: UserPageViewController?
+    var attachedCell: MyProfileInfoCell?
+    
     var didLaunchMeeting = [MinimizedMeeting]()
     var didTakeMeeting = [MinimizedMeeting]()
     var userInfo: Users? {
@@ -103,7 +105,12 @@ class UserMeetingCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
     }()
     
     func changeProfileButtonTapped() {
-        
+        if let attachedCell = self.attachedCell {
+            UIView.animate(withDuration: 0.8, animations: { 
+                attachedCell.isModifyMode = true
+                attachedCell.meetingCollectionView.reloadData()
+            })
+        }
     }
     
     override func setupViews() {

@@ -75,7 +75,7 @@ class UserInfoCell: BaseCell {
     }()
     
     lazy var followButton: UIButton = {
-        let button = UIButton(type: .custom)
+        let button = UIButton(type: .system)
         let image = UIImage(named: "icon small plus")
         image?.resizableImage(withCapInsets: UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
         button.setImage(image, for: .normal)
@@ -89,7 +89,7 @@ class UserInfoCell: BaseCell {
     }()
     
     lazy var commentButton: UIButton = {
-        let button = UIButton(type: .custom)
+        let button = UIButton(type: .system)
         button.setImage(UIImage(named: "icon small comment"), for: .normal)
         button.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         button.backgroundColor = .white

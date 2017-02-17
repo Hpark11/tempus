@@ -12,6 +12,8 @@ import SwiftKeychainWrapper
 
 class UserPageViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
+    
+    
     struct UserPageData {
         static let myInfoCellId = "myInfoCellId"
         static let followingCellId = "followingCellId"
@@ -134,5 +136,7 @@ class UserPageViewController: UICollectionViewController, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: view.frame.height - 50)
     }
+    
+    
 
 }

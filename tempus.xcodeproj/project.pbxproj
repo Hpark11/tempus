@@ -34,6 +34,7 @@
 		580A22D81E56F0AC00CF6E83 /* GothamRounded-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 580A22C91E56ECF100CF6E83 /* GothamRounded-MediumItalic.otf */; };
 		580A22D91E56F0AC00CF6E83 /* GothamRoundedBold_21016.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 580A22CA1E56ECF100CF6E83 /* GothamRoundedBold_21016.ttf */; };
 		580A22DA1E56F0B300CF6E83 /* GothamRounded-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 580A22C61E56ECF100CF6E83 /* GothamRounded-Light.otf */; };
+		580A22DC1E57473B00CF6E83 /* UserProfileModifyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580A22DB1E57473B00CF6E83 /* UserProfileModifyCell.swift */; };
 		580BCBCB1E54DA6F007AFFE3 /* ChattingHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580BCBCA1E54DA6F007AFFE3 /* ChattingHistoryViewController.swift */; };
 		580BCBCD1E54DFDE007AFFE3 /* ChattingWithNewOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580BCBCC1E54DFDE007AFFE3 /* ChattingWithNewOneViewController.swift */; };
 		580BCBCF1E5545D3007AFFE3 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580BCBCE1E5545D3007AFFE3 /* UserCell.swift */; };
@@ -129,6 +130,7 @@
 		580A22CB1E56ECF100CF6E83 /* GothamRoundedBook_21018.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamRoundedBook_21018.ttf; sourceTree = "<group>"; };
 		580A22CC1E56ECF100CF6E83 /* GothamRoundedLight_21020.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamRoundedLight_21020.ttf; sourceTree = "<group>"; };
 		580A22CD1E56ECF100CF6E83 /* GothamRoundedMedium_21022.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamRoundedMedium_21022.ttf; sourceTree = "<group>"; };
+		580A22DB1E57473B00CF6E83 /* UserProfileModifyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileModifyCell.swift; sourceTree = "<group>"; };
 		580BCBCA1E54DA6F007AFFE3 /* ChattingHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingHistoryViewController.swift; sourceTree = "<group>"; };
 		580BCBCC1E54DFDE007AFFE3 /* ChattingWithNewOneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingWithNewOneViewController.swift; sourceTree = "<group>"; };
 		580BCBCE1E5545D3007AFFE3 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 				580895291E52F78A00F8D96B /* MyProfileInfoCell.swift */,
 				580895231E52E86200F8D96B /* UserInfoCell.swift */,
 				580895251E52E87400F8D96B /* UserMeetingCell.swift */,
+				580A22DB1E57473B00CF6E83 /* UserProfileModifyCell.swift */,
 				580895271E52F74E00F8D96B /* UserFollowingCell.swift */,
 				580A22C01E56D9A400CF6E83 /* FollowerCell.swift */,
 				5808952B1E530F8C00F8D96B /* MinimizedMeetingCell.swift */,
@@ -735,6 +738,7 @@
 				580895261E52E87400F8D96B /* UserMeetingCell.swift in Sources */,
 				5808951E1E52C55700F8D96B /* UserProfileBarView.swift in Sources */,
 				583BB5BF1E4D4F9C000FDA44 /* MeetingCell.swift in Sources */,
+				580A22DC1E57473B00CF6E83 /* UserProfileModifyCell.swift in Sources */,
 				580FB4821E5225ED0057DA21 /* SignInRequiredViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
