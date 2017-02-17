@@ -10,6 +10,55 @@ import UIKit
 
 class UserInfoCell: BaseCell {
 
+    var user: Users?
+    
+    var userId: String? {
+        didSet {
+            if let userId = userId {
+                observeFirebaseValue(userId: userId)
+            }
+        }
+    }
+    
+    func observeFirebaseValue(userId: String) {
+        FirebaseDataService.instance.userRef.child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let value = snapshot.value as? Dictionary<String, AnyObject> {
+                
+                let user = Users(uid: snapshot.key, data: value)
+                self.userBackgroundImageView.imageUrlString = user.backgroundImageUrl
+                self.userProfileImageView.imageUrlString = value[Constants.Users.imageUrl] as? String
+                self.titleLabel.text = value[Constants.Users.username] as? String
+                self.introTextView.text = value[Constants.Users.intro] as? String
+                
+                let numComments = value[Constants.Users.numComments] as? Int
+                let numFollowers = value[Constants.Users.numFollowers] as? Int
+                let numFollowings = value[Constants.Users.numFollowings] as? Int
+                
+                //self.setPersonalStatistics(numComments: numComments!, numFollowers: numFollowers, numFollowings: numFollowings)
+            }
+        })
+    }
+    
+    func setPersonalStatistics(numComments: Int, numFollowers: Int, numFollowings: Int) {
+    
+        let attributedText = NSMutableAttributedString(string: "\(numComments)", attributes: [
+            NSFontAttributeName: UIFont.systemFont(ofSize: 24, weight: UIFontWeightMedium),
+            NSForegroundColorAttributeName: UIColor.black
+            ])
+        
+        attributedText.append(NSAttributedString(string: "\n댓글", attributes: [
+            NSFontAttributeName: UIFont.systemFont(ofSize: 14),
+            NSForegroundColorAttributeName: UIColor.darkGray
+            ]))
+        
+        // center alignment
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSRange(location: 0, length: attributedText.string.characters.count))
+        
+        commentsNumTextView.attributedText = attributedText
+    }
+    
     let userBackgroundImageView: DownloadImageView = {
         let imageView = DownloadImageView()
         imageView.image = UIImage(named: "placeholder1")
