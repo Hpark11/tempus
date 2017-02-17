@@ -7,13 +7,38 @@
 //
 
 import UIKit
+import Firebase
 
 class UserCell: UITableViewCell {
+    
+    var message: Message? {
+        didSet {
+            setUserProfile()
+            self.detailTextLabel?.text = message?.text
+            if let seconds = message?.timestamp?.doubleValue {
+                let dateTime = Date(timeIntervalSince1970: seconds)
+                let formatter = DateFormatter()
+                formatter.dateFormat = "hh:mm:ss a"
+                timeLabel.text = formatter.string(from: dateTime)
+            }
+        }
+    }
+    
+    
     
     struct UserData {
         static let profileImageSize: CGFloat = 48
         static let positionLabel: CGFloat = 64
     }
+    
+    
+    let timeLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = .lightGray
+        label.textAlignment = .right
+        return label
+    }()
     
     let profileImageView: DownloadImageView = {
         let imageView = DownloadImageView()
@@ -36,10 +61,40 @@ class UserCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         
+        addSubViews()
+        setConstriants()
+    }
+    
+    fileprivate func addSubViews() {
         addSubview(profileImageView)
-        
+        addSubview(timeLabel)
+    }
+    
+    fileprivate func setConstriants() {
         _ = profileImageView.anchor(nil, left: self.leftAnchor, bottom: nil, right: nil, topConstant: 0, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: UserData.profileImageSize, heightConstant: UserData.profileImageSize)
         profileImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        
+        _ = timeLabel.anchor(topAnchor, left: nil, bottom: nil, right: rightAnchor, topConstant: 20, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 100, heightConstant: 0)
+    }
+    
+    fileprivate func setUserProfile() {
+        let chatPartnerId: String?
+        if message?.fromUserId == FIRAuth.auth()?.currentUser?.uid {
+            chatPartnerId = message?.toUserId
+        } else {
+            chatPartnerId = message?.fromUserId
+        }
+        
+        if let id = chatPartnerId {
+            FirebaseDataService.instance.userRef.child(id).observeSingleEvent(of: .value, with: { (snapshot) in
+                if let value = snapshot.value as? Dictionary<String, AnyObject> {
+                    self.textLabel?.text = value[Constants.Users.username] as? String
+                    if let profileImageUrl = value[Constants.Users.imageUrl] as? String {
+                        self.profileImageView.imageUrlString = profileImageUrl
+                    }
+                }
+            })
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

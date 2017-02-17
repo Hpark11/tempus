@@ -185,6 +185,7 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
         googlemapView.camera = camera
             
         let marker = GMSMarker()
+        
         marker.position = CLLocationCoordinate2DMake(37.6183087, 126.9390451)
         marker.title = "Seoul"
         marker.snippet = "Republic of Korea"

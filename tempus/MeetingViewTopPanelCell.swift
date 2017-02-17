@@ -31,6 +31,8 @@ class MeetingViewTopPanelCell: BaseCell {
         }
     }
     
+    
+    
     /*
      *  UI Components
      */

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class MeetingViewController: UICollectionViewController {
 
@@ -33,6 +34,8 @@ class MeetingViewController: UICollectionViewController {
         static let bottomPanelCellId = "bottomPanelCellId"
         static let categoryCellId = "categoryCellId"
     }
+    
+    
     
     /*
      *  UI Components
@@ -75,6 +78,11 @@ class MeetingViewController: UICollectionViewController {
         
     }
     
+    override func loadView() {
+        super.loadView()
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -83,6 +91,8 @@ class MeetingViewController: UICollectionViewController {
         addSubViews()
         setConstraints()
         registerCells()
+        
+        self.navigationItem.title = ""
     }
     
     override func viewWillAppear(_ animated: Bool) {

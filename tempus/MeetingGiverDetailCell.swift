@@ -34,6 +34,7 @@ class MeetingGiverDetailCell: BaseCell {
         textView.isEditable = false
         textView.isSelectable = false
         textView.isUserInteractionEnabled = false
+        textView.text = "이것은 테스트 문자열입니다"
         return textView
     }()
     
@@ -54,6 +55,7 @@ class MeetingGiverDetailCell: BaseCell {
         textView.isEditable = false
         textView.isSelectable = false
         textView.isUserInteractionEnabled = false
+        textView.text = "이것은 테스트 문자열입니다"
         return textView
     }()
 
@@ -74,6 +76,7 @@ class MeetingGiverDetailCell: BaseCell {
         textView.isEditable = false
         textView.isSelectable = false
         textView.isUserInteractionEnabled = false
+        textView.text = "이것은 테스트 문자열입니다"
         return textView
     }()
     
@@ -94,6 +97,7 @@ class MeetingGiverDetailCell: BaseCell {
         textView.isEditable = false
         textView.isSelectable = false
         textView.isUserInteractionEnabled = false
+        textView.text = "이것은 테스트 문자열입니다"
         return textView
     }()
     

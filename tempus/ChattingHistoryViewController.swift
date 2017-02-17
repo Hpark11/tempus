@@ -57,13 +57,30 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
     
     func sendButtonTapped() {
         let ref = FirebaseDataService.instance.messageRef.childByAutoId()
+        
+        let toUserId = user?.uid
+        let fromUserId = FIRAuth.auth()?.currentUser?.uid
+        
         let values: Dictionary<String, AnyObject> = [
             "text": inputTextField.text! as AnyObject,
-            "toUserId": user?.uid as AnyObject,
-            "fromUserId": FIRAuth.auth()?.currentUser?.uid as AnyObject,
+            "toUserId": toUserId as AnyObject,
+            "fromUserId": fromUserId as AnyObject,
             "timestamp": NSNumber(value: Int(Date().timeIntervalSince1970))
         ]
-        ref.updateChildValues(values)
+
+        ref.updateChildValues(values) { (error, ref) in
+            if error != nil {
+                print(error as Any)
+                return
+            }
+            
+            let userMessageRef = FirebaseDataService.instance.userMessageRef.child(fromUserId!)
+            let messageId = ref.key
+            userMessageRef.updateChildValues([messageId: 1])
+            
+            let receipientUserMessageRef = FirebaseDataService.instance.userMessageRef.child(toUserId!)
+            receipientUserMessageRef.updateChildValues([messageId : 1])
+        }
     }
     
     override func viewDidLoad() {

@@ -20,6 +20,7 @@ class FirebaseDataService {
     private var _meetingRef = DB_BASE.child("meeting")
     private var _userRef = DB_BASE.child("users")
     private var _messeageRef = DB_BASE.child("messages")
+    private var _userMessageRef = DB_BASE.child("user-messages")
 
     // Storage References
     private var _imageRef = STORAGE_BASE.child("images")
@@ -40,6 +41,10 @@ class FirebaseDataService {
     
     var messageRef: FIRDatabaseReference {
         return _messeageRef
+    }
+    
+    var userMessageRef: FIRDatabaseReference {
+        return _userMessageRef
     }
     
     var imageRef: FIRStorageReference {
