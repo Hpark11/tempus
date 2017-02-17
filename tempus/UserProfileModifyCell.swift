@@ -25,6 +25,7 @@ class UserProfileModifyCell: BaseCell, UITextFieldDelegate {
                     self.passwordField.isEnabled = false
                     self.passwordConfirmField.placeholder = "비밀번호를 변경할 수 없습니다"
                     self.passwordConfirmField.isEnabled = false
+                    self.deleteProfileButton.isHidden = true
                 }
             }
         }
@@ -159,9 +160,20 @@ class UserProfileModifyCell: BaseCell, UITextFieldDelegate {
     }()
     
     lazy var deleteSuccessAlert: UIAlertController = {
-        let alert = UIAlertController(title: "삭제에러", message: "그동안 이용해주셔서 감사합니다", preferredStyle: .alert)
+        let alert = UIAlertController(title: "사용자 삭제확인", message: "정말로 삭제하시겠습니까?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default) { action in
-            _ = self.attachedViewController?.navigationController?.popViewController(animated: true)
+            if let user = FIRAuth.auth()?.currentUser {
+                FirebaseDataService.instance.userRef.child(user.uid).removeValue()
+                user.delete { error in
+                    if error != nil {
+                        // An error happened.
+                        self.presentAlert(controller: self.alert, message: "진행중에 에러가 발생하였습니다")
+                    } else {
+                        KeychainWrapper.standard.removeObject(forKey: Constants.keychainUid)
+                        _ = self.attachedViewController?.navigationController?.popViewController(animated: true)
+                    }
+                }
+            }
         })
         alert.addAction(UIAlertAction(title: "취소", style: .default) { action in })
         return alert
@@ -207,18 +219,7 @@ class UserProfileModifyCell: BaseCell, UITextFieldDelegate {
     }()
     
     func deleteProfileButtonTapped() {
-        if let user = FIRAuth.auth()?.currentUser {
-            FirebaseDataService.instance.userRef.child(user.uid).removeValue()
-            user.delete { error in
-                if error != nil {
-                    // An error happened.
-                    self.presentAlert(controller: self.alert, message: "진행중에 에러가 발생하였습니다")
-                } else {
-                    KeychainWrapper.standard.removeObject(forKey: Constants.keychainUid)
-                    self.presentAlert(controller: self.deleteSuccessAlert, message: "그동안 이용해주셔서 감사합니다")
-                }
-            }
-        }
+        self.presentAlert(controller: self.deleteSuccessAlert, message: "정말로 삭제하시겠습니까?")
     }
     
     override func setupViews() {
@@ -253,7 +254,7 @@ class UserProfileModifyCell: BaseCell, UITextFieldDelegate {
     }
     
     fileprivate func setConstraints() {
-        _ = infoSectionView.anchor(topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 54)
+        _ = infoSectionView.anchor(topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 36)
         
         _ = emailLabel.anchor(infoSectionView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 12, leftConstant: 12, bottomConstant: 0, rightConstant: 12, widthConstant: 0, heightConstant: 16)
         
@@ -273,7 +274,7 @@ class UserProfileModifyCell: BaseCell, UITextFieldDelegate {
         
         _ = dividerLightViews[2].anchor(introField.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 3, leftConstant: 12, bottomConstant: 0, rightConstant: 12, widthConstant: 0, heightConstant: 1)
         
-        _ = passwordSectionView.anchor(introField.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 16, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 54)
+        _ = passwordSectionView.anchor(introField.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 16, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 36)
         
         _ = passwordLabel.anchor(passwordSectionView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 12, leftConstant: 12, bottomConstant: 0, rightConstant: 12, widthConstant: 0, heightConstant: 16)
         
@@ -287,9 +288,9 @@ class UserProfileModifyCell: BaseCell, UITextFieldDelegate {
         
         _ = dividerLightViews[4].anchor(passwordConfirmField.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 3, leftConstant: 12, bottomConstant: 0, rightConstant: 12, widthConstant: 0, heightConstant: 1)
         
-        _ = deleteProfileButton.anchor(nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 16, bottomConstant: 32, rightConstant: 16, widthConstant: 0, heightConstant: 44)
+        _ = saveProfileButton.anchor(nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 16, bottomConstant: 32, rightConstant: 16, widthConstant: 0, heightConstant: 44)
         
-        _ = saveProfileButton.anchor(nil, left: leftAnchor, bottom: deleteProfileButton.topAnchor, right: rightAnchor, topConstant: 0, leftConstant: 16, bottomConstant: 10, rightConstant: 16, widthConstant: 0, heightConstant: 44)
+        _ = deleteProfileButton.anchor(nil, left: leftAnchor, bottom: deleteProfileButton.topAnchor, right: rightAnchor, topConstant: 0, leftConstant: 16, bottomConstant: 10, rightConstant: 16, widthConstant: 0, heightConstant: 44)
         
         _ = infoLabel.anchor(infoSectionView.topAnchor, left: infoSectionView.leftAnchor, bottom: infoSectionView.bottomAnchor, right: infoSectionView.rightAnchor, topConstant: 0, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         

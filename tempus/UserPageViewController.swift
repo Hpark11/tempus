@@ -33,7 +33,6 @@ class UserPageViewController: UICollectionViewController, UICollectionViewDelega
         label.textAlignment = .center
         label.text = "tempus"
         label.textColor = UIColor.white
-        
         return label
     }()
     

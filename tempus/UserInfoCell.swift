@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class UserInfoCell: BaseCell {
-
+    
     var myUid: String?
     var userInfo: Users? {
         didSet {
@@ -55,11 +55,26 @@ class UserInfoCell: BaseCell {
         return attributedText
     }
     
+    let overlayBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        view.alpha = 0.6
+        return view
+    }()
+    
+    let overlayUserView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        view.alpha = 0.6
+        return view
+    }()
+    
     let userBackgroundImageView: DownloadImageView = {
         let imageView = DownloadImageView()
         imageView.image = UIImage(named: "placeholder1")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        imageView.layer.masksToBounds = true
         return imageView
     }()
     
@@ -87,6 +102,36 @@ class UserInfoCell: BaseCell {
         button.addTarget(self, action: #selector(followButtonTapped), for: .touchUpInside)
         return button
     }()
+    
+    lazy var photoPickBackgroundButton: UIButton = {
+        let button = UIButton(type: .system)
+        let image = UIImage(named: "icon camera")
+        image?.resizableImage(withCapInsets: UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
+        button.setImage(image, for: .normal)
+        button.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
+        button.backgroundColor = .clear
+        button.addTarget(self, action: #selector(photoPickBackgroundButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    func photoPickBackgroundButtonTapped() {
+    
+    }
+    
+    lazy var photoPickUserImageButton: UIButton = {
+        let button = UIButton(type: .system)
+        let image = UIImage(named: "icon camera")
+        image?.resizableImage(withCapInsets: UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
+        button.setImage(image, for: .normal)
+        button.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
+        button.backgroundColor = .clear
+        button.addTarget(self, action: #selector(photoPickUserImageButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    func photoPickUserImageButtonTapped() {
+        
+    }
     
     lazy var commentButton: UIButton = {
         let button = UIButton(type: .system)
@@ -238,6 +283,11 @@ class UserInfoCell: BaseCell {
         addSubview(commentsNumTextView)
         addSubview(followersNumTextView)
         addSubview(followingNumTextView)
+        
+        userBackgroundImageView.addSubview(overlayBackgroundView)
+        userProfileImageView.addSubview(overlayUserView)
+        overlayBackgroundView.addSubview(photoPickBackgroundButton)
+        overlayUserView.addSubview(photoPickUserImageButton)
     }
 
     fileprivate func setConstraints() {
@@ -264,6 +314,14 @@ class UserInfoCell: BaseCell {
         _ = followersNumTextView.anchor(dividerView1.bottomAnchor, left: commentsNumTextView.rightAnchor, bottom: dividerView2.topAnchor, right: nil, topConstant: 18, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: frame.width / 3, heightConstant: 0)
         
         _ = followingNumTextView.anchor(dividerView1.bottomAnchor, left: followersNumTextView.rightAnchor, bottom: dividerView2.topAnchor, right: nil, topConstant: 18, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: frame.width / 3, heightConstant: 0)
+        
+        _ = overlayBackgroundView.anchor(userBackgroundImageView.topAnchor, left: userBackgroundImageView.leftAnchor, bottom: userBackgroundImageView.bottomAnchor, right: userBackgroundImageView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        
+        _ = overlayUserView.anchor(userProfileImageView.topAnchor, left: userProfileImageView.leftAnchor, bottom: userProfileImageView.bottomAnchor, right: userProfileImageView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        
+        _ = photoPickBackgroundButton.anchor(nil, left: nil, bottom: overlayBackgroundView.bottomAnchor, right: overlayBackgroundView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 3, rightConstant: 3, widthConstant: 44, heightConstant: 44)
+        
+        _ = photoPickUserImageButton.anchor(overlayUserView.topAnchor, left: overlayUserView.leftAnchor, bottom: overlayUserView.bottomAnchor, right: nil, topConstant: 0, leftConstant: 2, bottomConstant: 0, rightConstant: 0, widthConstant: 44, heightConstant: 44)
         
     }
 }

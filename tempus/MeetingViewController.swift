@@ -54,11 +54,11 @@ class MeetingViewController: UICollectionViewController {
     }()
     
     let titleLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 120, height: 40))
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 120, height: 26))
+        label.font = UIFont(name: "GothamRounded-Bold", size: 24)
         label.textAlignment = .center
         label.text = "tempus"
         label.textColor = UIColor.white
-        label.font = UIFont.systemFont(ofSize: 20)
         return label
     }()
     
