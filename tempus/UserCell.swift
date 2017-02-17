@@ -24,8 +24,6 @@ class UserCell: UITableViewCell {
         }
     }
     
-    
-    
     struct UserData {
         static let profileImageSize: CGFloat = 48
         static let positionLabel: CGFloat = 64

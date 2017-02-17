@@ -93,6 +93,8 @@ class SignInRequiredViewController: UIViewController{
                 if controllerId == Constants.ControllerId.userPage {
                     let layout = UICollectionViewFlowLayout()
                     layout.scrollDirection = .horizontal
+                    layout.minimumLineSpacing = 0
+                    layout.minimumInteritemSpacing = 0
                     let userPageViewController = UserPageViewController(collectionViewLayout: layout)
                     navigationController?.pushViewController(userPageViewController, animated: true)
                 } else if controllerId == Constants.ControllerId.chatting {

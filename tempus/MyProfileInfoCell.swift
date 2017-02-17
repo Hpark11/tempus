@@ -63,7 +63,7 @@ class MyProfileInfoCell: BaseCell, UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.item == 0 {
-            return CGSize(width: frame.width, height: frame.height / 1.4)
+            return CGSize(width: frame.width, height: frame.height / 1.1)
         } else {
             return CGSize(width: frame.width, height: frame.height)
         }

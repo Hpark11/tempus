@@ -108,7 +108,7 @@ class UserMeetingCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
         
         _ = didTakeMeetingCollectionView.anchor(didLaunchLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 60)
         
-        _ = changeProfileButton.anchor(nil, left: panelView.leftAnchor, bottom: panelView.bottomAnchor, right: panelView.rightAnchor, topConstant: 0, leftConstant: 16, bottomConstant: 42, rightConstant: 16, widthConstant: 0, heightConstant: 48)
+        _ = changeProfileButton.anchor(nil, left: panelView.leftAnchor, bottom: panelView.bottomAnchor, right: panelView.rightAnchor, topConstant: 0, leftConstant: 16, bottomConstant: 32, rightConstant: 16, widthConstant: 0, heightConstant: 48)
     }
     
     fileprivate func registerCells() {

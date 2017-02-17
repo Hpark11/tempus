@@ -10,33 +10,46 @@ import UIKit
 
 class UserInfoCell: BaseCell {
 
-    let userProfileImageView: DownloadImageView = {
+    let userBackgroundImageView: DownloadImageView = {
         let imageView = DownloadImageView()
         imageView.image = UIImage(named: "placeholder1")
-        imageView.layer.cornerRadius = Constants.userProfileImageSize.big / 2
+        imageView.contentMode = .scaleToFill
+        return imageView
+    }()
+    
+    let userProfileImageView: DownloadImageView = {
+        let imageView = DownloadImageView()
+        imageView.image = UIImage(named: "placeholder2")
+        imageView.layer.cornerRadius = Constants.userProfileImageSize.extra / 2
         imageView.layer.masksToBounds = true
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleToFill
+        imageView.layer.borderColor = UIColor.darkGray.cgColor
+        imageView.layer.borderWidth = 0.6
         return imageView
     }()
     
     lazy var followButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: "icon plus"), for: .normal)
-        button.frame = CGRect(x: 0, y: 0, width: 75, height: 75)
+        let image = UIImage(named: "icon small plus")
+        image?.resizableImage(withCapInsets: UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
+        button.setImage(image, for: .normal)
+        button.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
+        button.backgroundColor = .white
         button.addTarget(self, action: #selector(followButtonTapped), for: .touchUpInside)
-        button.layer.borderColor = UIColor.lightGray.cgColor
-        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.makeViaRgb(red: 230, green: 230, blue: 230).cgColor
+        button.layer.borderWidth = 0.4
         button.layer.cornerRadius = button.frame.width / 2
         return button
     }()
     
     lazy var commentButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: "icon comment"), for: .normal)
-        button.frame = CGRect(x: 0, y: 0, width: 75, height: 75)
+        button.setImage(UIImage(named: "icon small comment"), for: .normal)
+        button.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
+        button.backgroundColor = .white
         button.addTarget(self, action: #selector(commentButtonTapped), for: .touchUpInside)
-        button.layer.borderColor = UIColor.lightGray.cgColor
-        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.makeViaRgb(red: 230, green: 230, blue: 230).cgColor
+        button.layer.borderWidth = 0.4
         button.layer.cornerRadius = button.frame.width / 2
         return button
     }()
@@ -60,6 +73,19 @@ class UserInfoCell: BaseCell {
         label.textColor = UIColor.black
         label.font = UIFont.boldSystemFont(ofSize: 36)
         return label
+    }()
+    
+    lazy var introTextView: UITextView = {
+        let textView = UITextView()
+        textView.font = UIFont.systemFont(ofSize: 16)
+        textView.textAlignment = .center
+        textView.textColor = .lightGray
+        textView.backgroundColor = .clear
+        textView.isEditable = false
+        textView.isSelectable = false
+        textView.isUserInteractionEnabled = false
+        textView.text = "이것은 테스트 문자열입니다"
+        return textView
     }()
     
     let commentsNumTextView: UITextView = {
@@ -153,28 +179,33 @@ class UserInfoCell: BaseCell {
     }
     
     fileprivate func addSubViews() {
+        addSubview(userBackgroundImageView)
         addSubview(userProfileImageView)
         addSubview(followButton)
         addSubview(commentButton)
         addSubview(dividerView1)
         addSubview(dividerView2)
         addSubview(titleLabel)
+        addSubview(introTextView)
         addSubview(commentsNumTextView)
         addSubview(followersNumTextView)
         addSubview(followingNumTextView)
     }
 
     fileprivate func setConstraints() {
+        _ = userBackgroundImageView.anchor(topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: frame.height / 2.4)
         
-        _ = userProfileImageView.anchor(topAnchor, left: nil, bottom: nil, right: nil, topConstant: frame.height / 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: Constants.userProfileImageSize.big, heightConstant: Constants.userProfileImageSize.big)
+        _ = userProfileImageView.anchor(userBackgroundImageView.bottomAnchor, left: nil, bottom: nil, right: nil, topConstant: -(Constants.userProfileImageSize.extra / 2), leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: Constants.userProfileImageSize.extra, heightConstant: Constants.userProfileImageSize.extra)
         
         addConstraint(NSLayoutConstraint(item: userProfileImageView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
         
-        _ = followButton.anchor(topAnchor, left: nil, bottom: nil, right: userProfileImageView.leftAnchor, topConstant: frame.height / 5, leftConstant: 0, bottomConstant: 0, rightConstant: frame.width / 12, widthConstant: 75, heightConstant: 75)
+        _ = commentButton.anchor(userBackgroundImageView.bottomAnchor, left: userProfileImageView.rightAnchor, bottom: nil, right: nil, topConstant: -22, leftConstant: -22, bottomConstant: 0, rightConstant: 0, widthConstant: 44, heightConstant: 44)
         
-        _ = commentButton.anchor(topAnchor, left: userProfileImageView.rightAnchor, bottom: nil, right: nil, topConstant: frame.height / 5, leftConstant: frame.width / 12, bottomConstant: 0, rightConstant: 0, widthConstant: 75, heightConstant: 75)
+        _ = followButton.anchor(commentButton.bottomAnchor, left: commentButton.leftAnchor, bottom: nil, right: nil, topConstant: 5, leftConstant: -22, bottomConstant: 0, rightConstant: 0, widthConstant: 44, heightConstant: 44)
         
         _ = titleLabel.anchor(userProfileImageView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 16, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 40)
+        
+        _ = introTextView.anchor(titleLabel.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 2, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 30)
         
         _ = dividerView2.anchor(nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 1)
         
