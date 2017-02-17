@@ -7,15 +7,20 @@
 //
 
 import UIKit
+import Firebase
 
 class UserInfoCell: BaseCell {
 
-    var user: Users?
-    
+    var userInfo: Users?
+    var myUid: String = ""
     var userId: String? {
         didSet {
             if let userId = userId {
+                if userId == myUid {
+                    followButton.isHidden = true
+                }
                 observeFirebaseValue(userId: userId)
+                checkFollowButtonState()
             }
         }
     }
@@ -23,30 +28,31 @@ class UserInfoCell: BaseCell {
     func observeFirebaseValue(userId: String) {
         FirebaseDataService.instance.userRef.child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
             if let value = snapshot.value as? Dictionary<String, AnyObject> {
-                
-                let user = Users(uid: snapshot.key, data: value)
-                self.userBackgroundImageView.imageUrlString = user.backgroundImageUrl
-                self.userProfileImageView.imageUrlString = value[Constants.Users.imageUrl] as? String
-                self.titleLabel.text = value[Constants.Users.username] as? String
-                self.introTextView.text = value[Constants.Users.intro] as? String
-                
-                let numComments = value[Constants.Users.numComments] as? Int
-                let numFollowers = value[Constants.Users.numFollowers] as? Int
-                let numFollowings = value[Constants.Users.numFollowings] as? Int
-                
-                //self.setPersonalStatistics(numComments: numComments!, numFollowers: numFollowers, numFollowings: numFollowings)
+                self.userInfo = Users(uid: snapshot.key, data: value)
+                if let user = self.userInfo {
+                    self.userBackgroundImageView.imageUrlString = user.backgroundImageUrl
+                    self.userProfileImageView.imageUrlString = user.imageUrl
+                    self.titleLabel.text = user.username
+                    self.introTextView.text = user.intro
+                    self.setPersonalStatistics(numComments: user.numComments, numFollowers: user.numFollowers, numFollowings: user.numFollowings)
+                }
             }
         })
     }
     
     func setPersonalStatistics(numComments: Int, numFollowers: Int, numFollowings: Int) {
+        commentsNumTextView.attributedText = putDashBoardAttributedText(number: numComments, type: "댓글")
+        followersNumTextView.attributedText = putDashBoardAttributedText(number: numFollowers, type: "팔로워")
+        followingNumTextView.attributedText = putDashBoardAttributedText(number: numFollowings, type: "팔로잉")
+    }
     
-        let attributedText = NSMutableAttributedString(string: "\(numComments)", attributes: [
+    func putDashBoardAttributedText(number: Int, type: String) -> NSMutableAttributedString {
+        let attributedText = NSMutableAttributedString(string: "\(number)", attributes: [
             NSFontAttributeName: UIFont.systemFont(ofSize: 24, weight: UIFontWeightMedium),
             NSForegroundColorAttributeName: UIColor.black
             ])
         
-        attributedText.append(NSAttributedString(string: "\n댓글", attributes: [
+        attributedText.append(NSAttributedString(string: "\n\(type)", attributes: [
             NSFontAttributeName: UIFont.systemFont(ofSize: 14),
             NSForegroundColorAttributeName: UIColor.darkGray
             ]))
@@ -55,14 +61,13 @@ class UserInfoCell: BaseCell {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
         attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSRange(location: 0, length: attributedText.string.characters.count))
-        
-        commentsNumTextView.attributedText = attributedText
+        return attributedText
     }
     
     let userBackgroundImageView: DownloadImageView = {
         let imageView = DownloadImageView()
         imageView.image = UIImage(named: "placeholder1")
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
@@ -71,7 +76,7 @@ class UserInfoCell: BaseCell {
         imageView.image = UIImage(named: "placeholder2")
         imageView.layer.cornerRadius = Constants.userProfileImageSize.extra / 2
         imageView.layer.masksToBounds = true
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.borderColor = UIColor.darkGray.cgColor
         imageView.layer.borderWidth = 0.6
         return imageView
@@ -84,10 +89,10 @@ class UserInfoCell: BaseCell {
         button.setImage(image, for: .normal)
         button.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         button.backgroundColor = .white
-        button.addTarget(self, action: #selector(followButtonTapped), for: .touchUpInside)
         button.layer.borderColor = UIColor.makeViaRgb(red: 230, green: 230, blue: 230).cgColor
         button.layer.borderWidth = 0.4
         button.layer.cornerRadius = button.frame.width / 2
+        button.addTarget(self, action: #selector(followButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -102,6 +107,57 @@ class UserInfoCell: BaseCell {
         button.layer.cornerRadius = button.frame.width / 2
         return button
     }()
+    
+    func followButtonTapped(sender: UIButton) {
+        changeFollowButtonState()
+    }
+    
+    func checkFollowButtonState() {
+        if let shownUid = self.userId {
+            let followerRef = FirebaseDataService.instance.userRef.child(shownUid).child(Constants.Users.followers).child(self.myUid)
+            followerRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                if let _ = snapshot.value as? NSNull {
+                    self.turnOnAndOffFollowButton(isOn: false)
+                } else {
+                    self.turnOnAndOffFollowButton(isOn: true)
+                }
+            })
+        }
+    }
+    
+    func changeFollowButtonState() {
+        if let shownUid = self.userId {
+            let followingRef = FirebaseDataService.instance.userRef.child(self.myUid).child(Constants.Users.following).child(shownUid)
+            let followerRef = FirebaseDataService.instance.userRef.child(shownUid).child(Constants.Users.followers).child(self.myUid)
+            followerRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                if let _ = snapshot.value as? NSNull {
+                    self.userInfo?.changeNumFollowers(follows: true, followee: shownUid, follower: self.myUid)
+                    self.turnOnAndOffFollowButton(isOn: true)
+                    followerRef.setValue(NSNumber(value: 1))
+                    followingRef.setValue(NSNumber(value: 1))
+                } else {
+                    self.userInfo?.changeNumFollowers(follows: false, followee: shownUid, follower: self.myUid)
+                    self.turnOnAndOffFollowButton(isOn: false)
+                    followerRef.removeValue()
+                    followingRef.removeValue()
+                }
+            })
+        }
+    }
+    
+    func turnOnAndOffFollowButton(isOn: Bool) {
+        if !isOn {
+            self.followButton.setImage(UIImage(named: "icon small plus"), for: .normal)
+            self.followButton.backgroundColor = .white
+        } else {
+            self.followButton.setImage(UIImage(named: "icon small plus white"), for: .normal)
+            self.followButton.backgroundColor = UIColor.makeViaRgb(red: 0, green: 159, blue: 232)
+        }
+    }
+    
+    func commentButtonTapped() {
+        
+    }
     
     let dividerView1: UIView = {
         let view = UIView()
@@ -139,26 +195,8 @@ class UserInfoCell: BaseCell {
     
     let commentsNumTextView: UITextView = {
         let textView = UITextView()
-        //textView.backgroundColor = UIColor(white: 0.0, alpha: 0.0)
+        textView.backgroundColor = UIColor(white: 0.0, alpha: 0.0)
         textView.isEditable = false
-        
-        let attributedText = NSMutableAttributedString(string: "000", attributes: [
-            NSFontAttributeName: UIFont.systemFont(ofSize: 24, weight: UIFontWeightMedium),
-            NSForegroundColorAttributeName: UIColor.black
-            ])
-        
-        attributedText.append(NSAttributedString(string: "\n댓글", attributes: [
-            NSFontAttributeName: UIFont.systemFont(ofSize: 14),
-            NSForegroundColorAttributeName: UIColor.darkGray
-            ]))
-        
-        // center alignment
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .center
-        attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSRange(location: 0, length: attributedText.string.characters.count))
-        
-        textView.attributedText = attributedText
-        
         return textView
     }()
     
@@ -166,24 +204,6 @@ class UserInfoCell: BaseCell {
         let textView = UITextView()
         textView.backgroundColor = UIColor(white: 0.0, alpha: 0.0)
         textView.isEditable = false
-        
-        let attributedText = NSMutableAttributedString(string: "000", attributes: [
-            NSFontAttributeName: UIFont.systemFont(ofSize: 24, weight: UIFontWeightMedium),
-            NSForegroundColorAttributeName: UIColor.black
-            ])
-        
-        attributedText.append(NSAttributedString(string: "\n팔로워", attributes: [
-            NSFontAttributeName: UIFont.systemFont(ofSize: 14),
-            NSForegroundColorAttributeName: UIColor.darkGray
-            ]))
-        
-        // center alignment
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .center
-        attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSRange(location: 0, length: attributedText.string.characters.count))
-        
-        textView.attributedText = attributedText
-        
         return textView
     }()
     
@@ -191,34 +211,10 @@ class UserInfoCell: BaseCell {
         let textView = UITextView()
         textView.backgroundColor = UIColor(white: 0.0, alpha: 0.0)
         textView.isEditable = false
-        
-        let attributedText = NSMutableAttributedString(string: "000", attributes: [
-            NSFontAttributeName: UIFont.systemFont(ofSize: 24, weight: UIFontWeightMedium),
-            NSForegroundColorAttributeName: UIColor.black
-            ])
-        
-        attributedText.append(NSAttributedString(string: "\n팔로잉", attributes: [
-            NSFontAttributeName: UIFont.systemFont(ofSize: 14),
-            NSForegroundColorAttributeName: UIColor.darkGray
-            ]))
-        
-        // center alignment
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .center
-        attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSRange(location: 0, length: attributedText.string.characters.count))
-        
-        textView.attributedText = attributedText
-        
         return textView
     }()
     
-    func followButtonTapped() {
-        
-    }
     
-    func commentButtonTapped() {
-        
-    }
     
     override func setupViews() {
         super.setupViews()

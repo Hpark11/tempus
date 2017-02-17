@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-struct Users {
+class Users {
     private var _uid: String?
     private var _email: String?
     private var _provider: String?
@@ -142,5 +142,22 @@ struct Users {
         _imageUrl = data[Constants.Users.imageUrl] as? String
         _backgroundImageUrl = data[Constants.Users.backgroundImageUrl] as? String
         _intro = data[Constants.Users.intro] as? String
+    }
+    
+    func changeNumFollowers(follows: Bool, followee: String, follower: String) {
+        FirebaseDataService.instance.userRef.child(follower).child(Constants.Users.numFollowings).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let value = snapshot.value as? Int {
+                if follows {
+                    self._numFollowers = self._numFollowers! + 1
+                    FirebaseDataService.instance.userRef.child(follower).child(Constants.Users.numFollowings).setValue(value + 1)
+                } else {
+                    self._numFollowers = self._numFollowers! - 1
+                    FirebaseDataService.instance.userRef.child(follower).child(Constants.Users.numFollowings).setValue(value - 1)
+                }
+                FirebaseDataService.instance.userRef.child(followee).child(Constants.Users.followers).child(follower).setValue(NSNumber(value: 1))
+                FirebaseDataService.instance.userRef.child(follower).child(Constants.Users.following).child(followee).setValue(NSNumber(value: 1))
+                FirebaseDataService.instance.userRef.child(followee).child(Constants.Users.numFollowers).setValue(self._numFollowers)
+            }
+        })
     }
 }
