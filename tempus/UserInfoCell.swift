@@ -131,18 +131,27 @@ class UserInfoCell: BaseCell {
             let followerRef = FirebaseDataService.instance.userRef.child(shownUid).child(Constants.Users.followers).child(self.myUid)
             followerRef.observeSingleEvent(of: .value, with: { (snapshot) in
                 if let _ = snapshot.value as? NSNull {
-                    self.userInfo?.changeNumFollowers(follows: true, followee: shownUid, follower: self.myUid)
+                    self.observeChangeFollowing(follows: true, followee: shownUid, follower: self.myUid)
                     self.turnOnAndOffFollowButton(isOn: true)
                     followerRef.setValue(NSNumber(value: 1))
                     followingRef.setValue(NSNumber(value: 1))
                 } else {
-                    self.userInfo?.changeNumFollowers(follows: false, followee: shownUid, follower: self.myUid)
+                    self.observeChangeFollowing(follows: false, followee: shownUid, follower: self.myUid)
                     self.turnOnAndOffFollowButton(isOn: false)
                     followerRef.removeValue()
                     followingRef.removeValue()
                 }
             })
         }
+    }
+    
+    func observeChangeFollowing(follows: Bool, followee: String, follower: String) {
+        FirebaseDataService.instance.userRef.child(follower).child(Constants.Users.numFollowings).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let value = snapshot.value as? Int {
+                self.userInfo?.changeNumFollowers(follows: follows, followee: followee, follower: follower, numFollowing: value)
+                followersNumTextView.attributedText = putDashBoardAttributedText(number: self.userInfo?.numFollowers, type: "팔로워")
+            }
+        })
     }
     
     func turnOnAndOffFollowButton(isOn: Bool) {
