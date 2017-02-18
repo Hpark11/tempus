@@ -165,7 +165,9 @@ class UserProfileModifyCell: BaseCell, UITextFieldDelegate {
         alert.addAction(UIAlertAction(title: "확인", style: .default) { action in
             if let attachedCell = self.attachedCell {
                 attachedCell.isModifyMode = false
-                attachedCell.meetingCollectionView.reloadData()
+                if let userId = self.userInfo?.uid {
+                    attachedCell.meetingCollectionView.observeFirebaseValue(userId: String)
+                }
             }
         })
         
@@ -207,9 +209,12 @@ class UserProfileModifyCell: BaseCell, UITextFieldDelegate {
         let intro = self.introField.text!
         let username = self.usernameField.text!
         let email = self.emailField.text!
-        FirebaseDataService.instance.userRef.child((userInfo?.uid)!).child(Constants.Users.intro).setValue(intro)
-        FirebaseDataService.instance.userRef.child((userInfo?.uid)!).child(Constants.Users.username).setValue(username)
-        FirebaseDataService.instance.userRef.child((userInfo?.uid)!).child(Constants.Users.email).setValue(email)
+        if let uid = self.userInfo?.uid {
+            FirebaseDataService.instance.userRef.child(uid).child(Constants.Users.intro).setValue(intro)
+            FirebaseDataService.instance.userRef.child(uid).child(Constants.Users.username).setValue(username)
+            FirebaseDataService.instance.userRef.child(uid).child(Constants.Users.email).setValue(email)
+        }
+        
         if let attachedViewController = self.attachedViewController {
             attachedViewController.present(saveSuccessAlert, animated: true)
         }
