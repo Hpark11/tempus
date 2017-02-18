@@ -152,7 +152,6 @@ class UserFollowingCell: BaseCell, UITextFieldDelegate, UITableViewDelegate, UIT
         _ = sectionFollowingView.anchor(dividerView3.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 24)
         
         _ = followingTableView.anchor(sectionFollowingView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
-        
     }
     
     fileprivate func registerCells() {

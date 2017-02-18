@@ -20,6 +20,8 @@ extension MeetingViewController: UICollectionViewDelegateFlowLayout {
         }
     }
     
+    // ScrollRectToVisible
+    // Content Offset
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if topPanelCollectionView == collectionView {
             let topCell = collectionView.dequeueReusableCell(withReuseIdentifier:MeetingMainData.topPanelCellId, for: indexPath)  as! MeetingViewTopPanelCell
@@ -57,5 +59,10 @@ extension MeetingViewController: UICollectionViewDelegateFlowLayout {
         } else {
             return CGSize(width: 50, height: 50)
         }
+    }
+    
+    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let pageNumber = Int(targetContentOffset.pointee.x / view.frame.width)
+        topPanelPageControl.currentPage = pageNumber
     }
 }

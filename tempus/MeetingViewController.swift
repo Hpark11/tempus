@@ -11,13 +11,15 @@ import Firebase
 
 class MeetingViewController: UICollectionViewController {
 
+    var timer: Timer!
+    
     internal struct MeetingMainData {
         static let topContents: [MeetingTopPanelContent] = {
             return [
-                MeetingTopPanelContent(title: "당신의 가치를 높여줄 사람을\n만나볼수 없을까요?", imageName: "placeholder1"),
-                MeetingTopPanelContent(title: "잘 찾아보면 나와요 ", imageName: "placeholder2"),
-                MeetingTopPanelContent(title: "혹시 뭐 배워보고 싶어요?", imageName: "placeholder3"),
-                MeetingTopPanelContent(title: "당신의 하루를 가치있게!!", imageName: "placeholder1")
+                MeetingTopPanelContent(title: "당신의 가치를 높여줄 사람을\n만나볼수 없을까요?", imageName: "frontImage1"),
+                MeetingTopPanelContent(title: "매일을 가치있게", imageName: "frontImage2"),
+                MeetingTopPanelContent(title: "몇번의 클릭으로\n다양한 모임에 참여해보세요", imageName: "frontImage3"),
+                MeetingTopPanelContent(title: "매일 달라져가는 당신의 모습을\n 발견할 수 있습니다", imageName: "frontImage4")
             ]
         }()
         
@@ -71,6 +73,46 @@ class MeetingViewController: UICollectionViewController {
         return button
     }()
     
+    lazy var topPanelPageControl: UIPageControl = {
+        let pageControl = UIPageControl()
+        pageControl.pageIndicatorTintColor = .lightGray
+        pageControl.currentPageIndicatorTintColor = .yellow
+        pageControl.numberOfPages = MeetingMainData.topContents.count
+        return pageControl
+    }()
+    
+    lazy var counselingPageControl: UIPageControl = {
+        let pageControl = UIPageControl()
+        pageControl.pageIndicatorTintColor = .lightGray
+        pageControl.currentPageIndicatorTintColor = .cyan
+        //pageControl.numberOfPages = OnboardingData.pages.count
+        return pageControl
+    }()
+    
+    lazy var mentoringPageControl: UIPageControl = {
+        let pageControl = UIPageControl()
+        pageControl.pageIndicatorTintColor = .lightGray
+        pageControl.currentPageIndicatorTintColor = .cyan
+        //pageControl.numberOfPages = OnboardingData.pages.count
+        return pageControl
+    }()
+    
+    lazy var experiencePageControl: UIPageControl = {
+        let pageControl = UIPageControl()
+        pageControl.pageIndicatorTintColor = .lightGray
+        pageControl.currentPageIndicatorTintColor = .cyan
+        //pageControl.numberOfPages = OnboardingData.pages.count
+        return pageControl
+    }()
+    
+    lazy var networkingPageControl: UIPageControl = {
+        let pageControl = UIPageControl()
+        pageControl.pageIndicatorTintColor = .lightGray
+        pageControl.currentPageIndicatorTintColor = .cyan
+        //pageControl.numberOfPages = OnboardingData.pages.count
+        return pageControl
+    }()
+    
     /*
      *  UI Actions
      */
@@ -78,9 +120,18 @@ class MeetingViewController: UICollectionViewController {
         
     }
     
+    func topPanelPageScroll() {
+        
+        if topPanelPageControl.currentPage == MeetingMainData.topContents.count {
+            topPanelPageControl.currentPage = 1
+        }
+        let indexPath = IndexPath(item: self.topPanelPageControl.currentPage + 1, section: 0)
+        self.topPanelCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        self.topPanelPageControl.currentPage = self.topPanelPageControl.currentPage + 1
+    }
+    
     override func loadView() {
         super.loadView()
-        
     }
     
     override func viewDidLoad() {
@@ -91,8 +142,15 @@ class MeetingViewController: UICollectionViewController {
         addSubViews()
         setConstraints()
         registerCells()
-    
+        
+        timer = Timer.scheduledTimer(timeInterval: 1.8, target: self, selector: #selector(topPanelPageScroll), userInfo: nil, repeats: true)
+
         self.navigationItem.title = ""
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        timer.invalidate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -121,10 +179,13 @@ class MeetingViewController: UICollectionViewController {
     
     fileprivate func addSubViews() {
         view.addSubview(topPanelCollectionView)
+        view.addSubview(topPanelPageControl)
     }
     
     fileprivate func setConstraints() {
         _ = topPanelCollectionView.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: view.frame.height / 3.2).first
+        
+        _ = topPanelPageControl.anchor(nil, left: view.leftAnchor, bottom: topPanelCollectionView.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 2, rightConstant: 0, widthConstant: 0, heightConstant: 30)
         
         _ = self.collectionView?.anchor(topPanelCollectionView.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: -64, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0).first
     }

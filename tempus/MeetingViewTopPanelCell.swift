@@ -31,8 +31,6 @@ class MeetingViewTopPanelCell: BaseCell {
         }
     }
     
-    
-    
     /*
      *  UI Components
      */
@@ -77,6 +75,6 @@ class MeetingViewTopPanelCell: BaseCell {
         
         _ = titleView.anchor(nil, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 0, leftConstant: 16, bottomConstant: 0, rightConstant: 16, widthConstant: 0, heightConstant: 0)
         titleView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5).isActive = true
-        addConstraint(NSLayoutConstraint(item: titleView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: frame.size.height / 3.4))
+        addConstraint(NSLayoutConstraint(item: titleView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: frame.size.height / 3.8))
     }
 }
