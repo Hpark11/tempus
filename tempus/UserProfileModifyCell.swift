@@ -166,7 +166,7 @@ class UserProfileModifyCell: BaseCell, UITextFieldDelegate {
             if let attachedCell = self.attachedCell {
                 attachedCell.isModifyMode = false
                 if let userId = self.userInfo?.uid {
-                    attachedCell.meetingCollectionView.observeFirebaseValue(userId: String)
+                    self.attachedCell?.observeFirebaseValue(userId: userId)
                 }
             }
         })

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class UserFollowingCell: BaseCell, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
     
@@ -14,6 +15,12 @@ class UserFollowingCell: BaseCell, UITextFieldDelegate, UITableViewDelegate, UIT
 
     let followersCellId = "followersCellId"
     let followingCellId = "followingCellId"
+    
+    var users = Dictionary<String, Users>()
+    
+    var followers = [Users]()
+    var following = [Users]()
+    //var users = [Users]()
     
     let dividerView1: UIView = {
         let view = UIView()
@@ -76,12 +83,44 @@ class UserFollowingCell: BaseCell, UITextFieldDelegate, UITableViewDelegate, UIT
         return textField
     }()
     
+    func observeFirebaseValue() {
+        FirebaseDataService.instance.userRef.observe(.value, with: { (snapshot) in
+            if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                for one in snapshot {
+                    if let data = one.value as? Dictionary<String, AnyObject> {
+                        //self.users.append(Users(uid: one.key, data: data))
+                        let user = Users(uid: one.key, data: data)
+                        self.users[one.key] = user
+                    }
+                }
+            }
+            
+            if let userId = FIRAuth.auth()?.currentUser?.uid {
+                FirebaseDataService.instance.userRef.child(userId).child(Constants.Users.followers).observe(.value, with: { (snapshot) in
+                    if let value = snapshot.value as? Array<String> {
+                        
+                    }
+                })
+                
+                FirebaseDataService.instance.userRef.child(userId).child(Constants.Users.following).observe(.value, with: { (snapshot) in
+                    if let value = snapshot.value as? Array<String> {
+                        
+                    }
+                })
+            }
+            
+            self.followersTableView.reloadData()
+            self.followingTableView.reloadData()
+        })
+    }
+    
     override func setupViews() {
         super.setupViews()
     
         addSubViews()
         setConstraints()
         registerCells()
+        observeFirebaseValue()
     }
     
     fileprivate func addSubViews() {

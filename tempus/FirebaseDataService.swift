@@ -12,6 +12,17 @@ import Firebase
 let DB_BASE = FIRDatabase.database().reference()
 let STORAGE_BASE = FIRStorage.storage().reference()
 
+//struct StaticInstance {
+//    static var instance: DataController?
+//}
+//
+//class func sharedInstance() -> DataController {
+//    if !(StaticInstance.instance != nil) {
+//        StaticInstance.instance = DataController()
+//    }
+//    return StaticInstance.instance!
+//}
+
 class FirebaseDataService {
     static let instance = FirebaseDataService()
     
