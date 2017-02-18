@@ -10,6 +10,16 @@ import UIKit
 
 class FollowerCell: UITableViewCell {
     
+    var userInfo: Users? {
+        didSet {
+            if let user = userInfo {
+                profileImageView.imageUrlString = user.imageUrl
+                titleLabel.text = user.username
+                introLabel.text = user.intro
+            }
+        }
+    }
+    
     let profileImageView: DownloadImageView = {
         let imageView = DownloadImageView()
         imageView.image = UIImage(named: "placeholder human")

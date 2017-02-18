@@ -88,7 +88,6 @@ class UserFollowingCell: BaseCell, UITextFieldDelegate, UITableViewDelegate, UIT
             if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
                 for one in snapshot {
                     if let data = one.value as? Dictionary<String, AnyObject> {
-                        //self.users.append(Users(uid: one.key, data: data))
                         let user = Users(uid: one.key, data: data)
                         self.users[one.key] = user
                     }
@@ -96,17 +95,17 @@ class UserFollowingCell: BaseCell, UITextFieldDelegate, UITableViewDelegate, UIT
             }
             
             if let userId = FIRAuth.auth()?.currentUser?.uid {
-                FirebaseDataService.instance.userRef.child(userId).child(Constants.Users.followers).observe(.value, with: { (snapshot) in
-                    if let value = snapshot.value as? Array<String> {
-                        
+                if let following = self.users[userId]?.following {
+                    for key in following {
+                        self.following.append(self.users[key]!)
                     }
-                })
+                }
                 
-                FirebaseDataService.instance.userRef.child(userId).child(Constants.Users.following).observe(.value, with: { (snapshot) in
-                    if let value = snapshot.value as? Array<String> {
-                        
+                if let followers = self.users[userId]?.followers {
+                    for key in followers {
+                        self.followers.append(self.users[key]!)
                     }
-                })
+                }
             }
             
             self.followersTableView.reloadData()
@@ -183,17 +182,23 @@ class UserFollowingCell: BaseCell, UITextFieldDelegate, UITableViewDelegate, UIT
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        if followersTableView == tableView {
+            return followers.count
+        } else {
+            return following.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let identifier: String
         if tableView == followersTableView {
-            identifier = followersCellId
+            let cell = tableView.dequeueReusableCell(withIdentifier: followersCellId, for: indexPath) as! FollowerCell
+            cell.userInfo = self.followers[indexPath.item]
+            return cell
         } else {
-            identifier = followingCellId
+            let cell = tableView.dequeueReusableCell(withIdentifier: followingCellId, for: indexPath) as! FollowerCell
+            cell.userInfo = self.following[indexPath.item]
+            return cell
         }
-        return tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! FollowerCell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

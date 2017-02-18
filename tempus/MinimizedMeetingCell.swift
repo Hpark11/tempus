@@ -20,11 +20,6 @@ class MinimizedMeetingCell: BaseCell {
             
             if let imageUrl = meeting?.imageUrl {
                 imageView.imageUrlString = imageUrl
-//                if let meetingImage = imageCache.object(forKey: imageUrl as NSString) {
-//                    self.imageView.image = meetingImage
-//                } else {
-//                    self.setImageFromFirebaseStorageWithUrl(imageUrl: imageUrl)
-//                }
             }
         }
     }
