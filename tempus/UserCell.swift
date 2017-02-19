@@ -76,14 +76,7 @@ class UserCell: UITableViewCell {
     }
     
     fileprivate func setUserProfile() {
-        let chatPartnerId: String?
-        if message?.fromUserId == FIRAuth.auth()?.currentUser?.uid {
-            chatPartnerId = message?.toUserId
-        } else {
-            chatPartnerId = message?.fromUserId
-        }
-        
-        if let id = chatPartnerId {
+        if let id = message?.chatWithSomeone() {
             FirebaseDataService.instance.userRef.child(id).observeSingleEvent(of: .value, with: { (snapshot) in
                 if let value = snapshot.value as? Dictionary<String, AnyObject> {
                     self.textLabel?.text = value[Constants.Users.username] as? String

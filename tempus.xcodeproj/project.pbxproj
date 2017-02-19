@@ -61,6 +61,7 @@
 		5841BD661E5049ED001E6186 /* MeetingAddCoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841BD651E5049ED001E6186 /* MeetingAddCoverCell.swift */; };
 		5841BD681E5049FA001E6186 /* MeetingAddDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841BD671E5049FA001E6186 /* MeetingAddDetailCell.swift */; };
 		5841BD6A1E50776E001E6186 /* MeetingAddViewController_ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841BD691E50776E001E6186 /* MeetingAddViewController_ext.swift */; };
+		58CCD4B11E59330E009B29F8 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CCD4B01E59330E009B29F8 /* ChatMessageCell.swift */; };
 		58D2AAD61E4ACB510084CE80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AAD51E4ACB510084CE80 /* AppDelegate.swift */; };
 		58D2AAD81E4ACB510084CE80 /* MeetingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AAD71E4ACB510084CE80 /* MeetingListViewController.swift */; };
 		58D2AADE1E4ACB510084CE80 /* tempus.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AADC1E4ACB510084CE80 /* tempus.xcdatamodeld */; };
@@ -157,6 +158,7 @@
 		5841BD651E5049ED001E6186 /* MeetingAddCoverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingAddCoverCell.swift; sourceTree = "<group>"; };
 		5841BD671E5049FA001E6186 /* MeetingAddDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingAddDetailCell.swift; sourceTree = "<group>"; };
 		5841BD691E50776E001E6186 /* MeetingAddViewController_ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingAddViewController_ext.swift; sourceTree = "<group>"; };
+		58CCD4B01E59330E009B29F8 /* ChatMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
 		58D2AAD21E4ACB510084CE80 /* tempus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tempus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D2AAD51E4ACB510084CE80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D2AAD71E4ACB510084CE80 /* MeetingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingListViewController.swift; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 				580A22C01E56D9A400CF6E83 /* FollowerCell.swift */,
 				5808952B1E530F8C00F8D96B /* MinimizedMeetingCell.swift */,
 				580BCBCE1E5545D3007AFFE3 /* UserCell.swift */,
+				58CCD4B01E59330E009B29F8 /* ChatMessageCell.swift */,
 			);
 			name = "Custom Cells";
 			sourceTree = "<group>";
@@ -711,6 +714,7 @@
 				5807755D1E4ECB3A0092ED8F /* SlideViewController.swift in Sources */,
 				5808952A1E52F78A00F8D96B /* MyProfileInfoCell.swift in Sources */,
 				58FCAADD1E4B2756002F5B0A /* MeetingViewTopPanelCell.swift in Sources */,
+				58CCD4B11E59330E009B29F8 /* ChatMessageCell.swift in Sources */,
 				580FB4861E5232B70057DA21 /* SignInViewController.swift in Sources */,
 				58FCAAE91E4C3A0D002F5B0A /* MeetingCategoryContent.swift in Sources */,
 				58FCAAE31E4C2ADC002F5B0A /* RecommendedMeetingViewCell.swift in Sources */,

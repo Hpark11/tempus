@@ -9,11 +9,17 @@
 import UIKit
 import Firebase
 
-class ChattingHistoryViewController: UICollectionViewController, UITextFieldDelegate {
+class ChattingHistoryViewController: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout {
+    
+    let cellId = "cellId"
+    
+    var messages = [Message]()
+    var chatInputViewBottomAnchor: NSLayoutConstraint?
     
     var user: Users? {
         didSet {
             titleLabel.text = user?.username
+            observeMessages()
         }
     }
     
@@ -74,31 +80,66 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
                 return
             }
             
-            let userMessageRef = FirebaseDataService.instance.userMessageRef.child(fromUserId!)
+            self.inputTextField.text = nil
+            let userMessageRef = FirebaseDataService.instance.userMessageRef.child(fromUserId!).child(toUserId!)
             let messageId = ref.key
             userMessageRef.updateChildValues([messageId: 1])
             
-            let receipientUserMessageRef = FirebaseDataService.instance.userMessageRef.child(toUserId!)
+            let receipientUserMessageRef = FirebaseDataService.instance.userMessageRef.child(toUserId!).child(fromUserId!)
             receipientUserMessageRef.updateChildValues([messageId : 1])
         }
     }
     
+    func observeMessages() {
+        guard let uid = FIRAuth.auth()?.currentUser?.uid, let toUserId = user?.uid else {
+            return
+        }
+        let userMsgRef = FirebaseDataService.instance.userMessageRef.child(uid).child(toUserId)
+        userMsgRef.observe(.childAdded, with: { (snapshot) in
+            let messageId = snapshot.key
+            let messageRef = FirebaseDataService.instance.messageRef.child(messageId)
+            messageRef.observe(.value, with: { (snapshot) in
+                guard let dictionary = snapshot.value as? Dictionary<String, AnyObject> else {
+                    return
+                }
+                let message = Message()
+                message.setValuesForKeys(dictionary)
+                
+                if message.chatWithSomeone() == self.user?.uid {
+                    self.messages.append(message)
+                    DispatchQueue.main.async(execute: {
+                        self.collectionView?.reloadData()
+                    })
+                }
+            })
+        })
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView?.backgroundColor = .white
+
         navigationItem.titleView = titleLabel
+        setCollectionViewUI()
         addSubViews()
         setConstraints()
+        registerCells()
+        setupKeyboardObservers()
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        subscribeToKeyboardNotifications()
+        setTabBarVisibility(isHidden: true, animated: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setTabBarVisibility(isHidden: false, animated: true)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        unsubscribeFromKeyboardNotifications()
+        NotificationCenter.default.removeObserver(self)
     }
     
     fileprivate func addSubViews() {
@@ -108,8 +149,16 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
         chatInputView.addSubview(dividerView)
     }
     
+    fileprivate func setCollectionViewUI() {
+        //collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
+        collectionView?.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 58, right: 0)
+        collectionView?.alwaysBounceVertical = true
+        collectionView?.backgroundColor = .white
+        collectionView?.keyboardDismissMode = .interactive
+    }
+    
     fileprivate func setConstraints() {
-        _ = chatInputView.anchor(nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 64, rightConstant: 0, widthConstant: 0, heightConstant: ChattingHistoryData.inputYSize)
+        chatInputViewBottomAnchor = chatInputView.anchor(nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: ChattingHistoryData.inputYSize)[1]
         
         _ = sendButton.anchor(nil, left: nil, bottom: nil, right: chatInputView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 80, heightConstant: ChattingHistoryData.inputYSize)
         sendButton.centerYAnchor.constraint(equalTo: chatInputView.centerYAnchor).isActive = true
@@ -121,40 +170,109 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
         
     }
     
+    fileprivate func registerCells(){
+        collectionView?.register(ChatMessageCell.self, forCellWithReuseIdentifier: cellId)
+    }
+    
+    func setupKeyboardObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillHide), name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    func handleKeyboardWillShow(notification: Notification) {
+        let keyboardSize = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        let keyboardDuration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! Double
+        chatInputViewBottomAnchor?.constant = -(keyboardSize.cgRectValue.height)
+        UIView.animate(withDuration: keyboardDuration) { 
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func handleKeyboardWillHide(notification: Notification) {
+        let keyboardDuration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! Double
+        chatInputViewBottomAnchor?.constant = 0
+        UIView.animate(withDuration: keyboardDuration) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        sendButtonTapped()
-        return true
+        return textField.resignFirstResponder()
     }
     
-    // get keyboard height and shift the view from bottom to higher
-    func keyboardWillShow(_ notification: Notification) {
-        if inputTextField.isFirstResponder {
-            view.frame.origin.y = 0 - getKeyboardHeight(notification)
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return messages.count
+    }
+ 
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChatMessageCell
+        
+        let message = messages[indexPath.item]
+        cell.chattingTextView.text = message.text
+        setupCell(cell: cell, message: message)
+        cell.containerViewWidthAnchor?.constant = measuredFrameHeightForEachMessage(message: message.text!).width + 32
+
+        return cell
+    }
+    
+    private func setupCell(cell: ChatMessageCell, message: Message) {
+        if let imageUrl = self.user?.imageUrl {
+            cell.profileImageView.imageUrlString = imageUrl
+        }
+        
+        if message.fromUserId == FIRAuth.auth()?.currentUser?.uid {
+            cell.containerView.backgroundColor = ChatMessageCell.blueish
+            cell.chattingTextView.textColor = UIColor.white
+            cell.containerViewRightAnchor?.isActive = true
+            cell.containerViewLeftAnchor?.isActive = false
+            cell.profileImageView.isHidden = true
+        } else {
+            cell.containerView.backgroundColor = UIColor.makeViaRgb(red: 240, green: 240, blue: 240)
+            cell.chattingTextView.textColor = UIColor.black
+            cell.containerViewRightAnchor?.isActive = false
+            cell.containerViewLeftAnchor?.isActive = true
         }
     }
     
-    func keyboardWillHide(_ notification: Notification) {
-        if inputTextField.isFirstResponder {
-            view.frame.origin.y = 0
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        var height: CGFloat = 80
+        if let text = messages[indexPath.item].text {
+            height = measuredFrameHeightForEachMessage(message: text).height + 20// + Constants.userProfileImageSize.lessSmall
+        }
+        let width = UIScreen.main.bounds.width
+        return CGSize(width: width, height: height)
+    }
+    
+    private func measuredFrameHeightForEachMessage(message: String) -> CGRect {
+        let size = CGSize(width: 200, height: 1000)
+        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+        return NSString(string: message).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 16)], context: nil)
+    }
+    
+    func setTabBarVisibility(isHidden: Bool, animated: Bool) {
+        let tabBar = self.tabBarController?.tabBar
+        if tabBar?.isHidden == isHidden {
+            return
+        }
+        let frame = tabBar?.frame
+        let offset = (isHidden ? (frame?.height)! : -(frame?.height)!)
+        let duration: TimeInterval = (animated ? 0.5 : 0.0)
+        tabBar?.isHidden = false
+        if frame != nil
+        {
+            UIView.animate(withDuration: duration, animations: {
+                tabBar?.frame = (frame?.offsetBy(dx: 0, dy: offset))!
+            }, completion: {
+                if $0 {
+                    tabBar?.isHidden = isHidden
+                }
+            })
         }
     }
     
-    func getKeyboardHeight(_ notification: Notification) -> CGFloat {
-        let userInfo = notification.userInfo
-        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
-        return keyboardSize.cgRectValue.height
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        collectionView?.collectionViewLayout.invalidateLayout()
     }
-    
-    func subscribeToKeyboardNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
-    }
-    
-    func unsubscribeFromKeyboardNotifications() {
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
-    }
-    
 }
 
 

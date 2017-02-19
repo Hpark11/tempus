@@ -71,12 +71,15 @@ class ChattingViewController: UITableViewController {
         checkIsUserSignedIn()
         setNavigationBarUI()
         
-        registerCells()
-        
         messages.removeAll()
         messagesDict.removeAll()
         tableView.reloadData()
+        registerCells()
         observePreconfiguredUserMessage()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     func observePreconfiguredUserMessage() {
@@ -86,31 +89,40 @@ class ChattingViewController: UITableViewController {
         
         let ref = FirebaseDataService.instance.userMessageRef.child(uid)
         ref.observe(.childAdded, with: { (snapshot) in
-            let messageId = snapshot.key
-            let specificMessageRef = FirebaseDataService.instance.messageRef.child(messageId)
-            
-            specificMessageRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                if let dict = snapshot.value as? Dictionary<String, AnyObject> {
-                    let message = Message()
-                    message.setValuesForKeys(dict)
-                    self.messages.append(message)
-                    
-                    if let toUserId = message.toUserId {
-                        self.messagesDict[toUserId] = message
-                        self.messages = Array(self.messagesDict.values)
-                        self.messages.sort(by: { (message1, message2) -> Bool in
-                            return (message1.timestamp?.intValue)! > (message2.timestamp?.intValue)!
-                        })
+            let userId = snapshot.key
+            FirebaseDataService.instance.userMessageRef.child(uid).child(userId).observe(.childAdded, with: { (snapshot) in
+                let messageId = snapshot.key
+                let specificMessageRef = FirebaseDataService.instance.messageRef.child(messageId)
+                
+                specificMessageRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                    if let dict = snapshot.value as? Dictionary<String, AnyObject> {
+                        let message = Message()
+                        message.setValuesForKeys(dict)
+                        self.messages.append(message)
+                        
+                        if let chatPartnerId = message.chatWithSomeone() {
+                            self.messagesDict[chatPartnerId] = message
+                            self.messages = Array(self.messagesDict.values)
+                            self.messages.sort(by: { (message1, message2) -> Bool in
+                                return (message1.timestamp?.intValue)! > (message2.timestamp?.intValue)!
+                            })
+                        }
+                        
+                        self.timer?.invalidate()
+                        self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
                     }
-                    
-                    DispatchQueue.main.async(execute: {
-                        self.tableView.reloadData()
-                    })
-                }
-            })
+                })
+            })  
         })
     }
     
+    var timer: Timer?
+    
+    func handleReloadTable() {
+        DispatchQueue.main.async(execute: {
+            self.tableView.reloadData()
+        })
+    }
 
     fileprivate func setNavigationBarUI() {
         navigationItem.titleView = titleLabel
@@ -130,6 +142,20 @@ class ChattingViewController: UITableViewController {
     
     fileprivate func registerCells() {
         tableView.register(UserCell.self, forCellReuseIdentifier: cellId)
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let message = messages[indexPath.row]
+        guard let chatPartnerId = message.chatWithSomeone() else {
+            return
+        }
+        let ref = FirebaseDataService.instance.userRef.child(chatPartnerId)
+        ref.observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let value = snapshot.value as? Dictionary<String, AnyObject> else {
+                return
+            }
+            self.presentChattingHistory(user: Users(uid: chatPartnerId, data: value))
+        })
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
