@@ -105,12 +105,10 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
                 let message = Message()
                 message.setValuesForKeys(dictionary)
                 
-                if message.chatWithSomeone() == self.user?.uid {
-                    self.messages.append(message)
-                    DispatchQueue.main.async(execute: {
-                        self.collectionView?.reloadData()
-                    })
-                }
+                self.messages.append(message)
+                DispatchQueue.main.async(execute: {
+                    self.collectionView?.reloadData()
+                })
             })
         })
     }

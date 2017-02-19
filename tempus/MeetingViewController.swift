@@ -120,14 +120,15 @@ class MeetingViewController: UICollectionViewController {
         
     }
     
+    var pageNum: Int = 0
     func topPanelPageScroll() {
-        
-        if topPanelPageControl.currentPage == MeetingMainData.topContents.count {
-            topPanelPageControl.currentPage = 1
+        if pageNum >= MeetingMainData.topContents.count {
+            pageNum = 0
         }
-        let indexPath = IndexPath(item: self.topPanelPageControl.currentPage + 1, section: 0)
+        let indexPath = IndexPath(item: pageNum, section: 0)
         self.topPanelCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        self.topPanelPageControl.currentPage = self.topPanelPageControl.currentPage + 1
+        self.topPanelPageControl.currentPage = pageNum
+        pageNum += 1
     }
     
     override func loadView() {
@@ -143,8 +144,6 @@ class MeetingViewController: UICollectionViewController {
         setConstraints()
         registerCells()
         
-        timer = Timer.scheduledTimer(timeInterval: 1.8, target: self, selector: #selector(topPanelPageScroll), userInfo: nil, repeats: true)
-
         self.navigationItem.title = ""
     }
     
@@ -155,6 +154,8 @@ class MeetingViewController: UICollectionViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        timer = Timer.scheduledTimer(timeInterval: 2.2, target: self, selector: #selector(topPanelPageScroll), userInfo: nil, repeats: true)
         
         UIView.animate(withDuration: 0.5) { 
             self.navigationController?.navigationBar.isTranslucent = true

@@ -92,33 +92,39 @@ class ChattingViewController: UITableViewController {
             let userId = snapshot.key
             FirebaseDataService.instance.userMessageRef.child(uid).child(userId).observe(.childAdded, with: { (snapshot) in
                 let messageId = snapshot.key
-                let specificMessageRef = FirebaseDataService.instance.messageRef.child(messageId)
-                
-                specificMessageRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                    if let dict = snapshot.value as? Dictionary<String, AnyObject> {
-                        let message = Message()
-                        message.setValuesForKeys(dict)
-                        self.messages.append(message)
-                        
-                        if let chatPartnerId = message.chatWithSomeone() {
-                            self.messagesDict[chatPartnerId] = message
-                            self.messages = Array(self.messagesDict.values)
-                            self.messages.sort(by: { (message1, message2) -> Bool in
-                                return (message1.timestamp?.intValue)! > (message2.timestamp?.intValue)!
-                            })
-                        }
-                        
-                        self.timer?.invalidate()
-                        self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
-                    }
-                })
-            })  
+                self.fetchMessageAttemptReload(messageId: messageId)
+            })
         })
+    }
+    
+    private func fetchMessageAttemptReload(messageId: String) {
+        let specificMessageRef = FirebaseDataService.instance.messageRef.child(messageId)
+        specificMessageRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            if let dict = snapshot.value as? Dictionary<String, AnyObject> {
+                let message = Message()
+                message.setValuesForKeys(dict)
+                self.messages.append(message)
+                
+                if let chatPartnerId = message.chatWithSomeone() {
+                    self.messagesDict[chatPartnerId] = message
+                }
+                self.attemptReloadOfTable()
+            }
+        })
+    }
+    
+    private func attemptReloadOfTable() {
+        self.timer?.invalidate()
+        self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
     }
     
     var timer: Timer?
     
     func handleReloadTable() {
+        self.messages = Array(self.messagesDict.values)
+        self.messages.sort(by: { (message1, message2) -> Bool in
+            return (message1.timestamp?.intValue)! > (message2.timestamp?.intValue)!
+        })
         DispatchQueue.main.async(execute: {
             self.tableView.reloadData()
         })
@@ -130,14 +136,6 @@ class ChattingViewController: UITableViewController {
         let signOutButtonItem = UIBarButtonItem(customView: signOutButton)
         self.navigationItem.leftBarButtonItem = signOutButtonItem
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon add meeting"), style: .plain, target: self, action: #selector(openChattingWithNewOne))
-    }
-    
-    fileprivate func addSubViews() {
-
-    }
-    
-    fileprivate func setConstraints() {
-
     }
     
     fileprivate func registerCells() {
