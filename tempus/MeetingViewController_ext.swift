@@ -13,10 +13,8 @@ extension MeetingViewController: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if topPanelCollectionView == collectionView {
             return 4
-        } else if self.collectionView == collectionView {
-            return MeetingMainData.bottomContents.count + 1
         } else {
-            return 0
+            return MeetingMainData.bottomContents.count
         }
     }
     
@@ -28,14 +26,11 @@ extension MeetingViewController: UICollectionViewDelegateFlowLayout {
             topCell.content = MeetingMainData.topContents[indexPath.item]
             return topCell
         } else if self.collectionView == collectionView  {
-            if indexPath.item == MeetingMainData.bottomContents.count {
-                return collectionView.dequeueReusableCell(withReuseIdentifier: MeetingMainData.categoryCellId, for: indexPath) as! CategoryMeetingViewCell
-            } else {
-                let bottomCell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetingMainData.bottomPanelCellId, for: indexPath) as!MeetingViewBottomPanelCell
-                bottomCell.moreButton.addTarget(self, action: #selector(moreButtonTapped), for: .touchUpInside)
-                bottomCell.moreButton.tag = indexPath.item
-                return bottomCell
-            }
+            let bottomCell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetingMainData.bottomPanelCellId, for: indexPath) as!MeetingViewBottomPanelCell
+            bottomCell.content = MeetingMainData.bottomContents[indexPath.item]
+            bottomCell.moreButton.addTarget(self, action: #selector(moreButtonTapped), for: .touchUpInside)
+            bottomCell.attachedViewController = self
+            return bottomCell
         } else {
             return UICollectionViewCell()
         }
@@ -50,14 +45,8 @@ extension MeetingViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if topPanelCollectionView == collectionView {
             return CGSize(width: view.frame.width, height: collectionView.frame.size.height)
-        } else if self.collectionView == collectionView {
-            if indexPath.item == MeetingMainData.bottomContents.count {
-                return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height * 1.4)
-            } else {
-                return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height / 2.2)
-            }
         } else {
-            return CGSize(width: 50, height: 50)
+            return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height / 2.2)
         }
     }
     

@@ -14,6 +14,7 @@ struct MinimizedMeeting {
     var title: String?
     var category: String?
     var imageUrl: String?
+    var categoryEn: String?
     
     init(id: String, data: Dictionary<String, AnyObject>) {
         self.id = id
@@ -26,6 +27,7 @@ struct MinimizedMeeting {
                 }
             }
         }
+        categoryEn = data[Constants.Meetings.category] as? String
     }
 }
 

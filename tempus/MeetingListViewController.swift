@@ -10,12 +10,15 @@ import UIKit
 import Firebase
 import SwiftKeychainWrapper
 
-class MeetingListViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class MeetingListViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     
-    var selfImprovementMeetings = [Meeting]()
-    var prepareExaminationMeetings = [Meeting]()
-    var professionalSkillsMeetings = [Meeting]()
-    var lookingForHobbyMeetings = [Meeting]()
+    var selfImprovementMeetings = false
+    var prepareExaminationMeetings = false
+    var professionalSkillsMeetings = false
+    var lookingForHobbyMeetings = false
+    
+    var searchWord: String?
+    var searchActive : Bool = false
     
     struct MeetingListData {
         static let selfImprovementCellId = "selfImprovementCellId"
@@ -27,9 +30,40 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
         static let categoryBarSize: CGFloat = 50.0
     }
     
+
+    
+//    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+//        searchWord = nil
+//        searchBar.text = nil
+//        collectionView?.reloadData()
+//    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchWord = nil
+        searchBar.text = nil
+        collectionView?.reloadData()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.searchWord = searchText
+        collectionView?.reloadData()
+    }
+    
+    
     /*
      *  UI Components
      */
+    
+    lazy var searchBar:UISearchBar = {
+        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 200, height: 20))
+        searchBar.placeholder = "Your placeholder"
+        searchBar.sizeToFit()
+        searchBar.delegate = self
+        return searchBar
+    }()
+        
+    
+    
     let titleLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 120, height: 26))
         label.font = UIFont(name: "GothamRounded-Bold", size: 24)
@@ -63,7 +97,18 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
         return categoryBarView
     }()
     
-    func searchButtonTapped() {
+    func searchButtonTapped(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.8) {
+            if self.searchActive == false {
+                self.navigationItem.titleView = self.searchBar
+                self.searchButton.setImage(UIImage(named: "icon cancel"), for: .normal)
+                self.searchActive = true
+            } else {
+                self.navigationItem.titleView = self.titleLabel
+                self.searchButton.setImage(UIImage(named: "icon search"), for: .normal)
+                self.searchActive = false
+            }
+        }
     }
     
     func addMeetingButtonTapped() {
@@ -112,54 +157,12 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
         registerCells()
         
         collectionView?.backgroundColor = UIColor.white
-        observeFirebaseValue()
+        setupKeyboardObservers()
     }
     
-    func observeFirebaseValue() {
-        // get list of memePosts from Firebase
-        
-        FirebaseDataService.instance.meetingRef.observe(.value, with: { (snapshot) in
-            if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
-                self.selfImprovementMeetings.removeAll()
-                self.prepareExaminationMeetings.removeAll()
-                self.professionalSkillsMeetings.removeAll()
-                self.lookingForHobbyMeetings.removeAll()
-                
-                for one in snapshot {
-                    if let postMeeting = one.value as? Dictionary<String, AnyObject> {
-                        FirebaseDataService.instance.userRef.child(postMeeting[Constants.Meetings.userId] as! String).observeSingleEvent(of: .value, with: { (userSnap) in
-                            if let userInfo = userSnap.value as? Dictionary<String, AnyObject> {
-                                let meeting = Meeting(id:one.key, data: postMeeting, userInfo: userInfo)
-                                if let category = meeting.category {
-                                    switch(category) {
-                                    case Constants.Category.selfImprovement:
-                                        self.selfImprovementMeetings.append(meeting)
-                                        break
-                                    case Constants.Category.prepareExamination:
-                                        self.prepareExaminationMeetings.append(meeting)
-                                        break
-                                    case Constants.Category.professionalSkills:
-                                        self.professionalSkillsMeetings.append(meeting)
-                                        break
-                                    case Constants.Category.lookingForHobby:
-                                        self.lookingForHobbyMeetings.append(meeting)
-                                        break
-                                    default:
-                                        break
-                                    }
-                                }
-                            }
-                            self.collectionView?.reloadData()
-                        })
-                    }
-                }
-            }
-            
-            self.selfImprovementMeetings.reverse()
-            self.prepareExaminationMeetings.reverse()
-            self.professionalSkillsMeetings.reverse()
-            self.lookingForHobbyMeetings.reverse()
-        })
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
     }
     
     
@@ -169,8 +172,7 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
         
         navigationItem.titleView = titleLabel
         let searchButtonItem = UIBarButtonItem(customView: searchButton)
-        let addMeetingButtonItem = UIBarButtonItem(customView: addMeetingButton)
-        self.navigationItem.rightBarButtonItems = [addMeetingButtonItem, searchButtonItem]
+        self.navigationItem.rightBarButtonItems = [searchButtonItem]
     }
     
     fileprivate func setCollectionViewUI() {
@@ -182,16 +184,19 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
         collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
         collectionView?.isPagingEnabled = true
         collectionView?.showsHorizontalScrollIndicator = false
+        collectionView?.keyboardDismissMode = .interactive
     }
     
     fileprivate func addSubViews() {
         self.view.addSubview(categoryBarView)
     }
     
+    
+    
     fileprivate func setConstraints() {
         _ = categoryBarView.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: MeetingListData.categoryBarSize)
         
-        _ = collectionView?.anchor(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: MeetingListData.categoryBarSize, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        _ = collectionView?.anchor(categoryBarView.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)[0]
     }
     
     fileprivate func registerCells() {
@@ -220,19 +225,54 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
 
         if indexPath.item == 0 {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetingListData.selfImprovementCellId, for: indexPath) as! MeetingListCell
-            cell.meetingList = selfImprovementMeetings
+            if selfImprovementMeetings == false {
+                cell.searchWord = self.searchWord
+                cell.category = Constants.Category.selfImprovement
+                selfImprovementMeetings = true
+            } else {
+                cell.searchWord = self.searchWord
+                //cell.collectionViewTopAnchor?.constant = 108
+            }
         } else if indexPath.item == 1 {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetingListData.prepareExaminationCellId, for: indexPath) as! MeetingListCell
-            cell.meetingList = prepareExaminationMeetings
+            if prepareExaminationMeetings == false {
+                cell.searchWord = self.searchWord
+                cell.category = Constants.Category.prepareExamination
+                prepareExaminationMeetings = true
+            } else {
+                cell.searchWord = self.searchWord
+                //cell.collectionViewTopAnchor?.constant = 108
+            }
         } else if indexPath.item == 2 {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetingListData.professionalSkillsCellId, for: indexPath) as! MeetingListCell
-            cell.meetingList = professionalSkillsMeetings
+            if professionalSkillsMeetings == false {
+                cell.searchWord = self.searchWord
+                cell.category = Constants.Category.professionalSkills
+                professionalSkillsMeetings = true
+            } else {
+                cell.searchWord = self.searchWord
+                //cell.collectionViewTopAnchor?.constant = 108
+            }
         } else if indexPath.item == 3 {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetingListData.lookingForHobbyCellId, for: indexPath) as! MeetingListCell
-            cell.meetingList = lookingForHobbyMeetings
+            if lookingForHobbyMeetings == false {
+                cell.searchWord = self.searchWord
+                cell.category = Constants.Category.lookingForHobby
+                lookingForHobbyMeetings = true
+            } else {
+                cell.searchWord = self.searchWord
+                //cell.collectionViewTopAnchor?.constant = 108
+            }
         } else {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetingListData.selfImprovementCellId, for: indexPath) as! MeetingListCell
-            cell.meetingList = selfImprovementMeetings
+            if selfImprovementMeetings == false {
+                cell.searchWord = self.searchWord
+                cell.category = Constants.Category.selfImprovement
+                selfImprovementMeetings = true
+            } else {
+                cell.searchWord = self.searchWord
+                //cell.collectionViewTopAnchor?.constant = 108
+            }
         }
         
         cell.attachedViewController = self
@@ -241,6 +281,28 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: view.frame.height - MeetingListData.categoryBarSize)
+    }
+    
+    func setupKeyboardObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillHide), name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    func handleKeyboardWillShow(notification: Notification) {
+        //let keyboardSize = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        let keyboardDuration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! Double
+        //chatInputViewBottomAnchor?.constant = -(keyboardSize.cgRectValue.height)
+        UIView.animate(withDuration: keyboardDuration) {
+            self.collectionView?.layoutIfNeeded()
+        }
+    }
+    
+    func handleKeyboardWillHide(notification: Notification) {
+        let keyboardDuration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! Double
+        //chatInputViewBottomAnchor?.constant = 0
+        UIView.animate(withDuration: keyboardDuration) {
+            self.collectionView?.layoutIfNeeded()
+        }
     }
 }
 

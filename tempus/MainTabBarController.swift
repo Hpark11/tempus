@@ -15,16 +15,16 @@ class MainTabBarController: UITabBarController {
 
         let layout = UICollectionViewFlowLayout()
         
-        let meetingViewController = MeetingViewController(collectionViewLayout: layout)
+        let meetingViewController = MeetingListViewController(collectionViewLayout: layout)
         //let navigationController = MainNavigationController()
         let navigationController = UINavigationController(rootViewController: meetingViewController)
-        navigationController.title = "만남"
+        navigationController.title = "모임"
         navigationController.tabBarItem.image = UIImage(named: "icon meet")
         navigationController.tabBarController?.tabBar.tintColor = .black
         
         let communityViewController = CommunityViewController()
         let secondNavigationController = UINavigationController(rootViewController: communityViewController)
-        secondNavigationController.title = "모임"
+        secondNavigationController.title = "등록"
         secondNavigationController.tabBarItem.image = UIImage(named: "icon community")
         
         let signInRequiredViewControllerForMyPage = SignInRequiredViewController()
@@ -36,7 +36,7 @@ class MainTabBarController: UITabBarController {
         let signInRequiredViewControllerForChatting = SignInRequiredViewController()
         signInRequiredViewControllerForChatting.controllerId = Constants.ControllerId.chatting
         let fourthNavigationController = UINavigationController(rootViewController: signInRequiredViewControllerForChatting)
-        fourthNavigationController.title = "채팅하기"
+        fourthNavigationController.title = "그룹채팅"
         fourthNavigationController.tabBarItem.image = UIImage(named: "icon chat")
         
         let settingsViewController = SettingsViewController()

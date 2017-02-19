@@ -82,5 +82,7 @@ class MinimizedMeetingCell: BaseCell {
         imageView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.width)
         titleLabel.frame = CGRect(x: 0, y: frame.width + 2, width: frame.width, height: 40)
         categoryLabel.frame = CGRect(x: 0, y: frame.width + 38 , width: frame.width, height: 20)
+        
+        
     }
 }

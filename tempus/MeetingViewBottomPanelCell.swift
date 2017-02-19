@@ -10,16 +10,32 @@ import UIKit
 
 class MeetingViewBottomPanelCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
+    
+    var attachedViewController: MeetingViewController?
+    var meetings = [MinimizedMeeting]()
+    
+    
     var content: MeetingBottomPanelContent? {
         didSet {
             if let content = content {
-                meetingTypeLabel.text = content.typeName
+                meetingTypeLabel.text = content.categoryName
+                moreButton.tag = content.tag
+                setMeetings(category: content.category)
             }
         }
     }
     
     struct MeetingViewCellData {
         static let cellId = "cellId"
+    }
+    
+    func setMeetings(category: String) {
+        for meeting in rawMeetingList {
+            let one = MinimizedMeeting(id: meeting[Constants.Meetings.userId] as! String, data: meeting)
+            if category == one.categoryEn {
+                meetings.append(one)
+            }
+        }
     }
     
     /*
@@ -53,6 +69,7 @@ class MeetingViewBottomPanelCell: BaseCell, UICollectionViewDelegate, UICollecti
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.isPagingEnabled = true
+        collectionView.keyboardDismissMode = .interactive
         return collectionView
     }()
     
@@ -93,11 +110,23 @@ class MeetingViewBottomPanelCell: BaseCell, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return meetings.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let attachedViewController = self.attachedViewController {
+            let layout = UICollectionViewFlowLayout()
+            layout.scrollDirection = .horizontal
+            let slideViewController = SlideViewController(collectionViewLayout: layout)
+            slideViewController.meetingId = self.meetings[indexPath.item].id
+            slideViewController.meetingMainImageUrl = self.meetings[indexPath.item].imageUrl
+            attachedViewController.present(slideViewController, animated: true, completion: nil)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetingViewCellData.cellId, for: indexPath) as! RecommendedMeetingViewCell
+        cell.meeting = meetings[indexPath.item]
         return cell
     }
     

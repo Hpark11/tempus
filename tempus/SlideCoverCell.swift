@@ -28,13 +28,13 @@ class SlideCoverCell: BaseCell {
                     
                     self.typeLabel.text = value[Constants.Meetings.type] as? String
                     
-                    self.estimatingTextSize(text: (value[Constants.Meetings.title] as? String), unitSize: 44, constraint: self.titleLabelHeightConstraint)
+                    self.estimatingTextSize(text: (value[Constants.Meetings.title] as? String), unitSize: 26, constraint: self.titleLabelHeightConstraint)
                     self.estimatingTextSize(text: (value[Constants.Meetings.subTitle] as? String), unitSize: 20, constraint: self.subTitleLabelHeightConstraint)
                     
                     FirebaseDataService.instance.userRef.child((value[Constants.Meetings.userId] as? String)!).observeSingleEvent(of: .value, with: { (userSnap) in
                         if let userVal = userSnap.value as? Dictionary<String, AnyObject> {
                             self.userProfileImageView.imageUrlString = userVal[Constants.Users.imageUrl] as? String
-                            self.giverLabel.text = (userVal[Constants.Users.username] as? String)! + " 기버"
+                            self.giverLabel.text = (userVal[Constants.Users.username] as? String)!
                         }
                     })
                 }
@@ -48,7 +48,7 @@ class SlideCoverCell: BaseCell {
             let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
             let estimatedRect = NSString(string: title).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: unitSize)], context: nil)
             
-            if estimatedRect.size.height > unitSize + 2 {
+            if estimatedRect.size.height > unitSize {
                 titleLabelHeightConstraint?.constant = unitSize * 2
             } else {
                 titleLabelHeightConstraint?.constant = unitSize
@@ -102,7 +102,7 @@ class SlideCoverCell: BaseCell {
     
     lazy var titleTextView: UITextView = {
         let textView = UITextView()
-        textView.font = UIFont.boldSystemFont(ofSize: 34)
+        textView.font = UIFont.boldSystemFont(ofSize: 30)
         textView.backgroundColor = .clear
         textView.textColor = .white
         textView.text = "강교혁 기버와 함께하는 \n창업이야기"
@@ -114,7 +114,7 @@ class SlideCoverCell: BaseCell {
     
     lazy var subtitleTextView: UITextView = {
         let textView = UITextView()
-        textView.font = UIFont.systemFont(ofSize: 22)
+        textView.font = UIFont.systemFont(ofSize: 20)
         textView.textContainerInset = UIEdgeInsetsMake(0, 8, 0, 0)
         textView.textColor = .lightGray
         textView.backgroundColor = .clear

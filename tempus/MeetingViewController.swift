@@ -9,6 +9,19 @@
 import UIKit
 import Firebase
 
+
+class reloadOperation : Operation {
+    var collectionView : UICollectionView!
+    var completionHandler : ((UIImage?) -> ())!
+    
+    override func main() {
+        OperationQueue.main.addOperation {
+            self.collectionView.reloadData()
+            print("reloaded")
+        }
+    }
+}
+
 class MeetingViewController: UICollectionViewController {
 
     var timer: Timer!
@@ -25,10 +38,10 @@ class MeetingViewController: UICollectionViewController {
         
         static let bottomContents: [MeetingBottomPanelContent] = {
             return [
-                MeetingBottomPanelContent(typeName: "카운셀링"),
-                MeetingBottomPanelContent(typeName: "멘토링"),
-                MeetingBottomPanelContent(typeName: "체험"),
-                MeetingBottomPanelContent(typeName: "네트워킹")
+                MeetingBottomPanelContent(categoryName: "자기계발", category: Constants.Category.selfImprovement ,tag: 0),
+                MeetingBottomPanelContent(categoryName: "입시", category: Constants.Category.prepareExamination , tag: 1),
+                MeetingBottomPanelContent(categoryName: "전문기술", category: Constants.Category.professionalSkills, tag: 2),
+                MeetingBottomPanelContent(categoryName: "취미", category: Constants.Category.lookingForHobby, tag: 3)
             ]
         }()
         
@@ -145,10 +158,31 @@ class MeetingViewController: UICollectionViewController {
         registerCells()
         
         self.navigationItem.title = ""
+        
+        downloadAllRawMeetingList()
     }
+    
+    func downloadAllRawMeetingList() {
+        let userMsgRef = FirebaseDataService.instance.meetingRef
+        userMsgRef.observe(.value, with: { (snapshot) in
+            if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                rawMeetingList.removeAll()
+                for one in snapshot {
+                    if let dict = one.value as? Dictionary<String, AnyObject> {
+                        rawMeetingList.append(dict)
+                    }
+                    DispatchQueue.main.async(execute: { 
+                        self.collectionView?.reloadData()
+                    })
+                }
+            }
+        })
+    }
+    
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        
         timer.invalidate()
     }
     
@@ -196,4 +230,5 @@ class MeetingViewController: UICollectionViewController {
         collectionView?.register(MeetingViewBottomPanelCell.self, forCellWithReuseIdentifier: MeetingMainData.bottomPanelCellId)
         collectionView?.register(CategoryMeetingViewCell.self, forCellWithReuseIdentifier: MeetingMainData.categoryCellId)
     }
+    
 }

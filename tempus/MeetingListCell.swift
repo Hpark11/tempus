@@ -7,14 +7,70 @@
 //
 
 import UIKit
+import Firebase
 
 class MeetingListCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     var attachedViewController: MeetingListViewController?
-    var meetingList: [Meeting]? {
+    var category: String? {
         didSet {
-            collectionView.reloadData()
+            if let category = category {
+                observeFirebaseValue(category: category)
+            }
         }
+    }
+    
+    var collectionViewTopAnchor: NSLayoutConstraint?
+    var collectionViewbottomAnchor: NSLayoutConstraint?
+    
+    var searchWord: String? {
+        didSet {
+            if let searchWord = searchWord {
+                filteredMeetingList.removeAll()
+                for meeting in meetingList {
+                    if meeting.title?.range(of:searchWord) != nil || searchWord == "" {
+                        filteredMeetingList.append(meeting)
+                    }
+                }
+                collectionView.reloadData()
+                collectionViewTopAnchor?.constant = 108
+            } else {
+                collectionViewTopAnchor?.constant = 0
+            }
+            collectionViewbottomAnchor?.constant = frame.height
+        }
+    }
+    
+    var filteredMeetingList = [Meeting]()
+    var meetingList = [Meeting]()
+    func observeFirebaseValue(category: String) {
+        let meetingRef = FirebaseDataService.instance.meetingRef
+        meetingRef.observe(.value, with: { (snapshot) in
+            if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                self.meetingList.removeAll()
+                self.filteredMeetingList.removeAll()
+                for one in snapshot {
+                    if let dict = one.value as? Dictionary<String, AnyObject> {
+                        if category == dict[Constants.Meetings.category] as? String {
+                            FirebaseDataService.instance.userRef.child(dict[Constants.Meetings.userId] as! String).observeSingleEvent(of: .value, with: { (snapUser) in
+                                if let userInfo = snapUser.value as? Dictionary<String, AnyObject> {
+                                    let meeting = Meeting(id:one.key, data: dict, userInfo: userInfo)
+                                    self.meetingList.append(meeting)
+                                    if let word = self.searchWord, (meeting.title?.range(of:word) != nil) || (word == "") {
+                                        self.filteredMeetingList.append(meeting)
+                                    } else {
+                                        self.filteredMeetingList.append(meeting)
+                                    }
+                                }
+                                DispatchQueue.main.async(execute: { 
+                                    self.collectionView.reloadData()
+                                })
+                            })
+                        }
+                    }
+                }
+            }
+        })
     }
     
     let cellId = "cellId"
@@ -34,14 +90,19 @@ class MeetingListCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
         addSubViews()
         setConstraints()
         registerCells()
+        setupKeyboardObservers()
     }
     
     fileprivate func addSubViews() {
         addSubview(collectionView)
     }
     
+    
     fileprivate func setConstraints() {
-        _ = collectionView.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        let anchors = collectionView.anchor(topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: frame.height)
+        
+        collectionViewTopAnchor = anchors[0]
+        collectionViewbottomAnchor = anchors[3]
     }
     
     fileprivate func registerCells() {
@@ -59,14 +120,14 @@ class MeetingListCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return meetingList?.count ?? 0
+        return filteredMeetingList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MeetingCell
         if let attachedViewController = self.attachedViewController {
             cell.attachedViewController = attachedViewController
-            cell.meeting = meetingList?[indexPath.item]
+            cell.meeting = filteredMeetingList[indexPath.item]
         }
         return cell
     }
@@ -78,5 +139,28 @@ class MeetingListCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+    
+    func setupKeyboardObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillHide), name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    func handleKeyboardWillShow(notification: Notification) {
+        _ = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        let keyboardDuration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! Double
+        //collectionViewTopAnchor?.constant = 108
+        //collectionViewbottomAnchor?.constant = -(keyboardSize.cgRectValue.height)
+        UIView.animate(withDuration: keyboardDuration) {
+            self.collectionView.layoutIfNeeded()
+        }
+    }
+    
+    func handleKeyboardWillHide(notification: Notification) {
+        let keyboardDuration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! Double
+        //collectionViewbottomAnchor?.constant = 0
+        UIView.animate(withDuration: keyboardDuration) {
+            self.collectionView.layoutIfNeeded()
+        }
     }
 }

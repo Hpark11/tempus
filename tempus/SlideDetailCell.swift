@@ -15,6 +15,34 @@ class SlideDetailCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
         static let cellId: String = "cellId"
     }
     
+    var meetingId: String? {
+        didSet{
+            observeFirebaseValue()
+        }
+    }
+    func observeFirebaseValue() {
+        if let id = self.meetingId {
+            FirebaseDataService.instance.meetingRef.child(id).observeSingleEvent(of: .value, with: { (snapshot) in
+                if let value = snapshot.value as? Dictionary<String, AnyObject> {
+                    
+                    FirebaseDataService.instance.userRef.child((value[Constants.Meetings.userId] as? String)!).observeSingleEvent(of: .value, with: { (userSnap) in
+                        if let userVal = userSnap.value as? Dictionary<String, AnyObject> {
+                            self.mainImageView.imageUrlString = userVal[Constants.Users.backgroundImageUrl] as? String
+                            self.userProfileImageView.imageUrlString = userVal[Constants.Users.imageUrl] as? String
+                            self.giverLabel.text = userVal[Constants.Users.username] as? String
+                            self.introTextView.text = userVal[Constants.Users.intro] as? String
+                        }
+                        
+                        DispatchQueue.main.async(execute: { 
+                            self.giverInfollectionView.reloadData()
+                        })
+                    })
+                }
+            })
+        }
+    }
+    
+    
     lazy var giverInfollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
@@ -49,7 +77,7 @@ class SlideDetailCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
     
     let giverLabel: UILabel = {
         let label = UILabel()
-        label.text = "기버"
+        label.text = ""
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 28)
         return label
@@ -75,26 +103,25 @@ class SlideDetailCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
     }()
     
     lazy var followButton: UIButton = {
-        let button = UIButton()
-        button.layer.borderColor = UIColor.lightGray.cgColor
-        button.layer.borderWidth = 1.0
-        button.backgroundColor = UIColor.white
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 24)
-        button.titleLabel?.textColor = .darkGray
-        button.layer.cornerRadius = SlideDetailData.defaultButtonHeight / 2
+        let button = UIButton(type: .system)
+        button.tintColor = .white
+        button.backgroundColor = UIColor.makeViaRgb(red: 74, green: 144, blue: 226)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+        button.titleLabel?.textColor = .white
         button.addTarget(self, action: #selector(followButtonTapped), for: .touchUpInside)
         button.isUserInteractionEnabled = true
-        button.titleLabel?.text = "follow"
+        button.layer.cornerRadius = 8
+        button.setTitle("FOLLOW", for: .normal)
         return button
     }()
     
     lazy var commentButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: "icon comment"), for: .normal)
+        let button = UIButton(type: .system)
+        button.backgroundColor = UIColor.makeViaRgb(red: 74, green: 144, blue: 226)
+        button.setImage(UIImage(named: "icon small comment white"), for: .normal)
         button.addTarget(self, action: #selector(commentButtonTapped), for: .touchUpInside)
-        button.layer.borderColor = UIColor.lightGray.cgColor
-        button.layer.borderWidth = 1
-        button.layer.cornerRadius = SlideDetailData.defaultButtonHeight / 2
+        button.tintColor = .white
+        button.layer.cornerRadius = 8
         return button
     }()
     
@@ -132,7 +159,7 @@ class SlideDetailCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
         
         _ = userProfileImageView.anchor(mainImageView.bottomAnchor, left: leftAnchor, bottom: nil, right: nil, topConstant: -24, leftConstant: 12, bottomConstant: 0, rightConstant: 0, widthConstant: Constants.userProfileImageSize.middle, heightConstant: Constants.userProfileImageSize.middle)
         
-        _ = introTextView.anchor(nil, left: userProfileImageView.rightAnchor, bottom: userProfileImageView.bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 12, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 22)
+        _ = introTextView.anchor(nil, left: userProfileImageView.rightAnchor, bottom: userProfileImageView.bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 6, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 22)
 
         _ = giverLabel.anchor(nil, left: userProfileImageView.rightAnchor, bottom: introTextView.topAnchor, right: rightAnchor, topConstant: 0, leftConstant: 12, bottomConstant: 10, rightConstant: 0, widthConstant: 0, heightConstant: 32)
         
@@ -155,10 +182,13 @@ class SlideDetailCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SlideDetailData.cellId, for: indexPath) as! MeetingGiverDetailCell
+        if let meetingId = self.meetingId {
+            cell.meetingId = meetingId
+        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: frame.width, height: frame.height * 1.2)
+        return CGSize(width: frame.width, height: frame.height * 1.0)
     }
 }

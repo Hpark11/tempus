@@ -240,10 +240,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                     presentAlert(controller: alert, message: Alerts.nameRequired)
                     return
                 }
-                if !Validators.isAlphanumeric()(userName) {
-                    presentAlert(controller: alert, message: Alerts.nameAlphanumeric)
-                    return
-                }
                 if !Validators.maxLength(18)(userName) {
                     presentAlert(controller: alert, message: Alerts.nameMaxLength)
                     return
