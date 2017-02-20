@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tempus/FirebaseDataService.swift"
-            timestampString = "509205379.195329"
+            timestampString = "509245627.058803"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
             landmarkName = "downloadAllRawMeetingList()"
             landmarkType = "7">
          </BreakpointContent>

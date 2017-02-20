@@ -85,6 +85,8 @@ class SignInRequiredViewController: UIViewController{
         setConstraints()
     }
     
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let _ = KeychainWrapper.standard.string(forKey: Constants.keychainUid) {

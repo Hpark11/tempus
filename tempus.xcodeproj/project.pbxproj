@@ -63,6 +63,7 @@
 		5841BD6A1E50776E001E6186 /* MeetingAddViewController_ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841BD691E50776E001E6186 /* MeetingAddViewController_ext.swift */; };
 		58CCD4B11E59330E009B29F8 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CCD4B01E59330E009B29F8 /* ChatMessageCell.swift */; };
 		58CCD4B31E5A334E009B29F8 /* CommunityMyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CCD4B21E5A334E009B29F8 /* CommunityMyListViewController.swift */; };
+		58CCD4B51E5A8E8D009B29F8 /* SelfMadeMeetingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CCD4B41E5A8E8D009B29F8 /* SelfMadeMeetingListCell.swift */; };
 		58D2AAD61E4ACB510084CE80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AAD51E4ACB510084CE80 /* AppDelegate.swift */; };
 		58D2AAD81E4ACB510084CE80 /* MeetingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AAD71E4ACB510084CE80 /* MeetingListViewController.swift */; };
 		58D2AADE1E4ACB510084CE80 /* tempus.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AADC1E4ACB510084CE80 /* tempus.xcdatamodeld */; };
@@ -161,6 +162,7 @@
 		5841BD691E50776E001E6186 /* MeetingAddViewController_ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingAddViewController_ext.swift; sourceTree = "<group>"; };
 		58CCD4B01E59330E009B29F8 /* ChatMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
 		58CCD4B21E5A334E009B29F8 /* CommunityMyListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityMyListViewController.swift; sourceTree = "<group>"; };
+		58CCD4B41E5A8E8D009B29F8 /* SelfMadeMeetingListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfMadeMeetingListCell.swift; sourceTree = "<group>"; };
 		58D2AAD21E4ACB510084CE80 /* tempus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tempus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D2AAD51E4ACB510084CE80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D2AAD71E4ACB510084CE80 /* MeetingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingListViewController.swift; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 				5808952B1E530F8C00F8D96B /* MinimizedMeetingCell.swift */,
 				580BCBCE1E5545D3007AFFE3 /* UserCell.swift */,
 				58CCD4B01E59330E009B29F8 /* ChatMessageCell.swift */,
+				58CCD4B41E5A8E8D009B29F8 /* SelfMadeMeetingListCell.swift */,
 			);
 			name = "Custom Cells";
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				5807755C1E4ECB3A0092ED8F /* SlideViewController.swift */,
 				5807755E1E4ECB6A0092ED8F /* DiaryViewController.swift */,
 				580FB47F1E5225E20057DA21 /* CommunityViewController.swift */,
+				58CCD4B21E5A334E009B29F8 /* CommunityMyListViewController.swift */,
 				580FB4811E5225ED0057DA21 /* SignInRequiredViewController.swift */,
 				580FB4831E52260D0057DA21 /* SettingsViewController.swift */,
 				580FB4851E5232B70057DA21 /* SignInViewController.swift */,
@@ -369,7 +373,6 @@
 				580FB47D1E5225CD0057DA21 /* ChattingViewController.swift */,
 				580BCBCA1E54DA6F007AFFE3 /* ChattingHistoryViewController.swift */,
 				580BCBCC1E54DFDE007AFFE3 /* ChattingWithNewOneViewController.swift */,
-				58CCD4B21E5A334E009B29F8 /* CommunityMyListViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -731,6 +734,7 @@
 				580895201E52C70E00F8D96B /* UserProfileViewCell.swift in Sources */,
 				58D2AB0B1E4AD4330084CE80 /* OnboardingPageCell.swift in Sources */,
 				58D2AB031E4ACEAB0084CE80 /* OnboardingViewController.swift in Sources */,
+				58CCD4B51E5A8E8D009B29F8 /* SelfMadeMeetingListCell.swift in Sources */,
 				58D2AB051E4ACEFB0084CE80 /* OnboardingViewController_ext.swift in Sources */,
 				58FCAADB1E4B0663002F5B0A /* MeetingViewController.swift in Sources */,
 				58D2AB091E4AD0D80084CE80 /* UIView_ext.swift in Sources */,

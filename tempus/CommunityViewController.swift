@@ -33,8 +33,8 @@ class CommunityViewController: UIViewController {
     func observeFirebaseValue() {
         if let uid = FIRAuth.auth()?.currentUser?.uid {
             FirebaseDataService.instance.userRef.child(uid).child(Constants.Users.isGroupingAuth).observeSingleEvent(of: .value, with: { (snapshot) in
-                if let flag = snapshot.value as? Bool {
-                    if flag == true {
+                if let flag = snapshot.value as? String {
+                    if flag == "true" {
                         self.moveOnToNext()
                     }
                 }
@@ -91,7 +91,7 @@ class CommunityViewController: UIViewController {
     }()
     
     func addStoryButtonTapped() {
-        if let uid = FIRAuth.auth()?.currentUser?.uid {
+        if let _ = FIRAuth.auth()?.currentUser?.uid {
             let diaryViewController = DiaryViewController()
             present(diaryViewController, animated: true, completion: nil)
         } else {

@@ -11,6 +11,11 @@ import UIKit
 struct Constants {
     static let keychainUid = "uid"
     
+    struct Stories {
+        static let content: String = "content"
+        static let userId: String = "userId"
+    }
+    
     struct sizeStandards {
         static let landscapeRatio: CGFloat = 9 / 16
         static let spaceShort: CGFloat = 8
