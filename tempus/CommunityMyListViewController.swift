@@ -50,7 +50,7 @@ class CommunityMyListViewController: UITableViewController {
         super.viewDidLoad()
         setNavigationBarUI()
         registerCells()
-        tableView.backgroundColor = .black
+        tableView.backgroundColor = UIColor.makeViaRgb(red: 12, green: 12, blue: 12)
     }
 
     
@@ -58,6 +58,16 @@ class CommunityMyListViewController: UITableViewController {
         navigationController?.navigationBar.tintColor = .white
         navigationItem.titleView = titleLabel
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon signout solid"), style: .plain, target: self, action: #selector(signOutButtonTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon submit"), style: .plain, target: self, action: #selector(openNewMeeting))
+        self.navigationItem.title = ""
+    }
+    
+    func openNewMeeting() {
+        if let _ = KeychainWrapper.standard.string(forKey: Constants.keychainUid) {
+            let layout = UICollectionViewFlowLayout()
+            let meetingAddViewController = MeetingAddViewController(collectionViewLayout: layout)
+            navigationController?.pushViewController(meetingAddViewController, animated: true)
+        }
     }
     
     fileprivate func registerCells() {
@@ -74,7 +84,14 @@ class CommunityMyListViewController: UITableViewController {
             print(":::[HPARK] Sign Out Failure \(error) :::\n")
         }
     }
-
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let _ = KeychainWrapper.standard.string(forKey: Constants.keychainUid) {
+            let communityPartnersListViewController = CommunityPartnersListViewController()
+            communityPartnersListViewController.meetingId = openedMeetings[indexPath.item].id
+            navigationController?.pushViewController(communityPartnersListViewController, animated: true)
+        }
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return openedMeetings.count

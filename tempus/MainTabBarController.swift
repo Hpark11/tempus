@@ -24,7 +24,7 @@ class MainTabBarController: UITabBarController {
         
         let communityViewController = CommunityViewController()
         let secondNavigationController = UINavigationController(rootViewController: communityViewController)
-        secondNavigationController.title = "등록"
+        secondNavigationController.title = "관리"
         secondNavigationController.tabBarItem.image = UIImage(named: "icon community")
         
         let signInRequiredViewControllerForMyPage = SignInRequiredViewController()

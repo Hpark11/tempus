@@ -54,6 +54,8 @@ struct Constants {
         static let frontImageUrl: String = "frontImageUrl"
         static let backImageUrl: String = "backimageUrl"
         static let slides: String = "slides"
+        static let wannabe: String = "wannabe"
+        static let partners: String = "partners"
         
         struct Slides {
             static let storyTitle: String = "storyTitle"

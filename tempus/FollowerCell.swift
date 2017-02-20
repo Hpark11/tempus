@@ -10,12 +10,18 @@ import UIKit
 
 class FollowerCell: UITableViewCell {
     
+    var isDark: Bool = false
+    
     var userInfo: Users? {
         didSet {
             if let user = userInfo {
                 profileImageView.imageUrlString = user.imageUrl
                 titleLabel.text = user.username
                 introLabel.text = user.intro
+                if isDark {
+                    titleLabel.textColor = .white
+                    backgroundColor = .clear
+                }
             }
         }
     }
