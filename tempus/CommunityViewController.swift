@@ -32,18 +32,20 @@ class CommunityViewController: UIViewController {
     
     func observeFirebaseValue() {
         if let uid = FIRAuth.auth()?.currentUser?.uid {
-            FirebaseDataService.instance.userRef.child(uid).child(Constants.Users.isGroupingAuth).observeSingleEvent(of: .value, with: { (snapshot) in
-                if let flag = snapshot.value as? String {
-                    if flag == "true" {
-                        self.moveOnToNext()
+            FirebaseDataService.instance.userRef.child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                if let user = snapshot.value as? Dictionary<String, AnyObject> {
+                    let userInfo = Users(uid: snapshot.key, data: user)
+                    if userInfo.isGroupingAuth == "true" {
+                        self.moveOnToNext(userInfo: userInfo)
                     }
                 }
             })
         }
     }
     
-    func moveOnToNext() {
+    func moveOnToNext(userInfo: Users) {
         let communityMyListViewController = CommunityMyListViewController()
+        communityMyListViewController.userInfo = userInfo
         navigationController?.pushViewController(communityMyListViewController, animated: true)
     }
     

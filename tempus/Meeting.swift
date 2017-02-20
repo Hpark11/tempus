@@ -15,6 +15,8 @@ struct MinimizedMeeting {
     var category: String?
     var imageUrl: String?
     var categoryEn: String?
+    var isPassed: Bool?
+    var subTitle: String?
     
     init(id: String, data: Dictionary<String, AnyObject>) {
         self.id = id
@@ -28,6 +30,8 @@ struct MinimizedMeeting {
             }
         }
         categoryEn = data[Constants.Meetings.category] as? String
+        isPassed = data[Constants.Meetings.isPassed] as? Bool
+        subTitle = data[Constants.Meetings.subTitle] as? String
     }
 }
 
