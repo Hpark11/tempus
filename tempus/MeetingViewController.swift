@@ -146,11 +146,14 @@ class MeetingViewController: UICollectionViewController {
     
     override func loadView() {
         super.loadView()
+        
+        
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         setBottomPanelCollectionViewUI()
         setNavigationBarUI()
         addSubViews()

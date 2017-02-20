@@ -10,6 +10,8 @@ import UIKit
 
 class SlideDetailCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
+    var attachedViewController: SlideViewController?
+    
     struct SlideDetailData {
         static let defaultButtonHeight: CGFloat = 44
         static let cellId: String = "cellId"
@@ -182,6 +184,10 @@ class SlideDetailCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SlideDetailData.cellId, for: indexPath) as! MeetingGiverDetailCell
+        if let attachedViewController = self.attachedViewController {
+            cell.attachedViewController = attachedViewController
+        }
+        
         if let meetingId = self.meetingId {
             cell.meetingId = meetingId
         }

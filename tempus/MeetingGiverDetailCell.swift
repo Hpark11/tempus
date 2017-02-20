@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import Firebase
 import GoogleMaps
 
 class MeetingGiverDetailCell: BaseCell {
     
+    var attachedViewController: SlideViewController?
     var meetingId: String? {
         didSet {
             observeFirebaseValue()
@@ -106,7 +108,7 @@ class MeetingGiverDetailCell: BaseCell {
     }()
     
     lazy var applyButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.tintColor = .white
         button.backgroundColor = UIColor.makeViaRgb(red: 74, green: 144, blue: 226)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
@@ -114,13 +116,23 @@ class MeetingGiverDetailCell: BaseCell {
         button.addTarget(self, action: #selector(applyButtonTapped), for: .touchUpInside)
         button.isUserInteractionEnabled = true
         button.layer.cornerRadius = 8
-        button.setTitle("가입 신청", for: .normal)
+        button.setTitle("모임 가입 신청", for: .normal)
         return button
     }()
     
     
     func applyButtonTapped() {
-        
+        if let _ = FIRAuth.auth()?.currentUser?.uid {
+            if let attachedViewContriller = attachedViewController {
+                let submitJoinViewController = SubmitJoinViewController()
+                if let meetingId = meetingId {
+                    submitJoinViewController.meetingId = meetingId
+                }
+                attachedViewContriller.present(submitJoinViewController, animated: true, completion: nil)
+            }
+        } else {
+            
+        }
     }
     
     override func setupViews() {

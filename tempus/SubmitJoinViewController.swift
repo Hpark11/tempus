@@ -1,16 +1,18 @@
 //
-//  DiaryViewController.swift
+//  SubmitJoinViewController.swift
 //  tempus
 //
-//  Created by hPark on 2017. 2. 11..
+//  Created by hPark on 2017. 2. 20..
 //  Copyright © 2017년 boostcamp. All rights reserved.
 //
 
 import UIKit
 import Firebase
 
-class DiaryViewController: UIViewController {
+class SubmitJoinViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    var meetingId: String?
+    
     lazy var beforeButton: UIButton = {
         let button = UIButton()
         if let image = UIImage(named: "icon cancel") {
@@ -20,59 +22,36 @@ class DiaryViewController: UIViewController {
         button.isUserInteractionEnabled = true
         return button
     }()
-
+    
     func beforeButtonTapped() {
         dismiss(animated: true, completion: nil)
     }
-
+    
     let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 24)
         label.textColor = .white
-        //label.backgroundColor = .clear
-        label.text = "당신만의 개성있는 이야기"
+        label.text = "당신에대해 알고싶어요"
         return label
     }()
     
-    let phoneLabel: UILabel = {
+    let pictureLabel: UILabel = {
         let label = UILabel()
-        label.text = "핸드폰 번호를 적어주세요"
+        label.text = "당신을 알 수 있는 사진한장 부탁해요 ~!"
         label.textColor = UIColor.makeViaRgb(red: 230, green: 230, blue: 230)
         label.font = UIFont.systemFont(ofSize: 16)
         return label
     }()
     
-    lazy var phoneNumberField: UITextField = {
-        let textField = UITextField()
-        textField.keyboardType = .numberPad
-        textField.backgroundColor = .white
-        textField.textColor = .black
-        textField.layer.sublayerTransform = CATransform3DMakeTranslation(8, 0, 0)
-        textField.layer.cornerRadius = 8
-        return textField
-    }()
-    
-    let profileLabel: UILabel = {
-        let label = UILabel()
-        label.text = "간단한 자기소개를 적어주세요"
-        label.textColor = UIColor.makeViaRgb(red: 230, green: 230, blue: 230)
-        label.font = UIFont.systemFont(ofSize: 16)
-        return label
-    }()
-    
-    lazy var profileTextView: UITextView = {
-        let textView = UITextView()
-        textView.font = UIFont.systemFont(ofSize: 16)
-        textView.textContainerInset = UIEdgeInsetsMake(8, 8, 8, 8)
-        textView.backgroundColor = .white
-        textView.textColor = .black
-        textView.layer.cornerRadius = 8
-        return textView
+    let uploadImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "placeholder image")
+        return imageView
     }()
     
     let reasonLabel: UILabel = {
         let label = UILabel()
-        label.text = "모임을 개설하고자 하는 계기"
+        label.text = "자기소개 부탁드려요"
         label.textColor = UIColor.makeViaRgb(red: 230, green: 230, blue: 230)
         label.font = UIFont.systemFont(ofSize: 16)
         return label
@@ -87,7 +66,7 @@ class DiaryViewController: UIViewController {
         textView.layer.cornerRadius = 8
         return textView
     }()
-
+    
     lazy var sendStoryButton: UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = .white
@@ -97,13 +76,13 @@ class DiaryViewController: UIViewController {
         button.addTarget(self, action: #selector(sendStoryButtonTapped), for: .touchUpInside)
         button.isUserInteractionEnabled = true
         button.layer.cornerRadius = 8
-        button.titleLabel?.text = "보내기"
-        button.setTitle("보내기", for: .normal)
+        button.titleLabel?.text = "신청하기"
+        button.setTitle("신청하기", for: .normal)
         return button
     }()
     
     lazy var success: UIAlertController = {
-        let success = UIAlertController(title: "스토리 등록", message: "", preferredStyle: .alert)
+        let success = UIAlertController(title: "모임참여 등록", message: "", preferredStyle: .alert)
         success.addAction(UIAlertAction(title: "확인", style: .default) { action in
             self.timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(dismissCurrentVC), userInfo: nil, repeats: false)
         })
@@ -116,13 +95,25 @@ class DiaryViewController: UIViewController {
     }
     
     func sendStoryButtonTapped() {
-        if let uid = FIRAuth.auth()?.currentUser?.uid {
-            FirebaseDataService.instance.storyRegRef.childByAutoId().setValue([
-                Constants.Stories.content: mainTextView.text!,
-                Constants.Stories.userId: uid
+        if let uid = FIRAuth.auth()?.currentUser?.uid, let meetingId = meetingId {
+            FirebaseDataService.instance.userRef.child(uid).child(Constants.Users.submission).child(meetingId).setValue([
+                "imageUrl": uploadImageView.image!,
+                "introduction": mainTextView.text!
             ])
-            FirebaseDataService.instance.userRef.child(uid).child(Constants.Users.isGroupingAuth).setValue("true")
-            presentAlert(controller: success, message: "작성해주셔서 감사합니다 \n작성된 내용은 1~2일정도에 걸쳐 확인될 예정입니다.")
+            FirebaseDataService.instance.meetingRef.child(meetingId).observeSingleEvent(of: .value, with: { (snapshot) in
+                if let meeting = snapshot.value as? Dictionary<String, AnyObject> {
+                    if let wannabe = meeting[Constants.Meetings.wannabe] as? Array<String> {
+                        var submit = Array<String>()
+                        for key in wannabe {
+                            submit.append(key)
+                        }
+                        FirebaseDataService.instance.meetingRef.child(meetingId).setValue([
+                            Constants.Meetings.wannabe: submit as NSArray
+                        ])
+                    }
+                }
+            })
+            presentAlert(controller: success, message: "등록해주셔서 감사합니다. \n등록하신 내용은 그룹장이 확인 후\n 참여여부를 결정하게됩니다")
         }
     }
     
@@ -135,11 +126,10 @@ class DiaryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         addSubViews()
         setConstraints()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         subscribeToKeyboardNotifications()
@@ -153,10 +143,8 @@ class DiaryViewController: UIViewController {
     fileprivate func addSubViews() {
         view.addSubview(beforeButton)
         view.addSubview(titleLabel)
-        view.addSubview(phoneLabel)
-        view.addSubview(phoneNumberField)
-        view.addSubview(profileLabel)
-        view.addSubview(profileTextView)
+        view.addSubview(pictureLabel)
+        view.addSubview(uploadImageView)
         view.addSubview(reasonLabel)
         view.addSubview(mainTextView)
         view.addSubview(sendStoryButton)
@@ -167,22 +155,18 @@ class DiaryViewController: UIViewController {
         
         _ = titleLabel.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.leftAnchor, topConstant: 30, leftConstant: 16, bottomConstant: 0, rightConstant: 16, widthConstant: 0, heightConstant: 44)
         
-        _ = phoneLabel.anchor(titleLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 16, leftConstant: 16, bottomConstant: 0, rightConstant: 16, widthConstant: 0, heightConstant: 20)
+        _ = pictureLabel.anchor(titleLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 16, leftConstant: 16, bottomConstant: 0, rightConstant: 16, widthConstant: 0, heightConstant: 20)
         
-        _ = phoneNumberField.anchor(phoneLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 8, leftConstant: 16, bottomConstant: 0, rightConstant: 16, widthConstant: 0, heightConstant: 24)
+        _ = uploadImageView.anchor(pictureLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 8, leftConstant: 16, bottomConstant: 0, rightConstant: 16, widthConstant: 0, heightConstant: view.frame.height / 3.6)
         
-        _ = profileLabel.anchor(phoneNumberField.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 16, leftConstant: 16, bottomConstant: 0, rightConstant: 16, widthConstant: 0, heightConstant: 20)
-        
-        _ = profileTextView.anchor(profileLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 8, leftConstant: 16, bottomConstant: 0, rightConstant: 16, widthConstant: 0, heightConstant: view.frame.height / 3.6)
-        
-        _ = reasonLabel.anchor(profileTextView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 16, leftConstant: 16, bottomConstant: 0, rightConstant: 16, widthConstant: 0, heightConstant: 20)
+        _ = reasonLabel.anchor(uploadImageView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 16, leftConstant: 16, bottomConstant: 0, rightConstant: 16, widthConstant: 0, heightConstant: 20)
         
         _ = sendStoryButton.anchor(nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 16, bottomConstant: 16, rightConstant: 16, widthConstant: 0, heightConstant: 0)
         
         _ = mainTextView.anchor(reasonLabel.bottomAnchor, left: view.leftAnchor, bottom: sendStoryButton.topAnchor, right: view.rightAnchor, topConstant: 8, leftConstant: 16, bottomConstant: 16, rightConstant: 16, widthConstant: 0, heightConstant: 0)
     }
     
-
+    
     // get keyboard height and shift the view from bottom to higher
     func keyboardWillShow(_ notification: Notification) {
         if mainTextView.isFirstResponder {
@@ -211,4 +195,27 @@ class DiaryViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
+
+    // present image picker
+    func presentImagePickerController(_ source: UIImagePickerControllerSourceType) {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.sourceType = source
+        imagePickerController.allowsEditing = true
+        present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    // after finished picking image
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+            self.uploadImageView.image = image
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    // cancel button tapped
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
 }
+

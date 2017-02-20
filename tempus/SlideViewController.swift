@@ -128,6 +128,7 @@ class SlideViewController: UICollectionViewController, UICollectionViewDelegateF
             return cell
         } else if indexPath.item == (slides.count + 1) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SlideViewData.detailId, for: indexPath) as! SlideDetailCell
+            cell.attachedViewController = self
             cell.meetingId = self.meetingId
             return cell
         } else {

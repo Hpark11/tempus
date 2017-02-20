@@ -149,7 +149,6 @@ class MeetingListViewController: UICollectionViewController, UICollectionViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setNavigationBarUI()
         setCollectionViewUI()
         addSubViews()
