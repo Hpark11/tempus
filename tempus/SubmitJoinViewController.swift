@@ -43,11 +43,20 @@ class SubmitJoinViewController: UIViewController, UIImagePickerControllerDelegat
         return label
     }()
     
-    let uploadImageView: UIImageView = {
+    lazy var uploadImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "placeholder image")
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 8
+        imageView.layer.masksToBounds = true
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(mainPanelTapped)))
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
+    
+    func mainPanelTapped() {
+        presentImagePickerController(.photoLibrary)
+    }
     
     let reasonLabel: UILabel = {
         let label = UILabel()
@@ -96,25 +105,43 @@ class SubmitJoinViewController: UIViewController, UIImagePickerControllerDelegat
     
     func sendStoryButtonTapped() {
         if let uid = FIRAuth.auth()?.currentUser?.uid, let meetingId = meetingId {
-            FirebaseDataService.instance.userRef.child(uid).child(Constants.Users.submission).child(meetingId).setValue([
-                "imageUrl": uploadImageView.image!,
-                "introduction": mainTextView.text!
-            ])
-            FirebaseDataService.instance.meetingRef.child(meetingId).observeSingleEvent(of: .value, with: { (snapshot) in
-                if let meeting = snapshot.value as? Dictionary<String, AnyObject> {
-                    if let wannabe = meeting[Constants.Meetings.wannabe] as? Array<String> {
-                        var submit = Array<String>()
-                        for key in wannabe {
-                            submit.append(key)
+            if let image = uploadImageView.image, let imageData = UIImageJPEGRepresentation(image, 0.8) {
+                let imageUid = NSUUID().uuidString
+                let metadata = FIRStorageMetadata()
+                metadata.contentType = "image/jpeg"
+                FirebaseDataService.instance.imageRef.child(imageUid).put(imageData, metadata: metadata) { (metadata, error) in
+                    if error != nil {
+                        print(":::[HPARK] Unable to upload image to storage \(error as Any):::\n ")
+                    } else {
+                        if let downloadURL = metadata?.downloadURL()?.absoluteString {
+                            self.dataToFirebaseDatabase(meetingId: meetingId, userId: uid, imageUrl: downloadURL)
                         }
-                        FirebaseDataService.instance.meetingRef.child(meetingId).setValue([
-                            Constants.Meetings.wannabe: submit as NSArray
-                        ])
                     }
                 }
-            })
-            presentAlert(controller: success, message: "등록해주셔서 감사합니다. \n등록하신 내용은 그룹장이 확인 후\n 참여여부를 결정하게됩니다")
+            }
         }
+    }
+    
+    func dataToFirebaseDatabase(meetingId:String, userId: String, imageUrl: String) {
+        FirebaseDataService.instance.userRef.child(userId).child(Constants.Users.submission).child(meetingId).setValue([
+            "imageUrl": imageUrl,
+            "introduction": mainTextView.text!
+        ])
+        FirebaseDataService.instance.meetingRef.child(meetingId).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let meeting = snapshot.value as? Dictionary<String, AnyObject> {
+                var submit = Array<String>()
+                if let wannabe = meeting[Constants.Meetings.wannabe] as? Array<String> {
+                    for key in wannabe {
+                        submit.append(key)
+                    }
+                }
+                submit.append(userId)
+                FirebaseDataService.instance.meetingRef.child(meetingId).updateChildValues([
+                    Constants.Meetings.wannabe: submit as NSArray
+                ])
+            }
+            self.presentAlert(controller: self.success, message: "등록해주셔서 감사합니다. \n등록하신 내용은 그룹장이 확인 후\n 참여여부를 결정하게됩니다")
+        })
     }
     
     var timer: Timer?

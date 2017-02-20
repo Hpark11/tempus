@@ -142,8 +142,6 @@ class CommunityPartnersListViewController: UIViewController, UITextFieldDelegate
         return label
     }()
     
-    
-    
     func observeFirebaseValue(meetingId: String) {
         FirebaseDataService.instance.userRef.observe(.value, with: { (snapshot) in
             if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {

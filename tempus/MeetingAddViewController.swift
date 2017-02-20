@@ -65,20 +65,23 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
     let titleLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 120, height: 40))
         label.textAlignment = .center
-        label.text = "게시하기"
+        label.text = "새로운 모임 개설"
         label.textColor = UIColor.white
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 20)
         return label
     }()
     
     lazy var submitButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.tintColor = .white
-        button.backgroundColor = .red
-        button.setTitleColor(.white, for: .normal)
-        button.setTitle("게시하기", for: .normal)
+        button.backgroundColor = UIColor.makeViaRgb(red: 80, green: 227, blue: 194)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+        button.titleLabel?.textColor = .white
         button.addTarget(self, action: #selector(submitButtonTapped), for: .touchUpInside)
         button.isUserInteractionEnabled = true
+        button.layer.cornerRadius = 8
+        button.titleLabel?.text = "게시하기"
+        button.setTitle("게시하기", for: .normal)
         return button
     }()
     
@@ -110,19 +113,6 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
         alert.addAction(UIAlertAction(title: "취소", style: .default) { action in })
         return alert
     }()
-    
-    lazy var beforeButton: UIButton = {
-        let button = UIButton()
-        if let image = UIImage(named: "before") {
-            button.setImage(image, for: .normal)
-        }
-        button.addTarget(self, action: #selector(beforeButtonTapped), for: .touchUpInside)
-        return button
-    }()
-
-    func beforeButtonTapped() {
-        dismiss(animated: false, completion: nil)
-    }
     
     func submitButtonTapped() {
         present(alertController, animated: true, completion: nil)
@@ -185,29 +175,32 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
         setConstraints()
         registerCells()
         setCollectionViewUI()
+        setNavigationBarUI()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }
     
+    fileprivate func setNavigationBarUI() {
+        navigationController?.navigationBar.tintColor = .white
+        navigationItem.titleView = titleLabel
+    }
+    
     fileprivate func setCollectionViewUI() {
-        collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(64, 0, 0, 0)
-        collectionView?.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
+        //collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(64, 0, 0, 0)
+        //collectionView?.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
     }
     
     fileprivate func addSubViews() {
         view.addSubview(submitButton)
-        view.addSubview(beforeButton)
     }
     
     fileprivate func setConstraints() {
 
-        _ = collectionView?.anchor(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 64, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        _ = submitButton.anchor(nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 16, bottomConstant: 60, rightConstant: 16, widthConstant: 0, heightConstant: 48)
         
-        _ = submitButton.anchor(collectionView?.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 8, leftConstant: 8, bottomConstant: 8, rightConstant: 8, widthConstant: 0, heightConstant: 0)
-        
-        _ = beforeButton.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: nil, topConstant: 24, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 40).first
+        _ = collectionView?.anchor(view.topAnchor, left: view.leftAnchor, bottom: submitButton.topAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 8, rightConstant: 0, widthConstant: 0, heightConstant: 0)
     }
     
     fileprivate func registerCells() {
@@ -269,7 +262,7 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.item == 0 {
-            return CGSize(width: view.frame.width, height: view.frame.width * Constants.sizeStandards.landscapeRatio * 2.0)
+            return CGSize(width: view.frame.width, height: view.frame.width * Constants.sizeStandards.landscapeRatio * 3.6)
         } else if indexPath.item == 1 {
             return CGSize(width: view.frame.width, height: view.frame.width * Constants.sizeStandards.landscapeRatio * 2.4)
         } else if (indexPath.item - 1) == subImages.count {

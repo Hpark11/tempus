@@ -206,7 +206,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
             if error == nil {
                 print(":::[HPARK] Successfully signed in the app with email :::\n")
                 if let user = user, let email = user.email {
-                    let dataUser = ["provider": user.providerID, "email": email, "imageUrl": "https://firebasestorage.googleapis.com/v0/b/tempus-cbe18.appspot.com/o/images%2Fplaceholder.jpeg?alt=media&token=08d46599-746b-46da-a43e-73321be7be63"]
+                    let dataUser = ["provider": user.providerID, "email": email, "imageUrl": "https://firebasestorage.googleapis.com/v0/b/tempus-cbe18.appspot.com/o/images%2Fplaceholder.jpeg?alt=media&token=08d46599-746b-46da-a43e-73321be7be63", "username": self.userNameField.text!]
                     FirebaseDataService.instance.createFirebaseDatabaseUser(uid: user.uid, dataUser: dataUser)
                     KeychainWrapper.standard.set(user.uid, forKey: Constants.keychainUid)
                     self.dismiss(animated: true, completion: nil)
