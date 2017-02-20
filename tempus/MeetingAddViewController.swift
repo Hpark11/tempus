@@ -20,7 +20,7 @@ struct Slides {
 class MeetingAddViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var mainImage: UIImage?
-    var subImages: [UIImage] = [UIImage()]
+    var subImages = [UIImage]()
     var detailImage: UIImage?
     
     var imgTag: Int = 0
@@ -86,11 +86,29 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
     }()
     
     
+    
+    
     lazy var alertController: UIAlertController = {
         let alert = UIAlertController(title: "스토리 게시", message: "정말 게시하겠습니까?", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "확인", style: .default) { action in
+            
             let firebaseAutoRef = FirebaseDataService.instance.meetingRef.childByAutoId()
+            
+            if let uid = FIRAuth.auth()?.currentUser?.uid {
+                FirebaseDataService.instance.userRef.child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                    if let data = snapshot.value as? Dictionary<String, AnyObject> {
+                        let user = Users(uid: snapshot.key, data: data)
+                        var meetings = Array<String>()
+                        for meeting in user.openedMeetings {
+                            meetings.append(meeting)
+                        }
+                        meetings.append(firebaseAutoRef.key)
+                        FirebaseDataService.instance.userRef.child(uid).updateChildValues([Constants.Users.openedMeetings: meetings as NSArray])
+                    }
+                })
+            }
+            
             firebaseAutoRef.setValue([
                 Constants.Meetings.dateTime: NSNumber(value: Int(Date().timeIntervalSince1970)),
                 Constants.Meetings.address: self.submitData.address,
@@ -115,6 +133,7 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
     }()
     
     func submitButtonTapped() {
+        
         present(alertController, animated: true, completion: nil)
     }
     
@@ -176,6 +195,7 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
         registerCells()
         setCollectionViewUI()
         setNavigationBarUI()
+        subImages.append(UIImage(named: "placeholder image")!)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -188,8 +208,8 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
     }
     
     fileprivate func setCollectionViewUI() {
-        //collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(64, 0, 0, 0)
-        //collectionView?.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
+        collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, -50, 0)
+        collectionView?.contentInset = UIEdgeInsetsMake(0, 0, -50, 0)
     }
     
     fileprivate func addSubViews() {
@@ -198,9 +218,9 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
     
     fileprivate func setConstraints() {
 
-        _ = submitButton.anchor(nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 16, bottomConstant: 60, rightConstant: 16, widthConstant: 0, heightConstant: 48)
+        _ = submitButton.anchor(nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 16, bottomConstant: 60, rightConstant: 16, widthConstant: 0, heightConstant: 38)
         
-        _ = collectionView?.anchor(view.topAnchor, left: view.leftAnchor, bottom: submitButton.topAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 8, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        _ = collectionView?.anchor(view.topAnchor, left: view.leftAnchor, bottom: submitButton.topAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 4, rightConstant: 0, widthConstant: 0, heightConstant: 0)
     }
     
     fileprivate func registerCells() {
@@ -223,9 +243,6 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
             return coverCell
         } else if indexPath.item == 1 {
             let detailCell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetingAddViewData.detailId, for: indexPath) as! MeetingAddDetailCell
-            if let detailImage = self.detailImage {
-                detailCell.detailImageView.image = detailImage
-            }
             detailCell.traceSavedLocation(latitude: submitData.latitude, longitude: submitData.longitude, address: submitData.address)
             detailCell.attachedViewController = self
             return detailCell
@@ -262,9 +279,9 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.item == 0 {
-            return CGSize(width: view.frame.width, height: view.frame.width * Constants.sizeStandards.landscapeRatio * 3.6)
+            return CGSize(width: view.frame.width, height: view.frame.width * Constants.sizeStandards.landscapeRatio * 3.4)
         } else if indexPath.item == 1 {
-            return CGSize(width: view.frame.width, height: view.frame.width * Constants.sizeStandards.landscapeRatio * 2.4)
+            return CGSize(width: view.frame.width, height: view.frame.width * Constants.sizeStandards.landscapeRatio * 2.8)
         } else if (indexPath.item - 1) == subImages.count {
             return CGSize(width: view.frame.width, height: view.frame.width * Constants.sizeStandards.landscapeRatio + 50)
         } else {

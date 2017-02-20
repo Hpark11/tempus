@@ -99,7 +99,6 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UI
         return label
     }()
     
-    
     let categoryLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
@@ -160,7 +159,7 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UI
     
     func handleTypeChange() {
         if let attachedViewController = self.attachedViewController {
-            attachedViewController.submitData.type = typeDataSourceEn[categorySegmentedControl.selectedSegmentIndex]
+            attachedViewController.submitData.type = typeDataSourceEn[typeSegmentedControl.selectedSegmentIndex]
         }
     }
     
@@ -199,7 +198,7 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UI
 
         _ = imageGuideLabel.anchor(panelLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 20)
         
-        _ = mainImageView.anchor(imageGuideLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: frame.width * 3 / 4, heightConstant: frame.height / 2.4)
+        _ = mainImageView.anchor(imageGuideLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: frame.height / 2.4)
         
         _ = textLengthLabel.anchor(mainImageView.bottomAnchor, left: nil, bottom: nil, right: panelView.rightAnchor, topConstant: 12, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 220, heightConstant: 20)
         
