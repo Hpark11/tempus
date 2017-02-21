@@ -73,14 +73,334 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "tempus/AcceptSubmissionViewController.swift"
-            timestampString = "509364178.666226"
+            filePath = "tempus/CommunityPartnersListViewController.swift"
+            timestampString = "509376016.617552"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "216"
+            endingLineNumber = "216"
+            landmarkName = "viewWillAppear(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tempus.CommunityPartnersListViewController.viewWillAppear (Swift.Bool) -&gt; ()"
+                  moduleName = "tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/CommunityPartnersListViewController.swift"
+                  timestampString = "509376141.203435"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "216"
+                  endingLineNumber = "216"
+                  offsetFromSymbolStart = "126">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tempus.CommunityPartnersListViewController.viewWillAppear (Swift.Bool) -&gt; ()"
+                  moduleName = "tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/CommunityPartnersListViewController.swift"
+                  timestampString = "509376141.206882"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "216"
+                  endingLineNumber = "216"
+                  offsetFromSymbolStart = "227">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tempus/CommunityPartnersListViewController.swift"
+            timestampString = "509374566.896557"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "meetingId"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tempus/CommunityPartnersListViewController.swift"
+            timestampString = "509376016.617552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "160"
             endingLineNumber = "160"
-            landmarkName = "rejectButtonTapped()"
+            landmarkName = "getPartnersAndWannabe(meetingId:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tempus/CommunityPartnersListViewController.swift"
+            timestampString = "509376016.617552"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "301"
+            endingLineNumber = "301"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tempus/CommunityPartnersListViewController.swift"
+            timestampString = "509376068.246546"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "observeFirebaseValue(meetingId:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tempus.CommunityPartnersListViewController.(observeFirebaseValue (meetingId : Swift.String) -&gt; ()).(closure #1)"
+                  moduleName = "tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/CommunityPartnersListViewController.swift"
+                  timestampString = "509376141.226999"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "147"
+                  endingLineNumber = "147"
+                  offsetFromSymbolStart = "31">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tempus.CommunityPartnersListViewController.(observeFirebaseValue (meetingId : Swift.String) -&gt; ()).(closure #1)"
+                  moduleName = "tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/CommunityPartnersListViewController.swift"
+                  timestampString = "509376141.228864"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "147"
+                  endingLineNumber = "147"
+                  offsetFromSymbolStart = "587">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tempus/CommunityPartnersListViewController.swift"
+            timestampString = "509376192.747794"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
+            landmarkName = "getPartnersAndWannabe(meetingId:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tempus.CommunityPartnersListViewController.(getPartnersAndWannabe (meetingId : Swift.String) -&gt; ()).(closure #1)"
+                  moduleName = "tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/CommunityPartnersListViewController.swift"
+                  timestampString = "509376192.753204"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "181"
+                  endingLineNumber = "181"
+                  offsetFromSymbolStart = "3262">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tempus.CommunityPartnersListViewController.(getPartnersAndWannabe (meetingId : Swift.String) -&gt; ()).(closure #1)"
+                  moduleName = "tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/CommunityPartnersListViewController.swift"
+                  timestampString = "509376192.755793"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "181"
+                  endingLineNumber = "181"
+                  offsetFromSymbolStart = "3606">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tempus/CommunityPartnersListViewController.swift"
+            timestampString = "509376193.405967"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
+            landmarkName = "getPartnersAndWannabe(meetingId:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tempus.CommunityPartnersListViewController.(getPartnersAndWannabe (meetingId : Swift.String) -&gt; ()).(closure #1)"
+                  moduleName = "tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/CommunityPartnersListViewController.swift"
+                  timestampString = "509376193.411477"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "173"
+                  endingLineNumber = "173"
+                  offsetFromSymbolStart = "2164">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tempus.CommunityPartnersListViewController.(getPartnersAndWannabe (meetingId : Swift.String) -&gt; ()).(closure #1)"
+                  moduleName = "tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/CommunityPartnersListViewController.swift"
+                  timestampString = "509376193.414045"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "173"
+                  endingLineNumber = "173"
+                  offsetFromSymbolStart = "2508">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tempus/CommunityPartnersListViewController.swift"
+            timestampString = "509376194.655836"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
+            landmarkName = "getPartnersAndWannabe(meetingId:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tempus.CommunityPartnersListViewController.(getPartnersAndWannabe (meetingId : Swift.String) -&gt; ()).(closure #1)"
+                  moduleName = "tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/CommunityPartnersListViewController.swift"
+                  timestampString = "509376194.661172"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "189"
+                  endingLineNumber = "189"
+                  offsetFromSymbolStart = "4360">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tempus.CommunityPartnersListViewController.(getPartnersAndWannabe (meetingId : Swift.String) -&gt; ()).(closure #1)"
+                  moduleName = "tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/CommunityPartnersListViewController.swift"
+                  timestampString = "509376194.663759"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "189"
+                  endingLineNumber = "189"
+                  offsetFromSymbolStart = "4847">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tempus/CommunityPartnersListViewController.swift"
+            timestampString = "509376294.621911"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
+            landmarkName = "getPartnersAndWannabe(meetingId:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tempus.CommunityPartnersListViewController.(getPartnersAndWannabe (meetingId : Swift.String) -&gt; ()).(closure #1)"
+                  moduleName = "tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/CommunityPartnersListViewController.swift"
+                  timestampString = "509376294.837995"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "164"
+                  endingLineNumber = "164"
+                  offsetFromSymbolStart = "19">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "tempus.CommunityPartnersListViewController.(getPartnersAndWannabe (meetingId : Swift.String) -&gt; ()).(closure #1)"
+                  moduleName = "tempus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/CommunityPartnersListViewController.swift"
+                  timestampString = "509376294.841404"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "164"
+                  endingLineNumber = "164"
+                  offsetFromSymbolStart = "533">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

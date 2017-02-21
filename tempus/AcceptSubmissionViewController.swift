@@ -11,8 +11,7 @@ import Firebase
 
 class AcceptSubmissionViewController: UIViewController {
 
-    var attachedViewController = CommunityPartnersListViewController?
-    var rowIndex: Int?
+    var attachedViewController: CommunityPartnersListViewController?
     var meetingId: String?
     var wannabeUser: Users? {
         didSet {
@@ -118,7 +117,51 @@ class AcceptSubmissionViewController: UIViewController {
     }()
     
     func acceptButtonTapped() {
-        
+        if let wannabeUser = self.wannabeUser, let meetingId = self.meetingId {
+            // 유저데이터의 submission의 데이터를 삭제한다
+            let wannabeRef = FirebaseDataService.instance.meetingRef.child(meetingId).child(Constants.Meetings.wannabe)
+            let partnersRef = FirebaseDataService.instance.meetingRef.child(meetingId).child(Constants.Meetings.partners)
+            
+            FirebaseDataService.instance.userRef.child(wannabeUser.uid).child(Constants.Users.submission).child(meetingId).removeValue()
+            
+            // 유저데이터의 appliedMeeting데이터를 추가시킨다
+
+            var userMeetings = wannabeUser.appliedMeetings
+            userMeetings.append(meetingId)
+            
+            FirebaseDataService.instance.userRef.child(wannabeUser.uid).child(Constants.Users.appliedMeetings).setValue(userMeetings)
+            
+            
+            // 미팅데이터의 워너비 데이터를 지운다
+            wannabeRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                var restore = Array<String>()
+                if let wannabe = snapshot.value as? Array<String> {
+                    for one in wannabe {
+                        if one == wannabeUser.uid {
+                            wannabeRef.child(one).removeValue()
+                        } else {
+                            restore.append(one)
+                        }
+                    }
+                    wannabeRef.setValue(restore)
+                }
+            })
+            
+            partnersRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                var restore = Array<String>()
+                if let partners = snapshot.value as? Array<String> {
+                    restore = partners
+                }
+                restore.append(wannabeUser.uid)
+                partnersRef.setValue(restore)
+                
+                if let attachedViewController = self.attachedViewController {
+                    attachedViewController.getPartnersAndWannabe(meetingId: meetingId)
+                }
+                
+                self.navigationController?.popViewController(animated: true)
+            })
+        }
     }
     
     lazy var rejectButton: UIButton = {
@@ -135,34 +178,46 @@ class AcceptSubmissionViewController: UIViewController {
         return button
     }()
     
-    var didSelectedItemRemoved: ((_ item: Int) -> Void)?
-    
     func rejectButtonTapped() {
         if let wannabeUser = self.wannabeUser, let meetingId = self.meetingId {
             let wannabeRef = FirebaseDataService.instance.meetingRef.child(meetingId).child(Constants.Meetings.wannabe)
             FirebaseDataService.instance.userRef.child(wannabeUser.uid).child(Constants.Users.submission).child(meetingId).removeValue()
-            wannabeRef.observe(.value, with: { (snapshot) in
-                if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
-                    var restore = Array<String>()
-                    for one in snapshot {
-                        if let id = one.value as? String{
-                            if id == wannabeUser.uid {
-                                one.ref.removeValue()
-                            } else {
-                                restore.append(id)
-                            }
+            // 미팅데이터의 워너비 데이터를 지운다
+            wannabeRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                var restore = Array<String>()
+                if let wannabe = snapshot.value as? Array<String> {
+                    for one in wannabe {
+                        if one == wannabeUser.uid {
+                            wannabeRef.child(one).removeValue()
+                        } else {
+                            restore.append(one)
                         }
                     }
                     wannabeRef.setValue(restore)
                 }
-                if let index = self.rowIndex, let didSelect = self.didSelectedItemRemoved{
-                    didSelect(index)
-                }
                 if let attachedViewController = self.attachedViewController {
-                    attachedViewController.
+                    attachedViewController.getPartnersAndWannabe(meetingId: meetingId)
                 }
                 self.navigationController?.popViewController(animated: true)
             })
+            
+            
+//            wannabeRef.observe(.value, with: { (snapshot) in
+//                if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
+//                    var restore = Array<String>()
+//                    for one in snapshot {
+//                        if let id = one.value as? String{
+//                            if id == wannabeUser.uid {
+//                                one.ref.removeValue()
+//                            } else {
+//                                restore.append(id)
+//                            }
+//                        }
+//                    }
+//                    wannabeRef.setValue(restore)
+//                }
+//                
+//            })
         }
     }
     

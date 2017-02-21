@@ -143,48 +143,60 @@ class CommunityPartnersListViewController: UIViewController, UITextFieldDelegate
     }()
     
     func observeFirebaseValue(meetingId: String) {
-        FirebaseDataService.instance.userRef.observe(.value, with: { (snapshot) in
-            if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
-                for one in snapshot {
-                    if let data = one.value as? Dictionary<String, AnyObject> {
-                        let user = Users(uid: one.key, data: data)
-                        self.users[one.key] = user
+        FirebaseDataService.instance.userRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            if let data = snapshot.value as? Dictionary<String, AnyObject> {
+                for (key, value) in data {
+                    if let userInfo = value as? Dictionary<String, AnyObject> {
+                        let user = Users(uid: key, data: userInfo)
+                        self.users[key] = user
                     }
                 }
             }
-            
-            FirebaseDataService.instance.meetingRef.child(meetingId).observeSingleEvent(of: .value, with: { (snapMeeting) in
-                if let meeting = snapMeeting.value as? Dictionary<String, AnyObject> {
-                    if let title = meeting[Constants.Meetings.title] as? String {
-                        self.titleLabel.text = title
-                    }
-                    
-                    if let imageUrl = meeting[Constants.Meetings.frontImageUrl] as? String {
-                        self.mainImageView.imageUrlString = imageUrl
-                    }
-                    
-                    if let partners = meeting[Constants.Meetings.partners] as? Array<String> {
-                        for key in partners {
-                            self.partners.append(self.users[key]!)
-                        }
-                    }
-                    
-                    if let wannabe = meeting[Constants.Meetings.wannabe] as? Array<String> {
-                        for key in wannabe {
-                            self.wannabe.append(self.users[key]!)
-                        }
-                    }
-                    
-                    if let creatorId = meeting[Constants.Meetings.userId] as? String {
-                        self.creatorLabel.text = "만든이 : " + (self.users[creatorId]?.username)!
-                    }
-                    
-                    self.membersLabel.text = "현재 멤버 수 : \(self.partners.count) 명"
+            self.getPartnersAndWannabe(meetingId: meetingId)
+        })
+    }
+    
+    func getPartnersAndWannabe(meetingId: String) {
+        self.wannabe.removeAll()
+        self.partners.removeAll()
+        
+        FirebaseDataService.instance.meetingRef.child(meetingId).observeSingleEvent(of: .value, with: { (snapMeeting) in
+            if let meeting = snapMeeting.value as? Dictionary<String, AnyObject> {
+                if let title = meeting[Constants.Meetings.title] as? String {
+                    self.titleLabel.text = title
                 }
-                DispatchQueue.main.async(execute: {
-                    self.partnersTableView.reloadData()
-                    self.wannabeTableView.reloadData()
-                })
+                
+                if let imageUrl = meeting[Constants.Meetings.frontImageUrl] as? String {
+                    self.mainImageView.imageUrlString = imageUrl
+                }
+                
+                if let partners = meeting[Constants.Meetings.partners] as? Array<String> {
+                    for key in partners {
+                        if let user = self.users[key] {
+                            self.partners.append(user)
+                        }
+                    }
+                }
+                
+                if let wannabe = meeting[Constants.Meetings.wannabe] as? Array<String> {
+                    for key in wannabe {
+                        if let user = self.users[key] {
+                            self.wannabe.append(user)
+                        }
+                    }
+                }
+                
+                if let creatorId = meeting[Constants.Meetings.userId] as? String {
+                    if let name = self.users[creatorId]?.username {
+                        self.creatorLabel.text = "만든이 : " + name
+                    }
+                }
+                
+                self.membersLabel.text = "현재 멤버 수 : \(self.partners.count) 명"
+            }
+            DispatchQueue.main.async(execute: {
+                self.partnersTableView.reloadData()
+                self.wannabeTableView.reloadData()
             })
         })
     }
@@ -201,8 +213,9 @@ class CommunityPartnersListViewController: UIViewController, UITextFieldDelegate
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //partnersTableView.reloadData()
-        //wannabeTableView.reloadData()
+        if let meetingId = self.meetingId {
+            //self.getPartnersAndWannabe(meetingId: meetingId)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -266,15 +279,18 @@ class CommunityPartnersListViewController: UIViewController, UITextFieldDelegate
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let acceptSubmissionViewController = AcceptSubmissionViewController()
-        if let meetingId = self.meetingId {
-            acceptSubmissionViewController.meetingId = meetingId
-            acceptSubmissionViewController.wannabeUser = wannabe[indexPath.row]
-            acceptSubmissionViewController.rowIndex = indexPath.row
+        if tableView == wannabeTableView {
+            let acceptSubmissionViewController = AcceptSubmissionViewController()
+            if let meetingId = self.meetingId {
+                acceptSubmissionViewController.meetingId = meetingId
+                acceptSubmissionViewController.wannabeUser = wannabe[indexPath.row]
+                acceptSubmissionViewController.attachedViewController = self
+            }
+            
+            navigationController?.pushViewController(acceptSubmissionViewController, animated: true)
+        } else {
             
         }
-        
-        navigationController?.pushViewController(acceptSubmissionViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -290,6 +306,7 @@ class CommunityPartnersListViewController: UIViewController, UITextFieldDelegate
             let cell = tableView.dequeueReusableCell(withIdentifier: partnersCellId, for: indexPath) as! FollowerCell
             cell.isDark = true
             cell.userInfo = self.partners[indexPath.item]
+            
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: wannabeCellId, for: indexPath) as! FollowerCell
