@@ -82,6 +82,11 @@ struct Constants {
         static let appliedMeetings: String = "appliedMeetings"
         static let isGroupingAuth: String = "isGroupingAuth"
         static let submission: String = "submission"
+        
+        struct Submission {
+            static let imageUrl = "imageUrl"
+            static let introduction = "introduction"
+        }
     }
     
     struct Category {

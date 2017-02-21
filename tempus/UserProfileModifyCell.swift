@@ -155,7 +155,7 @@ class UserProfileModifyCell: BaseCell, UITextFieldDelegate {
     }()
     
     lazy var alert: UIAlertController = {
-        let alert = UIAlertController(title: "삭제에러", message: "진행중에 에러가 발생하였습니다", preferredStyle: .alert)
+        let alert = UIAlertController(title: "처리오류", message: "진행중에 에러가 발생하였습니다", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default) { action in })
         return alert
     }()
@@ -178,28 +178,26 @@ class UserProfileModifyCell: BaseCell, UITextFieldDelegate {
         let alert = UIAlertController(title: "저장확인", message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default) { action in
             
-            if self.userInfo?.provider == "Firebase" {
-                let user = FIRAuth.auth()?.currentUser
-                user?.updateEmail(self.emailField.text!) { error in
-                    if let error = error {
-                        print(error)
-                    } else {
-                        if let pwd1 = self.passwordField.text, let pwd2 = self.passwordConfirmField.text {
-                            if pwd1 == pwd2 {
-                                user?.updatePassword(pwd1) { error in
-                                    if let error = error {
-                                        print(error)
-                                    } else {
-                                        self.setBasicUserInfo()
-                                    }
-                                }
-                            }
+            let user = FIRAuth.auth()?.currentUser
+            user?.updateEmail(self.emailField.text!) { error in
+                if let error = error {
+                    print(error)
+                    self.presentAlert(controller: self.alert, message:"이메일 오류입니다")
+                }
+            }
+            
+            if let pwd1 = self.passwordField.text, let pwd2 = self.passwordConfirmField.text {
+                if pwd1 == pwd2, pwd1.characters.count >= 6 {
+                    user?.updatePassword(pwd1) { error in
+                        if let error = error {
+                            print(error)
+                            self.presentAlert(controller: self.alert, message:"비밀번호 오류입니다")
                         }
                     }
                 }
-            } else {
-                self.setBasicUserInfo()
             }
+            
+            self.setBasicUserInfo()
         })
         alert.addAction(UIAlertAction(title: "취소", style: .default) { action in })
         return alert

@@ -136,6 +136,7 @@ class ChattingViewController: UITableViewController {
         let signOutButtonItem = UIBarButtonItem(customView: signOutButton)
         self.navigationItem.leftBarButtonItem = signOutButtonItem
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon add meeting"), style: .plain, target: self, action: #selector(openChattingWithNewOne))
+        
     }
     
     fileprivate func registerCells() {

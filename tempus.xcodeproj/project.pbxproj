@@ -52,6 +52,7 @@
 		581121111E501DC0004D1C85 /* FirebaseDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581121101E501DC0004D1C85 /* FirebaseDataService.swift */; };
 		581121131E501DCF004D1C85 /* RestApiDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581121121E501DCF004D1C85 /* RestApiDataService.swift */; };
 		581121151E50415E004D1C85 /* MeetingAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581121141E50415E004D1C85 /* MeetingAddViewController.swift */; };
+		5817C3391E5C0EAF00E72F77 /* AcceptSubmissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5817C3381E5C0EAF00E72F77 /* AcceptSubmissionViewController.swift */; };
 		583BB5BD1E4D486B000FDA44 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BB5BC1E4D486B000FDA44 /* Constants.swift */; };
 		583BB5BF1E4D4F9C000FDA44 /* MeetingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BB5BE1E4D4F9C000FDA44 /* MeetingCell.swift */; };
 		583BB5C31E4D551A000FDA44 /* DownloadImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BB5C21E4D551A000FDA44 /* DownloadImageView.swift */; };
@@ -153,6 +154,7 @@
 		581121101E501DC0004D1C85 /* FirebaseDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDataService.swift; sourceTree = "<group>"; };
 		581121121E501DCF004D1C85 /* RestApiDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiDataService.swift; sourceTree = "<group>"; };
 		581121141E50415E004D1C85 /* MeetingAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingAddViewController.swift; sourceTree = "<group>"; };
+		5817C3381E5C0EAF00E72F77 /* AcceptSubmissionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AcceptSubmissionViewController.swift; sourceTree = "<group>"; };
 		583BB5BC1E4D486B000FDA44 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		583BB5BE1E4D4F9C000FDA44 /* MeetingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingCell.swift; sourceTree = "<group>"; };
 		583BB5C21E4D551A000FDA44 /* DownloadImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadImageView.swift; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 				580BCBCA1E54DA6F007AFFE3 /* ChattingHistoryViewController.swift */,
 				580BCBCC1E54DFDE007AFFE3 /* ChattingWithNewOneViewController.swift */,
 				58CCD4B81E5B17C2009B29F8 /* SubmitJoinViewController.swift */,
+				5817C3381E5C0EAF00E72F77 /* AcceptSubmissionViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -747,6 +750,7 @@
 				58D2AB091E4AD0D80084CE80 /* UIView_ext.swift in Sources */,
 				58CCD4B91E5B17C2009B29F8 /* SubmitJoinViewController.swift in Sources */,
 				580FB47E1E5225CD0057DA21 /* ChattingViewController.swift in Sources */,
+				5817C3391E5C0EAF00E72F77 /* AcceptSubmissionViewController.swift in Sources */,
 				580FB4841E52260D0057DA21 /* SettingsViewController.swift in Sources */,
 				58D2AB011E4ACE390084CE80 /* MainNavigationController.swift in Sources */,
 				5841BD681E5049FA001E6186 /* MeetingAddDetailCell.swift in Sources */,

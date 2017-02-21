@@ -117,11 +117,22 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
         super.viewDidLoad()
 
         navigationItem.titleView = titleLabel
+        
+        // Layout
+//        let layout = UICollectionViewFlowLayout()
+//        layout.scrollDirection = .vertical
+// 
+//        layout.estimatedItemSize = UICollectionViewFlowLayoutAutomaticSize
+//        self.collectionView?.collectionViewLayout = layout
+        
         setCollectionViewUI()
         addSubViews()
         setConstraints()
         registerCells()
         setupKeyboardObservers()
+        
+        //collectionView?.reloadData()
+        
     }
     
     
@@ -233,12 +244,13 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var height: CGFloat = 80
-        if let text = messages[indexPath.item].text {
-            height = measuredFrameHeightForEachMessage(message: text).height + 20// + Constants.userProfileImageSize.lessSmall
-        }
+//        var height: CGFloat = 80
+//        if let text = messages[indexPath.item].text {
+//            height = measuredFrameHeightForEachMessage(message: text).height + 20// + Constants.userProfileImageSize.lessSmall
+//        }
+        
         let width = UIScreen.main.bounds.width
-        return CGSize(width: width, height: height)
+        return CGSize(width: width, height: 80)
     }
     
     private func measuredFrameHeightForEachMessage(message: String) -> CGRect {

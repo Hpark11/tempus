@@ -179,7 +179,7 @@ class CommunityPartnersListViewController: UIViewController, UITextFieldDelegate
                         self.creatorLabel.text = "만든이 : " + (self.users[creatorId]?.username)!
                     }
                     
-                    self.membersLabel.text = "총 : \(self.partners.count) 명"
+                    self.membersLabel.text = "현재 멤버 수 : \(self.partners.count) 명"
                 }
                 DispatchQueue.main.async(execute: {
                     self.partnersTableView.reloadData()
@@ -196,11 +196,23 @@ class CommunityPartnersListViewController: UIViewController, UITextFieldDelegate
         setConstraints()
         registerCells()
         setNavigationBarUI()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //partnersTableView.reloadData()
+        //wannabeTableView.reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     fileprivate func setNavigationBarUI() {
         navigationController?.navigationBar.tintColor = .white
         navigationItem.titleView = logoLabel
+        self.navigationItem.title = ""
     }
     
     fileprivate func addSubViews() {
@@ -251,6 +263,18 @@ class CommunityPartnersListViewController: UIViewController, UITextFieldDelegate
     fileprivate func registerCells() {
         partnersTableView.register(FollowerCell.self, forCellReuseIdentifier: partnersCellId)
         wannabeTableView.register(FollowerCell.self, forCellReuseIdentifier: wannabeCellId)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let acceptSubmissionViewController = AcceptSubmissionViewController()
+        if let meetingId = self.meetingId {
+            acceptSubmissionViewController.meetingId = meetingId
+            acceptSubmissionViewController.wannabeUser = wannabe[indexPath.row]
+            acceptSubmissionViewController.rowIndex = indexPath.row
+            
+        }
+        
+        navigationController?.pushViewController(acceptSubmissionViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
