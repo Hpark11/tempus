@@ -41,6 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         FirebaseDataService.instance.downloadAllImagesToCache()
+        
+        
         //FirebaseDataService.instance.downloadAllRawMeetingList()
         return true
     }

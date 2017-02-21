@@ -19,6 +19,8 @@ class MeetingGiverDetailCell: BaseCell {
         }
     }
     
+    
+    
     func observeFirebaseValue() {
         if let id = self.meetingId {
             FirebaseDataService.instance.meetingRef.child(id).observeSingleEvent(of: .value, with: { (snapshot) in

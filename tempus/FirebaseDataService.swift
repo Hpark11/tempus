@@ -34,6 +34,7 @@ class FirebaseDataService {
     private var _userMessageRef = DB_BASE.child("user-messages")
     private var _imageUrlRef = DB_BASE.child("images")
     private var _storyRegRef = DB_BASE.child("storyReg")
+    private var _groupRef = DB_BASE.child("group")
     
     // Storage References
     private var _imageRef = STORAGE_BASE.child("images")
@@ -68,6 +69,10 @@ class FirebaseDataService {
         return _storyRegRef
     }
     
+    var groupRef: FIRDatabaseReference {
+        return _groupRef
+    }
+    
     var imageRef: FIRStorageReference {
         return _imageRef
     }
@@ -81,7 +86,8 @@ class FirebaseDataService {
             if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
                 for one in snapshot {
                     if let url = one.value as? String {
-                        FirebaseDataService.instance.imageRef.data(withMaxSize: 6 * 1024 * 1024, completion: { (data, error) in
+                        let ref = FIRStorage.storage().reference(forURL: url)
+                        ref.data(withMaxSize: 6 * 1024 * 1024, completion: { (data, error) in
                             if error != nil {
                                 print(":::[HPARK] Unable to Download image from Storage \(String(describing: error)):::")
                             } else {

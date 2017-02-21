@@ -95,6 +95,7 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
             
             let firebaseAutoRef = FirebaseDataService.instance.meetingRef.childByAutoId()
             
+            
             if let uid = FIRAuth.auth()?.currentUser?.uid {
                 FirebaseDataService.instance.userRef.child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
                     if let data = snapshot.value as? Dictionary<String, AnyObject> {
@@ -104,7 +105,9 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
                             meetings.append(meeting)
                         }
                         meetings.append(firebaseAutoRef.key)
-                        FirebaseDataService.instance.userRef.child(uid).updateChildValues([Constants.Users.openedMeetings: meetings as NSArray])
+                        FirebaseDataService.instance.userRef.child(uid).updateChildValues([
+                            Constants.Users.openedMeetings: meetings as NSArray
+                        ])
                     }
                 })
             }
@@ -147,6 +150,7 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
                     print(":::[HPARK] Unable to upload image to storage \(error as Any):::\n ")
                 } else {
                     if let downloadURL = metadata?.downloadURL()?.absoluteString {
+                        FirebaseDataService.instance.imageUrlRef.childByAutoId().setValue(downloadURL)
                         self.dataToFirebaseDatabase(imageUrl: downloadURL, cellType: cellType, dataReference: dataReference)
                     }
                 }
@@ -164,11 +168,19 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
             firebaseRef?.child(Constants.Meetings.title).setValue(self.submitData.title as AnyObject)
             firebaseRef?.child(Constants.Meetings.subTitle).setValue(self.submitData.subTitle as AnyObject)
             firebaseRef?.child(Constants.Meetings.frontImageUrl).setValue(imageUrl as AnyObject)
-        } else if cellType == .detail {
-            firebaseRef?.child(Constants.Meetings.price).setValue(self.submitData.price as AnyObject)
             firebaseRef?.child(Constants.Meetings.profile).setValue(self.submitData.profile as AnyObject)
             firebaseRef?.child(Constants.Meetings.preferred).setValue(self.submitData.preferred as AnyObject)
-            firebaseRef?.child(Constants.Meetings.backImageUrl).setValue(imageUrl as AnyObject)
+            
+            if let uid = FIRAuth.auth()?.currentUser?.uid {
+                let groupRef = FirebaseDataService.instance.groupRef.childByAutoId()
+                groupRef.child(Constants.Group.imageUrl).setValue(imageUrl)
+                groupRef.child(Constants.Group.name).setValue(self.submitData.title)
+                FirebaseDataService.instance.userRef.child(uid).child(Constants.Users.group).child(groupRef.key).setValue(1)
+            }
+            
+        } else if cellType == .detail {
+            firebaseRef?.child(Constants.Meetings.profile).setValue(self.submitData.profile as AnyObject)
+            firebaseRef?.child(Constants.Meetings.preferred).setValue(self.submitData.preferred as AnyObject)
         } else {
             dict = [
                 Constants.Meetings.Slides.storyTitle : self.submitData.slides[dataIterator].storyTitle as AnyObject,

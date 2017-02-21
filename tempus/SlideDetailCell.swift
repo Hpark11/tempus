@@ -17,6 +17,7 @@ class SlideDetailCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
         static let cellId: String = "cellId"
     }
     
+    var userId: String?
     var meetingId: String? {
         didSet{
             observeFirebaseValue()
@@ -26,7 +27,7 @@ class SlideDetailCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
         if let id = self.meetingId {
             FirebaseDataService.instance.meetingRef.child(id).observeSingleEvent(of: .value, with: { (snapshot) in
                 if let value = snapshot.value as? Dictionary<String, AnyObject> {
-                    
+                    self.userId = value[Constants.Meetings.userId] as? String
                     FirebaseDataService.instance.userRef.child((value[Constants.Meetings.userId] as? String)!).observeSingleEvent(of: .value, with: { (userSnap) in
                         if let userVal = userSnap.value as? Dictionary<String, AnyObject> {
                             self.mainImageView.imageUrlString = userVal[Constants.Users.backgroundImageUrl] as? String
@@ -121,6 +122,9 @@ class SlideDetailCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
         let layout = UICollectionViewFlowLayout()
         let checkUserProfileViewController = CheckUserProfileViewController(collectionViewLayout: layout)
         if let attachedViewController = self.attachedViewController {
+            if let userId = self.userId {
+                checkUserProfileViewController.userId = userId
+            }
             attachedViewController.present(checkUserProfileViewController, animated: true, completion: nil)
         }
     }

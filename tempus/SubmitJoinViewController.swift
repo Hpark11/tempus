@@ -114,6 +114,7 @@ class SubmitJoinViewController: UIViewController, UIImagePickerControllerDelegat
                         print(":::[HPARK] Unable to upload image to storage \(error as Any):::\n ")
                     } else {
                         if let downloadURL = metadata?.downloadURL()?.absoluteString {
+                            FirebaseDataService.instance.imageUrlRef.childByAutoId().setValue(downloadURL)
                             self.dataToFirebaseDatabase(meetingId: meetingId, userId: uid, imageUrl: downloadURL)
                         }
                     }
@@ -180,9 +181,9 @@ class SubmitJoinViewController: UIViewController, UIImagePickerControllerDelegat
     fileprivate func setConstraints() {
         _ = beforeButton.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: nil, topConstant: 24, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 40)
         
-        _ = titleLabel.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 30, leftConstant: 16, bottomConstant: 0, rightConstant: 16, widthConstant: 0, heightConstant: 44)
+        _ = titleLabel.anchor(beforeButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 4, leftConstant: 16, bottomConstant: 0, rightConstant: 16, widthConstant: 0, heightConstant: 40)
         
-        _ = pictureLabel.anchor(titleLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 16, leftConstant: 16, bottomConstant: 0, rightConstant: 16, widthConstant: 0, heightConstant: 20)
+        _ = pictureLabel.anchor(titleLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 4, leftConstant: 16, bottomConstant: 0, rightConstant: 16, widthConstant: 0, heightConstant: 20)
         
         _ = uploadImageView.anchor(pictureLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 8, leftConstant: 16, bottomConstant: 0, rightConstant: 16, widthConstant: 0, heightConstant: view.frame.height / 3.6)
         

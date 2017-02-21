@@ -45,27 +45,28 @@ class MeetingListCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
     var meetingList = [Meeting]()
     func observeFirebaseValue(category: String) {
         let meetingRef = FirebaseDataService.instance.meetingRef
-        meetingRef.observe(.value, with: { (snapshot) in
-            if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
-                self.meetingList.removeAll()
-                self.filteredMeetingList.removeAll()
-                for one in snapshot {
-                    if let dict = one.value as? Dictionary<String, AnyObject> {
-                        if category == dict[Constants.Meetings.category] as? String {
-                            FirebaseDataService.instance.userRef.child(dict[Constants.Meetings.userId] as! String).observeSingleEvent(of: .value, with: { (snapUser) in
-                                if let userInfo = snapUser.value as? Dictionary<String, AnyObject> {
-                                    let meeting = Meeting(id:one.key, data: dict, userInfo: userInfo)
-                                    self.meetingList.append(meeting)
-                                    if let word = self.searchWord, (meeting.title?.range(of:word) != nil) || (word == "") {
-                                        self.filteredMeetingList.append(meeting)
-                                    } else {
-                                        self.filteredMeetingList.append(meeting)
+        
+        meetingRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            if let dict = snapshot.value as? Dictionary<String, AnyObject> {
+                for (key, data) in dict {
+                    if let value = data as? Dictionary<String, AnyObject> {
+                        if category == value[Constants.Meetings.category] as? String {
+                            if let userId = value[Constants.Meetings.userId] as? String {
+                                FirebaseDataService.instance.userRef.child(userId).observeSingleEvent(of: .value, with: { (snapUser) in
+                                    if let userInfo = snapUser.value as? Dictionary<String, AnyObject> {
+                                        let meeting = Meeting(id:key, data: value, userInfo: userInfo)
+                                        self.meetingList.append(meeting)
+                                        if let word = self.searchWord, (meeting.title?.range(of:word) != nil) || (word == "") {
+                                            self.filteredMeetingList.append(meeting)
+                                        } else {
+                                            self.filteredMeetingList.append(meeting)
+                                        }
                                     }
-                                }
-                                DispatchQueue.main.async(execute: { 
-                                    self.collectionView.reloadData()
+                                    DispatchQueue.main.async(execute: {
+                                        self.collectionView.reloadData()
+                                    })
                                 })
-                            })
+                            }
                         }
                     }
                 }

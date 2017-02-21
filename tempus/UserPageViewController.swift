@@ -112,6 +112,7 @@ class UserPageViewController: UICollectionViewController, UICollectionViewDelega
         if indexPath.item == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UserPageData.myInfoCellId, for: indexPath) as! MyProfileInfoCell
             cell.attachedViewController = self
+            cell.userId = FIRAuth.auth()?.currentUser?.uid
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UserPageData.followingCellId, for: indexPath) as! UserFollowingCell

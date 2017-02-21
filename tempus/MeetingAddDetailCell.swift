@@ -206,9 +206,9 @@ class MeetingAddDetailCell: BaseCell, UITextViewDelegate, UIImagePickerControlle
     func textViewDidEndEditing(_ textView: UITextView) {
         if let attachedViewController = self.attachedViewController {
             if textView == personalRecordTextView {
-                attachedViewController.submitData.profile = textView.text!
+                attachedViewController.submitData.profile = personalRecordTextView.text
             } else if textView == preferredPersonTextView {
-                attachedViewController.submitData.preferred = textView.text!
+                attachedViewController.submitData.preferred = preferredPersonTextView.text
             }
         }
     }

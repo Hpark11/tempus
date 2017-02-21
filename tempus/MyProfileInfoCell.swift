@@ -19,17 +19,25 @@ class MyProfileInfoCell: BaseCell, UICollectionViewDelegate, UICollectionViewDat
         static let userMeetingCellId = "userMeetingCellId"
         static let userProfileModifyCellId = "userProfileModifyCellId"
     }
+    var userId: String? {
+        didSet {
+            if let userId = self.userId {
+                observeFirebaseValue(userId:userId)
+            }
+        }
+    }
     var userInfo: Users?
     
     func observeFirebaseValue(userId: String) {
-        if let userId = FIRAuth.auth()?.currentUser?.uid {
-            FirebaseDataService.instance.userRef.child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
-                if let value = snapshot.value as? Dictionary<String, AnyObject> {
-                    self.userInfo = Users(uid: snapshot.key, data: value)
-                    self.meetingCollectionView.reloadData()
-                }
+        FirebaseDataService.instance.userRef.child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let value = snapshot.value as? Dictionary<String, AnyObject> {
+                self.userInfo = Users(uid: snapshot.key, data: value)
+            }
+            
+            DispatchQueue.main.async(execute: {
+                self.meetingCollectionView.reloadData()
             })
-        }
+        })
     }
     
     lazy var meetingCollectionView: UICollectionView = {
@@ -44,10 +52,7 @@ class MyProfileInfoCell: BaseCell, UICollectionViewDelegate, UICollectionViewDat
     
     override func setupViews() {
         super.setupViews()
-        if let userId = FIRAuth.auth()?.currentUser?.uid {
-            observeFirebaseValue(userId: userId)
-        }
-        
+
         addSubViews()
         setConstraints()
         registerCells()
@@ -74,7 +79,7 @@ class MyProfileInfoCell: BaseCell, UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.item == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyProfileInfoData.userInfoCellId, for: indexPath) as! UserInfoCell
-            cell.myUid = userInfo?.uid
+            cell.myUid = FIRAuth.auth()?.currentUser?.uid
             cell.userInfo = userInfo
             if let attachedViewController = self.attachedViewController {
                 cell.attachedViewController = attachedViewController
@@ -103,7 +108,7 @@ class MyProfileInfoCell: BaseCell, UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.item == 0 {
-            return CGSize(width: frame.width, height: frame.height / 1.1)
+            return CGSize(width: frame.width, height: frame.height * 0.8)
         } else {
             return CGSize(width: frame.width, height: frame.height)
         }

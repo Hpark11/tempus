@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4D13DF3F1F9689260AE36F83 /* Pods_tempus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E88DB2E7A740E9A2F92813 /* Pods_tempus.framework */; };
+		5804D8991E5CD28C00628469 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8981E5CD28C00628469 /* Group.swift */; };
 		5807755D1E4ECB3A0092ED8F /* SlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5807755C1E4ECB3A0092ED8F /* SlideViewController.swift */; };
 		5807755F1E4ECB6A0092ED8F /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5807755E1E4ECB6A0092ED8F /* DiaryViewController.swift */; };
 		5808951B1E52A47500F8D96B /* UserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5808951A1E52A47500F8D96B /* UserPageViewController.swift */; };
@@ -110,6 +111,7 @@
 		08E88DB2E7A740E9A2F92813 /* Pods_tempus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tempus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B46B7A0A187E515B862B170 /* Pods-tempus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tempus.release.xcconfig"; path = "Pods/Target Support Files/Pods-tempus/Pods-tempus.release.xcconfig"; sourceTree = "<group>"; };
 		4514D91D6E2255B2CF063585 /* Pods-tempusTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tempusTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-tempusTests/Pods-tempusTests.release.xcconfig"; sourceTree = "<group>"; };
+		5804D8981E5CD28C00628469 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		5807755C1E4ECB3A0092ED8F /* SlideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideViewController.swift; sourceTree = "<group>"; };
 		5807755E1E4ECB6A0092ED8F /* DiaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
 		5808951A1E52A47500F8D96B /* UserPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPageViewController.swift; sourceTree = "<group>"; };
@@ -400,6 +402,7 @@
 				580CB5F61E4E6F85008658CA /* Meeting.swift */,
 				5808952F1E5428F900F8D96B /* Users.swift */,
 				580BCBD01E555BB8007AFFE3 /* Message.swift */,
+				5804D8981E5CD28C00628469 /* Group.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -762,6 +765,7 @@
 				58D2AB0D1E4AD48A0084CE80 /* BaseCell.swift in Sources */,
 				580BCBCB1E54DA6F007AFFE3 /* ChattingHistoryViewController.swift in Sources */,
 				58D2AAD61E4ACB510084CE80 /* AppDelegate.swift in Sources */,
+				5804D8991E5CD28C00628469 /* Group.swift in Sources */,
 				581121151E50415E004D1C85 /* MeetingAddViewController.swift in Sources */,
 				580895261E52E87400F8D96B /* UserMeetingCell.swift in Sources */,
 				5808951E1E52C55700F8D96B /* UserProfileBarView.swift in Sources */,

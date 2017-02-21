@@ -155,7 +155,7 @@ class CommunityPartnersListViewController: UIViewController, UITextFieldDelegate
             self.getPartnersAndWannabe(meetingId: meetingId)
         })
     }
-    
+
     func getPartnersAndWannabe(meetingId: String) {
         self.wannabe.removeAll()
         self.partners.removeAll()

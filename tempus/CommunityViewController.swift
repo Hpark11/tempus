@@ -45,7 +45,6 @@ class CommunityViewController: UIViewController {
     
     func moveOnToNext(userInfo: Users) {
         let communityMyListViewController = CommunityMyListViewController()
-        communityMyListViewController.userInfo = userInfo
         navigationController?.pushViewController(communityMyListViewController, animated: true)
     }
     

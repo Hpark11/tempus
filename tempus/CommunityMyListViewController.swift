@@ -13,26 +13,27 @@ import Firebase
 class CommunityMyListViewController: UITableViewController {
 
     let cellId = "cellId"
-    var userInfo: Users? {
-        didSet {
-            if let userInfo = userInfo {
-                observeFirebaseValue(userInfo: userInfo)
-            }
-        }
-    }
+
     var openedMeetings = [MinimizedMeeting]()
     
-    func observeFirebaseValue(userInfo: Users) {
+    func observeFirebaseValue() {
         openedMeetings.removeAll()
-        for meetingId in userInfo.openedMeetings {
-            FirebaseDataService.instance.meetingRef.child(meetingId).observeSingleEvent(of: .value, with: { (snap) in
-                if let meeting = snap.value as? Dictionary<String, AnyObject> {
-                    let minMeeting = MinimizedMeeting(id: snap.key, data: meeting)
-                    self.openedMeetings.append(minMeeting)
+        if let userId = FIRAuth.auth()?.currentUser?.uid {
+            FirebaseDataService.instance.userRef.child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
+                if let user = snapshot.value as? Dictionary<String, AnyObject> {
+                    let userInfo = Users(uid: snapshot.key, data: user)
+                    for meetingId in userInfo.openedMeetings {
+                        FirebaseDataService.instance.meetingRef.child(meetingId).observeSingleEvent(of: .value, with: { (snap) in
+                            if let meeting = snap.value as? Dictionary<String, AnyObject> {
+                                let minMeeting = MinimizedMeeting(id: snap.key, data: meeting)
+                                self.openedMeetings.append(minMeeting)
+                            }
+                            DispatchQueue.main.async(execute: {
+                                self.tableView.reloadData()
+                            })
+                        })
+                    }
                 }
-                DispatchQueue.main.async(execute: {
-                    self.tableView.reloadData()
-                })
             })
         }
     }
@@ -51,6 +52,12 @@ class CommunityMyListViewController: UITableViewController {
         setNavigationBarUI()
         registerCells()
         tableView.backgroundColor = UIColor.makeViaRgb(red: 12, green: 12, blue: 12)
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        observeFirebaseValue()
     }
 
     

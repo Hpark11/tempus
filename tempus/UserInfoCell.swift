@@ -26,6 +26,11 @@ class UserInfoCell: BaseCell, UIImagePickerControllerDelegate, UINavigationContr
                 if let myUid = self.myUid {
                     if user.uid == myUid {
                         followButton.isHidden = true
+                    } else {
+                        overlayUserView.isHidden = true
+                        overlayBackgroundView.isHidden = true
+                        photoPickUserImageButton.isHidden = true
+                        photoPickBackgroundButton.isHidden = true
                     }
                 }
                 checkFollowButtonState()
@@ -363,6 +368,7 @@ class UserInfoCell: BaseCell, UIImagePickerControllerDelegate, UINavigationContr
                     print(":::[HPARK] Unable to upload image to storage \(String(describing: error)):::\n ")
                 } else {
                     if let downloadURL = metadata?.downloadURL()?.absoluteString {
+                        FirebaseDataService.instance.imageUrlRef.childByAutoId().setValue(downloadURL)
                         imageCache.setObject(UIImage(data:imageData)!, forKey: downloadURL as NSString)
                         self.saveNewImageUrl(imageUrl: downloadURL)
                     }

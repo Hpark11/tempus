@@ -200,24 +200,6 @@ class AcceptSubmissionViewController: UIViewController {
                 }
                 self.navigationController?.popViewController(animated: true)
             })
-            
-            
-//            wannabeRef.observe(.value, with: { (snapshot) in
-//                if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
-//                    var restore = Array<String>()
-//                    for one in snapshot {
-//                        if let id = one.value as? String{
-//                            if id == wannabeUser.uid {
-//                                one.ref.removeValue()
-//                            } else {
-//                                restore.append(id)
-//                            }
-//                        }
-//                    }
-//                    wannabeRef.setValue(restore)
-//                }
-//                
-//            })
         }
     }
     

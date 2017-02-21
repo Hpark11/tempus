@@ -37,6 +37,12 @@ struct Constants {
         static let tabBarColor: UIColor = .lightGray
     }
     
+    struct Group {
+        static let imageUrl = "imageUrl"
+        static let name = "name"
+        static let messages = "messages"
+    }
+    
     struct Meetings {
         static let userId: String = "userId"
         static let isPassed: String = "isPassed"
@@ -82,6 +88,7 @@ struct Constants {
         static let appliedMeetings: String = "appliedMeetings"
         static let isGroupingAuth: String = "isGroupingAuth"
         static let submission: String = "submission"
+        static let group: String = "group"
         
         struct Submission {
             static let imageUrl = "imageUrl"
