@@ -213,9 +213,6 @@ class CommunityPartnersListViewController: UIViewController, UITextFieldDelegate
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let meetingId = self.meetingId {
-            //self.getPartnersAndWannabe(meetingId: meetingId)
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

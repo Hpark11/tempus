@@ -11,8 +11,6 @@ import Firebase
 import SwiftKeychainWrapper
 
 class UserPageViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-
-    
     
     struct UserPageData {
         static let myInfoCellId = "myInfoCellId"

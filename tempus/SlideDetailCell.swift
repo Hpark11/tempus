@@ -88,7 +88,7 @@ class SlideDetailCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
     lazy var introTextView: UITextView = {
         let textView = UITextView()
         textView.font = UIFont.systemFont(ofSize: 16)
-        textView.textContainerInset = UIEdgeInsetsMake(0, 8, 0, 0)
+        textView.textContainerInset = UIEdgeInsetsMake(0, 4, 0, 0)
         textView.textColor = .lightGray
         textView.backgroundColor = .clear
         textView.isEditable = false
@@ -113,26 +113,16 @@ class SlideDetailCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
         button.addTarget(self, action: #selector(followButtonTapped), for: .touchUpInside)
         button.isUserInteractionEnabled = true
         button.layer.cornerRadius = 8
-        button.setTitle("FOLLOW", for: .normal)
-        return button
-    }()
-    
-    lazy var commentButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.backgroundColor = UIColor.makeViaRgb(red: 74, green: 144, blue: 226)
-        button.setImage(UIImage(named: "icon small comment white"), for: .normal)
-        button.addTarget(self, action: #selector(commentButtonTapped), for: .touchUpInside)
-        button.tintColor = .white
-        button.layer.cornerRadius = 8
+        button.setTitle("유저정보 확인하기", for: .normal)
         return button
     }()
     
     func followButtonTapped() {
-        
-    }
-    
-    func commentButtonTapped() {
-        
+        let layout = UICollectionViewFlowLayout()
+        let checkUserProfileViewController = CheckUserProfileViewController(collectionViewLayout: layout)
+        if let attachedViewController = self.attachedViewController {
+            attachedViewController.present(checkUserProfileViewController, animated: true, completion: nil)
+        }
     }
     
     override func setupViews() {
@@ -151,7 +141,6 @@ class SlideDetailCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
         addSubview(introTextView)
         addSubview(giverLabel)
         addSubview(followButton)
-        addSubview(commentButton)
         addSubview(dividerView)
         addSubview(giverInfollectionView)
     }
@@ -164,12 +153,10 @@ class SlideDetailCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
         _ = introTextView.anchor(nil, left: userProfileImageView.rightAnchor, bottom: userProfileImageView.bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 6, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 22)
 
         _ = giverLabel.anchor(nil, left: userProfileImageView.rightAnchor, bottom: introTextView.topAnchor, right: rightAnchor, topConstant: 0, leftConstant: 12, bottomConstant: 10, rightConstant: 0, widthConstant: 0, heightConstant: 32)
+
+        _ = followButton.anchor(introTextView.bottomAnchor, left: userProfileImageView.leftAnchor, bottom: nil, right: rightAnchor, topConstant: 12, leftConstant: 0, bottomConstant: 0, rightConstant: 12, widthConstant: 0, heightConstant: 38)
         
-        _ = commentButton.anchor(introTextView.bottomAnchor, left: nil, bottom: nil, right: rightAnchor, topConstant: 12, leftConstant: 0, bottomConstant: 0, rightConstant: 12, widthConstant: SlideDetailData.defaultButtonHeight, heightConstant: SlideDetailData.defaultButtonHeight)
-        
-        _ = followButton.anchor(introTextView.bottomAnchor, left: userProfileImageView.leftAnchor, bottom: nil, right: commentButton.leftAnchor, topConstant: 12, leftConstant: 0, bottomConstant: 0, rightConstant: 10, widthConstant: 0, heightConstant: SlideDetailData.defaultButtonHeight)
-        
-        _ = dividerView.anchor(followButton.bottomAnchor, left: userProfileImageView.leftAnchor, bottom: nil, right: commentButton.rightAnchor, topConstant: 12, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 1.4)
+        _ = dividerView.anchor(followButton.bottomAnchor, left: userProfileImageView.leftAnchor, bottom: nil, right: followButton.rightAnchor, topConstant: 12, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 1.4)
         
         _ = giverInfollectionView.anchor(dividerView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 4, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
     }

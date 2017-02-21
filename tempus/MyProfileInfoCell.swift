@@ -42,7 +42,6 @@ class MyProfileInfoCell: BaseCell, UICollectionViewDelegate, UICollectionViewDat
         return collectionView
     }()
     
-    
     override func setupViews() {
         super.setupViews()
         if let userId = FIRAuth.auth()?.currentUser?.uid {

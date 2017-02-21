@@ -82,6 +82,7 @@
 		58D2AB0D1E4AD48A0084CE80 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AB0C1E4AD48A0084CE80 /* BaseCell.swift */; };
 		58D2AB0F1E4ADC7A0084CE80 /* OnboardingCoverPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AB0E1E4ADC7A0084CE80 /* OnboardingCoverPageCell.swift */; };
 		58D2E2781E4CB4860084B2C9 /* MeetingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2E2771E4CB4860084B2C9 /* MeetingListCell.swift */; };
+		58F3CDC01E5C825E00629A81 /* CheckUserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F3CDBF1E5C825E00629A81 /* CheckUserProfileViewController.swift */; };
 		58FCAAD91E4B00EA002F5B0A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58FCAAD81E4B00EA002F5B0A /* GoogleService-Info.plist */; };
 		58FCAADB1E4B0663002F5B0A /* MeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FCAADA1E4B0663002F5B0A /* MeetingViewController.swift */; };
 		58FCAADD1E4B2756002F5B0A /* MeetingViewTopPanelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FCAADC1E4B2756002F5B0A /* MeetingViewTopPanelCell.swift */; };
@@ -188,6 +189,7 @@
 		58D2AB0C1E4AD48A0084CE80 /* BaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		58D2AB0E1E4ADC7A0084CE80 /* OnboardingCoverPageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingCoverPageCell.swift; sourceTree = "<group>"; };
 		58D2E2771E4CB4860084B2C9 /* MeetingListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingListCell.swift; sourceTree = "<group>"; };
+		58F3CDBF1E5C825E00629A81 /* CheckUserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckUserProfileViewController.swift; sourceTree = "<group>"; };
 		58FCAAD81E4B00EA002F5B0A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		58FCAADA1E4B0663002F5B0A /* MeetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingViewController.swift; sourceTree = "<group>"; };
 		58FCAADC1E4B2756002F5B0A /* MeetingViewTopPanelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingViewTopPanelCell.swift; sourceTree = "<group>"; };
@@ -382,6 +384,7 @@
 				580BCBCC1E54DFDE007AFFE3 /* ChattingWithNewOneViewController.swift */,
 				58CCD4B81E5B17C2009B29F8 /* SubmitJoinViewController.swift */,
 				5817C3381E5C0EAF00E72F77 /* AcceptSubmissionViewController.swift */,
+				58F3CDBF1E5C825E00629A81 /* CheckUserProfileViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -715,6 +718,7 @@
 				5811210A1E4F0227004D1C85 /* SlideCell.swift in Sources */,
 				58D2AB0F1E4ADC7A0084CE80 /* OnboardingCoverPageCell.swift in Sources */,
 				580BCBCF1E5545D3007AFFE3 /* UserCell.swift in Sources */,
+				58F3CDC01E5C825E00629A81 /* CheckUserProfileViewController.swift in Sources */,
 				58FCAAE71E4C382E002F5B0A /* CategoryMeetingViewCell.swift in Sources */,
 				5808952C1E530F8C00F8D96B /* MinimizedMeetingCell.swift in Sources */,
 				580895241E52E86200F8D96B /* UserInfoCell.swift in Sources */,
