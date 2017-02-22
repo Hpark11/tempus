@@ -32,6 +32,7 @@ class FirebaseDataService {
     private var _userRef = DB_BASE.child("users")
     private var _messeageRef = DB_BASE.child("messages")
     private var _userMessageRef = DB_BASE.child("user-messages")
+    private var _groupMsgRef = DB_BASE.child("groupMessages")
     private var _imageUrlRef = DB_BASE.child("images")
     private var _storyRegRef = DB_BASE.child("storyReg")
     private var _groupRef = DB_BASE.child("group")
@@ -55,6 +56,10 @@ class FirebaseDataService {
     
     var messageRef: FIRDatabaseReference {
         return _messeageRef
+    }
+    
+    var groupMsgRef: FIRDatabaseReference {
+        return _groupMsgRef
     }
     
     var userMessageRef: FIRDatabaseReference {

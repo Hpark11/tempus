@@ -26,6 +26,6 @@ class Message: NSObject {
 
 class GroupMessage: NSObject {
     var fromUserId: String?
-    var timestamp: NSNumber?
     var text: String?
+    var timestamp: NSNumber?
 }

@@ -25,10 +25,10 @@ class ChattingViewController: UITableViewController {
         return label
     }()
     
-    func presentChattingHistory(user: Users) {
+    func presentChattingHistory(group: Group) {
         let layout = UICollectionViewFlowLayout()
         let chattingHistoryViewController = ChattingHistoryViewController(collectionViewLayout: layout)
-        chattingHistoryViewController.user = user
+        chattingHistoryViewController.group = group
         navigationController?.pushViewController(chattingHistoryViewController, animated: true)
     }
     
@@ -56,8 +56,6 @@ class ChattingViewController: UITableViewController {
         checkIsUserSignedIn()
         setNavigationBarUI()
         
-        messages.removeAll()
-        messagesDict.removeAll()
         tableView.reloadData()
         registerCells()
         observePreconfiguredUserMessage()
@@ -73,7 +71,7 @@ class ChattingViewController: UITableViewController {
         }
         
         self.groups.removeAll()
-        FirebaseDataService.instance.userRef.child(uid).child(Constants.Users.group).observeSingleEvent(of: .childAdded, with: { (snapshot) in
+        FirebaseDataService.instance.userRef.child(uid).child(Constants.Users.group).observeSingleEvent(of: .value, with: { (snapshot) in
             if let dict = snapshot.value as? Dictionary<String, Int> {
                 for (key, _) in dict {
                     FirebaseDataService.instance.groupRef.child(key).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -108,36 +106,25 @@ class ChattingViewController: UITableViewController {
     }
     
     fileprivate func registerCells() {
-        tableView.register(UserCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(GroupCell.self, forCellReuseIdentifier: cellId)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let message = messages[indexPath.row]
-        guard let chatPartnerId = message.chatWithSomeone() else {
-            return
-        }
-        let ref = FirebaseDataService.instance.userRef.child(chatPartnerId)
-        ref.observeSingleEvent(of: .value, with: { (snapshot) in
-            guard let value = snapshot.value as? Dictionary<String, AnyObject> else {
-                return
-            }
-            self.presentChattingHistory(user: Users(uid: chatPartnerId, data: value))
-        })
+        self.presentChattingHistory(group: groups[indexPath.item])
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return messages.count
+        return groups.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! UserCell
-        let message = messages[indexPath.row]
-        cell.message = message
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! GroupCell
+        cell.group = groups[indexPath.item]
         return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
+        return 160
     }
 }
 

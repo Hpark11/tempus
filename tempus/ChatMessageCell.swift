@@ -12,6 +12,7 @@ class ChatMessageCell: BaseCell {
     var containerViewWidthAnchor: NSLayoutConstraint?
     var containerViewRightAnchor: NSLayoutConstraint?
     var containerViewLeftAnchor: NSLayoutConstraint?
+    
     let profileImageView: DownloadImageView = {
         let imageView = DownloadImageView()
         imageView.image = UIImage(named: "placeholder human")

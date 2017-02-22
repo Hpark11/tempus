@@ -45,6 +45,12 @@ struct Constants {
         static let messages = "messages"
     }
     
+    struct GroupMessages {
+        static let fromUserId = "fromUserId"
+        static let text = "text"
+        static let timestamp = "timestamp"
+    }
+    
     struct Meetings {
         static let userId: String = "userId"
         static let isPassed: String = "isPassed"
