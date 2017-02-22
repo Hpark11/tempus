@@ -14,7 +14,6 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
     let cellId = "cellId"
     
     var groupMsgs = [GroupMessage]()
-    var users = [Users]()
     var chatInputViewBottomAnchor: NSLayoutConstraint?
     
     var group: Group? {
@@ -32,7 +31,7 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 260, height: 40))
         label.textAlignment = .center
         label.textColor = UIColor.white
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
     }()
     
@@ -84,6 +83,10 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
         }
     }
     
+    func fileShareButtonTapped() {
+        
+    }
+    
     func observeMessages() {
         if let groupId = self.group?.key {
             let groupMessageRef = FirebaseDataService.instance.groupRef.child(groupId).child(Constants.Group.messages)
@@ -96,17 +99,8 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
                     }
                     let groupMsg = GroupMessage()
                     groupMsg.setValuesForKeys(dict)
-                    
                     self.groupMsgs.append(groupMsg)
-                    if let fromUserId = groupMsg.fromUserId {
-                        FirebaseDataService.instance.userRef.child(fromUserId).observeSingleEvent(of: .value, with: { (snapshot) in
-                            if let data = snapshot.value as? Dictionary<String, AnyObject> {
-                                let user = Users(uid: snapshot.key, data: data)
-                                self.users.append(user)
-                            }
-                            self.attemptReloadOfTable()
-                        })
-                    }
+                    self.attemptReloadOfTable()
                 })
             })
         }
@@ -128,6 +122,7 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
         super.viewDidLoad()
 
         navigationItem.titleView = titleLabel
+        setNavigationBarUI()
         setCollectionViewUI()
         addSubViews()
         setConstraints()
@@ -156,6 +151,10 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
         chatInputView.addSubview(sendButton)
         chatInputView.addSubview(inputTextField)
         chatInputView.addSubview(dividerView)
+    }
+    
+    fileprivate func setNavigationBarUI() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon file share"), style: .plain, target: self, action: #selector(fileShareButtonTapped))
     }
     
     fileprivate func setCollectionViewUI() {
@@ -218,9 +217,7 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
         
         let message = groupMsgs[indexPath.item]
         cell.chattingTextView.text = message.text
-        if indexPath.item < users.count {
-            cell.profileImageView.imageUrlString = users[indexPath.item].imageUrl
-        }
+        cell.fromUserId = self.groupMsgs[indexPath.item].fromUserId
         setupCell(cell: cell, message: message)
         cell.containerViewWidthAnchor?.constant = measuredFrameHeightForEachMessage(message: message.text!).width + 32
         

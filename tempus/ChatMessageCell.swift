@@ -13,6 +13,19 @@ class ChatMessageCell: BaseCell {
     var containerViewRightAnchor: NSLayoutConstraint?
     var containerViewLeftAnchor: NSLayoutConstraint?
     
+    var fromUserId: String? {
+        didSet {
+            if let fromUserId = fromUserId {
+                FirebaseDataService.instance.userRef.child(fromUserId).observeSingleEvent(of: .value, with: { (snapshot) in
+                    if let data = snapshot.value as? Dictionary<String, AnyObject> {
+                        let user = Users(uid: snapshot.key, data: data)
+                        self.profileImageView.imageUrlString = user.imageUrl
+                    }
+                })
+            }
+        }
+    }
+    
     let profileImageView: DownloadImageView = {
         let imageView = DownloadImageView()
         imageView.image = UIImage(named: "placeholder human")

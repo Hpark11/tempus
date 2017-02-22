@@ -10,6 +10,7 @@
 		4D13DF3F1F9689260AE36F83 /* Pods_tempus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E88DB2E7A740E9A2F92813 /* Pods_tempus.framework */; };
 		5804D8991E5CD28C00628469 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8981E5CD28C00628469 /* Group.swift */; };
 		5804D89B1E5D4FC100628469 /* GroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D89A1E5D4FC100628469 /* GroupCell.swift */; };
+		5804D89D1E5DA3B300628469 /* ShareFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D89C1E5DA3B300628469 /* ShareFilesViewController.swift */; };
 		5807755D1E4ECB3A0092ED8F /* SlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5807755C1E4ECB3A0092ED8F /* SlideViewController.swift */; };
 		5807755F1E4ECB6A0092ED8F /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5807755E1E4ECB6A0092ED8F /* DiaryViewController.swift */; };
 		5808951B1E52A47500F8D96B /* UserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5808951A1E52A47500F8D96B /* UserPageViewController.swift */; };
@@ -114,6 +115,7 @@
 		4514D91D6E2255B2CF063585 /* Pods-tempusTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tempusTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-tempusTests/Pods-tempusTests.release.xcconfig"; sourceTree = "<group>"; };
 		5804D8981E5CD28C00628469 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		5804D89A1E5D4FC100628469 /* GroupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
+		5804D89C1E5DA3B300628469 /* ShareFilesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareFilesViewController.swift; sourceTree = "<group>"; };
 		5807755C1E4ECB3A0092ED8F /* SlideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideViewController.swift; sourceTree = "<group>"; };
 		5807755E1E4ECB6A0092ED8F /* DiaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
 		5808951A1E52A47500F8D96B /* UserPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPageViewController.swift; sourceTree = "<group>"; };
@@ -390,6 +392,7 @@
 				58CCD4B81E5B17C2009B29F8 /* SubmitJoinViewController.swift */,
 				5817C3381E5C0EAF00E72F77 /* AcceptSubmissionViewController.swift */,
 				58F3CDBF1E5C825E00629A81 /* CheckUserProfileViewController.swift */,
+				5804D89C1E5DA3B300628469 /* ShareFilesViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -711,6 +714,7 @@
 				583BB5BD1E4D486B000FDA44 /* Constants.swift in Sources */,
 				58CCD4B31E5A334E009B29F8 /* CommunityMyListViewController.swift in Sources */,
 				58FCAADF1E4B276E002F5B0A /* MeetingViewBottomPanelCell.swift in Sources */,
+				5804D89D1E5DA3B300628469 /* ShareFilesViewController.swift in Sources */,
 				58D2AAD81E4ACB510084CE80 /* MeetingListViewController.swift in Sources */,
 				5808951B1E52A47500F8D96B /* UserPageViewController.swift in Sources */,
 				58FCAAED1E4C44A7002F5B0A /* MeetingBottomPanelContent.swift in Sources */,
