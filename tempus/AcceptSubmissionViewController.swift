@@ -121,16 +121,19 @@ class AcceptSubmissionViewController: UIViewController {
             // 유저데이터의 submission의 데이터를 삭제한다
             let wannabeRef = FirebaseDataService.instance.meetingRef.child(meetingId).child(Constants.Meetings.wannabe)
             let partnersRef = FirebaseDataService.instance.meetingRef.child(meetingId).child(Constants.Meetings.partners)
-            
             FirebaseDataService.instance.userRef.child(wannabeUser.uid).child(Constants.Users.submission).child(meetingId).removeValue()
             
             // 유저데이터의 appliedMeeting데이터를 추가시킨다
-
             var userMeetings = wannabeUser.appliedMeetings
             userMeetings.append(meetingId)
-            
             FirebaseDataService.instance.userRef.child(wannabeUser.uid).child(Constants.Users.appliedMeetings).setValue(userMeetings)
             
+            // 가입된 유저에게 그룹 아이디를 부여한다
+            FirebaseDataService.instance.meetingRef.child(meetingId).child(Constants.Meetings.group).observeSingleEvent(of: .value, with: { (snapshot) in
+                if let groupName = snapshot.value as? String {
+                    FirebaseDataService.instance.userRef.child(wannabeUser.uid).child(Constants.Users.group).child(groupName).setValue(1)
+                }
+            })
             
             // 미팅데이터의 워너비 데이터를 지운다
             wannabeRef.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -147,6 +150,7 @@ class AcceptSubmissionViewController: UIViewController {
                 }
             })
             
+            // 미팅데이터의 파트너 데이터를 추가시킨다
             partnersRef.observeSingleEvent(of: .value, with: { (snapshot) in
                 var restore = Array<String>()
                 if let partners = snapshot.value as? Array<String> {

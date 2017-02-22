@@ -176,6 +176,7 @@ class MeetingAddViewController: UICollectionViewController, UICollectionViewDele
                 groupRef.child(Constants.Group.imageUrl).setValue(imageUrl)
                 groupRef.child(Constants.Group.name).setValue(self.submitData.title)
                 FirebaseDataService.instance.userRef.child(uid).child(Constants.Users.group).child(groupRef.key).setValue(1)
+                firebaseRef?.child(Constants.Meetings.group).setValue(groupRef.key)
             }
             
         } else if cellType == .detail {

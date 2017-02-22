@@ -109,7 +109,7 @@ class MeetingCell: BaseCell {
         let textView = UITextView()
         textView.font = UIFont.systemFont(ofSize: 18)
         textView.textContainerInset = UIEdgeInsetsMake(0, 10, 0, 0)
-        textView.textColor = .lightGray
+        textView.textColor = UIColor.makeViaRgb(red: 234, green: 234, blue: 234)
         textView.backgroundColor = .clear
         textView.text = "강교혁 기버만이 가진 창업노하우를 같이 공유합니다"
         textView.isEditable = false

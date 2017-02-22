@@ -64,6 +64,7 @@ class MeetingGiverDetailCell: BaseCell {
         textView.isSelectable = false
         textView.isUserInteractionEnabled = false
         textView.text = "이것은 테스트 문자열입니다"
+        textView.isScrollEnabled = true
         return textView
     }()
 
@@ -85,6 +86,7 @@ class MeetingGiverDetailCell: BaseCell {
         textView.isSelectable = false
         textView.isUserInteractionEnabled = false
         textView.text = "이것은 테스트 문자열입니다"
+        textView.isScrollEnabled = true
         return textView
     }()
     

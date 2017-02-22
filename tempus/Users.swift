@@ -26,6 +26,7 @@ class Users {
     private var _numFollowings: Int?
     private var _intro: String?
     private var _isGroupingAuth: String?
+    private var _group: Dictionary<String, Int>?
     
     var uid: String {
         if let uid = _uid {
@@ -154,6 +155,14 @@ class Users {
             return "false"
         }
     }
+    
+    var group: Dictionary<String, Int> {
+        if let group = _group {
+            return group
+        } else {
+            return Dictionary<String, Int>()
+        }
+    }
 
     init(uid: String, data: Dictionary<String, AnyObject>) {
         _uid = uid
@@ -172,6 +181,7 @@ class Users {
         _appliedMeetings = data[Constants.Users.appliedMeetings] as? Array<String>
         _openedMeetings = data[Constants.Users.openedMeetings] as? Array<String>
         _isGroupingAuth = data[Constants.Users.isGroupingAuth] as? String
+        _group = data[Constants.Users.group] as? Dictionary<String, Int>
     }
     
     func changeNumFollowers(follows: Bool, followee: String, follower: String, numFollowing: Int) {

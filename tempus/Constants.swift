@@ -62,6 +62,7 @@ struct Constants {
         static let slides: String = "slides"
         static let wannabe: String = "wannabe"
         static let partners: String = "partners"
+        static let group: String = "group"
         
         struct Slides {
             static let storyTitle: String = "storyTitle"
