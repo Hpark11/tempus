@@ -70,6 +70,6 @@ class ChatMessageCell: BaseCell {
         
         _ = chattingTextView.anchor(topAnchor, left: containerView.leftAnchor, bottom: nil, right: containerView.rightAnchor, topConstant: 2, leftConstant: 16, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: frame.height)
         
-        _ = profileImageView.anchor(containerView.topAnchor, left: containerView.leftAnchor, bottom: nil, right: nil, topConstant: -8, leftConstant: -16, bottomConstant: 0, rightConstant: 0, widthConstant: Constants.userProfileImageSize.mini, heightConstant: Constants.userProfileImageSize.mini)
+        _ = profileImageView.anchor(containerView.topAnchor, left: containerView.leftAnchor, bottom: nil, right: nil, topConstant: 0, leftConstant: -16, bottomConstant: 0, rightConstant: 0, widthConstant: Constants.userProfileImageSize.mini, heightConstant: Constants.userProfileImageSize.mini)
     }
 }

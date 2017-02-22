@@ -208,7 +208,9 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
         
         let message = groupMsgs[indexPath.item]
         cell.chattingTextView.text = message.text
-        cell.profileImageView.imageUrlString = users[indexPath.item].imageUrl
+        if indexPath.item < users.count {
+            cell.profileImageView.imageUrlString = users[indexPath.item].imageUrl
+        }
         setupCell(cell: cell, message: message)
         cell.containerViewWidthAnchor?.constant = measuredFrameHeightForEachMessage(message: message.text!).width + 32
         return cell
