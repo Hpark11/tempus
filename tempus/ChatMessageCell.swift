@@ -45,9 +45,9 @@ class ChatMessageCell: BaseCell {
         return view
     }()
     
+    
     override func setupViews() {
         super.setupViews()
-        
         
         addSubViews()
         setConstriants()

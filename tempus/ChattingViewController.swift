@@ -55,10 +55,9 @@ class ChattingViewController: UITableViewController {
         view.backgroundColor = .white
         checkIsUserSignedIn()
         setNavigationBarUI()
-        
-        tableView.reloadData()
         registerCells()
         observePreconfiguredUserMessage()
+        tableView.separatorColor = .clear
     }
     
     override func viewWillAppear(_ animated: Bool) {
