@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4D13DF3F1F9689260AE36F83 /* Pods_tempus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E88DB2E7A740E9A2F92813 /* Pods_tempus.framework */; };
 		5804D8991E5CD28C00628469 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8981E5CD28C00628469 /* Group.swift */; };
+		5804D89B1E5D4FC100628469 /* GroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D89A1E5D4FC100628469 /* GroupCell.swift */; };
 		5807755D1E4ECB3A0092ED8F /* SlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5807755C1E4ECB3A0092ED8F /* SlideViewController.swift */; };
 		5807755F1E4ECB6A0092ED8F /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5807755E1E4ECB6A0092ED8F /* DiaryViewController.swift */; };
 		5808951B1E52A47500F8D96B /* UserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5808951A1E52A47500F8D96B /* UserPageViewController.swift */; };
@@ -112,6 +113,7 @@
 		1B46B7A0A187E515B862B170 /* Pods-tempus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tempus.release.xcconfig"; path = "Pods/Target Support Files/Pods-tempus/Pods-tempus.release.xcconfig"; sourceTree = "<group>"; };
 		4514D91D6E2255B2CF063585 /* Pods-tempusTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tempusTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-tempusTests/Pods-tempusTests.release.xcconfig"; sourceTree = "<group>"; };
 		5804D8981E5CD28C00628469 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		5804D89A1E5D4FC100628469 /* GroupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
 		5807755C1E4ECB3A0092ED8F /* SlideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideViewController.swift; sourceTree = "<group>"; };
 		5807755E1E4ECB6A0092ED8F /* DiaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
 		5808951A1E52A47500F8D96B /* UserPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPageViewController.swift; sourceTree = "<group>"; };
@@ -302,9 +304,10 @@
 				580895271E52F74E00F8D96B /* UserFollowingCell.swift */,
 				580A22C01E56D9A400CF6E83 /* FollowerCell.swift */,
 				5808952B1E530F8C00F8D96B /* MinimizedMeetingCell.swift */,
-				580BCBCE1E5545D3007AFFE3 /* UserCell.swift */,
 				58CCD4B01E59330E009B29F8 /* ChatMessageCell.swift */,
 				58CCD4B41E5A8E8D009B29F8 /* SelfMadeMeetingListCell.swift */,
+				580BCBCE1E5545D3007AFFE3 /* UserCell.swift */,
+				5804D89A1E5D4FC100628469 /* GroupCell.swift */,
 			);
 			name = "Custom Cells";
 			sourceTree = "<group>";
@@ -735,6 +738,7 @@
 				5841BD661E5049ED001E6186 /* MeetingAddCoverCell.swift in Sources */,
 				580FB4801E5225E20057DA21 /* CommunityViewController.swift in Sources */,
 				5807755D1E4ECB3A0092ED8F /* SlideViewController.swift in Sources */,
+				5804D89B1E5D4FC100628469 /* GroupCell.swift in Sources */,
 				5808952A1E52F78A00F8D96B /* MyProfileInfoCell.swift in Sources */,
 				58FCAADD1E4B2756002F5B0A /* MeetingViewTopPanelCell.swift in Sources */,
 				58CCD4B11E59330E009B29F8 /* ChatMessageCell.swift in Sources */,
