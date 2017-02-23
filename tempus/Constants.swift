@@ -39,10 +39,18 @@ struct Constants {
     
     struct Group {
         static let imageUrl = "imageUrl"
-        static let fileUrl = "fileUrl"
+        static let fileDir = "fileDir"
         static let name = "name"
         static let meetingId = "meetingId"
         static let messages = "messages"
+        static let fileUrls = "fileUrls"
+        
+        struct FileUrls {
+            static let fileName = "fileName"
+            static let fileSize = "fileSize"
+            static let fileUrl = "fileUrl"
+            static let fileExt = "fileExt"
+        }
     }
     
     struct GroupMessages {

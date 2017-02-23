@@ -105,7 +105,7 @@ class SlideCoverCell: BaseCell {
         textView.font = UIFont.boldSystemFont(ofSize: 30)
         textView.backgroundColor = .clear
         textView.textColor = .white
-        textView.text = "강교혁 기버와 함께하는 \n창업이야기"
+        textView.text = ""
         textView.isEditable = false
         textView.isSelectable = false
         textView.isUserInteractionEnabled = false
@@ -118,7 +118,7 @@ class SlideCoverCell: BaseCell {
         textView.textContainerInset = UIEdgeInsetsMake(0, 8, 0, 0)
         textView.textColor = UIColor.makeViaRgb(red: 234, green: 234, blue: 234)
         textView.backgroundColor = .clear
-        textView.text = "강교혁 기버만이 가진 창업노하우를 같이 공유합니다"
+        textView.text = ""
         textView.isEditable = false
         textView.isSelectable = false
         textView.isUserInteractionEnabled = false

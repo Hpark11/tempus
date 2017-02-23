@@ -27,6 +27,7 @@ class ChattingViewController: UITableViewController {
     
     func presentChattingHistory(group: Group) {
         let layout = UICollectionViewFlowLayout()
+        layout.estimatedItemSize = CGSize(width: view.frame.width, height: 40)
         let chattingHistoryViewController = ChattingHistoryViewController(collectionViewLayout: layout)
         chattingHistoryViewController.group = group
         navigationController?.pushViewController(chattingHistoryViewController, animated: true)

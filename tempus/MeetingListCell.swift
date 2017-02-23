@@ -33,7 +33,7 @@ class MeetingListCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
                     }
                 }
                 collectionView.reloadData()
-                //collectionViewTopAnchor?.constant = 108
+                collectionViewTopAnchor?.constant = 108
             } else {
                 collectionViewTopAnchor?.constant = 0
             }

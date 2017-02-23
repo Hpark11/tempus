@@ -78,7 +78,7 @@ class MeetingCell: BaseCell {
     
     lazy var overlayView: UIView = {
         let view = UIView()
-        view.backgroundColor = .blue
+        view.backgroundColor = .black
         view.alpha = 0.3
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(mainPanelTapped)))
         view.isUserInteractionEnabled = true
@@ -97,9 +97,10 @@ class MeetingCell: BaseCell {
         textView.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0)
         textView.backgroundColor = .clear
         textView.textColor = .white
-        textView.text = "강교혁 기버와 함께하는 \n창업이야기"
+        textView.text = ""
         textView.isEditable = false
         textView.isSelectable = false
+        textView.isScrollEnabled = false
         textView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(mainPanelTapped)))
         textView.isUserInteractionEnabled = true
         return textView
@@ -111,9 +112,10 @@ class MeetingCell: BaseCell {
         textView.textContainerInset = UIEdgeInsetsMake(0, 10, 0, 0)
         textView.textColor = UIColor.makeViaRgb(red: 234, green: 234, blue: 234)
         textView.backgroundColor = .clear
-        textView.text = "강교혁 기버만이 가진 창업노하우를 같이 공유합니다"
+        textView.text = ""
         textView.isEditable = false
         textView.isSelectable = false
+        textView.isScrollEnabled = false
         textView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(mainPanelTapped)))
         textView.isUserInteractionEnabled = true
         return textView

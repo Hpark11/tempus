@@ -13,7 +13,7 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
     
     let cellId = "cellId"
     
-    var groupMsgs = [GroupMessage]()
+    var groupMsgs:[GroupMessage] = [GroupMessage()]
     var chatInputViewBottomAnchor: NSLayoutConstraint?
     
     var group: Group? {
@@ -85,6 +85,9 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
     
     func fileShareButtonTapped() {
         let shareFilesViewController = ShareFilesViewController()
+        if let group = self.group {
+            shareFilesViewController.group = group
+        }
         
         navigationController?.pushViewController(shareFilesViewController, animated: true)
     }
@@ -101,8 +104,14 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
                     }
                     let groupMsg = GroupMessage()
                     groupMsg.setValuesForKeys(dict)
-                    self.groupMsgs.append(groupMsg)
-                    self.attemptReloadOfTable()
+                    self.groupMsgs.insert(groupMsg, at: self.groupMsgs.count - 1)//.append(groupMsg)
+                    self.collectionView?.reloadData()
+                    
+                    if self.groupMsgs.count >= 2 {
+                        let indexPath = IndexPath(item: self.groupMsgs.count - 2, section: 0)
+                        self.collectionView?.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition(), animated: true)
+                    }
+                    //self.attemptReloadOfTable()
                 })
             })
         }
@@ -110,25 +119,29 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
     
     private func attemptReloadOfTable() {
         self.timer?.invalidate()
-        self.timer = Timer.scheduledTimer(timeInterval: 0.4, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
+        self.timer = Timer.scheduledTimer(timeInterval: 0.6, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
     }
     
     var timer: Timer?
     func handleReloadTable() {
         DispatchQueue.main.async(execute: {
             self.collectionView?.reloadData()
+            if self.groupMsgs.count >= 2 {
+                let indexPath = IndexPath(item: self.groupMsgs.count - 2, section: 0)
+                self.collectionView?.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition(), animated: true)
+            }
         })
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setNavigationBarUI()
         setCollectionViewUI()
         addSubViews()
         setConstraints()
         registerCells()
         setupKeyboardObservers()
+        
     }
     
     
@@ -178,7 +191,6 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
         inputTextField.centerYAnchor.constraint(equalTo: chatInputView.centerYAnchor).isActive = true
         
         _ = dividerView.anchor(chatInputView.topAnchor, left: chatInputView.leftAnchor, bottom: nil, right: chatInputView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 1)
-        
     }
     
     fileprivate func registerCells(){
@@ -212,18 +224,24 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return groupMsgs.count
+        let count = groupMsgs.count
+        return count
     }
  
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChatMessageCell
-        
-        let message = groupMsgs[indexPath.item]
-        cell.chattingTextView.text = message.text
-        cell.fromUserId = self.groupMsgs[indexPath.item].fromUserId
-        setupCell(cell: cell, message: message)
-        cell.containerViewWidthAnchor?.constant = measuredFrameHeightForEachMessage(message: message.text!).width + 32
-        
+        if groupMsgs.count > indexPath.item {
+            let message = groupMsgs[indexPath.item]
+            cell.chattingTextView.text = message.text
+            cell.fromUserId = self.groupMsgs[indexPath.item].fromUserId
+            setupCell(cell: cell, message: message)
+            if let text = message.text {
+                cell.containerViewWidthAnchor?.constant = measuredFrameHeightForEachMessage(message: text).width + 32
+            }
+        }
+//        if indexPath.item == (groupMsgs.count - 1) {
+//            collectionView.reloadData()
+//        }
         return cell
     }
     
@@ -235,23 +253,14 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
             cell.containerViewLeftAnchor?.isActive = false
             cell.profileImageView.isHidden = true
         } else {
+            cell.profileImageView.isHidden = false
             cell.containerView.backgroundColor = UIColor.makeViaRgb(red: 240, green: 240, blue: 240)
             cell.chattingTextView.textColor = UIColor.black
             cell.containerViewRightAnchor?.isActive = false
             cell.containerViewLeftAnchor?.isActive = true
         }
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var height: CGFloat = 80
-        if let text = groupMsgs[indexPath.item].text {
-            height = measuredFrameHeightForEachMessage(message: text).height + 20// + Constants.userProfileImageSize.lessSmall
-        }
-        
-        let width = UIScreen.main.bounds.width
-        return CGSize(width: width, height: height)
-    }
-    
+
     private func measuredFrameHeightForEachMessage(message: String) -> CGRect {
         let size = CGSize(width: 200, height: 1000)
         let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)

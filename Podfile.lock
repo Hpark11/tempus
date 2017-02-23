@@ -11,6 +11,7 @@ PODS:
     - FBSDKCoreKit
   - FBSDKShareKit (4.19.0):
     - FBSDKCoreKit
+  - FileBrowser (0.2.0)
   - Firebase/Auth (3.12.0):
     - Firebase/Core
     - FirebaseAuth (= 3.1.0)
@@ -82,6 +83,7 @@ DEPENDENCIES:
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
+  - FileBrowser (~> 0.2)
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
@@ -97,6 +99,7 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 894b2b6eda6a4c8c4204e92e59cc355709ef045c
   FBSDKLoginKit: 83ca4d8f12a2022570af9fd6aacf27f6b425b99f
   FBSDKShareKit: 5953758366278430dc322d5cdc906db361ed7f81
+  FileBrowser: af8abc035daca66a6066351ae162c4af4c6b24dd
   Firebase: 8e99eb1ff553ad5bcc6072cc3d925bb89c1244d6
   FirebaseAnalytics: 9c67af0ebeb8d2146c9b4ea2616439affa947b58
   FirebaseAuth: b436e4ecebe068bf8e8c6e4e29de5756ffe7ee24
@@ -114,6 +117,6 @@ SPEC CHECKSUMS:
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
   SwiftValidators: 3be5c8f80287fe4960d1b053519b22f304804a00
 
-PODFILE CHECKSUM: 06c9cb3af6906f9bd954f6e4d24a6ea39625b81d
+PODFILE CHECKSUM: 2b08f79f59c69cd70fc4757eebb5f412e50ab99e
 
 COCOAPODS: 1.2.0

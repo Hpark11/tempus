@@ -13,6 +13,8 @@
 		5804D89D1E5DA3B300628469 /* ShareFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D89C1E5DA3B300628469 /* ShareFilesViewController.swift */; };
 		5804D89F1E5E802A00628469 /* DownloadButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D89E1E5E802A00628469 /* DownloadButtonView.swift */; };
 		5804D8A11E5E806400628469 /* LoadingSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8A01E5E806400628469 /* LoadingSpinner.swift */; };
+		5804D8A31E5F20F000628469 /* FileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8A21E5F20F000628469 /* FileInfo.swift */; };
+		5804D8A51E5F259600628469 /* FileInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8A41E5F259600628469 /* FileInfoCell.swift */; };
 		5807755D1E4ECB3A0092ED8F /* SlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5807755C1E4ECB3A0092ED8F /* SlideViewController.swift */; };
 		5807755F1E4ECB6A0092ED8F /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5807755E1E4ECB6A0092ED8F /* DiaryViewController.swift */; };
 		5808951B1E52A47500F8D96B /* UserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5808951A1E52A47500F8D96B /* UserPageViewController.swift */; };
@@ -120,6 +122,8 @@
 		5804D89C1E5DA3B300628469 /* ShareFilesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareFilesViewController.swift; sourceTree = "<group>"; };
 		5804D89E1E5E802A00628469 /* DownloadButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadButtonView.swift; sourceTree = "<group>"; };
 		5804D8A01E5E806400628469 /* LoadingSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingSpinner.swift; sourceTree = "<group>"; };
+		5804D8A21E5F20F000628469 /* FileInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileInfo.swift; sourceTree = "<group>"; };
+		5804D8A41E5F259600628469 /* FileInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileInfoCell.swift; sourceTree = "<group>"; };
 		5807755C1E4ECB3A0092ED8F /* SlideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideViewController.swift; sourceTree = "<group>"; };
 		5807755E1E4ECB6A0092ED8F /* DiaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
 		5808951A1E52A47500F8D96B /* UserPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPageViewController.swift; sourceTree = "<group>"; };
@@ -316,6 +320,7 @@
 				58CCD4B41E5A8E8D009B29F8 /* SelfMadeMeetingListCell.swift */,
 				580BCBCE1E5545D3007AFFE3 /* UserCell.swift */,
 				5804D89A1E5D4FC100628469 /* GroupCell.swift */,
+				5804D8A41E5F259600628469 /* FileInfoCell.swift */,
 			);
 			name = "Custom Cells";
 			sourceTree = "<group>";
@@ -415,6 +420,7 @@
 				5808952F1E5428F900F8D96B /* Users.swift */,
 				580BCBD01E555BB8007AFFE3 /* Message.swift */,
 				5804D8981E5CD28C00628469 /* Group.swift */,
+				5804D8A21E5F20F000628469 /* FileInfo.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -715,6 +721,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				583BB5C51E4D9258000FDA44 /* CategoryBarView.swift in Sources */,
+				5804D8A51E5F259600628469 /* FileInfoCell.swift in Sources */,
 				58FCAAEB1E4C4414002F5B0A /* MeetingTopPanelContent.swift in Sources */,
 				580FB47C1E52217A0057DA21 /* MainTabBarController.swift in Sources */,
 				583BB5BD1E4D486B000FDA44 /* Constants.swift in Sources */,
@@ -783,6 +790,7 @@
 				5804D8991E5CD28C00628469 /* Group.swift in Sources */,
 				581121151E50415E004D1C85 /* MeetingAddViewController.swift in Sources */,
 				5804D89F1E5E802A00628469 /* DownloadButtonView.swift in Sources */,
+				5804D8A31E5F20F000628469 /* FileInfo.swift in Sources */,
 				580895261E52E87400F8D96B /* UserMeetingCell.swift in Sources */,
 				5808951E1E52C55700F8D96B /* UserProfileBarView.swift in Sources */,
 				583BB5BF1E4D4F9C000FDA44 /* MeetingCell.swift in Sources */,

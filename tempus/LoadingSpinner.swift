@@ -148,10 +148,8 @@ class LoadingSpinner: UIView {
         
     }
     
-    //MARK: - Private
-    
+ 
     func updatePath() {
-        //        let acenter = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds))
         let aradius = min(self.bounds.width/2, self.bounds.height / 2) - self.progressLayer.lineWidth / 2
         let astartAngle = CGFloat(0)
         let aendAngle = CGFloat(2*M_PI)
@@ -162,9 +160,7 @@ class LoadingSpinner: UIView {
         self.progressLayer.strokeEnd = 0.0
     }
     
-    //MARK: - Properties
 
-    
     func setHidesWhenStopped(hidesWhenStopped:Bool){
         _hidesWhenStopped = hidesWhenStopped
         self.isHidden = !self.isAnimating && hidesWhenStopped
