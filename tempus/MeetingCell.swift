@@ -60,8 +60,8 @@ class MeetingCell: BaseCell {
         imageView.image = UIImage(named: "placeholder1")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(mainPanelTapped)))
-        imageView.isUserInteractionEnabled = true
+        //imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(mainPanelTapped)))
+        //imageView.isUserInteractionEnabled = true
         return imageView
     }()
     
@@ -80,8 +80,8 @@ class MeetingCell: BaseCell {
         let view = UIView()
         view.backgroundColor = .black
         view.alpha = 0.3
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(mainPanelTapped)))
-        view.isUserInteractionEnabled = true
+        //view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(mainPanelTapped)))
+        //view.isUserInteractionEnabled = true
         return view
     }()
     
@@ -100,8 +100,8 @@ class MeetingCell: BaseCell {
         textView.text = ""
         textView.isEditable = false
         textView.isSelectable = false
-        textView.isScrollEnabled = false
-        textView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(mainPanelTapped)))
+        //textView.isScrollEnabled = false
+        //textView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(mainPanelTapped)))
         textView.isUserInteractionEnabled = true
         return textView
     }()
@@ -116,7 +116,7 @@ class MeetingCell: BaseCell {
         textView.isEditable = false
         textView.isSelectable = false
         textView.isScrollEnabled = false
-        textView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(mainPanelTapped)))
+        //textView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(mainPanelTapped)))
         textView.isUserInteractionEnabled = true
         return textView
     }()

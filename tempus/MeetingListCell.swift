@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class MeetingListCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class MeetingListCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate {
 
     var attachedViewController: MeetingListViewController?
     var category: String? {
@@ -163,5 +163,42 @@ class MeetingListCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
         UIView.animate(withDuration: keyboardDuration) {
             self.collectionView.layoutIfNeeded()
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let attachedViewController = self.attachedViewController {
+            let layout = UICollectionViewFlowLayout()
+            layout.scrollDirection = .horizontal
+            let slideViewController = SlideViewController(collectionViewLayout: layout)
+            slideViewController.meetingId = filteredMeetingList[indexPath.item].meetingId
+            slideViewController.meetingMainImageUrl = filteredMeetingList[indexPath.item].imageUrl
+            
+            // expansion
+            let attributes = collectionView.layoutAttributesForItem(at: indexPath)
+            let attributesFrame = attributes?.frame
+            let frameToOpenFrom = collectionView.convert(attributesFrame!, to: collectionView.superview)
+            openingFrame = frameToOpenFrom
+            
+            slideViewController.transitioningDelegate = self
+            slideViewController.modalTransitionStyle = .coverVertical
+            
+            
+            attachedViewController.present(slideViewController, animated: true, completion: nil)
+        }
+    }
+    
+    var openingFrame: CGRect?
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        let presentationAnimator = ViewExpansion.animator
+        presentationAnimator.openingFrame = openingFrame!
+        presentationAnimator.transitionMode = .present
+        return presentationAnimator
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        let presentationAnimator = ViewExpansion.animator
+        presentationAnimator.openingFrame = openingFrame!
+        presentationAnimator.transitionMode = .dismiss
+        return presentationAnimator
     }
 }
