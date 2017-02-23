@@ -84,7 +84,9 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
     }
     
     func fileShareButtonTapped() {
+        let shareFilesViewController = ShareFilesViewController()
         
+        navigationController?.pushViewController(shareFilesViewController, animated: true)
     }
     
     func observeMessages() {
@@ -121,7 +123,6 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.titleView = titleLabel
         setNavigationBarUI()
         setCollectionViewUI()
         addSubViews()
@@ -154,6 +155,8 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
     }
     
     fileprivate func setNavigationBarUI() {
+        self.navigationItem.title = ""
+        navigationItem.titleView = titleLabel
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon file share"), style: .plain, target: self, action: #selector(fileShareButtonTapped))
     }
     

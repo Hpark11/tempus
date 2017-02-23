@@ -64,7 +64,7 @@ class ChattingWithNewOneViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         dismiss(animated: true) {
-            let user = self.users[indexPath.row]
+            let _ = self.users[indexPath.row]
             //self.attachedViewController?.presentChattingHistory(group: user)
         }
     }
