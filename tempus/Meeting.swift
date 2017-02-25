@@ -97,7 +97,7 @@ struct Meeting {
         self._username = userInfo[Constants.Users.username] as? String
         self._userImageUrl = userInfo[Constants.Users.imageUrl] as? String
         self._followers = userInfo[Constants.Users.numFollowers] as? Int
-        self._comments = userInfo[Constants.Users.comments] as? Int
+        self._comments = userInfo[Constants.Users.numComments] as? Int
     }
 }
 

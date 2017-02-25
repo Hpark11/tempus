@@ -46,7 +46,7 @@ class SelfMadeMeetingListCell: UITableViewCell {
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = .lightGray
         label.textAlignment = .right
-        label.text = "HH:MM:SS"
+        label.text = ""
         return label
     }()
     
@@ -79,28 +79,30 @@ class SelfMadeMeetingListCell: UITableViewCell {
         let imageView = DownloadImageView()
         imageView.image = UIImage(named: "placeholder1")
         imageView.contentMode = .scaleToFill
+        imageView.layer.cornerRadius = 8
+        imageView.layer.masksToBounds = true
         return imageView
     }()
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        backgroundColor = .black
+        backgroundColor = .white
         
         textLabel?.frame = CGRect(x: 16, y: textLabel!.frame.origin.y - 2, width: textLabel!.frame.width, height: textLabel!.frame.height)
-        textLabel?.textColor = .white
+        textLabel?.textColor = .black
         detailTextLabel?.frame = CGRect(x: 16, y: detailTextLabel!.frame.origin.y + 2, width: detailTextLabel!.frame.width, height: detailTextLabel!.frame.height)
-        detailTextLabel?.textColor = .white
+        detailTextLabel?.textColor = .lightGray
         
-        gradientLayer.frame = self.overlayView.bounds
-        
-        let color1 = UIColor.black.cgColor as CGColor
-        let color2 = UIColor.clear.cgColor as CGColor
-        gradientLayer.colors = [color1, color2]
-        gradientLayer.locations = [0.0, 0.78]
-        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
-        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.7)
-        self.overlayView.layer.addSublayer(gradientLayer)
+//        gradientLayer.frame = self.overlayView.bounds
+//        
+//        let color1 = UIColor.black.cgColor as CGColor
+//        let color2 = UIColor.clear.cgColor as CGColor
+//        gradientLayer.colors = [color1, color2]
+//        gradientLayer.locations = [0.0, 0.78]
+//        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
+//        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.7)
+//        self.overlayView.layer.addSublayer(gradientLayer)
     }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -109,7 +111,9 @@ class SelfMadeMeetingListCell: UITableViewCell {
         addSubViews()
         setConstriants()
         textLabel?.text = "시험용"
+        
         detailTextLabel?.text = "나도시험용"
+        //detailTextLabel?.textColor = .lightGray
     }
     
     fileprivate func addSubViews() {
@@ -118,14 +122,14 @@ class SelfMadeMeetingListCell: UITableViewCell {
         addSubview(currentStatusLabel)
     }
     
-    let gradientLayer = CAGradientLayer()
+    //let gradientLayer = CAGradientLayer()
     
     
     fileprivate func setConstriants() {
-        _ = profileImageView.anchor(nil, left: nil, bottom: nil, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: SelfMadeMeetingListData.profileImageSize + 20, heightConstant: SelfMadeMeetingListData.profileImageSize)
+        _ = profileImageView.anchor(topAnchor, left: nil, bottom: bottomAnchor, right: rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 8, rightConstant: 8, widthConstant: SelfMadeMeetingListData.profileImageSize, heightConstant: 0)
         profileImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         
-        _ = overlayView.anchor(profileImageView.topAnchor, left: profileImageView.leftAnchor, bottom: profileImageView.bottomAnchor, right: profileImageView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        //_ = overlayView.anchor(profileImageView.topAnchor, left: profileImageView.leftAnchor, bottom: profileImageView.bottomAnchor, right: profileImageView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
         _ = currentStatusLabel.anchor(topAnchor, left: nil, bottom: nil, right: profileImageView.leftAnchor, topConstant: 2, leftConstant: 0, bottomConstant: 0, rightConstant: 2, widthConstant: 100, heightConstant: 0)
     }

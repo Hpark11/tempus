@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '50B80052EAF7FFD7AD659793E5A41168'
-               BlueprintName = 'SwiftValidators'
+               BlueprintIdentifier = 'B8D8C363B343A0778AE6633D70E11749'
+               BlueprintName = 'iCarousel'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'SwiftValidators.framework'>
+               BuildableName = 'iCarousel.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

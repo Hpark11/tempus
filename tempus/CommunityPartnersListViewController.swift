@@ -28,7 +28,7 @@ class CommunityPartnersListViewController: UIViewController, UITextFieldDelegate
     
     let dividerView1: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.makeViaRgb(red: 230, green: 230, blue: 230)
+        view.backgroundColor = UIColor.lightGray
         return view
     }()
     
@@ -54,8 +54,8 @@ class CommunityPartnersListViewController: UIViewController, UITextFieldDelegate
     
     let overlayView: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
-        view.alpha = 0.7
+        view.backgroundColor = .white
+        view.alpha = 1
         return view
     }()
     
@@ -94,7 +94,7 @@ class CommunityPartnersListViewController: UIViewController, UITextFieldDelegate
     let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 24)
-        label.textColor = .white
+        label.textColor = .black
         label.backgroundColor = .clear
         return label
     }()
@@ -118,7 +118,7 @@ class CommunityPartnersListViewController: UIViewController, UITextFieldDelegate
     let partnersLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.textColor = .white
+        label.textColor = .black
         label.backgroundColor = .clear
         label.text = "함께하는 이들"
         return label
@@ -127,7 +127,7 @@ class CommunityPartnersListViewController: UIViewController, UITextFieldDelegate
     let wannabeLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.textColor = .white
+        label.textColor = .black
         label.backgroundColor = .clear
         label.text = "가입을 원하는 이들"
         return label
@@ -301,13 +301,13 @@ class CommunityPartnersListViewController: UIViewController, UITextFieldDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == partnersTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: partnersCellId, for: indexPath) as! FollowerCell
-            cell.isDark = true
+            cell.isDark = false
             cell.userInfo = self.partners[indexPath.item]
             
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: wannabeCellId, for: indexPath) as! FollowerCell
-            cell.isDark = true
+            cell.isDark = false
             cell.userInfo = self.wannabe[indexPath.item]
             return cell
         }

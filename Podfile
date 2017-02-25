@@ -19,6 +19,7 @@ target 'tempus' do
   pod 'SwiftKeychainWrapper'
   pod 'SwiftValidators'
   pod 'FileBrowser', '~> 0.2'
+  pod 'iCarousel'
  
   target 'tempusTests' do
     inherit! :search_paths

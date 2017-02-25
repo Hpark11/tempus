@@ -29,6 +29,15 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         static let success = "회원가입을 축하합니다."
     }
     
+    let titleLabel: UILabel = {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 264, height: 80))
+        label.font = UIFont(name: "GothamRounded-Bold", size: 64)
+        label.textAlignment = .center
+        label.text = "tempus"
+        label.textColor = UIColor.white
+        return label
+    }()
+    
     lazy var alert: UIAlertController = {
         let alert = UIAlertController(title: "사용자 등록 경고", message: "With this", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default) { action in })
@@ -346,10 +355,13 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(dividerView3)
         view.addSubview(dividerView4)
         view.addSubview(cancelButton)
+        view.addSubview(titleLabel)
     }
     
     fileprivate func setConstraints() {
         _ = imageView.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: view.frame.height * 6 / 16)
+        
+        _ = titleLabel.anchor(imageView.topAnchor, left: imageView.leftAnchor, bottom: imageView.bottomAnchor, right: imageView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
         _ = loginRegisterSegmentedControl.anchor(imageView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 16, leftConstant: 16, bottomConstant: 0, rightConstant: 16, widthConstant: 0, heightConstant: 32)
         

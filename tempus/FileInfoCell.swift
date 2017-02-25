@@ -45,10 +45,13 @@ class FileInfoCell: UITableViewCell {
     func downloadButtonTapped() {
         if let fileInfo = self.fileInfo {
             let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory ,.userDomainMask, true)[0] as String
-            let filePath = URL(string: dirPath)
+            let filePath = URL(string: "\(dirPath)/\(fileInfo.fileName)")
             let ref = FIRStorage.storage().reference(forURL: fileInfo.fileUrl)
 
-            let downloadTask = ref.write(toFile: filePath!)
+            guard let fullPath = filePath else {
+                return
+            }
+            let downloadTask = ref.write(toFile: fullPath)
             
             downloadTask.observe(.progress) { (snapshot) -> Void in
                 // Download reported progress

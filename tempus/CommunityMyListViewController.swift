@@ -9,6 +9,7 @@
 import UIKit
 import SwiftKeychainWrapper
 import Firebase
+import iCarousel
 
 class CommunityMyListViewController: UITableViewController {
 
@@ -51,13 +52,28 @@ class CommunityMyListViewController: UITableViewController {
         super.viewDidLoad()
         setNavigationBarUI()
         registerCells()
-        tableView.backgroundColor = UIColor.makeViaRgb(red: 12, green: 12, blue: 12)
+        
+        tableView.backgroundColor = .white// UIColor.makeViaRgb(red: 12, green: 12, blue: 12)
+        //carousel.type = .coverFlow
+        //view.addSubview(carousel)
+        //_ = carousel.anchor(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         observeFirebaseValue()
+    }
+    
+    func signOutButtonTapped() {
+        do {
+            try FIRAuth.auth()?.signOut()
+            KeychainWrapper.standard.removeObject(forKey: Constants.keychainUid)
+            _ = navigationController?.popViewController(animated: true)
+        } catch {
+            let error = error as NSError
+            print(":::[HPARK] Sign Out Failure \(error) :::\n")
+        }
     }
 
     
@@ -81,16 +97,7 @@ class CommunityMyListViewController: UITableViewController {
         tableView.register(SelfMadeMeetingListCell.self, forCellReuseIdentifier: cellId)
     }
     
-    func signOutButtonTapped() {
-        do {
-            try FIRAuth.auth()?.signOut()
-            KeychainWrapper.standard.removeObject(forKey: Constants.keychainUid)
-            _ = navigationController?.popViewController(animated: true)
-        } catch {
-            let error = error as NSError
-            print(":::[HPARK] Sign Out Failure \(error) :::\n")
-        }
-    }
+    
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let _ = KeychainWrapper.standard.string(forKey: Constants.keychainUid) {
@@ -106,11 +113,84 @@ class CommunityMyListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! SelfMadeMeetingListCell
-        cell.meeting = self.openedMeetings[indexPath.item]
+        if self.openedMeetings.count > indexPath.item {
+            cell.meeting = self.openedMeetings[indexPath.item]
+        }
         return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 72
+        return 96
     }
+    
+//    lazy var carousel: iCarousel = {
+//        let carousel = iCarousel()
+//        carousel.delegate = self
+//        carousel.dataSource = self
+//        carousel.isPagingEnabled = true
+//        return carousel
+//    }()
+//    
+//    func numberOfItems(in carousel: iCarousel) -> Int {
+//        return openedMeetings.count
+//    }
+//    
+//    func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
+//        var label: UILabel
+//        var itemView: DownloadImageView
+//        
+//        //reuse view if available, otherwise create a new view
+//        if let view = view as? DownloadImageView {
+//            itemView = view
+//            //get a reference to the label in the recycled view
+//            label = itemView.viewWithTag(1) as! UILabel
+//        } else {
+//            //don't do anything specific to the index within
+//            //this `if ... else` statement because the view will be
+//            //recycled and used with other index values later
+//            itemView = DownloadImageView(frame: CGRect(x: 0, y: 0, width: 200, height: 200 * 16 / 9))
+//            itemView.image = UIImage(named: "placeholder image")
+//            itemView.imageUrlString = openedMeetings[index].imageUrl
+//            itemView.contentMode = .scaleAspectFill
+//            itemView.clipsToBounds = true
+//            itemView.layer.cornerRadius = 8
+//            itemView.layer.masksToBounds = true
+//            
+//            label = UILabel(frame: itemView.bounds)
+//            label.backgroundColor = .clear
+//            label.textAlignment = .left
+//            label.font = label.font.withSize(24)
+//            label.tag = 1
+//            itemView.addSubview(label)
+//        }
+//        
+//        //set item label
+//        //remember to always set any properties of your carousel item
+//        //views outside of the `if (view == nil) {...}` check otherwise
+//        //you'll get weird issues with carousel item content appearing
+//        //in the wrong place in the carousel
+//        label.text = openedMeetings[index].title
+//        
+//        return itemView
+//    }
+//    
+//    func carousel(_ carousel: iCarousel, didSelectItemAt index: Int) {
+//        if let _ = KeychainWrapper.standard.string(forKey: Constants.keychainUid) {
+//            let communityPartnersListViewController = CommunityPartnersListViewController()
+//            communityPartnersListViewController.meetingId = openedMeetings[index].id
+//            navigationController?.pushViewController(communityPartnersListViewController, animated: true)
+//        }
+//    }
+//    
+//    func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
+//        if (option == .spacing) {
+//            return value * 1.1
+//        }
+//        return value
+//    }
+//    
+//    func carouselItemWidth(_ carousel: iCarousel) -> CGFloat {
+//        return 200
+//    }
+    
 }

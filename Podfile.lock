@@ -76,6 +76,7 @@ PODS:
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMSessionFetcher/Core (1.1.8)
+  - iCarousel (1.8.3)
   - SwiftKeychainWrapper (3.0.1)
   - SwiftValidators (5.1.1)
 
@@ -91,6 +92,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - GoogleMaps
   - GooglePlaces
+  - iCarousel
   - SwiftKeychainWrapper
   - SwiftValidators
 
@@ -114,9 +116,10 @@ SPEC CHECKSUMS:
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 6f8d8b28b7e345549ac471071608170b31cb4977
+  iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
   SwiftValidators: 3be5c8f80287fe4960d1b053519b22f304804a00
 
-PODFILE CHECKSUM: 2b08f79f59c69cd70fc4757eebb5f412e50ab99e
+PODFILE CHECKSUM: b65d4a343254df1f73bd778695b87b9e10b98b5c
 
 COCOAPODS: 1.2.0
