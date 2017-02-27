@@ -212,7 +212,13 @@ class UserInfoCell: BaseCell, UIImagePickerControllerDelegate, UINavigationContr
     }
     
     func commentButtonTapped() {
-        
+        if let attachedViewController = self.attachedViewController {
+            let commentsViewController = CommentsViewController()
+            if let userInfo = self.userInfo {
+                commentsViewController.userInfo = userInfo
+            }
+            attachedViewController.present(commentsViewController, animated: true, completion: nil)
+        }
     }
     
     let dividerView1: UIView = {
@@ -269,8 +275,6 @@ class UserInfoCell: BaseCell, UIImagePickerControllerDelegate, UINavigationContr
         textView.isEditable = false
         return textView
     }()
-    
-    
     
     override func setupViews() {
         super.setupViews()
@@ -352,7 +356,6 @@ class UserInfoCell: BaseCell, UIImagePickerControllerDelegate, UINavigationContr
             } else {
                 userBackgroundImageView.image = image
             }
-            
             pickedImageToFirebaseStorage(image: image)
         }
         picker.dismiss(animated: true, completion: nil)

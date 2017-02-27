@@ -16,6 +16,9 @@
 		5804D8A31E5F20F000628469 /* FileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8A21E5F20F000628469 /* FileInfo.swift */; };
 		5804D8A51E5F259600628469 /* FileInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8A41E5F259600628469 /* FileInfoCell.swift */; };
 		5804D8A71E5F609D00628469 /* ViewExpansion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8A61E5F609D00628469 /* ViewExpansion.swift */; };
+		5804D8AA1E62878900628469 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8A91E62878900628469 /* CommentsViewController.swift */; };
+		5804D8AC1E6289B700628469 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8AB1E6289B700628469 /* CommentCell.swift */; };
+		5804D8B01E63C90100628469 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8AF1E63C90000628469 /* Comment.swift */; };
 		5807755D1E4ECB3A0092ED8F /* SlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5807755C1E4ECB3A0092ED8F /* SlideViewController.swift */; };
 		5807755F1E4ECB6A0092ED8F /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5807755E1E4ECB6A0092ED8F /* DiaryViewController.swift */; };
 		5808951B1E52A47500F8D96B /* UserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5808951A1E52A47500F8D96B /* UserPageViewController.swift */; };
@@ -126,6 +129,9 @@
 		5804D8A21E5F20F000628469 /* FileInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileInfo.swift; sourceTree = "<group>"; };
 		5804D8A41E5F259600628469 /* FileInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileInfoCell.swift; sourceTree = "<group>"; };
 		5804D8A61E5F609D00628469 /* ViewExpansion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExpansion.swift; sourceTree = "<group>"; };
+		5804D8A91E62878900628469 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
+		5804D8AB1E6289B700628469 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		5804D8AF1E63C90000628469 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		5807755C1E4ECB3A0092ED8F /* SlideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideViewController.swift; sourceTree = "<group>"; };
 		5807755E1E4ECB6A0092ED8F /* DiaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
 		5808951A1E52A47500F8D96B /* UserPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPageViewController.swift; sourceTree = "<group>"; };
@@ -250,6 +256,51 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5804D8AD1E63C26400628469 /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				5804D8AB1E6289B700628469 /* CommentCell.swift */,
+				5804D89A1E5D4FC100628469 /* GroupCell.swift */,
+				5804D8A41E5F259600628469 /* FileInfoCell.swift */,
+				580BCBCE1E5545D3007AFFE3 /* UserCell.swift */,
+				58CCD4B41E5A8E8D009B29F8 /* SelfMadeMeetingListCell.swift */,
+				580A22C01E56D9A400CF6E83 /* FollowerCell.swift */,
+			);
+			name = Table;
+			sourceTree = "<group>";
+		};
+		5804D8AE1E63C26800628469 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				58D2AB0A1E4AD4330084CE80 /* OnboardingPageCell.swift */,
+				58D2AB0E1E4ADC7A0084CE80 /* OnboardingCoverPageCell.swift */,
+				58D2AB0C1E4AD48A0084CE80 /* BaseCell.swift */,
+				58FCAADC1E4B2756002F5B0A /* MeetingViewTopPanelCell.swift */,
+				58FCAADE1E4B276E002F5B0A /* MeetingViewBottomPanelCell.swift */,
+				58FCAAE21E4C2ADC002F5B0A /* RecommendedMeetingViewCell.swift */,
+				58FCAAE61E4C382E002F5B0A /* CategoryMeetingViewCell.swift */,
+				58D2E2771E4CB4860084B2C9 /* MeetingListCell.swift */,
+				583BB5BE1E4D4F9C000FDA44 /* MeetingCell.swift */,
+				583BB5C61E4D9A73000FDA44 /* CategoryViewCell.swift */,
+				5808951F1E52C70E00F8D96B /* UserProfileViewCell.swift */,
+				581121091E4F0227004D1C85 /* SlideCell.swift */,
+				5811210B1E4F0274004D1C85 /* SlideCoverCell.swift */,
+				5811210D1E4F0280004D1C85 /* SlideDetailCell.swift */,
+				580A22BE1E557CD200CF6E83 /* MeetingGiverDetailCell.swift */,
+				5841BD631E5049DA001E6186 /* MeetingAddCell.swift */,
+				5841BD651E5049ED001E6186 /* MeetingAddCoverCell.swift */,
+				5841BD671E5049FA001E6186 /* MeetingAddDetailCell.swift */,
+				580895231E52E86200F8D96B /* UserInfoCell.swift */,
+				580895251E52E87400F8D96B /* UserMeetingCell.swift */,
+				580A22DB1E57473B00CF6E83 /* UserProfileModifyCell.swift */,
+				580895291E52F78A00F8D96B /* MyProfileInfoCell.swift */,
+				580895271E52F74E00F8D96B /* UserFollowingCell.swift */,
+				5808952B1E530F8C00F8D96B /* MinimizedMeetingCell.swift */,
+				58CCD4B01E59330E009B29F8 /* ChatMessageCell.swift */,
+			);
+			name = Collection;
+			sourceTree = "<group>";
+		};
 		580A22CE1E56ECF400CF6E83 /* Font */ = {
 			isa = PBXGroup;
 			children = (
@@ -294,36 +345,8 @@
 		583BB5C11E4D54D3000FDA44 /* Custom Cells */ = {
 			isa = PBXGroup;
 			children = (
-				58D2AB0A1E4AD4330084CE80 /* OnboardingPageCell.swift */,
-				58D2AB0E1E4ADC7A0084CE80 /* OnboardingCoverPageCell.swift */,
-				58D2AB0C1E4AD48A0084CE80 /* BaseCell.swift */,
-				58FCAADC1E4B2756002F5B0A /* MeetingViewTopPanelCell.swift */,
-				58FCAADE1E4B276E002F5B0A /* MeetingViewBottomPanelCell.swift */,
-				58FCAAE21E4C2ADC002F5B0A /* RecommendedMeetingViewCell.swift */,
-				58FCAAE61E4C382E002F5B0A /* CategoryMeetingViewCell.swift */,
-				58D2E2771E4CB4860084B2C9 /* MeetingListCell.swift */,
-				583BB5BE1E4D4F9C000FDA44 /* MeetingCell.swift */,
-				583BB5C61E4D9A73000FDA44 /* CategoryViewCell.swift */,
-				5808951F1E52C70E00F8D96B /* UserProfileViewCell.swift */,
-				581121091E4F0227004D1C85 /* SlideCell.swift */,
-				5811210B1E4F0274004D1C85 /* SlideCoverCell.swift */,
-				5811210D1E4F0280004D1C85 /* SlideDetailCell.swift */,
-				580A22BE1E557CD200CF6E83 /* MeetingGiverDetailCell.swift */,
-				5841BD631E5049DA001E6186 /* MeetingAddCell.swift */,
-				5841BD651E5049ED001E6186 /* MeetingAddCoverCell.swift */,
-				5841BD671E5049FA001E6186 /* MeetingAddDetailCell.swift */,
-				580895231E52E86200F8D96B /* UserInfoCell.swift */,
-				580895251E52E87400F8D96B /* UserMeetingCell.swift */,
-				580A22DB1E57473B00CF6E83 /* UserProfileModifyCell.swift */,
-				580895291E52F78A00F8D96B /* MyProfileInfoCell.swift */,
-				580895271E52F74E00F8D96B /* UserFollowingCell.swift */,
-				580A22C01E56D9A400CF6E83 /* FollowerCell.swift */,
-				5808952B1E530F8C00F8D96B /* MinimizedMeetingCell.swift */,
-				58CCD4B01E59330E009B29F8 /* ChatMessageCell.swift */,
-				58CCD4B41E5A8E8D009B29F8 /* SelfMadeMeetingListCell.swift */,
-				580BCBCE1E5545D3007AFFE3 /* UserCell.swift */,
-				5804D89A1E5D4FC100628469 /* GroupCell.swift */,
-				5804D8A41E5F259600628469 /* FileInfoCell.swift */,
+				5804D8AE1E63C26800628469 /* Collection */,
+				5804D8AD1E63C26400628469 /* Table */,
 			);
 			name = "Custom Cells";
 			sourceTree = "<group>";
@@ -407,6 +430,7 @@
 				5817C3381E5C0EAF00E72F77 /* AcceptSubmissionViewController.swift */,
 				58F3CDBF1E5C825E00629A81 /* CheckUserProfileViewController.swift */,
 				5804D89C1E5DA3B300628469 /* ShareFilesViewController.swift */,
+				5804D8A91E62878900628469 /* CommentsViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -424,6 +448,7 @@
 				580BCBD01E555BB8007AFFE3 /* Message.swift */,
 				5804D8981E5CD28C00628469 /* Group.swift */,
 				5804D8A21E5F20F000628469 /* FileInfo.swift */,
+				5804D8AF1E63C90000628469 /* Comment.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -737,6 +762,7 @@
 				580A22BF1E557CD200CF6E83 /* MeetingGiverDetailCell.swift in Sources */,
 				583BB5C71E4D9A73000FDA44 /* CategoryViewCell.swift in Sources */,
 				5811210C1E4F0274004D1C85 /* SlideCoverCell.swift in Sources */,
+				5804D8AA1E62878900628469 /* CommentsViewController.swift in Sources */,
 				5808952E1E531B8700F8D96B /* Cache.swift in Sources */,
 				580895281E52F74E00F8D96B /* UserFollowingCell.swift in Sources */,
 				581121111E501DC0004D1C85 /* FirebaseDataService.swift in Sources */,
@@ -787,6 +813,7 @@
 				580FB4841E52260D0057DA21 /* SettingsViewController.swift in Sources */,
 				58D2AB011E4ACE390084CE80 /* MainNavigationController.swift in Sources */,
 				5841BD681E5049FA001E6186 /* MeetingAddDetailCell.swift in Sources */,
+				5804D8AC1E6289B700628469 /* CommentCell.swift in Sources */,
 				58D2AB071E4AD07D0084CE80 /* OnboardingPage.swift in Sources */,
 				58D2AB0D1E4AD48A0084CE80 /* BaseCell.swift in Sources */,
 				580BCBCB1E54DA6F007AFFE3 /* ChattingHistoryViewController.swift in Sources */,
@@ -796,6 +823,7 @@
 				5804D89F1E5E802A00628469 /* DownloadButtonView.swift in Sources */,
 				5804D8A31E5F20F000628469 /* FileInfo.swift in Sources */,
 				580895261E52E87400F8D96B /* UserMeetingCell.swift in Sources */,
+				5804D8B01E63C90100628469 /* Comment.swift in Sources */,
 				5808951E1E52C55700F8D96B /* UserProfileBarView.swift in Sources */,
 				583BB5BF1E4D4F9C000FDA44 /* MeetingCell.swift in Sources */,
 				580A22DC1E57473B00CF6E83 /* UserProfileModifyCell.swift in Sources */,

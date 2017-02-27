@@ -59,6 +59,13 @@ struct Constants {
         static let timestamp = "timestamp"
     }
     
+    struct Comments {
+        static let text = "text"
+        static let userId = "userId"
+        static let timestamp = "timestamp"
+        static let children = "children"
+    }
+    
     struct Meetings {
         static let userId: String = "userId"
         static let isPassed: String = "isPassed"

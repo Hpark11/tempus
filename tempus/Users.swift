@@ -18,7 +18,7 @@ class Users {
     private var _backgroundImageUrl: String?
     private var _followers: Array<String>?
     private var _following: Array<String>?
-    private var _comments: Array<String>?
+    private var _comments: Dictionary<String, AnyObject>?
     private var _appliedMeetings: Array<String>?
     private var _openedMeetings: Array<String>?
     private var _numComments: Int?
@@ -92,11 +92,11 @@ class Users {
         }
     }
     
-    var comments: Array<String> {
+    var comments: Dictionary<String, AnyObject> {
         if let comments = _comments {
             return comments
         } else {
-            return []
+            return [String:AnyObject]()
         }
     }
     
@@ -164,11 +164,13 @@ class Users {
         }
     }
 
+    // username, text, date, image
+    
     init(uid: String, data: Dictionary<String, AnyObject>) {
         _uid = uid
         _email = data[Constants.Users.email] as? String
         _username = data[Constants.Users.username] as? String
-        _comments = data[Constants.Users.comments] as? Array<String>
+        _comments = data[Constants.Users.comments] as? Dictionary<String, AnyObject>
         _followers = data[Constants.Users.followers] as? Array<String>
         _following = data[Constants.Users.following] as? Array<String>
         _numComments = data[Constants.Users.numComments] as? Int
