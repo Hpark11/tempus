@@ -190,12 +190,15 @@ class Users {
         if follows {
             self._numFollowers = self._numFollowers! + 1
             FirebaseDataService.instance.userRef.child(follower).child(Constants.Users.numFollowings).setValue(numFollowing + 1)
+            FirebaseDataService.instance.userRef.child(followee).child(Constants.Users.followers).child(follower).setValue(NSNumber(value: 1))
+            FirebaseDataService.instance.userRef.child(follower).child(Constants.Users.following).child(followee).setValue(NSNumber(value: 1))
         } else {
             self._numFollowers = self._numFollowers! - 1
             FirebaseDataService.instance.userRef.child(follower).child(Constants.Users.numFollowings).setValue(numFollowing - 1)
+            FirebaseDataService.instance.userRef.child(followee).child(Constants.Users.followers).child(follower).removeValue()
+            FirebaseDataService.instance.userRef.child(follower).child(Constants.Users.following).child(followee).removeValue()
         }
-        FirebaseDataService.instance.userRef.child(followee).child(Constants.Users.followers).child(follower).setValue(NSNumber(value: 1))
-        FirebaseDataService.instance.userRef.child(follower).child(Constants.Users.following).child(followee).setValue(NSNumber(value: 1))
+        
         FirebaseDataService.instance.userRef.child(followee).child(Constants.Users.numFollowers).setValue(self._numFollowers)
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class CommentsViewController: UITableViewController {
     
@@ -15,16 +16,24 @@ class CommentsViewController: UITableViewController {
     var comments = [Comment]()
     var userInfo: Users? {
         didSet {
-            if let comments = userInfo?.comments {
-                for (key, data) in comments {
-                    let comment = Comment(key: key, data: data as! Dictionary<String, AnyObject>)
-                    for (key, data) in comment.children {
-                        let comment = Comment(key: key, data: data as! Dictionary<String, AnyObject>)
-                        self.comments.append(comment)
+            if let userId = userInfo?.uid {
+                FirebaseDataService.instance.userRef.child(userId).child(Constants.Users.comments).observe(.value, with: { (snapshot) in
+                    if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                        self.comments.removeAll()
+                        for one in snapshot {
+                            if let dict = one.value as? Dictionary<String, AnyObject> {
+                                let comment = Comment(key: one.key, data: dict)
+                                for (key, data) in comment.children {
+                                    let comment = Comment(key: key, data: data as! Dictionary<String, AnyObject>)
+                                    self.comments.append(comment)
+                                }
+                                self.comments.append(comment)
+                            }
+                        }
                     }
-                    self.comments.append(comment)
-                }
-                self.comments = self.comments.reversed()
+                    self.comments.reverse()
+                    self.tableView?.reloadData()
+                })
             }
         }
     }
@@ -40,6 +49,9 @@ class CommentsViewController: UITableViewController {
     
     func openNewComment() {
         let commentNewViewController = CommentNewViewController()
+        if let userId = self.userInfo?.uid {
+            commentNewViewController.toUserId = userId
+        }
         navigationController?.pushViewController(commentNewViewController, animated: true)
     }
     
@@ -51,9 +63,14 @@ class CommentsViewController: UITableViewController {
         super.viewDidLoad()
         setNavigationBarUI()
         addSubViews()
-        setConstraints()
         registerCells()
+        view.backgroundColor = .white
         tableView.separatorColor = .clear
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //tableView.reloadData()
     }
     
     fileprivate func setNavigationBarUI() {
@@ -90,6 +107,15 @@ class CommentsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let commentNewViewController = CommentNewViewController()
+        if let userId = self.userInfo?.uid {
+            commentNewViewController.toUserId = userId
+        }
+        
+        if let _ = self.comments[indexPath.item].parent {
+            commentNewViewController.parentComment = self.comments[indexPath.item].parent
+        } 
+        navigationController?.pushViewController(commentNewViewController, animated: true)
         return
     }
     

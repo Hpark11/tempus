@@ -13,10 +13,11 @@ class CommentCell: UITableViewCell {
     var comment: Comment? {
         didSet {
             if let comment = self.comment {
-                if let _ = comment.parent {
+                if let commentParent = comment.parent, commentParent != comment.key {
                     userImageViewLeftConstraint?.constant = Constants.userProfileImageSize.lessSmall + 16
                     dividerView.isHidden = true
                 } else {
+                    userImageViewLeftConstraint?.constant = 8
                     dividerView.isHidden = false
                 }
                 formDate(timestamp: comment.timestamp.doubleValue)
