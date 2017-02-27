@@ -86,79 +86,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "tempus/UserInfoCell.swift"
-            timestampString = "509707906.220921"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
-            landmarkName = "changeFollowButtonState()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "tempus.UserInfoCell.changeFollowButtonState () -&gt; ()"
-                  moduleName = "tempus"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/UserInfoCell.swift"
-                  timestampString = "509855985.949784"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "174"
-                  endingLineNumber = "174"
-                  offsetFromSymbolStart = "29">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "tempus.UserInfoCell.changeFollowButtonState () -&gt; ()"
-                  moduleName = "tempus"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/UserInfoCell.swift"
-                  timestampString = "509855985.952805"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "174"
-                  endingLineNumber = "174"
-                  offsetFromSymbolStart = "315">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "tempus/UserInfoCell.swift"
-            timestampString = "509707977.362024"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
-            landmarkName = "changeFollowButtonState()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tempus/UserInfoCell.swift"
-            timestampString = "509708051.542746"
+            timestampString = "509863032.988466"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
             landmarkName = "observeChangeFollowing(follows:followee:follower:)"
             landmarkType = "7">
             <Locations>
@@ -202,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tempus/UserInfoCell.swift"
-            timestampString = "509708053.254808"
+            timestampString = "509863032.988466"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
             landmarkName = "observeChangeFollowing(follows:followee:follower:)"
             landmarkType = "7">
             <Locations>
@@ -218,11 +154,11 @@
                   moduleName = "tempus"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/UserInfoCell.swift"
-                  timestampString = "509855985.961799"
+                  timestampString = "509891433.935157"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "195"
-                  endingLineNumber = "195"
+                  startingLineNumber = "197"
+                  endingLineNumber = "197"
                   offsetFromSymbolStart = "75">
                </Location>
                <Location
@@ -233,11 +169,11 @@
                   moduleName = "tempus"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/UserInfoCell.swift"
-                  timestampString = "509855985.963972"
+                  timestampString = "509891433.93807"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "195"
-                  endingLineNumber = "195"
+                  startingLineNumber = "197"
+                  endingLineNumber = "197"
                   offsetFromSymbolStart = "685">
                </Location>
             </Locations>

@@ -46,6 +46,7 @@ class CheckUserProfileViewController: UICollectionViewController, UICollectionVi
         if let userId = self.userId {
             cell.userId = userId
         }
+        cell.checkUserProfileViewController = self
         return cell
     }
     

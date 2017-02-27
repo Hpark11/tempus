@@ -19,6 +19,8 @@
 		5804D8AA1E62878900628469 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8A91E62878900628469 /* CommentsViewController.swift */; };
 		5804D8AC1E6289B700628469 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8AB1E6289B700628469 /* CommentCell.swift */; };
 		5804D8B01E63C90100628469 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8AF1E63C90000628469 /* Comment.swift */; };
+		5804D8B21E640A6B00628469 /* SubCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8B11E640A6B00628469 /* SubCommentView.swift */; };
+		5804D8B41E643E1700628469 /* CommentNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8B31E643E1700628469 /* CommentNewViewController.swift */; };
 		5807755D1E4ECB3A0092ED8F /* SlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5807755C1E4ECB3A0092ED8F /* SlideViewController.swift */; };
 		5807755F1E4ECB6A0092ED8F /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5807755E1E4ECB6A0092ED8F /* DiaryViewController.swift */; };
 		5808951B1E52A47500F8D96B /* UserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5808951A1E52A47500F8D96B /* UserPageViewController.swift */; };
@@ -132,6 +134,8 @@
 		5804D8A91E62878900628469 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		5804D8AB1E6289B700628469 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		5804D8AF1E63C90000628469 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		5804D8B11E640A6B00628469 /* SubCommentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubCommentView.swift; sourceTree = "<group>"; };
+		5804D8B31E643E1700628469 /* CommentNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentNewViewController.swift; sourceTree = "<group>"; };
 		5807755C1E4ECB3A0092ED8F /* SlideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideViewController.swift; sourceTree = "<group>"; };
 		5807755E1E4ECB6A0092ED8F /* DiaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
 		5808951A1E52A47500F8D96B /* UserPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPageViewController.swift; sourceTree = "<group>"; };
@@ -338,6 +342,7 @@
 				5804D89E1E5E802A00628469 /* DownloadButtonView.swift */,
 				5804D8A01E5E806400628469 /* LoadingSpinner.swift */,
 				5804D8A61E5F609D00628469 /* ViewExpansion.swift */,
+				5804D8B11E640A6B00628469 /* SubCommentView.swift */,
 			);
 			name = "Custom Views";
 			sourceTree = "<group>";
@@ -431,6 +436,7 @@
 				58F3CDBF1E5C825E00629A81 /* CheckUserProfileViewController.swift */,
 				5804D89C1E5DA3B300628469 /* ShareFilesViewController.swift */,
 				5804D8A91E62878900628469 /* CommentsViewController.swift */,
+				5804D8B31E643E1700628469 /* CommentNewViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -788,6 +794,7 @@
 				5808952A1E52F78A00F8D96B /* MyProfileInfoCell.swift in Sources */,
 				58FCAADD1E4B2756002F5B0A /* MeetingViewTopPanelCell.swift in Sources */,
 				58CCD4B11E59330E009B29F8 /* ChatMessageCell.swift in Sources */,
+				5804D8B21E640A6B00628469 /* SubCommentView.swift in Sources */,
 				580FB4861E5232B70057DA21 /* SignInViewController.swift in Sources */,
 				58FCAAE91E4C3A0D002F5B0A /* MeetingCategoryContent.swift in Sources */,
 				58FCAAE31E4C2ADC002F5B0A /* RecommendedMeetingViewCell.swift in Sources */,
@@ -810,6 +817,7 @@
 				58CCD4B91E5B17C2009B29F8 /* SubmitJoinViewController.swift in Sources */,
 				580FB47E1E5225CD0057DA21 /* ChattingViewController.swift in Sources */,
 				5817C3391E5C0EAF00E72F77 /* AcceptSubmissionViewController.swift in Sources */,
+				5804D8B41E643E1700628469 /* CommentNewViewController.swift in Sources */,
 				580FB4841E52260D0057DA21 /* SettingsViewController.swift in Sources */,
 				58D2AB011E4ACE390084CE80 /* MainNavigationController.swift in Sources */,
 				5841BD681E5049FA001E6186 /* MeetingAddDetailCell.swift in Sources */,

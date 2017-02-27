@@ -14,6 +14,7 @@ class Comment: NSObject {
     private var _userId: String?
     private var _timestamp: NSNumber?
     private var _children: Dictionary<String, AnyObject>?
+    private var _parent: String?
     
     var key: String {
         if let key = _key {
@@ -41,7 +42,7 @@ class Comment: NSObject {
     
     var timestamp: NSNumber {
         if let time = _timestamp {
-            return userId
+            return time
         } else {
             return 0
         }
@@ -51,8 +52,12 @@ class Comment: NSObject {
         if let children = _children {
             return children
         } else {
-            return _children
+            return [String:AnyObject]()
         }
+    }
+    
+    var parent: String? {
+        return _parent
     }
     
     init(key: String, data: Dictionary<String, AnyObject>) {
@@ -61,5 +66,6 @@ class Comment: NSObject {
         _userId = data[Constants.Comments.userId] as? String
         _timestamp = data[Constants.Comments.timestamp] as? NSNumber
         _children = data[Constants.Comments.children] as? Dictionary<String, AnyObject>
+        _parent = data[Constants.Comments.parent] as? String
     }
 }

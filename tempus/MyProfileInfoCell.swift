@@ -11,6 +11,7 @@ import Firebase
 
 class MyProfileInfoCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
+    var checkUserProfileViewController: CheckUserProfileViewController?
     var attachedViewController: UserPageViewController?
     var isModifyMode: Bool = false
     
@@ -83,6 +84,9 @@ class MyProfileInfoCell: BaseCell, UICollectionViewDelegate, UICollectionViewDat
             cell.userInfo = userInfo
             if let attachedViewController = self.attachedViewController {
                 cell.attachedViewController = attachedViewController
+            }
+            if let checkUserProfileViewController = self.checkUserProfileViewController {
+                cell.checkUserProfileViewController = checkUserProfileViewController
             }
             return cell
         } else {

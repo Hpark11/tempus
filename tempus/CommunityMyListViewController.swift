@@ -116,6 +116,7 @@ class CommunityMyListViewController: UITableViewController {
         if self.openedMeetings.count > indexPath.item {
             cell.meeting = self.openedMeetings[indexPath.item]
         }
+
         return cell
     }
     

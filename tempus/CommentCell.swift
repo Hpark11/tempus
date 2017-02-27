@@ -10,21 +10,72 @@ import UIKit
 
 class CommentCell: UITableViewCell {
     
+    var comment: Comment? {
+        didSet {
+            if let comment = self.comment {
+                if let _ = comment.parent {
+                    userImageViewLeftConstraint?.constant = Constants.userProfileImageSize.lessSmall + 16
+                    dividerView.isHidden = true
+                } else {
+                    dividerView.isHidden = false
+                }
+                formDate(timestamp: comment.timestamp.doubleValue)
+                commentTextView.text = comment.text
+                observeFirebaseValue(userId: comment.userId)
+            }
+        }
+    }
+
+    func formDate(timestamp: Double) {
+        let timestampDate = Date(timeIntervalSince1970: timestamp)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm:ss a"
+        dateTimeLabel.text = dateFormatter.string(from: timestampDate)
+    }
+    
+    func observeFirebaseValue(userId: String) {
+        FirebaseDataService.instance.userRef.child(userId).child(Constants.Users.imageUrl).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let imageUrl = snapshot.value as? String {
+                self.userImageView.imageUrlString = imageUrl
+            }
+        })
+        FirebaseDataService.instance.userRef.child(userId).child(Constants.Users.username).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let username = snapshot.value as? String {
+                self.usernameLabel.text = username
+            }
+        })
+    }
+    
+    let dividerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.makeViaRgb(red: 230, green: 230, blue: 230)
+        return view
+    }()
     
     let userImageView: DownloadImageView = {
         let imageView = DownloadImageView()
         imageView.layer.cornerRadius = 6
-        imageView.layer.borderColor = UIColor.black.cgColor
-        imageView.layer.borderWidth = 1.4
         imageView.layer.masksToBounds = true
         return imageView
     }()
     
-    let commentTextLabel: UILabel = {
+    let usernameLabel: UILabel = {
         let label = UILabel()
-        label.lineBreakMode = .byWordWrapping
-        label.numberOfLines = 0
         return label
+    }()
+    
+    let dateTimeLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .lightGray
+        label.font = UIFont.systemFont(ofSize: 12)
+        return label
+    }()
+    
+    let commentTextView: UITextView = {
+        let textView = UITextView()
+        textView.isEditable = false
+        textView.isScrollEnabled = false
+        return textView
     }()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -32,8 +83,8 @@ class CommentCell: UITableViewCell {
         
         imageView?.layer.cornerRadius = 8
         
-        textLabel?.text = "테스트"
-        detailTextLabel?.text = "00:00:00"
+        addSubViews()
+        setConstraints()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -41,19 +92,25 @@ class CommentCell: UITableViewCell {
     }
     
     fileprivate func addSubViews() {
-        addSubview(userImageView)
+        contentView.addSubview(dividerView)
+        contentView.addSubview(usernameLabel)
+        contentView.addSubview(dateTimeLabel)
+        contentView.addSubview(userImageView)
+        contentView.addSubview(commentTextView)
     }
     
     var commentBottomConstraint: NSLayoutConstraint?
+    var userImageViewLeftConstraint: NSLayoutConstraint?
     
     fileprivate func setConstraints() {
-        _ = userImageView.anchor(topAnchor, left: leftAnchor, bottom: nil, right: nil, topConstant: 8, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: Constants.userProfileImageSize.lessSmall, heightConstant: Constants.userProfileImageSize.lessSmall)
+        _ = dividerView.anchor(contentView.topAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 1)
         
-        _ = textLabel?.anchor(topAnchor, left: userImageView.rightAnchor, bottom: nil, right: rightAnchor, topConstant: 8, leftConstant: 8, bottomConstant: 0, rightConstant: 8, widthConstant: 0, heightConstant: 28)
+        userImageViewLeftConstraint = userImageView.anchor(contentView.topAnchor, left: contentView.leftAnchor, bottom: nil, right: nil, topConstant: 8, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: Constants.userProfileImageSize.lessSmall, heightConstant: Constants.userProfileImageSize.lessSmall)[1]
         
-        _ = detailTextLabel?.anchor(textLabel?.bottomAnchor, left: userImageView.rightAnchor, bottom: nil, right: rightAnchor, topConstant: 2, leftConstant: 8, bottomConstant: 0, rightConstant: 8, widthConstant: 0, heightConstant: 20)
+        _ = usernameLabel.anchor(contentView.topAnchor, left: userImageView.rightAnchor, bottom: nil, right: contentView.rightAnchor, topConstant: 8, leftConstant: 8, bottomConstant: 0, rightConstant: 8, widthConstant: 0, heightConstant: 16)
         
-        _ = commentTextLabel.anchor(detailTextLabel?.bottomAnchor, left: userImageView.rightAnchor, bottom: nil, right: rightAnchor, topConstant: 6, leftConstant: 8, bottomConstant: 0, rightConstant: 8, widthConstant: 0, heightConstant: 100)
+        _ = dateTimeLabel.anchor(usernameLabel.bottomAnchor, left: userImageView.rightAnchor, bottom: nil, right: contentView.rightAnchor, topConstant: 2, leftConstant: 8, bottomConstant: 0, rightConstant: 8, widthConstant: 0, heightConstant: 14)
         
+        commentBottomConstraint = commentTextView.anchor(dateTimeLabel.bottomAnchor, left: userImageView.rightAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, topConstant: 0, leftConstant: 2, bottomConstant: 0, rightConstant: 8, widthConstant: 0, heightConstant: 0)[2]
     }
 }

@@ -64,6 +64,7 @@ struct Constants {
         static let userId = "userId"
         static let timestamp = "timestamp"
         static let children = "children"
+        static let parent = "parent"
     }
     
     struct Meetings {

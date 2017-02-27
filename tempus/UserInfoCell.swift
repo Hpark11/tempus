@@ -13,6 +13,8 @@ class UserInfoCell: BaseCell, UIImagePickerControllerDelegate, UINavigationContr
     
     var isUserImage: Bool = false
     var myUid: String?
+    
+    var checkUserProfileViewController: CheckUserProfileViewController?
     var attachedViewController: UserPageViewController?
     var userInfo: Users? {
         didSet {
@@ -212,12 +214,16 @@ class UserInfoCell: BaseCell, UIImagePickerControllerDelegate, UINavigationContr
     }
     
     func commentButtonTapped() {
+        let commentsViewController = CommentsViewController()
+        if let userInfo = self.userInfo {
+            commentsViewController.userInfo = userInfo
+        }
+        let commentNavigationController = UINavigationController(rootViewController: commentsViewController)
+        
         if let attachedViewController = self.attachedViewController {
-            let commentsViewController = CommentsViewController()
-            if let userInfo = self.userInfo {
-                commentsViewController.userInfo = userInfo
-            }
-            attachedViewController.present(commentsViewController, animated: true, completion: nil)
+            attachedViewController.present(commentNavigationController, animated: true, completion: nil)
+        } else if let checkUserProfileViewController = self.checkUserProfileViewController {
+            checkUserProfileViewController.present(commentNavigationController, animated: true, completion: nil)
         }
     }
     

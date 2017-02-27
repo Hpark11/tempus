@@ -239,9 +239,6 @@ class ChattingHistoryViewController: UICollectionViewController, UITextFieldDele
                 cell.containerViewWidthAnchor?.constant = measuredFrameHeightForEachMessage(message: text).width + 32
             }
         }
-//        if indexPath.item == (groupMsgs.count - 1) {
-//            collectionView.reloadData()
-//        }
         return cell
     }
     
