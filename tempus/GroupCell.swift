@@ -30,7 +30,7 @@ class GroupCell: UITableViewCell {
                     titleTextViewRightAnchor?.isActive = true
 //                    titleTextViewLeftAnchor?.constant = 0
 //                    titleTextViewRightAnchor?.constant = 0
-                    self.textLabel?.textAlignment = .right
+                    self.titleTextView.textAlignment = .right
                 } else {
                     groupImageLeftAnchor?.isActive = false
                     groupImageRightAnchor?.isActive = true
@@ -40,7 +40,7 @@ class GroupCell: UITableViewCell {
                     titleTextViewRightAnchor?.isActive = false
 //                    titleTextViewLeftAnchor?.constant = 8
 //                    titleTextViewRightAnchor?.constant = 0
-                    self.textLabel?.textAlignment = .left
+                    self.titleTextView.textAlignment = .left
                 }
             }
         }
@@ -140,13 +140,13 @@ class GroupCell: UITableViewCell {
     
     
     fileprivate func setConstriants() {
-        let groupImageViewAnchors = groupImageView.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: frame.width * 0.72, heightConstant: 0)
+        let groupImageViewAnchors = groupImageView.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: frame.width * 0.64, heightConstant: 0)
         
         groupImageLeftAnchor = groupImageViewAnchors[1]
         groupImageRightAnchor = groupImageViewAnchors[3]
         
 
-        let overlayViewAnchors = overlayView.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: frame.width * 0.72, heightConstant: 0)
+        let overlayViewAnchors = overlayView.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: frame.width * 0.64, heightConstant: 0)
         
         overlayViewLeftAnchor = overlayViewAnchors[1]
         overlayViewRightAnchor = overlayViewAnchors[3]

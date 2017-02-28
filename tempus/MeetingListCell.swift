@@ -197,7 +197,6 @@ class MeetingListCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
             slideViewController.transitioningDelegate = self
             slideViewController.modalTransitionStyle = .coverVertical
             
-            
             attachedViewController.present(slideViewController, animated: true, completion: nil)
         }
     }
