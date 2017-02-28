@@ -83,6 +83,22 @@ class UserFollowingCell: BaseCell, UITextFieldDelegate, UITableViewDelegate, UIT
         return textField
     }()
     
+    let followerLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .black
+        label.text = "나를 팔로잉하는 분들"
+        return label
+    }()
+    
+    let followingLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .black
+        label.text = "내가 팔로잉하는 분들"
+        return label
+    }()
+    
     func observeFirebaseValue() {
         FirebaseDataService.instance.userRef.observe(.value, with: { (snapshot) in
             if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
@@ -96,13 +112,13 @@ class UserFollowingCell: BaseCell, UITextFieldDelegate, UITableViewDelegate, UIT
             
             if let userId = FIRAuth.auth()?.currentUser?.uid {
                 if let following = self.users[userId]?.following {
-                    for key in following {
+                    for (key, _) in following {
                         self.following.append(self.users[key]!)
                     }
                 }
                 
                 if let followers = self.users[userId]?.followers {
-                    for key in followers {
+                    for (key, _) in followers {
                         self.followers.append(self.users[key]!)
                     }
                 }
@@ -132,6 +148,8 @@ class UserFollowingCell: BaseCell, UITextFieldDelegate, UITableViewDelegate, UIT
         addSubview(sectionFollowingView)
         addSubview(followingTableView)
         addSubview(followersTableView)
+        addSubview(followerLabel)
+        addSubview(followingLabel)
     }
     
     fileprivate func setConstraints() {
@@ -143,15 +161,19 @@ class UserFollowingCell: BaseCell, UITextFieldDelegate, UITableViewDelegate, UIT
         
         _ = dividerView2.anchor(searchField.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 1)
         
-        _ = sectionFollowerView.anchor(dividerView2.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 24)
+        _ = sectionFollowerView.anchor(dividerView2.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 30)
+        
+        _ = followerLabel.anchor(sectionFollowerView.topAnchor, left: sectionFollowerView.leftAnchor, bottom: sectionFollowerView.bottomAnchor, right: sectionFollowerView.rightAnchor, topConstant: 0, leftConstant: 4, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
         _ = followersTableView.anchor(sectionFollowerView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: frame.height / 3)
         
         _ = dividerView3.anchor(followersTableView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 1)
         
-        _ = sectionFollowingView.anchor(dividerView3.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 24)
+        _ = sectionFollowingView.anchor(dividerView3.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 30)
         
         _ = followingTableView.anchor(sectionFollowingView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        
+        _ = followingLabel.anchor(sectionFollowingView.topAnchor, left: sectionFollowingView.leftAnchor, bottom: sectionFollowingView.bottomAnchor, right: sectionFollowingView.rightAnchor, topConstant: 0, leftConstant: 4, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
     }
     
     fileprivate func registerCells() {

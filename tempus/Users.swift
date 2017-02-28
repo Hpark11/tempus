@@ -16,8 +16,8 @@ class Users {
     private var _username: String?
     private var _imageUrl: String?
     private var _backgroundImageUrl: String?
-    private var _followers: Array<String>?
-    private var _following: Array<String>?
+    private var _followers: Dictionary<String, AnyObject>?
+    private var _following: Dictionary<String, AnyObject>?
     private var _comments: Dictionary<String, AnyObject>?
     private var _appliedMeetings: Array<String>?
     private var _openedMeetings: Array<String>?
@@ -76,19 +76,19 @@ class Users {
         }
     }
     
-    var followers: Array<String> {
+    var followers: Dictionary<String, AnyObject>{
         if let followers = _followers {
             return followers
         } else {
-            return []
+            return [String:AnyObject]()
         }
     }
     
-    var following: Array<String> {
+    var following: Dictionary<String, AnyObject> {
         if let following = _following {
             return following
         } else {
-            return []
+            return [String:AnyObject]()
         }
     }
     
@@ -171,8 +171,8 @@ class Users {
         _email = data[Constants.Users.email] as? String
         _username = data[Constants.Users.username] as? String
         _comments = data[Constants.Users.comments] as? Dictionary<String, AnyObject>
-        _followers = data[Constants.Users.followers] as? Array<String>
-        _following = data[Constants.Users.following] as? Array<String>
+        _followers = data[Constants.Users.followers] as? Dictionary<String, AnyObject>
+        _following = data[Constants.Users.following] as? Dictionary<String, AnyObject>
         _numComments = data[Constants.Users.numComments] as? Int
         _numFollowers = data[Constants.Users.numFollowers] as? Int
         _numFollowings = data[Constants.Users.numFollowings] as? Int
