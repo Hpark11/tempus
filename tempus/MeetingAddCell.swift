@@ -61,7 +61,7 @@ class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
     
     lazy var panelLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 24)
         label.textColor = .black
         label.textAlignment = .left
         label.text = "스토리"
@@ -72,8 +72,6 @@ class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
         let imageView = DownloadImageView()
         imageView.image = UIImage(named: "placeholder3")
         imageView.contentMode = .scaleToFill
-        imageView.layer.borderWidth = 1
-        imageView.layer.borderColor = UIColor.darkGray.cgColor
         imageView.layer.cornerRadius = 8
         imageView.layer.masksToBounds = true
         imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(cellImageTapped)))
@@ -83,7 +81,7 @@ class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
     
     let storyTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .black
         label.text = "스토리 제목"
         return label
@@ -92,14 +90,15 @@ class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
     lazy var storyTitleField: UITextField = {
         let textField = UITextField()
         textField.font = UIFont.systemFont(ofSize: 14)
-        textField.backgroundColor = UIColor.makeViaRgb(red: 216, green: 216, blue: 216)
+        textField.backgroundColor = UIColor.makeViaRgb(red: 234, green: 234, blue: 234)
+        textField.layer.cornerRadius = 8
         textField.delegate = self
         return textField
     }()
     
     let storySubtitleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .black
         label.text = "스토리라인"
         return label
@@ -109,7 +108,8 @@ class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
         let textView = UITextView()
         textView.font = UIFont.systemFont(ofSize: 14)
         textView.textColor = .black
-        textView.backgroundColor = UIColor.makeViaRgb(red: 216, green: 216, blue: 216)
+        textView.backgroundColor = UIColor.makeViaRgb(red: 234, green: 234, blue: 234)
+        textView.layer.cornerRadius = 8
         textView.delegate = self
         return textView
     }()
@@ -118,9 +118,11 @@ class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
         let button = UIButton()
         button.tintColor = .white
         button.backgroundColor = .cyan
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.setTitleColor(.white, for: .normal)
         button.setTitle("스토리 추가", for: .normal)
         button.addTarget(self, action: #selector(addStoryButtonTapped), for: .touchUpInside)
+        button.layer.cornerRadius = 8
         button.isUserInteractionEnabled = true
         return button
     }()
@@ -133,6 +135,7 @@ class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
         button.setTitle("현재 스토리 삭제", for: .normal)
         button.addTarget(self, action: #selector(deleteStoryButtonTapped), for: .touchUpInside)
         button.isUserInteractionEnabled = true
+        button.layer.cornerRadius = 8
         return button
     }()
     
@@ -147,7 +150,7 @@ class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
     
     let addStoryLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .black
         label.text = "당신의 이야기를 더 추가할 수 있습니다"
         return label
@@ -164,7 +167,7 @@ class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
     func addStoryButtonTapped() {
         if let attachedViewController = self.attachedViewController {
             attachedViewController.numStories += 1
-            attachedViewController.subImages.append(UIImage())
+            attachedViewController.subImages.append(UIImage(named: "placeholder image")!)
             attachedViewController.submitData.slides.append(Slides())
             attachedViewController.collectionView?.reloadData()
         }
@@ -216,23 +219,23 @@ class MeetingAddCell: BaseCell, UITextFieldDelegate, UITextViewDelegate {
     }
     
     fileprivate func setConstraints() {
-        _ = panelView.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 8, leftConstant: 8, bottomConstant: 8, rightConstant: 8, widthConstant: 0, heightConstant: 0)
+        _ = panelView.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 16, leftConstant: 16, bottomConstant: 16, rightConstant: 16, widthConstant: 0, heightConstant: 0)
         
-        _ = panelLabel.anchor(topAnchor, left: leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 36)
+        _ = panelLabel.anchor(topAnchor, left: leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 40)
         
-        _ = cellImageView.anchor(panelLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: nil, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: frame.width / 4, heightConstant: frame.width / 4)
+        _ = cellImageView.anchor(panelLabel.bottomAnchor, left: nil, bottom: nil, right: panelView.rightAnchor, topConstant: 26, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: frame.width / 4, heightConstant: frame.width / 4 + 22)
         
-        _ = storyTitleLabel.anchor(panelLabel.bottomAnchor, left: cellImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 16)
+        _ = storyTitleLabel.anchor(panelLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: cellImageView.leftAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 4, widthConstant: 0, heightConstant: 16)
         
-        _ = storyTitleField.anchor(storyTitleLabel.bottomAnchor, left: cellImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 2, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 28)
+        _ = storyTitleField.anchor(storyTitleLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: cellImageView.leftAnchor, topConstant: 2, leftConstant: 0, bottomConstant: 0, rightConstant: 4, widthConstant: 0, heightConstant: 28)
         
-        _ = storySubtitleLabel.anchor(storyTitleField.bottomAnchor, left: cellImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 6, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 16)
+        _ = storySubtitleLabel.anchor(storyTitleField.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: cellImageView.leftAnchor, topConstant: 6, leftConstant: 0, bottomConstant: 0, rightConstant: 4, widthConstant: 0, heightConstant: 16)
         
-        _ = storySubtitleTextView.anchor(storySubtitleLabel.bottomAnchor, left: cellImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 2, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 64)
+        _ = storySubtitleTextView.anchor(storySubtitleLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: cellImageView.leftAnchor, topConstant: 2, leftConstant: 0, bottomConstant: 0, rightConstant: 4, widthConstant: 0, heightConstant: 64)
         
         _ = addStoryLabel.anchor(storySubtitleTextView.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 6, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 16)
         
-        _ = addStoryButton.anchor(addStoryLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: nil, topConstant: 2, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: (frame.width - 16) / 2 - 1, heightConstant: 36)
+        _ = addStoryButton.anchor(addStoryLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: nil, topConstant: 2, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: (frame.width - 16) / 2 - 4, heightConstant: 36)
         
         _ = deleteStoryButton.anchor(addStoryLabel.bottomAnchor, left: addStoryButton.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 2, leftConstant: 1, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 36)
         

@@ -64,7 +64,7 @@ class UserProfileBarView : UIView, UICollectionViewDelegate, UICollectionViewDat
         
         categoryHighlightedBar.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         categoryHighlightedBar.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1 / CGFloat(UserProfileBarData.categories.count)).isActive = true
-        categoryHighlightedBar.heightAnchor.constraint(equalToConstant: 2).isActive = true
+        categoryHighlightedBar.heightAnchor.constraint(equalToConstant: 2.4).isActive = true
     }
     
     fileprivate func addSubViews() {

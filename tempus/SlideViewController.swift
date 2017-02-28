@@ -46,21 +46,26 @@ class SlideViewController: UICollectionViewController, UICollectionViewDelegateF
     
     lazy var beforeButton: UIButton = {
         let button = UIButton()
-        if let image = UIImage(named: "before") {
+        if let image = UIImage(named: "icon cancel") {
             button.setImage(image, for: .normal)
         }
-        //button.addTarget(self, action: #selector(beforeButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(beforeButtonTapped), for: .touchUpInside)
+        button.isUserInteractionEnabled = true
         return button
     }()
     
-    lazy var nextButton: UIButton = {
-        let button = UIButton()
-        if let image = UIImage(named: "next") {
-            button.setImage(image, for: .normal)
-        }
-        //button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
-        return button
-    }()
+//    lazy var nextButton: UIButton = {
+//        let button = UIButton()
+//        if let image = UIImage(named: "next") {
+//            button.setImage(image, for: .normal)
+//        }
+//        //button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+//        return button
+//    }()
+    
+    func beforeButtonTapped() {
+        dismiss(animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,7 +99,7 @@ class SlideViewController: UICollectionViewController, UICollectionViewDelegateF
         navigationController?.navigationBar.isHidden = true
         collectionView?.backgroundView = mainImageView
         view.addSubview(beforeButton)
-        view.addSubview(nextButton)
+        //view.addSubview(nextButton)
     }
     
     fileprivate func setConstraints() {
@@ -102,7 +107,7 @@ class SlideViewController: UICollectionViewController, UICollectionViewDelegateF
         
         beforeButtonTopAnchor = beforeButton.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: nil, topConstant: 24, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 40).first
         
-        nextButtonTopAnchor = nextButton.anchor(view.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, topConstant: 24, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 40).first
+        //nextButtonTopAnchor = nextButton.anchor(view.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, topConstant: 24, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 40).first
     }
     
     fileprivate func registerCells() {
@@ -123,6 +128,8 @@ class SlideViewController: UICollectionViewController, UICollectionViewDelegateF
             return cell
         } else if indexPath.item == (slides.count + 1) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SlideViewData.detailId, for: indexPath) as! SlideDetailCell
+            cell.attachedViewController = self
+            cell.meetingId = self.meetingId
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SlideViewData.cellId, for: indexPath) as! SlideCell

@@ -28,19 +28,26 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UI
     
     let panelLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 24)
         label.textColor = .black
         label.textAlignment = .left
-        label.text = "메인"
+        label.text = "메인 슬라이드"
+        return label
+    }()
+    
+    let imageGuideLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .black
+        label.text = "메인 사진을 올려주세요 (세로가 더 긴 사진이 좋답니다 ^^)"
         return label
     }()
     
     lazy var mainImageView: DownloadImageView = {
         let imageView = DownloadImageView()
-        imageView.image = UIImage()
-        imageView.contentMode = .scaleToFill
-        imageView.layer.borderWidth = 1
-        imageView.layer.borderColor = UIColor.darkGray.cgColor
+        imageView.image = UIImage(named: "placeholder image")
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 8
         imageView.layer.masksToBounds = true
         imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(mainImageTapped)))
@@ -50,7 +57,7 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UI
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .black
         label.text = "메인 타이틀"
         return label
@@ -59,14 +66,15 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UI
     lazy var titleField: UITextField = {
         let textField = UITextField()
         textField.font = UIFont.systemFont(ofSize: 14)
-        textField.backgroundColor = UIColor.makeViaRgb(red: 216, green: 216, blue: 216)
+        textField.backgroundColor = UIColor.makeViaRgb(red: 234, green: 234, blue: 234)
+        textField.layer.cornerRadius = 8
         textField.delegate = self
         return textField
     }()
     
     let subtitleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .black
         label.text = "서브 타이틀"
         return label
@@ -76,7 +84,8 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UI
         let textView = UITextView()
         textView.font = UIFont.systemFont(ofSize: 14)
         textView.textColor = .black
-        textView.backgroundColor = UIColor.makeViaRgb(red: 216, green: 216, blue: 216)
+        textView.backgroundColor = UIColor.makeViaRgb(red: 234, green: 234, blue: 234)
+        textView.layer.cornerRadius = 8
         textView.delegate = self
         return textView
     }()
@@ -90,10 +99,9 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UI
         return label
     }()
     
-    
     let categoryLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .black
         label.text = "카테고리를 선택하세요"
         return label
@@ -108,11 +116,26 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UI
         return pickerView
     }()
     
+    lazy var categorySegmentedControl: UISegmentedControl = {
+        let sc = UISegmentedControl(items: self.categoryDataSource)
+        sc.translatesAutoresizingMaskIntoConstraints = false
+        sc.tintColor = UIColor.black
+        sc.selectedSegmentIndex = 0
+        sc.addTarget(self, action: #selector(handleCategoryChange), for: .valueChanged)
+        return sc
+    }()
+    
+    func handleCategoryChange() {
+        if let attachedViewController = self.attachedViewController {
+            attachedViewController.submitData.category = categoryDataSourceEn[categorySegmentedControl.selectedSegmentIndex]
+        }
+    }
+    
     let typeLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .black
-        label.text = "만남의 유형을 선택하세요"
+        label.text = "유형을 선택하세요"
         return label
     }()
     
@@ -125,9 +148,24 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UI
         return pickerView
     }()
     
+    lazy var typeSegmentedControl: UISegmentedControl = {
+        let sc = UISegmentedControl(items: self.typeDataSource)
+        sc.translatesAutoresizingMaskIntoConstraints = false
+        sc.tintColor = UIColor.black
+        sc.selectedSegmentIndex = 0
+        sc.addTarget(self, action: #selector(handleTypeChange), for: .valueChanged)
+        return sc
+    }()
+    
+    func handleTypeChange() {
+        if let attachedViewController = self.attachedViewController {
+            attachedViewController.submitData.type = typeDataSourceEn[typeSegmentedControl.selectedSegmentIndex]
+        }
+    }
+    
     func mainImageTapped() {
         if let attachedViewController = self.attachedViewController {
-            attachedViewController.presentImagePickerController(.savedPhotosAlbum, imgTag: 0)
+            attachedViewController.presentImagePickerController(.photoLibrary, imgTag: 0)
         }
     }
     
@@ -140,12 +178,13 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UI
     fileprivate func addSubviews() {
         addSubview(panelView)
         addSubview(panelLabel)
+        addSubview(imageGuideLabel)
         addSubview(mainImageView)
         addSubview(titleField)
         addSubview(subtitleTextView)
         addSubview(textLengthLabel)
-        addSubview(categoryPickerView)
-        addSubview(typePickerView)
+        addSubview(categorySegmentedControl)
+        addSubview(typeSegmentedControl)
         addSubview(titleLabel)
         addSubview(subtitleLabel)
         addSubview(categoryLabel)
@@ -153,29 +192,31 @@ class MeetingAddCoverCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UI
     }
     
     fileprivate func setConstraints() {
-        _ = panelView.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 8, leftConstant: 8, bottomConstant: 8, rightConstant: 8, widthConstant: 0, heightConstant: 0)
+        _ = panelView.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 16, leftConstant: 16, bottomConstant: 16, rightConstant: 16, widthConstant: 0, heightConstant: 0)
         
-        _ = panelLabel.anchor(topAnchor, left: leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 36)
+        _ = panelLabel.anchor(topAnchor, left: leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 40)
 
-        _ = mainImageView.anchor(panelLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: nil, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: frame.width / 4, heightConstant: frame.width / 4 * 16 / 11)
+        _ = imageGuideLabel.anchor(panelLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 20)
         
-        _ = titleLabel.anchor(panelLabel.bottomAnchor, left: mainImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 16)
+        _ = mainImageView.anchor(imageGuideLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: frame.height / 2.4)
         
-        _ = titleField.anchor(titleLabel.bottomAnchor, left: mainImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 2, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 30)
+        _ = textLengthLabel.anchor(mainImageView.bottomAnchor, left: nil, bottom: nil, right: panelView.rightAnchor, topConstant: 12, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 220, heightConstant: 20)
         
-        _ = subtitleLabel.anchor(titleField.bottomAnchor, left: mainImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 6, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 16)
+        _ = titleLabel.anchor(mainImageView.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: textLengthLabel.leftAnchor, topConstant: 12, leftConstant: 0, bottomConstant: 0, rightConstant: 4, widthConstant: 0, heightConstant: 20)
         
-        _ = subtitleTextView.anchor(subtitleLabel.bottomAnchor, left: mainImageView.rightAnchor, bottom: mainImageView.bottomAnchor, right: panelView.rightAnchor, topConstant: 2, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        _ = titleField.anchor(titleLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 6, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 30)
         
-        _ = textLengthLabel.anchor(panelView.topAnchor, left: nil, bottom: nil, right: panelView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 220, heightConstant: 20)
+        _ = subtitleLabel.anchor(titleField.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 20)
         
-        _ = categoryLabel.anchor(subtitleTextView.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 6, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 16)
+        _ = typeSegmentedControl.anchor(nil, left: panelView.leftAnchor, bottom: panelView.bottomAnchor, right: panelView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 24)
         
-        _ = categoryPickerView.anchor(categoryLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 2, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 90)
+        _ = typeLabel.anchor(nil, left: panelView.leftAnchor, bottom: typeSegmentedControl.topAnchor, right: panelView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 4, rightConstant: 0, widthConstant: 0, heightConstant: 20)
         
-        _ = typeLabel.anchor(categoryPickerView.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 6, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 16)
+        _ = categorySegmentedControl.anchor(nil, left: panelView.leftAnchor, bottom: typeLabel.topAnchor, right: panelView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 14, rightConstant: 0, widthConstant: 0, heightConstant: 24)
         
-        _ = typePickerView.anchor(typeLabel.bottomAnchor, left: panelView.leftAnchor, bottom: panelView.bottomAnchor, right: panelView.rightAnchor, topConstant: 2, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        _ = categoryLabel.anchor(nil, left: panelView.leftAnchor, bottom: categorySegmentedControl.topAnchor, right: panelView.rightAnchor, topConstant: 6, leftConstant: 0, bottomConstant: 4, rightConstant: 0, widthConstant: 0, heightConstant: 20)
+        
+        _ = subtitleTextView.anchor(subtitleLabel.bottomAnchor, left: panelView.leftAnchor, bottom: categoryLabel.topAnchor, right: panelView.rightAnchor, topConstant: 4, leftConstant: 0, bottomConstant: 16, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
     }
     

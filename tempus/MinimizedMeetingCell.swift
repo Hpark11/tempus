@@ -19,17 +19,13 @@ class MinimizedMeetingCell: BaseCell {
             }
             
             if let imageUrl = meeting?.imageUrl {
-                if let meetingImage = imageCache.object(forKey: imageUrl as NSString) {
-                    self.imageView.image = meetingImage
-                } else {
-                    self.setImageFromFirebaseStorageWithUrl(imageUrl: imageUrl)
-                }
+                imageView.imageUrlString = imageUrl
             }
         }
     }
     
-    let imageView: UIImageView = {
-        let imageView = UIImageView()
+    let imageView: DownloadImageView = {
+        let imageView = DownloadImageView()
         imageView.image = UIImage(named: "frozen")
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 16
@@ -56,7 +52,7 @@ class MinimizedMeetingCell: BaseCell {
     
     func setImageFromFirebaseStorageWithUrl(imageUrl: String) {
         let ref = FIRStorage.storage().reference(forURL: imageUrl)
-        ref.data(withMaxSize: 3 * 1024 * 1024, completion: { (data, error) in
+        ref.data(withMaxSize: 6 * 1024 * 1024, completion: { (data, error) in
             if error != nil {
                 print(":::[HPARK] Unable to Download image from Storage \(String(describing: error)):::")
             } else {
@@ -86,5 +82,7 @@ class MinimizedMeetingCell: BaseCell {
         imageView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.width)
         titleLabel.frame = CGRect(x: 0, y: frame.width + 2, width: frame.width, height: 40)
         categoryLabel.frame = CGRect(x: 0, y: frame.width + 38 , width: frame.width, height: 20)
+        
+        
     }
 }

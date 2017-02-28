@@ -36,7 +36,6 @@ class MeetingCell: BaseCell {
                         titleLabelHeightConstraint?.constant = 32
                     }
                     
-                    
                     titleTextView.text = title
                 }
                 
@@ -61,8 +60,8 @@ class MeetingCell: BaseCell {
         imageView.image = UIImage(named: "placeholder1")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(mainPanelTapped)))
-        imageView.isUserInteractionEnabled = true
+        //imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(mainPanelTapped)))
+        //imageView.isUserInteractionEnabled = true
         return imageView
     }()
     
@@ -79,10 +78,10 @@ class MeetingCell: BaseCell {
     
     lazy var overlayView: UIView = {
         let view = UIView()
-        view.backgroundColor = .blue
+        view.backgroundColor = .black
         view.alpha = 0.3
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(mainPanelTapped)))
-        view.isUserInteractionEnabled = true
+        //view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(mainPanelTapped)))
+        //view.isUserInteractionEnabled = true
         return view
     }()
     
@@ -98,10 +97,11 @@ class MeetingCell: BaseCell {
         textView.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0)
         textView.backgroundColor = .clear
         textView.textColor = .white
-        textView.text = "강교혁 기버와 함께하는 \n창업이야기"
+        textView.text = ""
         textView.isEditable = false
         textView.isSelectable = false
-        textView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(mainPanelTapped)))
+        //textView.isScrollEnabled = false
+        //textView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(mainPanelTapped)))
         textView.isUserInteractionEnabled = true
         return textView
     }()
@@ -110,12 +110,13 @@ class MeetingCell: BaseCell {
         let textView = UITextView()
         textView.font = UIFont.systemFont(ofSize: 18)
         textView.textContainerInset = UIEdgeInsetsMake(0, 10, 0, 0)
-        textView.textColor = .lightGray
+        textView.textColor = UIColor.makeViaRgb(red: 234, green: 234, blue: 234)
         textView.backgroundColor = .clear
-        textView.text = "강교혁 기버만이 가진 창업노하우를 같이 공유합니다"
+        textView.text = ""
         textView.isEditable = false
         textView.isSelectable = false
-        textView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(mainPanelTapped)))
+        textView.isScrollEnabled = false
+        //textView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(mainPanelTapped)))
         textView.isUserInteractionEnabled = true
         return textView
     }()
@@ -189,7 +190,7 @@ class MeetingCell: BaseCell {
         var numC: Int = 0
         
         if let name = username {
-            let attributedText = NSMutableAttributedString(string: "\(name) 기버", attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18)])
+            let attributedText = NSMutableAttributedString(string: "\(name)", attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18)])
             attributedText.append(NSAttributedString(string: "\n", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14)]))
             let style = NSMutableParagraphStyle()
             style.lineSpacing = 6
@@ -245,9 +246,9 @@ class MeetingCell: BaseCell {
         
         _ = userProfileImageView.anchor(mainImageView.bottomAnchor, left: leftAnchor, bottom: nil, right: nil, topConstant: 8, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: Constants.userProfileImageSize.small, heightConstant: Constants.userProfileImageSize.small)
         
-        _ = giverLabel.anchor(mainImageView.bottomAnchor, left: userProfileImageView.rightAnchor, bottom: nil, right: nil, topConstant: 8, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 140, heightConstant: 48)
-        
         _ = meetingTypeLabel.anchor(mainImageView.bottomAnchor, left: nil, bottom: nil, right: rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 8, widthConstant: 100, heightConstant: 28)
+        
+        _ = giverLabel.anchor(mainImageView.bottomAnchor, left: userProfileImageView.rightAnchor, bottom: nil, right: meetingTypeLabel.leftAnchor, topConstant: 8, leftConstant: 8, bottomConstant: 0, rightConstant: 8, widthConstant: 0, heightConstant: 48)
         
         _ = moreButton.anchor(meetingTypeLabel.bottomAnchor, left: nil, bottom: nil, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 8, widthConstant: 20, heightConstant: 20)
         

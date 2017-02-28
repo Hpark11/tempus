@@ -32,11 +32,11 @@ class SlideCell: BaseCell {
         if let titleText = title, let subTitleText = subTitle {
             let attributedText = NSMutableAttributedString(string: titleText, attributes: [
                 NSFontAttributeName: UIFont.systemFont(ofSize: 32, weight: UIFontWeightMedium),
-                NSForegroundColorAttributeName: UIColor.black
+                NSForegroundColorAttributeName: UIColor.white
             ])
             attributedText.append(NSAttributedString(string: "\n\n\(subTitleText)", attributes: [
                 NSFontAttributeName: UIFont.systemFont(ofSize: 18),
-                NSForegroundColorAttributeName: UIColor.black
+                NSForegroundColorAttributeName: UIColor.white
             ]))
             mainTextView.attributedText = attributedText
         }
@@ -47,13 +47,13 @@ class SlideCell: BaseCell {
      */
     let overlayView: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
-        view.alpha = 0.4
-//        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
-//        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-//        blurEffectView.frame = view.bounds
-//        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//        view.addSubview(blurEffectView)
+        //view.backgroundColor = .black
+        //view.alpha = 0.6
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(blurEffectView)
         return view
     }()
     
@@ -62,8 +62,6 @@ class SlideCell: BaseCell {
         imageView.image = UIImage()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.layer.borderWidth = 2.6
-        imageView.layer.borderColor = UIColor.darkGray.cgColor
         imageView.layer.cornerRadius = 14
         imageView.layer.shadowColor = UIColor.black.cgColor
         imageView.layer.shadowOpacity = 1.0
@@ -77,14 +75,10 @@ class SlideCell: BaseCell {
         let textView = UITextView()
         textView.font = UIFont.boldSystemFont(ofSize: 28)
         textView.textContainerInset = UIEdgeInsetsMake(26, 8, 8, 8)
-        textView.backgroundColor = .white
-        textView.textColor = .black
-        textView.text = "이것은 테스트용 입니다"
+        textView.backgroundColor = .clear
+        textView.textColor = .white
         textView.isUserInteractionEnabled = false
         textView.isScrollEnabled = false
-        textView.layer.borderWidth = 2
-        textView.layer.cornerRadius = 14
-        textView.layer.borderColor = UIColor.lightGray.cgColor
         return textView
     }()
 

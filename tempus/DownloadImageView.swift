@@ -12,6 +12,22 @@ import UIKit
 
 class DownloadImageView : UIImageView {
     
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        addSubview(imageView)
+//        _ = imageView.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+//    }
+//    
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+//    var image: UIImage? {
+//        didSet {
+//            self.imageView.image = image
+//        }
+//    }
+//    let imageView = UIImageView()
+    
     var imageUrlString: String? {
         didSet {
             if let imageUrlString = imageUrlString {
@@ -21,25 +37,27 @@ class DownloadImageView : UIImageView {
     }
     
     func loadImageUsingUrlString(urlString: String) {
-        let url = URL(string: urlString)
+        let url: URL? = URL(string: urlString)
         image = nil
         
-        if let imageFromCache = imageCache.object(forKey: urlString as NSString) {
-            self.image = imageFromCache
-            return
-        }
-        
-        URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
-            guard error == nil else {
-                print(error as Any)
+        if let url = url {
+            if let imageFromCache = imageCache.object(forKey: urlString as NSString) {
+                self.image = imageFromCache
                 return
             }
             
-            DispatchQueue.main.async(execute: {
-                let imageToCache = UIImage(data: data!)
-                self.image = imageToCache
-                imageCache.setObject(imageToCache!, forKey: urlString as NSString)
-            })
-        }).resume()
+            URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+                guard error == nil else {
+                    print(error as Any)
+                    return
+                }
+                
+                DispatchQueue.main.async(execute: {
+                    let imageToCache = UIImage(data: data!)
+                    self.image = imageToCache
+                    imageCache.setObject(imageToCache!, forKey: urlString as NSString)
+                })
+            }).resume()
+        }
     }
 }

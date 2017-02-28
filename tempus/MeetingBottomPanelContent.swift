@@ -9,5 +9,7 @@
 import Foundation
 
 struct MeetingBottomPanelContent {
-    let typeName: String
+    let categoryName: String
+    let category: String
+    let tag: Int
 }

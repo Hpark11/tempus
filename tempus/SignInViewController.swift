@@ -29,6 +29,15 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         static let success = "회원가입을 축하합니다."
     }
     
+    let titleLabel: UILabel = {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 264, height: 80))
+        label.font = UIFont(name: "GothamRounded-Bold", size: 64)
+        label.textAlignment = .center
+        label.text = "tempus"
+        label.textColor = UIColor.white
+        return label
+    }()
+    
     lazy var alert: UIAlertController = {
         let alert = UIAlertController(title: "사용자 등록 경고", message: "With this", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default) { action in })
@@ -201,12 +210,16 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         })
     }
     
-    func firebaseSignInWithEmail(email: String, password: String) {
+    func firebaseSignInWithEmail(email: String, password: String, isFirst: Bool) {
         FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
             if error == nil {
                 print(":::[HPARK] Successfully signed in the app with email :::\n")
                 if let user = user, let email = user.email {
-                    let dataUser = ["provider": user.providerID, "email": email]
+                    var dataUser = ["provider": user.providerID, "email": email]
+                    if isFirst {
+                        dataUser["imageUrl"] = "https://firebasestorage.googleapis.com/v0/b/tempus-cbe18.appspot.com/o/images%2Fplaceholder.jpeg?alt=media&token=08d46599-746b-46da-a43e-73321be7be63"
+                        dataUser["username"] = self.userNameField.text!
+                    }
                     FirebaseDataService.instance.createFirebaseDatabaseUser(uid: user.uid, dataUser: dataUser)
                     KeychainWrapper.standard.set(user.uid, forKey: Constants.keychainUid)
                     self.dismiss(animated: true, completion: nil)
@@ -231,17 +244,13 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                     return
                 }
                 
-                firebaseSignInWithEmail(email: email, password: password)
+                firebaseSignInWithEmail(email: email, password: password, isFirst: false)
             }
         } else { // register button
             // Username Validation
             if let userName = userNameField.text {
                 if Validators.isEmpty()(userName) {
                     presentAlert(controller: alert, message: Alerts.nameRequired)
-                    return
-                }
-                if !Validators.isAlphanumeric()(userName) {
-                    presentAlert(controller: alert, message: Alerts.nameAlphanumeric)
                     return
                 }
                 if !Validators.maxLength(18)(userName) {
@@ -293,7 +302,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                     } else {
                         print(":::[HPARK] Successfully authenticated with email ::: \n")
                         self.presentAlert(controller: self.success, message: Alerts.success)
-                        self.firebaseSignInWithEmail(email: email, password: password)
+                        self.firebaseSignInWithEmail(email: email, password: password, isFirst: true)
                     }
                 })
             }
@@ -346,10 +355,13 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(dividerView3)
         view.addSubview(dividerView4)
         view.addSubview(cancelButton)
+        view.addSubview(titleLabel)
     }
     
     fileprivate func setConstraints() {
         _ = imageView.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: view.frame.height * 6 / 16)
+        
+        _ = titleLabel.anchor(imageView.topAnchor, left: imageView.leftAnchor, bottom: imageView.bottomAnchor, right: imageView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
         _ = loginRegisterSegmentedControl.anchor(imageView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 16, leftConstant: 16, bottomConstant: 0, rightConstant: 16, widthConstant: 0, heightConstant: 32)
         

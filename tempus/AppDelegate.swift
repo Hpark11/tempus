@@ -15,6 +15,8 @@ import FBSDKLoginKit
 
 
 
+var rawMeetingList = [[String: AnyObject]]()
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -37,6 +39,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        FirebaseDataService.instance.downloadAllImagesToCache()
+        
+        
+        //FirebaseDataService.instance.downloadAllRawMeetingList()
         return true
     }
 

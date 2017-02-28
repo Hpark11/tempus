@@ -8,6 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		4D13DF3F1F9689260AE36F83 /* Pods_tempus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E88DB2E7A740E9A2F92813 /* Pods_tempus.framework */; };
+		5804D8991E5CD28C00628469 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8981E5CD28C00628469 /* Group.swift */; };
+		5804D89B1E5D4FC100628469 /* GroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D89A1E5D4FC100628469 /* GroupCell.swift */; };
+		5804D89D1E5DA3B300628469 /* ShareFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D89C1E5DA3B300628469 /* ShareFilesViewController.swift */; };
+		5804D89F1E5E802A00628469 /* DownloadButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D89E1E5E802A00628469 /* DownloadButtonView.swift */; };
+		5804D8A11E5E806400628469 /* LoadingSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8A01E5E806400628469 /* LoadingSpinner.swift */; };
+		5804D8A31E5F20F000628469 /* FileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8A21E5F20F000628469 /* FileInfo.swift */; };
+		5804D8A51E5F259600628469 /* FileInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8A41E5F259600628469 /* FileInfoCell.swift */; };
+		5804D8A71E5F609D00628469 /* ViewExpansion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8A61E5F609D00628469 /* ViewExpansion.swift */; };
+		5804D8AA1E62878900628469 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8A91E62878900628469 /* CommentsViewController.swift */; };
+		5804D8AC1E6289B700628469 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8AB1E6289B700628469 /* CommentCell.swift */; };
+		5804D8B01E63C90100628469 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8AF1E63C90000628469 /* Comment.swift */; };
+		5804D8B41E643E1700628469 /* CommentNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8B31E643E1700628469 /* CommentNewViewController.swift */; };
+		5804D8B71E64F1A300628469 /* PinJump.json in Resources */ = {isa = PBXBuildFile; fileRef = 5804D8B61E64F1A300628469 /* PinJump.json */; };
+		5804D8B91E64F70300628469 /* Goody.json in Resources */ = {isa = PBXBuildFile; fileRef = 5804D8B81E64F70300628469 /* Goody.json */; };
+		5804D8BB1E64FAB600628469 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 5804D8BA1E64FAB600628469 /* data.json */; };
+		5804D8BD1E64FB3400628469 /* Loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 5804D8BC1E64FB3400628469 /* Loading.json */; };
+		5804D8C01E64FC3B00628469 /* lo.json in Resources */ = {isa = PBXBuildFile; fileRef = 5804D8BE1E64FC3B00628469 /* lo.json */; };
+		5804D8C11E64FC3B00628469 /* aa.json in Resources */ = {isa = PBXBuildFile; fileRef = 5804D8BF1E64FC3B00628469 /* aa.json */; };
 		5807755D1E4ECB3A0092ED8F /* SlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5807755C1E4ECB3A0092ED8F /* SlideViewController.swift */; };
 		5807755F1E4ECB6A0092ED8F /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5807755E1E4ECB6A0092ED8F /* DiaryViewController.swift */; };
 		5808951B1E52A47500F8D96B /* UserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5808951A1E52A47500F8D96B /* UserPageViewController.swift */; };
@@ -20,6 +38,25 @@
 		5808952C1E530F8C00F8D96B /* MinimizedMeetingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5808952B1E530F8C00F8D96B /* MinimizedMeetingCell.swift */; };
 		5808952E1E531B8700F8D96B /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5808952D1E531B8700F8D96B /* Cache.swift */; };
 		580895301E5428F900F8D96B /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5808952F1E5428F900F8D96B /* Users.swift */; };
+		580A22BF1E557CD200CF6E83 /* MeetingGiverDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580A22BE1E557CD200CF6E83 /* MeetingGiverDetailCell.swift */; };
+		580A22C11E56D9A400CF6E83 /* FollowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580A22C01E56D9A400CF6E83 /* FollowerCell.swift */; };
+		580A22CF1E56F09200CF6E83 /* GothamRounded-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 580A22C21E56ECF100CF6E83 /* GothamRounded-Bold.otf */; };
+		580A22D01E56F09500CF6E83 /* GothamRounded-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 580A22C31E56ECF100CF6E83 /* GothamRounded-BoldItalic.otf */; };
+		580A22D11E56F09700CF6E83 /* GothamRounded-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 580A22C41E56ECF100CF6E83 /* GothamRounded-Book.otf */; };
+		580A22D21E56F09C00CF6E83 /* GothamRounded-BookItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 580A22C51E56ECF100CF6E83 /* GothamRounded-BookItalic.otf */; };
+		580A22D31E56F09D00CF6E83 /* GothamRoundedMedium_21022.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 580A22CD1E56ECF100CF6E83 /* GothamRoundedMedium_21022.ttf */; };
+		580A22D41E56F09F00CF6E83 /* GothamRoundedLight_21020.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 580A22CC1E56ECF100CF6E83 /* GothamRoundedLight_21020.ttf */; };
+		580A22D51E56F0A100CF6E83 /* GothamRoundedBook_21018.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 580A22CB1E56ECF100CF6E83 /* GothamRoundedBook_21018.ttf */; };
+		580A22D61E56F0A600CF6E83 /* GothamRounded-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 580A22C71E56ECF100CF6E83 /* GothamRounded-LightItalic.otf */; };
+		580A22D71E56F0AC00CF6E83 /* GothamRounded-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 580A22C81E56ECF100CF6E83 /* GothamRounded-Medium.otf */; };
+		580A22D81E56F0AC00CF6E83 /* GothamRounded-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 580A22C91E56ECF100CF6E83 /* GothamRounded-MediumItalic.otf */; };
+		580A22D91E56F0AC00CF6E83 /* GothamRoundedBold_21016.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 580A22CA1E56ECF100CF6E83 /* GothamRoundedBold_21016.ttf */; };
+		580A22DA1E56F0B300CF6E83 /* GothamRounded-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 580A22C61E56ECF100CF6E83 /* GothamRounded-Light.otf */; };
+		580A22DC1E57473B00CF6E83 /* UserProfileModifyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580A22DB1E57473B00CF6E83 /* UserProfileModifyCell.swift */; };
+		580BCBCB1E54DA6F007AFFE3 /* ChattingHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580BCBCA1E54DA6F007AFFE3 /* ChattingHistoryViewController.swift */; };
+		580BCBCD1E54DFDE007AFFE3 /* ChattingWithNewOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580BCBCC1E54DFDE007AFFE3 /* ChattingWithNewOneViewController.swift */; };
+		580BCBCF1E5545D3007AFFE3 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580BCBCE1E5545D3007AFFE3 /* UserCell.swift */; };
+		580BCBD11E555BB8007AFFE3 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580BCBD01E555BB8007AFFE3 /* Message.swift */; };
 		580CB5F71E4E6F85008658CA /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580CB5F61E4E6F85008658CA /* Meeting.swift */; };
 		580FB47C1E52217A0057DA21 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580FB47B1E52217A0057DA21 /* MainTabBarController.swift */; };
 		580FB47E1E5225CD0057DA21 /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580FB47D1E5225CD0057DA21 /* ChattingViewController.swift */; };
@@ -33,6 +70,7 @@
 		581121111E501DC0004D1C85 /* FirebaseDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581121101E501DC0004D1C85 /* FirebaseDataService.swift */; };
 		581121131E501DCF004D1C85 /* RestApiDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581121121E501DCF004D1C85 /* RestApiDataService.swift */; };
 		581121151E50415E004D1C85 /* MeetingAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581121141E50415E004D1C85 /* MeetingAddViewController.swift */; };
+		5817C3391E5C0EAF00E72F77 /* AcceptSubmissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5817C3381E5C0EAF00E72F77 /* AcceptSubmissionViewController.swift */; };
 		583BB5BD1E4D486B000FDA44 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BB5BC1E4D486B000FDA44 /* Constants.swift */; };
 		583BB5BF1E4D4F9C000FDA44 /* MeetingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BB5BE1E4D4F9C000FDA44 /* MeetingCell.swift */; };
 		583BB5C31E4D551A000FDA44 /* DownloadImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BB5C21E4D551A000FDA44 /* DownloadImageView.swift */; };
@@ -42,6 +80,11 @@
 		5841BD661E5049ED001E6186 /* MeetingAddCoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841BD651E5049ED001E6186 /* MeetingAddCoverCell.swift */; };
 		5841BD681E5049FA001E6186 /* MeetingAddDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841BD671E5049FA001E6186 /* MeetingAddDetailCell.swift */; };
 		5841BD6A1E50776E001E6186 /* MeetingAddViewController_ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841BD691E50776E001E6186 /* MeetingAddViewController_ext.swift */; };
+		58CCD4B11E59330E009B29F8 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CCD4B01E59330E009B29F8 /* ChatMessageCell.swift */; };
+		58CCD4B31E5A334E009B29F8 /* CommunityMyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CCD4B21E5A334E009B29F8 /* CommunityMyListViewController.swift */; };
+		58CCD4B51E5A8E8D009B29F8 /* SelfMadeMeetingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CCD4B41E5A8E8D009B29F8 /* SelfMadeMeetingListCell.swift */; };
+		58CCD4B71E5AED08009B29F8 /* CommunityPartnersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CCD4B61E5AED08009B29F8 /* CommunityPartnersListViewController.swift */; };
+		58CCD4B91E5B17C2009B29F8 /* SubmitJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CCD4B81E5B17C2009B29F8 /* SubmitJoinViewController.swift */; };
 		58D2AAD61E4ACB510084CE80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AAD51E4ACB510084CE80 /* AppDelegate.swift */; };
 		58D2AAD81E4ACB510084CE80 /* MeetingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AAD71E4ACB510084CE80 /* MeetingListViewController.swift */; };
 		58D2AADE1E4ACB510084CE80 /* tempus.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AADC1E4ACB510084CE80 /* tempus.xcdatamodeld */; };
@@ -57,6 +100,7 @@
 		58D2AB0D1E4AD48A0084CE80 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AB0C1E4AD48A0084CE80 /* BaseCell.swift */; };
 		58D2AB0F1E4ADC7A0084CE80 /* OnboardingCoverPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2AB0E1E4ADC7A0084CE80 /* OnboardingCoverPageCell.swift */; };
 		58D2E2781E4CB4860084B2C9 /* MeetingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D2E2771E4CB4860084B2C9 /* MeetingListCell.swift */; };
+		58F3CDC01E5C825E00629A81 /* CheckUserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F3CDBF1E5C825E00629A81 /* CheckUserProfileViewController.swift */; };
 		58FCAAD91E4B00EA002F5B0A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58FCAAD81E4B00EA002F5B0A /* GoogleService-Info.plist */; };
 		58FCAADB1E4B0663002F5B0A /* MeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FCAADA1E4B0663002F5B0A /* MeetingViewController.swift */; };
 		58FCAADD1E4B2756002F5B0A /* MeetingViewTopPanelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FCAADC1E4B2756002F5B0A /* MeetingViewTopPanelCell.swift */; };
@@ -84,6 +128,24 @@
 		08E88DB2E7A740E9A2F92813 /* Pods_tempus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tempus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B46B7A0A187E515B862B170 /* Pods-tempus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tempus.release.xcconfig"; path = "Pods/Target Support Files/Pods-tempus/Pods-tempus.release.xcconfig"; sourceTree = "<group>"; };
 		4514D91D6E2255B2CF063585 /* Pods-tempusTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tempusTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-tempusTests/Pods-tempusTests.release.xcconfig"; sourceTree = "<group>"; };
+		5804D8981E5CD28C00628469 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		5804D89A1E5D4FC100628469 /* GroupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
+		5804D89C1E5DA3B300628469 /* ShareFilesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareFilesViewController.swift; sourceTree = "<group>"; };
+		5804D89E1E5E802A00628469 /* DownloadButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadButtonView.swift; sourceTree = "<group>"; };
+		5804D8A01E5E806400628469 /* LoadingSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingSpinner.swift; sourceTree = "<group>"; };
+		5804D8A21E5F20F000628469 /* FileInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileInfo.swift; sourceTree = "<group>"; };
+		5804D8A41E5F259600628469 /* FileInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileInfoCell.swift; sourceTree = "<group>"; };
+		5804D8A61E5F609D00628469 /* ViewExpansion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExpansion.swift; sourceTree = "<group>"; };
+		5804D8A91E62878900628469 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
+		5804D8AB1E6289B700628469 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		5804D8AF1E63C90000628469 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		5804D8B31E643E1700628469 /* CommentNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentNewViewController.swift; sourceTree = "<group>"; };
+		5804D8B61E64F1A300628469 /* PinJump.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PinJump.json; sourceTree = "<group>"; };
+		5804D8B81E64F70300628469 /* Goody.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Goody.json; sourceTree = "<group>"; };
+		5804D8BA1E64FAB600628469 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
+		5804D8BC1E64FB3400628469 /* Loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Loading.json; sourceTree = "<group>"; };
+		5804D8BE1E64FC3B00628469 /* lo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lo.json; sourceTree = "<group>"; };
+		5804D8BF1E64FC3B00628469 /* aa.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = aa.json; sourceTree = "<group>"; };
 		5807755C1E4ECB3A0092ED8F /* SlideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideViewController.swift; sourceTree = "<group>"; };
 		5807755E1E4ECB6A0092ED8F /* DiaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
 		5808951A1E52A47500F8D96B /* UserPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPageViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +159,25 @@
 		5808952B1E530F8C00F8D96B /* MinimizedMeetingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimizedMeetingCell.swift; sourceTree = "<group>"; };
 		5808952D1E531B8700F8D96B /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		5808952F1E5428F900F8D96B /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
+		580A22BE1E557CD200CF6E83 /* MeetingGiverDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingGiverDetailCell.swift; sourceTree = "<group>"; };
+		580A22C01E56D9A400CF6E83 /* FollowerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowerCell.swift; sourceTree = "<group>"; };
+		580A22C21E56ECF100CF6E83 /* GothamRounded-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GothamRounded-Bold.otf"; sourceTree = "<group>"; };
+		580A22C31E56ECF100CF6E83 /* GothamRounded-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GothamRounded-BoldItalic.otf"; sourceTree = "<group>"; };
+		580A22C41E56ECF100CF6E83 /* GothamRounded-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GothamRounded-Book.otf"; sourceTree = "<group>"; };
+		580A22C51E56ECF100CF6E83 /* GothamRounded-BookItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GothamRounded-BookItalic.otf"; sourceTree = "<group>"; };
+		580A22C61E56ECF100CF6E83 /* GothamRounded-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GothamRounded-Light.otf"; sourceTree = "<group>"; };
+		580A22C71E56ECF100CF6E83 /* GothamRounded-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GothamRounded-LightItalic.otf"; sourceTree = "<group>"; };
+		580A22C81E56ECF100CF6E83 /* GothamRounded-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GothamRounded-Medium.otf"; sourceTree = "<group>"; };
+		580A22C91E56ECF100CF6E83 /* GothamRounded-MediumItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GothamRounded-MediumItalic.otf"; sourceTree = "<group>"; };
+		580A22CA1E56ECF100CF6E83 /* GothamRoundedBold_21016.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamRoundedBold_21016.ttf; sourceTree = "<group>"; };
+		580A22CB1E56ECF100CF6E83 /* GothamRoundedBook_21018.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamRoundedBook_21018.ttf; sourceTree = "<group>"; };
+		580A22CC1E56ECF100CF6E83 /* GothamRoundedLight_21020.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamRoundedLight_21020.ttf; sourceTree = "<group>"; };
+		580A22CD1E56ECF100CF6E83 /* GothamRoundedMedium_21022.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamRoundedMedium_21022.ttf; sourceTree = "<group>"; };
+		580A22DB1E57473B00CF6E83 /* UserProfileModifyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileModifyCell.swift; sourceTree = "<group>"; };
+		580BCBCA1E54DA6F007AFFE3 /* ChattingHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingHistoryViewController.swift; sourceTree = "<group>"; };
+		580BCBCC1E54DFDE007AFFE3 /* ChattingWithNewOneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingWithNewOneViewController.swift; sourceTree = "<group>"; };
+		580BCBCE1E5545D3007AFFE3 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		580BCBD01E555BB8007AFFE3 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		580CB5F61E4E6F85008658CA /* Meeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
 		580FB47B1E52217A0057DA21 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		580FB47D1E5225CD0057DA21 /* ChattingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
@@ -110,6 +191,7 @@
 		581121101E501DC0004D1C85 /* FirebaseDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDataService.swift; sourceTree = "<group>"; };
 		581121121E501DCF004D1C85 /* RestApiDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiDataService.swift; sourceTree = "<group>"; };
 		581121141E50415E004D1C85 /* MeetingAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingAddViewController.swift; sourceTree = "<group>"; };
+		5817C3381E5C0EAF00E72F77 /* AcceptSubmissionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AcceptSubmissionViewController.swift; sourceTree = "<group>"; };
 		583BB5BC1E4D486B000FDA44 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		583BB5BE1E4D4F9C000FDA44 /* MeetingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingCell.swift; sourceTree = "<group>"; };
 		583BB5C21E4D551A000FDA44 /* DownloadImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadImageView.swift; sourceTree = "<group>"; };
@@ -119,6 +201,11 @@
 		5841BD651E5049ED001E6186 /* MeetingAddCoverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingAddCoverCell.swift; sourceTree = "<group>"; };
 		5841BD671E5049FA001E6186 /* MeetingAddDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingAddDetailCell.swift; sourceTree = "<group>"; };
 		5841BD691E50776E001E6186 /* MeetingAddViewController_ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingAddViewController_ext.swift; sourceTree = "<group>"; };
+		58CCD4B01E59330E009B29F8 /* ChatMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
+		58CCD4B21E5A334E009B29F8 /* CommunityMyListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityMyListViewController.swift; sourceTree = "<group>"; };
+		58CCD4B41E5A8E8D009B29F8 /* SelfMadeMeetingListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfMadeMeetingListCell.swift; sourceTree = "<group>"; };
+		58CCD4B61E5AED08009B29F8 /* CommunityPartnersListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityPartnersListViewController.swift; sourceTree = "<group>"; };
+		58CCD4B81E5B17C2009B29F8 /* SubmitJoinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmitJoinViewController.swift; sourceTree = "<group>"; };
 		58D2AAD21E4ACB510084CE80 /* tempus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tempus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D2AAD51E4ACB510084CE80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58D2AAD71E4ACB510084CE80 /* MeetingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingListViewController.swift; sourceTree = "<group>"; };
@@ -138,6 +225,7 @@
 		58D2AB0C1E4AD48A0084CE80 /* BaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		58D2AB0E1E4ADC7A0084CE80 /* OnboardingCoverPageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingCoverPageCell.swift; sourceTree = "<group>"; };
 		58D2E2771E4CB4860084B2C9 /* MeetingListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingListCell.swift; sourceTree = "<group>"; };
+		58F3CDBF1E5C825E00629A81 /* CheckUserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckUserProfileViewController.swift; sourceTree = "<group>"; };
 		58FCAAD81E4B00EA002F5B0A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		58FCAADA1E4B0663002F5B0A /* MeetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingViewController.swift; sourceTree = "<group>"; };
 		58FCAADC1E4B2756002F5B0A /* MeetingViewTopPanelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingViewTopPanelCell.swift; sourceTree = "<group>"; };
@@ -182,26 +270,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		5811210F1E501CA1004D1C85 /* Singleton */ = {
+		5804D8AD1E63C26400628469 /* Table */ = {
 			isa = PBXGroup;
 			children = (
-				581121101E501DC0004D1C85 /* FirebaseDataService.swift */,
-				581121121E501DCF004D1C85 /* RestApiDataService.swift */,
+				5804D8AB1E6289B700628469 /* CommentCell.swift */,
+				5804D89A1E5D4FC100628469 /* GroupCell.swift */,
+				5804D8A41E5F259600628469 /* FileInfoCell.swift */,
+				580BCBCE1E5545D3007AFFE3 /* UserCell.swift */,
+				58CCD4B41E5A8E8D009B29F8 /* SelfMadeMeetingListCell.swift */,
+				580A22C01E56D9A400CF6E83 /* FollowerCell.swift */,
 			);
-			name = Singleton;
+			name = Table;
 			sourceTree = "<group>";
 		};
-		583BB5C01E4D54BC000FDA44 /* Custom Views */ = {
-			isa = PBXGroup;
-			children = (
-				583BB5C21E4D551A000FDA44 /* DownloadImageView.swift */,
-				583BB5C41E4D9258000FDA44 /* CategoryBarView.swift */,
-				5808951D1E52C55700F8D96B /* UserProfileBarView.swift */,
-			);
-			name = "Custom Views";
-			sourceTree = "<group>";
-		};
-		583BB5C11E4D54D3000FDA44 /* Custom Cells */ = {
+		5804D8AE1E63C26800628469 /* Collection */ = {
 			isa = PBXGroup;
 			children = (
 				58D2AB0A1E4AD4330084CE80 /* OnboardingPageCell.swift */,
@@ -218,14 +300,80 @@
 				581121091E4F0227004D1C85 /* SlideCell.swift */,
 				5811210B1E4F0274004D1C85 /* SlideCoverCell.swift */,
 				5811210D1E4F0280004D1C85 /* SlideDetailCell.swift */,
+				580A22BE1E557CD200CF6E83 /* MeetingGiverDetailCell.swift */,
 				5841BD631E5049DA001E6186 /* MeetingAddCell.swift */,
 				5841BD651E5049ED001E6186 /* MeetingAddCoverCell.swift */,
 				5841BD671E5049FA001E6186 /* MeetingAddDetailCell.swift */,
-				580895291E52F78A00F8D96B /* MyProfileInfoCell.swift */,
-				580895271E52F74E00F8D96B /* UserFollowingCell.swift */,
 				580895231E52E86200F8D96B /* UserInfoCell.swift */,
 				580895251E52E87400F8D96B /* UserMeetingCell.swift */,
+				580A22DB1E57473B00CF6E83 /* UserProfileModifyCell.swift */,
+				580895291E52F78A00F8D96B /* MyProfileInfoCell.swift */,
+				580895271E52F74E00F8D96B /* UserFollowingCell.swift */,
 				5808952B1E530F8C00F8D96B /* MinimizedMeetingCell.swift */,
+				58CCD4B01E59330E009B29F8 /* ChatMessageCell.swift */,
+			);
+			name = Collection;
+			sourceTree = "<group>";
+		};
+		5804D8B51E64F18E00628469 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				5804D8B61E64F1A300628469 /* PinJump.json */,
+				5804D8B81E64F70300628469 /* Goody.json */,
+				5804D8BA1E64FAB600628469 /* data.json */,
+				5804D8BC1E64FB3400628469 /* Loading.json */,
+				5804D8BE1E64FC3B00628469 /* lo.json */,
+				5804D8BF1E64FC3B00628469 /* aa.json */,
+			);
+			name = Animation;
+			sourceTree = "<group>";
+		};
+		580A22CE1E56ECF400CF6E83 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				580A22C21E56ECF100CF6E83 /* GothamRounded-Bold.otf */,
+				580A22C31E56ECF100CF6E83 /* GothamRounded-BoldItalic.otf */,
+				580A22C41E56ECF100CF6E83 /* GothamRounded-Book.otf */,
+				580A22C51E56ECF100CF6E83 /* GothamRounded-BookItalic.otf */,
+				580A22C61E56ECF100CF6E83 /* GothamRounded-Light.otf */,
+				580A22C71E56ECF100CF6E83 /* GothamRounded-LightItalic.otf */,
+				580A22C81E56ECF100CF6E83 /* GothamRounded-Medium.otf */,
+				580A22C91E56ECF100CF6E83 /* GothamRounded-MediumItalic.otf */,
+				580A22CA1E56ECF100CF6E83 /* GothamRoundedBold_21016.ttf */,
+				580A22CB1E56ECF100CF6E83 /* GothamRoundedBook_21018.ttf */,
+				580A22CC1E56ECF100CF6E83 /* GothamRoundedLight_21020.ttf */,
+				580A22CD1E56ECF100CF6E83 /* GothamRoundedMedium_21022.ttf */,
+			);
+			name = Font;
+			sourceTree = "<group>";
+		};
+		5811210F1E501CA1004D1C85 /* Singleton */ = {
+			isa = PBXGroup;
+			children = (
+				581121101E501DC0004D1C85 /* FirebaseDataService.swift */,
+				581121121E501DCF004D1C85 /* RestApiDataService.swift */,
+			);
+			name = Singleton;
+			sourceTree = "<group>";
+		};
+		583BB5C01E4D54BC000FDA44 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				583BB5C21E4D551A000FDA44 /* DownloadImageView.swift */,
+				583BB5C41E4D9258000FDA44 /* CategoryBarView.swift */,
+				5808951D1E52C55700F8D96B /* UserProfileBarView.swift */,
+				5804D89E1E5E802A00628469 /* DownloadButtonView.swift */,
+				5804D8A01E5E806400628469 /* LoadingSpinner.swift */,
+				5804D8A61E5F609D00628469 /* ViewExpansion.swift */,
+			);
+			name = "Custom Views";
+			sourceTree = "<group>";
+		};
+		583BB5C11E4D54D3000FDA44 /* Custom Cells */ = {
+			isa = PBXGroup;
+			children = (
+				5804D8AE1E63C26800628469 /* Collection */,
+				5804D8AD1E63C26400628469 /* Table */,
 			);
 			name = "Custom Cells";
 			sourceTree = "<group>";
@@ -253,6 +401,7 @@
 		58D2AAD41E4ACB510084CE80 /* tempus */ = {
 			isa = PBXGroup;
 			children = (
+				5804D8B51E64F18E00628469 /* Animation */,
 				5808951C1E52A95A00F8D96B /* tempus.entitlements */,
 				5811210F1E501CA1004D1C85 /* Singleton */,
 				58D2AAFD1E4ACB850084CE80 /* Resource */,
@@ -295,12 +444,22 @@
 				58D2AB021E4ACEAB0084CE80 /* OnboardingViewController.swift */,
 				5807755C1E4ECB3A0092ED8F /* SlideViewController.swift */,
 				5807755E1E4ECB6A0092ED8F /* DiaryViewController.swift */,
-				580FB47D1E5225CD0057DA21 /* ChattingViewController.swift */,
 				580FB47F1E5225E20057DA21 /* CommunityViewController.swift */,
+				58CCD4B21E5A334E009B29F8 /* CommunityMyListViewController.swift */,
+				58CCD4B61E5AED08009B29F8 /* CommunityPartnersListViewController.swift */,
 				580FB4811E5225ED0057DA21 /* SignInRequiredViewController.swift */,
 				580FB4831E52260D0057DA21 /* SettingsViewController.swift */,
 				580FB4851E5232B70057DA21 /* SignInViewController.swift */,
 				5808951A1E52A47500F8D96B /* UserPageViewController.swift */,
+				580FB47D1E5225CD0057DA21 /* ChattingViewController.swift */,
+				580BCBCA1E54DA6F007AFFE3 /* ChattingHistoryViewController.swift */,
+				580BCBCC1E54DFDE007AFFE3 /* ChattingWithNewOneViewController.swift */,
+				58CCD4B81E5B17C2009B29F8 /* SubmitJoinViewController.swift */,
+				5817C3381E5C0EAF00E72F77 /* AcceptSubmissionViewController.swift */,
+				58F3CDBF1E5C825E00629A81 /* CheckUserProfileViewController.swift */,
+				5804D89C1E5DA3B300628469 /* ShareFilesViewController.swift */,
+				5804D8A91E62878900628469 /* CommentsViewController.swift */,
+				5804D8B31E643E1700628469 /* CommentNewViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -315,6 +474,10 @@
 				58FCAAEC1E4C44A7002F5B0A /* MeetingBottomPanelContent.swift */,
 				580CB5F61E4E6F85008658CA /* Meeting.swift */,
 				5808952F1E5428F900F8D96B /* Users.swift */,
+				580BCBD01E555BB8007AFFE3 /* Message.swift */,
+				5804D8981E5CD28C00628469 /* Group.swift */,
+				5804D8A21E5F20F000628469 /* FileInfo.swift */,
+				5804D8AF1E63C90000628469 /* Comment.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -341,6 +504,7 @@
 		58D2AAFD1E4ACB850084CE80 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				580A22CE1E56ECF400CF6E83 /* Font */,
 				58D2AADF1E4ACB510084CE80 /* Assets.xcassets */,
 				58D2AAE11E4ACB510084CE80 /* LaunchScreen.storyboard */,
 				58D2AAE41E4ACB510084CE80 /* Info.plist */,
@@ -488,9 +652,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				580A22D91E56F0AC00CF6E83 /* GothamRoundedBold_21016.ttf in Resources */,
+				580A22D11E56F09700CF6E83 /* GothamRounded-Book.otf in Resources */,
+				580A22D31E56F09D00CF6E83 /* GothamRoundedMedium_21022.ttf in Resources */,
+				5804D8C11E64FC3B00628469 /* aa.json in Resources */,
+				580A22D61E56F0A600CF6E83 /* GothamRounded-LightItalic.otf in Resources */,
+				580A22D51E56F0A100CF6E83 /* GothamRoundedBook_21018.ttf in Resources */,
+				580A22CF1E56F09200CF6E83 /* GothamRounded-Bold.otf in Resources */,
+				580A22DA1E56F0B300CF6E83 /* GothamRounded-Light.otf in Resources */,
+				5804D8BB1E64FAB600628469 /* data.json in Resources */,
+				5804D8B71E64F1A300628469 /* PinJump.json in Resources */,
 				58D2AAE31E4ACB510084CE80 /* LaunchScreen.storyboard in Resources */,
+				5804D8C01E64FC3B00628469 /* lo.json in Resources */,
+				580A22D71E56F0AC00CF6E83 /* GothamRounded-Medium.otf in Resources */,
+				5804D8BD1E64FB3400628469 /* Loading.json in Resources */,
+				5804D8B91E64F70300628469 /* Goody.json in Resources */,
+				580A22D81E56F0AC00CF6E83 /* GothamRounded-MediumItalic.otf in Resources */,
 				58FCAAD91E4B00EA002F5B0A /* GoogleService-Info.plist in Resources */,
+				580A22D41E56F09F00CF6E83 /* GothamRoundedLight_21020.ttf in Resources */,
 				58D2AAE01E4ACB510084CE80 /* Assets.xcassets in Resources */,
+				580A22D01E56F09500CF6E83 /* GothamRounded-BoldItalic.otf in Resources */,
+				580A22D21E56F09C00CF6E83 /* GothamRounded-BookItalic.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,59 +784,85 @@
 			buildActionMask = 2147483647;
 			files = (
 				583BB5C51E4D9258000FDA44 /* CategoryBarView.swift in Sources */,
+				5804D8A51E5F259600628469 /* FileInfoCell.swift in Sources */,
 				58FCAAEB1E4C4414002F5B0A /* MeetingTopPanelContent.swift in Sources */,
 				580FB47C1E52217A0057DA21 /* MainTabBarController.swift in Sources */,
 				583BB5BD1E4D486B000FDA44 /* Constants.swift in Sources */,
+				58CCD4B31E5A334E009B29F8 /* CommunityMyListViewController.swift in Sources */,
 				58FCAADF1E4B276E002F5B0A /* MeetingViewBottomPanelCell.swift in Sources */,
+				5804D89D1E5DA3B300628469 /* ShareFilesViewController.swift in Sources */,
 				58D2AAD81E4ACB510084CE80 /* MeetingListViewController.swift in Sources */,
 				5808951B1E52A47500F8D96B /* UserPageViewController.swift in Sources */,
 				58FCAAED1E4C44A7002F5B0A /* MeetingBottomPanelContent.swift in Sources */,
+				580A22BF1E557CD200CF6E83 /* MeetingGiverDetailCell.swift in Sources */,
 				583BB5C71E4D9A73000FDA44 /* CategoryViewCell.swift in Sources */,
 				5811210C1E4F0274004D1C85 /* SlideCoverCell.swift in Sources */,
+				5804D8AA1E62878900628469 /* CommentsViewController.swift in Sources */,
 				5808952E1E531B8700F8D96B /* Cache.swift in Sources */,
 				580895281E52F74E00F8D96B /* UserFollowingCell.swift in Sources */,
 				581121111E501DC0004D1C85 /* FirebaseDataService.swift in Sources */,
 				5841BD641E5049DA001E6186 /* MeetingAddCell.swift in Sources */,
 				5811210A1E4F0227004D1C85 /* SlideCell.swift in Sources */,
 				58D2AB0F1E4ADC7A0084CE80 /* OnboardingCoverPageCell.swift in Sources */,
+				580BCBCF1E5545D3007AFFE3 /* UserCell.swift in Sources */,
+				58F3CDC01E5C825E00629A81 /* CheckUserProfileViewController.swift in Sources */,
 				58FCAAE71E4C382E002F5B0A /* CategoryMeetingViewCell.swift in Sources */,
 				5808952C1E530F8C00F8D96B /* MinimizedMeetingCell.swift in Sources */,
 				580895241E52E86200F8D96B /* UserInfoCell.swift in Sources */,
 				58D2E2781E4CB4860084B2C9 /* MeetingListCell.swift in Sources */,
 				5841BD6A1E50776E001E6186 /* MeetingAddViewController_ext.swift in Sources */,
 				580CB5F71E4E6F85008658CA /* Meeting.swift in Sources */,
+				580A22C11E56D9A400CF6E83 /* FollowerCell.swift in Sources */,
 				581121131E501DCF004D1C85 /* RestApiDataService.swift in Sources */,
+				580BCBCD1E54DFDE007AFFE3 /* ChattingWithNewOneViewController.swift in Sources */,
 				583BB5C31E4D551A000FDA44 /* DownloadImageView.swift in Sources */,
 				5841BD661E5049ED001E6186 /* MeetingAddCoverCell.swift in Sources */,
 				580FB4801E5225E20057DA21 /* CommunityViewController.swift in Sources */,
 				5807755D1E4ECB3A0092ED8F /* SlideViewController.swift in Sources */,
+				5804D89B1E5D4FC100628469 /* GroupCell.swift in Sources */,
 				5808952A1E52F78A00F8D96B /* MyProfileInfoCell.swift in Sources */,
 				58FCAADD1E4B2756002F5B0A /* MeetingViewTopPanelCell.swift in Sources */,
+				58CCD4B11E59330E009B29F8 /* ChatMessageCell.swift in Sources */,
 				580FB4861E5232B70057DA21 /* SignInViewController.swift in Sources */,
 				58FCAAE91E4C3A0D002F5B0A /* MeetingCategoryContent.swift in Sources */,
 				58FCAAE31E4C2ADC002F5B0A /* RecommendedMeetingViewCell.swift in Sources */,
 				580895301E5428F900F8D96B /* Users.swift in Sources */,
+				58CCD4B71E5AED08009B29F8 /* CommunityPartnersListViewController.swift in Sources */,
 				58D2AADE1E4ACB510084CE80 /* tempus.xcdatamodeld in Sources */,
 				58FCAAE11E4C2436002F5B0A /* MeetingViewController_ext.swift in Sources */,
 				5811210E1E4F0280004D1C85 /* SlideDetailCell.swift in Sources */,
 				5807755F1E4ECB6A0092ED8F /* DiaryViewController.swift in Sources */,
+				580BCBD11E555BB8007AFFE3 /* Message.swift in Sources */,
 				580895201E52C70E00F8D96B /* UserProfileViewCell.swift in Sources */,
 				58D2AB0B1E4AD4330084CE80 /* OnboardingPageCell.swift in Sources */,
+				5804D8A11E5E806400628469 /* LoadingSpinner.swift in Sources */,
 				58D2AB031E4ACEAB0084CE80 /* OnboardingViewController.swift in Sources */,
+				5804D8A71E5F609D00628469 /* ViewExpansion.swift in Sources */,
+				58CCD4B51E5A8E8D009B29F8 /* SelfMadeMeetingListCell.swift in Sources */,
 				58D2AB051E4ACEFB0084CE80 /* OnboardingViewController_ext.swift in Sources */,
 				58FCAADB1E4B0663002F5B0A /* MeetingViewController.swift in Sources */,
 				58D2AB091E4AD0D80084CE80 /* UIView_ext.swift in Sources */,
+				58CCD4B91E5B17C2009B29F8 /* SubmitJoinViewController.swift in Sources */,
 				580FB47E1E5225CD0057DA21 /* ChattingViewController.swift in Sources */,
+				5817C3391E5C0EAF00E72F77 /* AcceptSubmissionViewController.swift in Sources */,
+				5804D8B41E643E1700628469 /* CommentNewViewController.swift in Sources */,
 				580FB4841E52260D0057DA21 /* SettingsViewController.swift in Sources */,
 				58D2AB011E4ACE390084CE80 /* MainNavigationController.swift in Sources */,
 				5841BD681E5049FA001E6186 /* MeetingAddDetailCell.swift in Sources */,
+				5804D8AC1E6289B700628469 /* CommentCell.swift in Sources */,
 				58D2AB071E4AD07D0084CE80 /* OnboardingPage.swift in Sources */,
 				58D2AB0D1E4AD48A0084CE80 /* BaseCell.swift in Sources */,
+				580BCBCB1E54DA6F007AFFE3 /* ChattingHistoryViewController.swift in Sources */,
 				58D2AAD61E4ACB510084CE80 /* AppDelegate.swift in Sources */,
+				5804D8991E5CD28C00628469 /* Group.swift in Sources */,
 				581121151E50415E004D1C85 /* MeetingAddViewController.swift in Sources */,
+				5804D89F1E5E802A00628469 /* DownloadButtonView.swift in Sources */,
+				5804D8A31E5F20F000628469 /* FileInfo.swift in Sources */,
 				580895261E52E87400F8D96B /* UserMeetingCell.swift in Sources */,
+				5804D8B01E63C90100628469 /* Comment.swift in Sources */,
 				5808951E1E52C55700F8D96B /* UserProfileBarView.swift in Sources */,
 				583BB5BF1E4D4F9C000FDA44 /* MeetingCell.swift in Sources */,
+				580A22DC1E57473B00CF6E83 /* UserProfileModifyCell.swift in Sources */,
 				580FB4821E5225ED0057DA21 /* SignInRequiredViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

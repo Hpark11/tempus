@@ -15,35 +15,31 @@ class MainTabBarController: UITabBarController {
 
         let layout = UICollectionViewFlowLayout()
         
-        let meetingViewController = MeetingViewController(collectionViewLayout: layout)
+        let meetingViewController = MeetingListViewController(collectionViewLayout: layout)
         //let navigationController = MainNavigationController()
         let navigationController = UINavigationController(rootViewController: meetingViewController)
-        navigationController.title = "만남"
+        navigationController.title = "커뮤니티"
         navigationController.tabBarItem.image = UIImage(named: "icon meet")
         navigationController.tabBarController?.tabBar.tintColor = .black
         
         let communityViewController = CommunityViewController()
         let secondNavigationController = UINavigationController(rootViewController: communityViewController)
-        secondNavigationController.title = "모임"
+        secondNavigationController.title = "호스팅"
         secondNavigationController.tabBarItem.image = UIImage(named: "icon community")
         
-        let signInRequiredViewController = SignInRequiredViewController()
-        let thirdNavigationController = UINavigationController(rootViewController: signInRequiredViewController)
-        thirdNavigationController.title = "마이페이지"
-        thirdNavigationController.tabBarItem.image = UIImage(named: "icon myPage")
+        let signInRequiredViewControllerForChatting = SignInRequiredViewController()
+        signInRequiredViewControllerForChatting.controllerId = Constants.ControllerId.chatting
+        let thirdNavigationController = UINavigationController(rootViewController: signInRequiredViewControllerForChatting)
+        thirdNavigationController.title = "그룹채팅"
+        thirdNavigationController.tabBarItem.image = UIImage(named: "icon chat")
         
-        let chattingViewController = ChattingViewController()
-        let fourthNavigationController = UINavigationController(rootViewController: chattingViewController)
-        fourthNavigationController.title = "채팅하기"
-        fourthNavigationController.tabBarItem.image = UIImage(named: "icon chat")
+        let signInRequiredViewControllerForMyPage = SignInRequiredViewController()
+        signInRequiredViewControllerForMyPage.controllerId = Constants.ControllerId.userPage
+        let fourthNavigationController = UINavigationController(rootViewController: signInRequiredViewControllerForMyPage)
+        fourthNavigationController.title = "마이페이지"
+        fourthNavigationController.tabBarItem.image = UIImage(named: "icon myPage")
         
-        let settingsViewController = SettingsViewController()
-        let fifthNavigationController = UINavigationController(rootViewController: settingsViewController)
-        fifthNavigationController.title = "설정"
-        fifthNavigationController.tabBarItem.image = UIImage(named: "icon setting")
-        
-        
-        viewControllers = [navigationController, secondNavigationController, thirdNavigationController, fourthNavigationController, fifthNavigationController]
+        viewControllers = [navigationController, secondNavigationController, thirdNavigationController, fourthNavigationController]
         // Do any additional setup after loading the view.
     }
 

@@ -10,7 +10,7 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 
-class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate {
+class MeetingAddDetailCell: BaseCell, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, GMSMapViewDelegate, GMSAutocompleteViewControllerDelegate {
 
     var attachedViewController: MeetingAddViewController?
     
@@ -39,6 +39,7 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
         view.delegate = self
         view.isMyLocationEnabled = true
         view.settings.myLocationButton = true
+        view.layer.cornerRadius = 8
         return view
     }()
     
@@ -47,58 +48,31 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textColor = .black
         label.textAlignment = .left
-        label.text = "프로필"
+        label.text = "세부사항 슬라이드"
         return label
-    }()
-    
-    lazy var detailImageView: DownloadImageView = {
-        let imageView = DownloadImageView()
-        imageView.image = UIImage()
-        imageView.contentMode = .scaleToFill
-        imageView.layer.borderWidth = 1
-        imageView.layer.borderColor = UIColor.darkGray.cgColor
-        imageView.layer.cornerRadius = 8
-        imageView.layer.masksToBounds = true
-        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(detailImageTapped)))
-        imageView.isUserInteractionEnabled = true
-        return imageView
-    }()
-    
-    let priceLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = .black
-        label.text = "가격 (원)"
-        return label
-    }()
-    
-    lazy var priceField: UITextField = {
-        let textField = UITextField()
-        textField.font = UIFont.systemFont(ofSize: 14)
-        textField.backgroundColor = UIColor.makeViaRgb(red: 216, green: 216, blue: 216)
-        textField.delegate = self
-        return textField
     }()
     
     let preferredPersonLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .black
         label.text = "선호하는 대상"
         return label
     }()
     
-    lazy var preferredPersonField: UITextField = {
-        let textField = UITextField()
-        textField.font = UIFont.systemFont(ofSize: 14)
-        textField.backgroundColor = UIColor.makeViaRgb(red: 216, green: 216, blue: 216)
-        textField.delegate = self
-        return textField
+    lazy var preferredPersonTextView: UITextView = {
+        let textView = UITextView()
+        textView.font = UIFont.systemFont(ofSize: 14)
+        textView.textColor = .black
+        textView.backgroundColor = UIColor.makeViaRgb(red: 234, green: 234, blue: 234)
+        textView.layer.cornerRadius = 8
+        textView.delegate = self
+        return textView
     }()
     
     let personalRecordLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .black
         label.text = "개인 이력"
         return label
@@ -108,7 +82,8 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
         let textView = UITextView()
         textView.font = UIFont.systemFont(ofSize: 14)
         textView.textColor = .black
-        textView.backgroundColor = UIColor.makeViaRgb(red: 216, green: 216, blue: 216)
+        textView.layer.cornerRadius = 8
+        textView.backgroundColor = UIColor.makeViaRgb(red: 234, green: 234, blue: 234)
         textView.delegate = self
         return textView
     }()
@@ -117,14 +92,14 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .darkGray
-        label.text = "선호대상: 0 / 20, 개인이력: 0 / 120"
+        label.text = "선호대상: 0 / 200, 개인이력: 0 / 280"
         label.textAlignment = .right
         return label
     }()
     
     let preferredLocationLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .black
         label.text = "선호하는 위치"
         return label
@@ -134,18 +109,14 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
         let button = UIButton()
         button.tintColor = .white
         button.backgroundColor = .cyan
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.setTitleColor(.white, for: .normal)
         button.setTitle("위치 검색", for: .normal)
+        button.layer.cornerRadius = 8
         button.addTarget(self, action: #selector(locationSearchButtonTapped), for: .touchUpInside)
         button.isUserInteractionEnabled = true
         return button
     }()
-    
-    func detailImageTapped() {
-        if let attachedViewController = self.attachedViewController {
-            attachedViewController.presentImagePickerController(.savedPhotosAlbum, imgTag: 1)
-        }
-    }
 
     func presentAlert(message:String) {
         if let attachedViewController = self.attachedViewController, let alertController = self.alertController {
@@ -185,6 +156,7 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
         googlemapView.camera = camera
             
         let marker = GMSMarker()
+        
         marker.position = CLLocationCoordinate2DMake(37.6183087, 126.9390451)
         marker.title = "Seoul"
         marker.snippet = "Republic of Korea"
@@ -199,11 +171,8 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
     fileprivate func addSubviews() {
         addSubview(panelView)
         addSubview(panelLabel)
-        addSubview(detailImageView)
-        addSubview(priceLabel)
-        addSubview(priceField)
         addSubview(preferredPersonLabel)
-        addSubview(preferredPersonField)
+        addSubview(preferredPersonTextView)
         addSubview(personalRecordLabel)
         addSubview(personalRecordTextView)
         addSubview(preferredLocationLabel)
@@ -213,80 +182,34 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
     }
     
     fileprivate func setConstraints() {
-        _ = panelView.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 8, leftConstant: 8, bottomConstant: 8, rightConstant: 8, widthConstant: 0, heightConstant: 0)
+        _ = panelView.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 16, leftConstant: 16, bottomConstant: 16, rightConstant: 16, widthConstant: 0, heightConstant: 0)
         
-        _ = panelLabel.anchor(topAnchor, left: leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 36)
+        _ = panelLabel.anchor(topAnchor, left: leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 2, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 40)
         
-        _ = detailImageView.anchor(panelLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: nil, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: frame.width / 4, heightConstant: frame.width / 4)
+        _ = preferredLocationLabel.anchor(panelLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 20)
         
-        _ = priceLabel.anchor(panelLabel.bottomAnchor, left: detailImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 16)
+        _ = locationSearchButton.anchor(preferredLocationLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 4, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 34)
         
-        _ = priceField.anchor(priceLabel.bottomAnchor, left: detailImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 2, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 28)
+        _ = googlemapView.anchor(locationSearchButton.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 4, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: frame.height / 3)
         
-        _ = preferredPersonLabel.anchor(priceField.bottomAnchor, left: detailImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 6, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 16)
+        _ = textLengthLabel.anchor(googlemapView.bottomAnchor, left: nil, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 240, heightConstant: 20)
         
-        _ = preferredPersonField.anchor(preferredPersonLabel.bottomAnchor, left: detailImageView.rightAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 2, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 28)
+        _ = preferredPersonLabel.anchor(googlemapView.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 20)
         
-        _ = personalRecordLabel.anchor(detailImageView.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 6, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 16)
+        _ = preferredPersonTextView.anchor(preferredPersonLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 4, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 60)
         
-        _ = personalRecordTextView.anchor(personalRecordLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 2, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 50)
+        _ = personalRecordLabel.anchor(preferredPersonTextView.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 20)
         
-        _ = preferredLocationLabel.anchor(personalRecordTextView.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 6, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 16)
-        
-        _ = locationSearchButton.anchor(preferredLocationLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 2, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 36)
-        
-        _ = textLengthLabel.anchor(panelView.topAnchor, left: nil, bottom: nil, right: panelView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 220, heightConstant: 20)
-        
-        _ = googlemapView.anchor(locationSearchButton.bottomAnchor, left: panelView.leftAnchor, bottom: panelView.bottomAnchor, right: panelView.rightAnchor, topConstant: 6, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
-        if let attachedViewController = self.attachedViewController {
-            if textField == self.priceField {
-                if let text = textField.text {
-                    attachedViewController.submitData.price = text
-                }
-            } else if textField == self.preferredPersonField {
-                if let text = textField.text {
-                    attachedViewController.submitData.preferred = text
-                }
-            }
-        }
-    }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        var newText: NSString = textField.text! as NSString
-        newText = newText.replacingCharacters(in: range, with: string) as NSString
-        
-        if textField == self.priceField {
-            guard Int(newText as String) != nil else {
-                presentAlert(message: "숫자만 가능합니다.")
-                return true
-            }
-            if newText.length > 14 {
-                self.priceField.text = newText.substring(to: 13)
-            }
-        } else if textField == self.preferredPersonField {
-            if newText.length > 20 {
-                self.textLengthLabel.textColor = UIColor.red
-                self.preferredPersonField.text = newText.substring(to: 19)
-            } else {
-                self.textLengthLabel.textColor = UIColor.darkGray
-            }
-            preferredPersonCharNumber = newText.length
-            self.textLengthLabel.text = "선호대상: \(preferredPersonCharNumber) / 20, 개인이력: \(personalRecordCharNumber) / 120"
-        }
-        return true
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+        _ = personalRecordTextView.anchor(personalRecordLabel.bottomAnchor, left: panelView.leftAnchor, bottom: panelView.bottomAnchor, right: panelView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 2, rightConstant: 0, widthConstant: 0, heightConstant: 0)
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if let attachedViewController = self.attachedViewController {
-            attachedViewController.submitData.profile = textView.text
+            if textView == personalRecordTextView {
+                attachedViewController.submitData.profile = personalRecordTextView.text
+            } else if textView == preferredPersonTextView {
+                attachedViewController.submitData.preferred = preferredPersonTextView.text
+            }
         }
     }
     
@@ -294,15 +217,24 @@ class MeetingAddDetailCell: BaseCell, UITextFieldDelegate, UITextViewDelegate, U
         var newText: NSString = textView.text! as NSString
         newText = newText.replacingCharacters(in: range, with: text) as NSString
         
-        if newText.length > 120 {
-            self.textLengthLabel.textColor = UIColor.red
-            self.personalRecordTextView.text = newText.substring(to: 119)
-        } else {
-            self.textLengthLabel.textColor = UIColor.darkGray
+        if textView == self.preferredPersonTextView {
+            if newText.length > 200 {
+                self.textLengthLabel.textColor = UIColor.red
+                self.preferredPersonTextView.text = newText.substring(to: 199)
+            } else {
+                self.textLengthLabel.textColor = UIColor.darkGray
+            }
+            preferredPersonCharNumber = newText.length
+        } else if textView == self.personalRecordTextView {
+            if newText.length > 280 {
+                self.textLengthLabel.textColor = UIColor.red
+                self.personalRecordTextView.text = newText.substring(to: 279)
+            } else {
+                self.textLengthLabel.textColor = UIColor.darkGray
+            }
+            personalRecordCharNumber = newText.length
         }
-        
-        personalRecordCharNumber = newText.length
-        self.textLengthLabel.text = "선호대상: \(preferredPersonCharNumber) / 20, 개인이력: \(personalRecordCharNumber) / 120"
+        self.textLengthLabel.text = "선호대상: \(preferredPersonCharNumber) / 200, 개인이력: \(personalRecordCharNumber) / 280"
         return true
     }
     

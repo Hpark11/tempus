@@ -10,8 +10,35 @@ import UIKit
 
 class UserMeetingCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-    var didLaunchMeeting: [MinimizedMeeting]?
-    var didTakeMeeting: [MinimizedMeeting]?
+    var attachedViewController: UserPageViewController?
+    var attachedCell: MyProfileInfoCell?
+    
+    var didLaunchMeeting = [MinimizedMeeting]()
+    var didTakeMeeting = [MinimizedMeeting]()
+    var userInfo: Users? {
+        didSet {
+            if let user = self.userInfo {
+                didLaunchMeeting.removeAll()
+                didTakeMeeting.removeAll()
+                for openedMeetingId in user.openedMeetings {
+                    FirebaseDataService.instance.meetingRef.child(openedMeetingId).observeSingleEvent(of: .value, with: { (snapshot) in
+                        if let data = snapshot.value as? Dictionary<String, AnyObject> {
+                            self.didLaunchMeeting.append(MinimizedMeeting(id: snapshot.key, data: data))
+                        }
+                        self.didLaunchMeetingCollectionView.reloadData()
+                    })
+                }
+                for appliedMeetingId in user.appliedMeetings {
+                    FirebaseDataService.instance.meetingRef.child(appliedMeetingId).observeSingleEvent(of: .value, with: { (snapshot) in
+                        if let data = snapshot.value as? Dictionary<String, AnyObject> {
+                            self.didTakeMeeting.append(MinimizedMeeting(id: snapshot.key, data: data))
+                        }
+                        self.didTakeMeetingCollectionView.reloadData()
+                    })
+                }
+            }
+        }
+    }
     
     struct UserMeetingData {
         static let didLaunchCellId = "didLaunchCellId"
@@ -26,6 +53,7 @@ class UserMeetingCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
     lazy var didLaunchMeetingCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
+
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
         collectionView.delegate = self
@@ -36,6 +64,7 @@ class UserMeetingCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
     lazy var didTakeMeetingCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
+
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
         collectionView.delegate = self
@@ -62,7 +91,7 @@ class UserMeetingCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
     }()
     
     lazy var changeProfileButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.tintColor = .white
         button.backgroundColor = UIColor.makeViaRgb(red: 34, green: 73, blue: 143)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
@@ -76,7 +105,12 @@ class UserMeetingCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
     }()
     
     func changeProfileButtonTapped() {
-        
+        if let attachedCell = self.attachedCell {
+            UIView.animate(withDuration: 0.8, animations: { 
+                attachedCell.isModifyMode = true
+                attachedCell.meetingCollectionView.reloadData()
+            })
+        }
     }
     
     override func setupViews() {
@@ -102,13 +136,13 @@ class UserMeetingCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
         
         _ = didLaunchLabel.anchor(topAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 36)
         
-        _ = didLaunchMeetingCollectionView.anchor(didLaunchLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 60)
+        _ = didLaunchMeetingCollectionView.anchor(didLaunchLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 160)
         
-        _ = didTakeLabel.anchor(didLaunchMeetingCollectionView.topAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 36)
+        _ = didTakeLabel.anchor(didLaunchMeetingCollectionView.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 36)
         
-        _ = didTakeMeetingCollectionView.anchor(didLaunchLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 60)
+        _ = didTakeMeetingCollectionView.anchor(didTakeLabel.bottomAnchor, left: panelView.leftAnchor, bottom: nil, right: panelView.rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 160)
         
-        _ = changeProfileButton.anchor(nil, left: panelView.leftAnchor, bottom: panelView.bottomAnchor, right: panelView.rightAnchor, topConstant: 0, leftConstant: 16, bottomConstant: 42, rightConstant: 16, widthConstant: 0, heightConstant: 48)
+        _ = changeProfileButton.anchor(nil, left: panelView.leftAnchor, bottom: panelView.bottomAnchor, right: panelView.rightAnchor, topConstant: 0, leftConstant: 16, bottomConstant: 32, rightConstant: 16, widthConstant: 0, heightConstant: 48)
     }
     
     fileprivate func registerCells() {
@@ -118,36 +152,44 @@ class UserMeetingCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == didLaunchMeetingCollectionView {
-            if let meetings = didLaunchMeeting {
-                return meetings.count
-            }
+            return didLaunchMeeting.count
         } else if collectionView == didTakeMeetingCollectionView {
-            if let meetings = didTakeMeeting {
-                return meetings.count
-            }
+            return didTakeMeeting.count
         }
         return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let attachedViewController = self.attachedViewController {
+            let layout = UICollectionViewFlowLayout()
+            layout.scrollDirection = .horizontal
+            let slideViewController = SlideViewController(collectionViewLayout: layout)
+            if collectionView == didLaunchMeetingCollectionView {
+                slideViewController.meetingId = self.didLaunchMeeting[indexPath.item].id
+                slideViewController.meetingMainImageUrl = self.didLaunchMeeting[indexPath.item].imageUrl
+                
+            } else {
+                slideViewController.meetingId = self.didTakeMeeting[indexPath.item].id
+                slideViewController.meetingMainImageUrl = self.didTakeMeeting[indexPath.item].imageUrl
+            }
+            attachedViewController.present(slideViewController, animated: false, completion: nil)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == didLaunchMeetingCollectionView {
-            if let meetings = didLaunchMeeting {
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UserMeetingData.didLaunchCellId, for: indexPath) as! MinimizedMeetingCell
-                cell.meeting = meetings[indexPath.item]
-                return cell
-            }
-        } else if collectionView == didTakeMeetingCollectionView {
-            if let meetings = didTakeMeeting {
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UserMeetingData.didLaunchCellId, for: indexPath) as! MinimizedMeetingCell
-                cell.meeting = meetings[indexPath.item]
-                return cell
-            }
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UserMeetingData.didLaunchCellId, for: indexPath) as! MinimizedMeetingCell
+            cell.meeting = didLaunchMeeting[indexPath.item]
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UserMeetingData.didTakeCellId, for: indexPath) as! MinimizedMeetingCell
+            cell.meeting = didTakeMeeting[indexPath.item]
+            return cell
         }
-        return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 16
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

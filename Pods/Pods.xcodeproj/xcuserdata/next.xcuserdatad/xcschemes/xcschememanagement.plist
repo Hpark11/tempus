@@ -24,6 +24,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>FileBrowser.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>GTMSessionFetcher.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -54,15 +59,20 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>iCarousel.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>lottie-ios.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2CE7BF76A3361BAB9FF48789EFB893E3</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>32F9B71258DF57F3D7A5055440792AC4</key>
+		<key>325A8060E7104A9154587DAF3D51FF9A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,17 +82,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>69E95AB7F8F8F8F7804502095A956EB2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>6D5CEDECD3D8DC52EA507E0431BDA8A0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>86B72F58803A50C223591A30E81E751C</key>
+		<key>7DD5D347AE86A299B5463E1B6CCA27C5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>A825DF01C8CBC45851D54672DFF310F3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B3F6D4577C09B466D7700E457F01A2CF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B8D8C363B343A0778AE6633D70E11749</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -102,12 +127,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CADFBFC2B01927680334E8AC469837E3</key>
+		<key>E396A93E4C79B22B7816E9F02F62ECED</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E396A93E4C79B22B7816E9F02F62ECED</key>
+		<key>EEFF09BC47ACB5E3813911EE179FDCD0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
