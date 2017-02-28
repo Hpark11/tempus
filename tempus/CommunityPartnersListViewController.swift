@@ -201,6 +201,11 @@ class CommunityPartnersListViewController: UIViewController, UITextFieldDelegate
         })
     }
     
+    override func loadView() {
+        super.loadView()
+        print("park")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

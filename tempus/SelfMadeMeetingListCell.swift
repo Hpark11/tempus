@@ -89,9 +89,9 @@ class SelfMadeMeetingListCell: UITableViewCell {
         
         backgroundColor = .white
         
-        textLabel?.frame = CGRect(x: 16, y: textLabel!.frame.origin.y - 2, width: textLabel!.frame.width, height: textLabel!.frame.height)
+        textLabel?.frame = CGRect(x: SelfMadeMeetingListData.profileImageSize + 16, y: textLabel!.frame.origin.y - 2, width: textLabel!.frame.width, height: textLabel!.frame.height)
         textLabel?.textColor = .black
-        detailTextLabel?.frame = CGRect(x: 16, y: detailTextLabel!.frame.origin.y + 2, width: detailTextLabel!.frame.width, height: detailTextLabel!.frame.height)
+        detailTextLabel?.frame = CGRect(x: SelfMadeMeetingListData.profileImageSize + 16, y: detailTextLabel!.frame.origin.y + 2, width: detailTextLabel!.frame.width, height: detailTextLabel!.frame.height)
         detailTextLabel?.textColor = .lightGray
         
 //        gradientLayer.frame = self.overlayView.bounds
@@ -126,12 +126,12 @@ class SelfMadeMeetingListCell: UITableViewCell {
     
     
     fileprivate func setConstriants() {
-        _ = profileImageView.anchor(topAnchor, left: nil, bottom: bottomAnchor, right: rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 8, rightConstant: 8, widthConstant: SelfMadeMeetingListData.profileImageSize, heightConstant: 0)
+        _ = profileImageView.anchor(topAnchor, left: leftAnchor, bottom: bottomAnchor, right: nil, topConstant: 8, leftConstant: 8, bottomConstant: 8, rightConstant: 8, widthConstant: SelfMadeMeetingListData.profileImageSize, heightConstant: 0)
         profileImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         
         //_ = overlayView.anchor(profileImageView.topAnchor, left: profileImageView.leftAnchor, bottom: profileImageView.bottomAnchor, right: profileImageView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
-        _ = currentStatusLabel.anchor(topAnchor, left: nil, bottom: nil, right: profileImageView.leftAnchor, topConstant: 2, leftConstant: 0, bottomConstant: 0, rightConstant: 2, widthConstant: 100, heightConstant: 0)
+        _ = currentStatusLabel.anchor(topAnchor, left: nil, bottom: nil, right: rightAnchor, topConstant: 2, leftConstant: 0, bottomConstant: 0, rightConstant: 2, widthConstant: 100, heightConstant: 0)
     }
     
     required init?(coder aDecoder: NSCoder) {

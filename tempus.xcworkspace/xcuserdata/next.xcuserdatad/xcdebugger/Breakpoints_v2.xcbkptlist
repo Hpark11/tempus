@@ -154,7 +154,7 @@
                   moduleName = "tempus"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/UserInfoCell.swift"
-                  timestampString = "509939222.857227"
+                  timestampString = "509941981.797341"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "197"
@@ -169,7 +169,7 @@
                   moduleName = "tempus"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/next/Desktop/projects/projects/tempus/tempus/UserInfoCell.swift"
-                  timestampString = "509939222.85916"
+                  timestampString = "509941981.799481"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "197"
@@ -233,13 +233,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "tempus/CommunityMyListViewController.swift"
-            timestampString = "509939212.00474"
+            filePath = "tempus/CommunityPartnersListViewController.swift"
+            timestampString = "509941212.4171"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
-            landmarkName = "tableView(_:didSelectRowAt:)"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
+            landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -250,13 +250,29 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tempus/CommunityPartnersListViewController.swift"
-            timestampString = "509939368.175383"
+            timestampString = "509940803.510657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "meetingId"
-            landmarkType = "24">
+            startingLineNumber = "206"
+            endingLineNumber = "206"
+            landmarkName = "loadView()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tempus/CommunityMyListViewController.swift"
+            timestampString = "509941980.511705"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
+            landmarkName = "tableView(_:didSelectRowAt:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

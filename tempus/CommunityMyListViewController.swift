@@ -18,25 +18,67 @@ class CommunityMyListViewController: UITableViewController {
     var openedMeetings = [MinimizedMeeting]()
     
     func observeFirebaseValue() {
-        openedMeetings.removeAll()
+        
+//        if let userId = userInfo?.uid {
+//            FirebaseDataService.instance.userRef.child(userId).child(Constants.Users.comments).observe(.value, with: { (snapshot) in
+//                if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
+//                    self.comments.removeAll()
+//                    for one in snapshot {
+//                        if let dict = one.value as? Dictionary<String, AnyObject> {
+//                            let comment = Comment(key: one.key, data: dict)
+//                            for (key, data) in comment.children {
+//                                let comment = Comment(key: key, data: data as! Dictionary<String, AnyObject>)
+//                                self.comments.append(comment)
+//                            }
+//                            self.comments.append(comment)
+//                        }
+//                    }
+//                }
+//                self.comments.reverse()
+//                self.tableView?.reloadData()
+//            })
+//        }
+        
         if let userId = FIRAuth.auth()?.currentUser?.uid {
-            FirebaseDataService.instance.userRef.child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
-                if let user = snapshot.value as? Dictionary<String, AnyObject> {
-                    let userInfo = Users(uid: snapshot.key, data: user)
-                    for meetingId in userInfo.openedMeetings {
-                        FirebaseDataService.instance.meetingRef.child(meetingId).observeSingleEvent(of: .value, with: { (snap) in
-                            if let meeting = snap.value as? Dictionary<String, AnyObject> {
-                                let minMeeting = MinimizedMeeting(id: snap.key, data: meeting)
-                                self.openedMeetings.append(minMeeting)
-                            }
-                            DispatchQueue.main.async(execute: {
-                                self.tableView.reloadData()
+            FirebaseDataService.instance.userRef.child(userId).child(Constants.Users.openedMeetings).observe(.value, with: { (snapshot) in
+                if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                    self.openedMeetings.removeAll()
+                    for one in snapshot {
+                        if let meetingId = one.value as? String {
+                            FirebaseDataService.instance.meetingRef.child(meetingId).observeSingleEvent(of: .value, with: { (snapshot) in
+                                if let meeting = snapshot.value as? Dictionary<String, AnyObject> {
+                                    let minMeeting = MinimizedMeeting(id: snapshot.key, data: meeting)
+                                    self.openedMeetings.append(minMeeting)
+                                }
+                                DispatchQueue.main.async(execute: {
+                                    self.tableView.reloadData()
+                                })
                             })
-                        })
+                        }
                     }
                 }
             })
         }
+        
+//        if let userId = FIRAuth.auth()?.currentUser?.uid {
+//            FirebaseDataService.instance.userRef.child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
+//                self.openedMeetings.removeAll()
+//                if let user = snapshot.value as? Dictionary<String, AnyObject> {
+//                    let userInfo = Users(uid: snapshot.key, data: user)
+//                    for meetingId in userInfo.openedMeetings {
+//                        FirebaseDataService.instance.meetingRef.child(meetingId).observeSingleEvent(of: .value, with: { (snap) in
+//                            if let meeting = snap.value as? Dictionary<String, AnyObject> {
+//                                let minMeeting = MinimizedMeeting(id: snap.key, data: meeting)
+//                                self.openedMeetings.append(minMeeting)
+//                            }
+//                            DispatchQueue.main.async(execute: {
+//                                self.tableView.reloadData()
+//                            })
+//                        })
+//                    }
+//                }
+//            })
+//        }
     }
     
     let titleLabel: UILabel = {
@@ -57,12 +99,12 @@ class CommunityMyListViewController: UITableViewController {
         //carousel.type = .coverFlow
         //view.addSubview(carousel)
         //_ = carousel.anchor(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        observeFirebaseValue()
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        observeFirebaseValue()
     }
     
     func signOutButtonTapped() {
