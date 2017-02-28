@@ -21,6 +21,12 @@
 		5804D8B01E63C90100628469 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8AF1E63C90000628469 /* Comment.swift */; };
 		5804D8B21E640A6B00628469 /* SubCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8B11E640A6B00628469 /* SubCommentView.swift */; };
 		5804D8B41E643E1700628469 /* CommentNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804D8B31E643E1700628469 /* CommentNewViewController.swift */; };
+		5804D8B71E64F1A300628469 /* PinJump.json in Resources */ = {isa = PBXBuildFile; fileRef = 5804D8B61E64F1A300628469 /* PinJump.json */; };
+		5804D8B91E64F70300628469 /* Goody.json in Resources */ = {isa = PBXBuildFile; fileRef = 5804D8B81E64F70300628469 /* Goody.json */; };
+		5804D8BB1E64FAB600628469 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 5804D8BA1E64FAB600628469 /* data.json */; };
+		5804D8BD1E64FB3400628469 /* Loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 5804D8BC1E64FB3400628469 /* Loading.json */; };
+		5804D8C01E64FC3B00628469 /* lo.json in Resources */ = {isa = PBXBuildFile; fileRef = 5804D8BE1E64FC3B00628469 /* lo.json */; };
+		5804D8C11E64FC3B00628469 /* aa.json in Resources */ = {isa = PBXBuildFile; fileRef = 5804D8BF1E64FC3B00628469 /* aa.json */; };
 		5807755D1E4ECB3A0092ED8F /* SlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5807755C1E4ECB3A0092ED8F /* SlideViewController.swift */; };
 		5807755F1E4ECB6A0092ED8F /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5807755E1E4ECB6A0092ED8F /* DiaryViewController.swift */; };
 		5808951B1E52A47500F8D96B /* UserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5808951A1E52A47500F8D96B /* UserPageViewController.swift */; };
@@ -136,6 +142,12 @@
 		5804D8AF1E63C90000628469 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		5804D8B11E640A6B00628469 /* SubCommentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubCommentView.swift; sourceTree = "<group>"; };
 		5804D8B31E643E1700628469 /* CommentNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentNewViewController.swift; sourceTree = "<group>"; };
+		5804D8B61E64F1A300628469 /* PinJump.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PinJump.json; sourceTree = "<group>"; };
+		5804D8B81E64F70300628469 /* Goody.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Goody.json; sourceTree = "<group>"; };
+		5804D8BA1E64FAB600628469 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
+		5804D8BC1E64FB3400628469 /* Loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Loading.json; sourceTree = "<group>"; };
+		5804D8BE1E64FC3B00628469 /* lo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lo.json; sourceTree = "<group>"; };
+		5804D8BF1E64FC3B00628469 /* aa.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = aa.json; sourceTree = "<group>"; };
 		5807755C1E4ECB3A0092ED8F /* SlideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideViewController.swift; sourceTree = "<group>"; };
 		5807755E1E4ECB6A0092ED8F /* DiaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
 		5808951A1E52A47500F8D96B /* UserPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPageViewController.swift; sourceTree = "<group>"; };
@@ -305,6 +317,19 @@
 			name = Collection;
 			sourceTree = "<group>";
 		};
+		5804D8B51E64F18E00628469 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				5804D8B61E64F1A300628469 /* PinJump.json */,
+				5804D8B81E64F70300628469 /* Goody.json */,
+				5804D8BA1E64FAB600628469 /* data.json */,
+				5804D8BC1E64FB3400628469 /* Loading.json */,
+				5804D8BE1E64FC3B00628469 /* lo.json */,
+				5804D8BF1E64FC3B00628469 /* aa.json */,
+			);
+			name = Animation;
+			sourceTree = "<group>";
+		};
 		580A22CE1E56ECF400CF6E83 /* Font */ = {
 			isa = PBXGroup;
 			children = (
@@ -379,6 +404,7 @@
 		58D2AAD41E4ACB510084CE80 /* tempus */ = {
 			isa = PBXGroup;
 			children = (
+				5804D8B51E64F18E00628469 /* Animation */,
 				5808951C1E52A95A00F8D96B /* tempus.entitlements */,
 				5811210F1E501CA1004D1C85 /* Singleton */,
 				58D2AAFD1E4ACB850084CE80 /* Resource */,
@@ -632,12 +658,18 @@
 				580A22D91E56F0AC00CF6E83 /* GothamRoundedBold_21016.ttf in Resources */,
 				580A22D11E56F09700CF6E83 /* GothamRounded-Book.otf in Resources */,
 				580A22D31E56F09D00CF6E83 /* GothamRoundedMedium_21022.ttf in Resources */,
+				5804D8C11E64FC3B00628469 /* aa.json in Resources */,
 				580A22D61E56F0A600CF6E83 /* GothamRounded-LightItalic.otf in Resources */,
 				580A22D51E56F0A100CF6E83 /* GothamRoundedBook_21018.ttf in Resources */,
 				580A22CF1E56F09200CF6E83 /* GothamRounded-Bold.otf in Resources */,
 				580A22DA1E56F0B300CF6E83 /* GothamRounded-Light.otf in Resources */,
+				5804D8BB1E64FAB600628469 /* data.json in Resources */,
+				5804D8B71E64F1A300628469 /* PinJump.json in Resources */,
 				58D2AAE31E4ACB510084CE80 /* LaunchScreen.storyboard in Resources */,
+				5804D8C01E64FC3B00628469 /* lo.json in Resources */,
 				580A22D71E56F0AC00CF6E83 /* GothamRounded-Medium.otf in Resources */,
+				5804D8BD1E64FB3400628469 /* Loading.json in Resources */,
+				5804D8B91E64F70300628469 /* Goody.json in Resources */,
 				580A22D81E56F0AC00CF6E83 /* GothamRounded-MediumItalic.otf in Resources */,
 				58FCAAD91E4B00EA002F5B0A /* GoogleService-Info.plist in Resources */,
 				580A22D41E56F09F00CF6E83 /* GothamRoundedLight_21020.ttf in Resources */,

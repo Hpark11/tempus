@@ -77,6 +77,7 @@ PODS:
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMSessionFetcher/Core (1.1.8)
   - iCarousel (1.8.3)
+  - lottie-ios (1.0.4)
   - SwiftKeychainWrapper (3.0.1)
   - SwiftValidators (5.1.1)
 
@@ -93,6 +94,7 @@ DEPENDENCIES:
   - GoogleMaps
   - GooglePlaces
   - iCarousel
+  - lottie-ios
   - SwiftKeychainWrapper
   - SwiftValidators
 
@@ -117,9 +119,10 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 6f8d8b28b7e345549ac471071608170b31cb4977
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
+  lottie-ios: 8b2c5ba38105430a72f03ce54be90d8dac950161
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
   SwiftValidators: 3be5c8f80287fe4960d1b053519b22f304804a00
 
-PODFILE CHECKSUM: b65d4a343254df1f73bd778695b87b9e10b98b5c
+PODFILE CHECKSUM: 3b4fc1d424a5b134e4094d5d63c7d440cdf151fb
 
 COCOAPODS: 1.2.0

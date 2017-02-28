@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Lottie
 
 class MeetingListCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate {
 
@@ -33,7 +34,7 @@ class MeetingListCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
                     }
                 }
                 collectionView.reloadData()
-                //collectionViewTopAnchor?.constant = 108
+                collectionViewTopAnchor?.constant = 108
             } else {
                 collectionViewTopAnchor?.constant = 0
             }
@@ -64,6 +65,7 @@ class MeetingListCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
                                     }
                                     DispatchQueue.main.async(execute: {
                                         self.collectionView.reloadData()
+                                        self.animationView.isHidden = true
                                     })
                                 })
                             }
@@ -87,19 +89,32 @@ class MeetingListCell: BaseCell, UICollectionViewDelegate, UICollectionViewDataS
     
     override func setupViews() {
         super.setupViews()
-        
+        self.animationView.isHidden = false
         addSubViews()
         setConstraints()
         registerCells()
         setupKeyboardObservers()
     }
     
+    let animationView: LOTAnimationView = {
+        let animationView = LOTAnimationView.animationNamed("PinJump")
+        animationView?.frame = CGRect(x: 0, y: 0, width: 300, height: 250)
+        animationView?.contentMode = .scaleAspectFill
+        animationView?.loopAnimation = true
+        return animationView!
+    }()
+    
     fileprivate func addSubViews() {
         addSubview(collectionView)
+        addSubview(animationView)
     }
     
     
     fileprivate func setConstraints() {
+        animationView.play()
+        
+        _ = animationView.anchor(topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 108, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 250)
+        
         let anchors = collectionView.anchor(topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: frame.height)
         
         collectionViewTopAnchor = anchors[0]

@@ -20,6 +20,8 @@ target 'tempus' do
   pod 'SwiftValidators'
   pod 'FileBrowser', '~> 0.2'
   pod 'iCarousel'
+  pod 'lottie-ios'
+
  
   target 'tempusTests' do
     inherit! :search_paths
