@@ -2,8 +2,8 @@
 
 ### 기본정보
 * Author : Hyunsoo Park
-* tempus는 다양한 분야에 종사하거나 취미를 가진 사람들이 그들의 이해관계나 목적에 맞는 커뮤니티를 빠르고 쉽게 구성하고 참여하여 자신의 한정된 시간을 가치있게 만들어 줄 수 있는 어플리케이션입니다.
-* 자신이 현재 성취하고자 하는 목표가 있거나 경험해 보고 싶은 일, 혹은 다른 사람들과 너 나은 취미 생활을 하기 원한다면 tempus에서 함께하세요.
+  * tempus는 다양한 분야에 종사하거나 취미를 가진 사람들이 그들의 이해관계나 목적에 맞는 커뮤니티를 빠르고 쉽게 구성하고 참여하여 자신의 한정된 시간을 가치있게 만들어 줄 수 있는 어플리케이션입니다.
+  * 자신이 현재 성취하고자 하는 목표가 있거나 경험해 보고 싶은 일, 혹은 다른 사람들과 너 나은 취미 생활을 하기 원한다면 tempus에서 함께하세요.
 
 ### 동영상 시연 : https://www.youtube.com/watch?v=ZrBe03moZuU
 [![ScreenShot](https://github.com/BoostCamp/MemeMe_hPark/blob/master/img/play.png)](https://www.youtube.com/watch?v=ZrBe03moZuU)
@@ -40,24 +40,35 @@
   2. 댓글 - 커뮤니티 가입 전에 호스트에게 문의하거나 의견을 피력할 수 있는 수단
 
 ### 구현 화면
-<img src="https://github.com/BoostCamp/MemeMe_hPark/blob/master/img/1.png" width="280">
-<img src="https://github.com/BoostCamp/MemeMe_hPark/blob/master/img/3.png" width="280">
-<img src="https://github.com/BoostCamp/MemeMe_hPark/blob/master/img/5.png" width="280">
-<img src="https://github.com/BoostCamp/MemeMe_hPark/blob/master/img/7.png" width="280">
-<img src="https://github.com/BoostCamp/MemeMe_hPark/blob/master/img/8.png" width="280">
-<img src="https://github.com/BoostCamp/MemeMe_hPark/blob/master/img/9.png" width="280">
-<img src="https://github.com/BoostCamp/MemeMe_hPark/blob/master/img/10.png" width="280">
-<img src="https://github.com/BoostCamp/MemeMe_hPark/blob/master/img/11.png" width="280">
-<img src="https://github.com/BoostCamp/MemeMe_hPark/blob/master/img/12.png" width="280">
-<img src="https://github.com/BoostCamp/MemeMe_hPark/blob/master/img/13.png" width="280">
-<img src="https://github.com/BoostCamp/MemeMe_hPark/blob/master/img/15.png" width="280">
-<img src="https://github.com/BoostCamp/MemeMe_hPark/blob/master/img/16.png" width="280">
-<img src="https://github.com/BoostCamp/MemeMe_hPark/blob/master/img/17.png" width="280">
-<img src="https://github.com/BoostCamp/MemeMe_hPark/blob/master/img/18.png" width="280">
-<img src="https://github.com/BoostCamp/MemeMe_hPark/blob/master/img/19.png" width="280">
-<img src="https://github.com/BoostCamp/MemeMe_hPark/blob/master/img/20.png" width="280">
-<img src="https://github.com/BoostCamp/MemeMe_hPark/blob/master/img/22.png" width="280">
-<img src="https://github.com/BoostCamp/MemeMe_hPark/blob/master/img/23.png" width="280">
+<img src="https://github.com/Hpark11/tempus/blob/master/img/1.png" width="280">
+<img src="https://github.com/Hpark11/tempus/blob/master/img/2.png" width="280">
+<img src="https://github.com/Hpark11/tempus/blob/master/img/3.png" width="280">
+<img src="https://github.com/Hpark11/tempus/blob/master/img/4.png" width="280">
+<img src="https://github.com/Hpark11/tempus/blob/master/img/5.png" width="280">
+<img src="https://github.com/Hpark11/tempus/blob/master/img/6.png" width="280">
+<img src="https://github.com/Hpark11/tempus/blob/master/img/7.png" width="280">
+<img src="https://github.com/Hpark11/tempus/blob/master/img/8.png" width="280">
+<img src="https://github.com/Hpark11/tempus/blob/master/img/9.png" width="280">
+<img src="https://github.com/Hpark11/tempus/blob/master/img/10.png" width="280">
+<img src="https://github.com/Hpark11/tempus/blob/master/img/11.png" width="280">
+<img src="https://github.com/Hpark11/tempus/blob/master/img/12.png" width="280">
+<img src="https://github.com/Hpark11/tempus/blob/master/img/13.png" width="280">
+<img src="https://github.com/Hpark11/tempus/blob/master/img/14.png" width="280">
+<img src="https://github.com/Hpark11/tempus/blob/master/img/15.png" width="280">
+<img src="https://github.com/Hpark11/tempus/blob/master/img/16.png" width="280">
+<img src="https://github.com/Hpark11/tempus/blob/master/img/17.png" width="280">
+<img src="https://github.com/Hpark11/tempus/blob/master/img/18.png" width="280">
+<img src="https://github.com/Hpark11/tempus/blob/master/img/19.png" width="280">
+<img src="https://github.com/Hpark11/tempus/blob/master/img/20.png" width="280">
+<img src="https://github.com/Hpark11/tempus/blob/master/img/21.png" width="280">
+<img src="https://github.com/Hpark11/tempus/blob/master/img/22.png" width="280">
+<img src="https://github.com/Hpark11/tempus/blob/master/img/23.png" width="280">
+<img src="https://github.com/Hpark11/tempus/blob/master/img/24.png" width="280">
+<img src="https://github.com/Hpark11/tempus/blob/master/img/25.png" width="280">
+<img src="https://github.com/Hpark11/tempus/blob/master/img/37.png" width="280">
+<img src="https://github.com/Hpark11/tempus/blob/master/img/77.png" width="280">
+
+
 
 
 
