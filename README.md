@@ -6,7 +6,6 @@
   * 자신이 현재 성취하고자 하는 목표가 있거나 경험해 보고 싶은 일, 혹은 다른 사람들과 너 나은 취미 생활을 하기 원한다면 tempus에서 함께하세요.
 
 ### 동영상 시연 : https://www.youtube.com/watch?v=ZrBe03moZuU
-[![ScreenShot](https://github.com/BoostCamp/MemeMe_hPark/blob/master/img/play.png)](https://www.youtube.com/watch?v=ZrBe03moZuU)
 
 ### 어플리케이션 기본기능
 * 커뮤니티 참여
